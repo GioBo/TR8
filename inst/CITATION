@@ -1,0 +1,55 @@
+citHeader("Please use the following references whenever using data retrieved with tr8():")
+citEntry(entry = "Article", 
+         author = personList(as.person("Klotz Stefan"),as.person("Kühn Ingolf"),as.person("Durka Walter")),
+         title = "BIOLFLOR - Eine Datenbank zu biologisch-ökologischen Merkmalen zur Flora von Deutschland. 38: 1-333.  (Bundesamt für. Bonn, Bundesamt für Naturschutz)", 
+         journal = "Schriftenreihe für Vegetationskunde", year = 2002, 
+         volume = 38, pages = "1-333", 
+         url = "http://dx.doi.org/10.1111/j.1366-9516.2004.00106.x",
+         textVersion = paste("BIOLFLOR - Eine Datenbank zu biologisch-ökologischen","Merkmalen zur Flora von Deutschland.","Schriftenreihe für Vegetationskunde 38: 1-333.","(Bundesamt für. Bonn, Bundesamt für Naturschutz)"))
+
+
+
+
+citEntry(
+    entry="Article",
+    author = personList(as.person("Kleyer, M."),as.person("Bekker, R.M."),as.person("Knevel, I.C."), as.person("Bakker, J.P"), as.person("Thompson, K."), as.person("Sonnenschein, M."), as.person("Poschlod, P."), as.person("Van Groenendael, J.M."), as.person("Klimes, L."), as.person("Klimesova, J."), as.person("Klotz, S."), as.person("Rusch, G.M."), as.person("Hermy, M."), as.person("Adriaens, D."), as.person("Boedeltje, G."), as.person("Bossuyt, B."), as.person("Dannemann, A."), as.person("Endels, P."), as.person("Götzenberger, L."), as.person("Hodgson, J.G."), as.person("Jackel, A-K."), as.person("Kühn, I."), as.person("Kunzmann, D."), as.person("Ozinga, W.A."), as.person("Römermann, C."), as.person("Stadler, M."), as.person("Schlegelmilch, J."), as.person("Steendam, H.J."), as.person("Tackenberg, O."), as.person("Wilmann, B."), as.person("Cornelissen, J.H.C."), as.person("Eriksson, O."), as.person("Garnier, E."), as.person("Peco, B.")),
+    title="The LEDA Traitbase: A database of life-history traits of Northwest European flora.",
+    journal = " Journal of Ecology",
+    year = 2008, 
+    volume = 96, pages = "1266-1274",
+    textVersion = paste("Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P, Thompson, K., Sonnenschein, M., Poschlod, P., Van Groenendael, J.M., Klimes, L., Klimesova, J., Klotz, S., Rusch, G.M., Hermy, M., Adriaens, D., Boedeltje, G., Bossuyt, B., Dannemann, A., Endels, P., Götzenberger, L., Hodgson, J.G., Jackel, A-K., Kühn, I., Kunzmann, D., Ozinga, W.A., Römermann, C., Stadler, M., Schlegelmilch, J., Steendam, H.J., Tackenberg, O., Wilmann, B., Cornelissen, J.H.C., Eriksson, O., Garnier, E., Peco, B. (2008):", "The LEDA Traitbase: A database of life-history traits of Northwest European flora. Journal of Ecology 96: 1266-1274.")
+        )
+
+citEntry(
+    entry="Article",
+    author=personList(as.person("Fitter, A . H."),as.person(" Peat , H. J.")),
+    title="The Ecological Flora Database",
+    year=1994,
+    journal=" Journal of Ecology",
+    volume=82,
+    pages="415-425",
+    textVersion="Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database, J. Ecol., 82, 415-425.")
+
+citEntry(
+    entry="Article",
+    author=personList(as.person("Pignatti S."), as.person("Menegoni P."), as.person("Pietrosanti S.")),
+    title="Biondicazione attraverso le piante vascolari. Valori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora d'Italia.",
+    journal="Braun-Blanquetia",
+    pages="97",
+    year=2005,
+    textVersion="Pignatti S., Menegoni P., Pietrosanti S., 2005, Biondicazione attraverso le piante vascolari. Valori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora d'Italia. Braun-Blanquetia 39, Camerino, pp.  97.")
+
+citEntry(
+    entry="Article",
+    year=2012,
+    journal="Ecology",
+    volume=93,
+    pages="689",
+    title="A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants species across the former Soviet Union",
+    author=personList(as.person("Asem A. Akhmetzhanova"), as.person("Nadejda A. Soudzilovskaia"), as.person("Vladimir G. Onipchenko"), as.person("Will K. Cornwell"), as.person("Vladimir A. Agafonov"), as.person("Ivan A. Selivanov"),as.person("Johannes H. C. Cornelissen")),
+    textVersion="Asem A. Akhmetzhanova, Nadejda A. Soudzilovskaia, Vladimir G. Onipchenko, Will K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen. 2012. A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants species across the former Soviet Union. Ecology 93:689."
+    )
+citFooter("As tr8 is continually evolving, you may want to cite its version number. Find it with 'help(package=tr8)'.")
+
+
+

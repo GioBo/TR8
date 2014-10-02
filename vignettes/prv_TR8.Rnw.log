@@ -1,0 +1,35 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.18)  4 MAY 2014 11:55
+entering extended mode
+ %&-line parsing enabled.
+**&pdflatex prv_TR8.Rnw.ini \nonstopmode\nofiles\PassOptionsToPackage{active,ti
+ghtpage,auctex}{preview}\AtBeginDocument{\ifx\ifPreview\undefined\RequirePackag
+e[displaymath,floats,graphics,textmath,sections,footnotes]{preview}[2004/11/05]
+\fi} \input TR8.Rnw.tex
+(./prv_TR8.Rnw.ini
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/carlisle/mylatex.ltx)
+(/usr/share/texmf-texlive/tex/latex/tools/.tex File ignored))
+No auxiliary output files.
+
+! I can't find file `TR8.Rnw.tex'.
+<*> ...preview}[2004/11/05]\fi} \input TR8.Rnw.tex
+                                                  
+(Press Enter to retry, or Control-D to exit)
+Please type another input file name
+! Emergency stop.
+<*> ...preview}[2004/11/05]\fi} \input TR8.Rnw.tex
+                                                  
+*** (job aborted, file error in nonstop mode)
+
+ 
+Here is how much of TeX's memory you used:
+ 26 strings out of 495061
+ 596 string characters out of 1182621
+ 45108 words of memory out of 3000000
+ 3295 multiletter control sequences out of 15000+50000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 5i,0n,5p,493b,12s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

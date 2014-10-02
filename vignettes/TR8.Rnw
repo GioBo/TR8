@@ -1,0 +1,314 @@
+\documentclass{article}
+\usepackage{nameref}
+\usepackage{url}
+\bibliographystyle{plain}
+%% \VignetteIndexEntry{Plants traits data}
+%%\VignetteDepends{TR8}
+\title{TR8: Extract traits data for plant species}
+\author{Gionata Bocci\\Pisa (ITALY)\\ {boccigionata@gmail.com}}
+\begin{document}
+\maketitle
+\SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,strip.white=true,keep.source=TRUE}
+\SweaveOpts{include=FALSE}
+
+\section{Rationale}
+\label{sec:rationale}
+
+The \texttt{TR8} package has been built in order to provide the user with the
+possibility of easily retrieving traits data for plant species from the following publicly available databases:
+
+\begin{description}
+\item[Biolflor] \url{http://www2.ufz.de/biolflor/index.jsp} \cite{biolflor}
+\item[Ecological Flora of the British Isles] \url{http://www.ecoflora.co.uk/} \cite{ecoflora}
+\item[LEDA traitbase] \url{http://www.leda-traitbase.org/LEDAportal/} \cite{leda}
+\item[Ellenberg values for Italian Flora] \cite{pignatti}
+\item[Mycorrhizal intensity database] \cite{amf}
+\end{description}
+
+  Please note that not all the traits available on the listed
+  databases are downloaded by the package: this may change in future
+  versions of the package (ie. some functionalities may be added and
+  more traits will be made available).
+
+\section{Installation}
+\label{sec:installation}
+
+ The package relies on some functions provided by the following packages (which are thus needed):
+ \begin{itemize}
+  \item plyr\cite{plyr}
+  \item reshape\cite{reshape}
+  \item RCurl\cite{RCurl}
+  \item XML\cite{XML}
+  \item taxize\cite{taxize}
+  \item gWidgets\cite{gWidgets}
+  \end{itemize}
+  
+   For the moment the package is available only as a \texttt{.zip}
+   file, thus you will have to manually install these other packages; to do so, run the following:
+
+@ 
+<<dependencies,eval=FALSE>>=
+install.packages(c("XML","RCurl","plyr","taxize","methods","gWidgets"), dependencies=TRUE)
+@ %def 
+
+   
+  In order to install the \texttt{TR8} package from the 
+  \texttt{R commander} (\texttt{Rcmdr}) GUI interface,  go to the \texttt{Packages} menu,
+  then choose \texttt{Install package(s) from local zip files} and choose the
+  provided compressed package file.
+  
+  Once the package is installed, you can load it with:
+
+@ 
+<<label=load,eval=FALSE>>=
+library(TR8)
+@ %def 
+
+Please note that:
+
+\begin{description}
+\item[The user is asked to always cite the data sources: ] the
+  development of traits databases is a long and costly process,
+  thus all the users of the \texttt{TR8} package are asked (and
+  reminded \textbf{every time} they load the package and use the \texttt{tr8()} function) to always cite the original sources of the data (see
+  paragraph \ref{sec:citing}).
+  
+\end{description}
+  
+\section{Simple usage}
+\label{sec:usage}
+
+  Using the \texttt{TR8} package is fairly simple: users just need to
+  call the \texttt{tr8} function passing, as argument, a vector of
+  plant species names:
+  
+@ 
+<<usage,eval=FALSE>>=
+## a vector containing a list of plant species names
+my_species<-c("Apium graveolens","Holcus mollis","Lathyrus sylvestris")
+## now run tr8 and store the results in the my_traits object
+my_traits<-tr8(my_species)
+@ %def 
+
+
+
+  A multi-panel window will appear: the user is asked to choose those
+  traits which are to be downloaded from the various databases; if data from the LEDA Traitbase are selected, after
+  clicking \texttt{OK} a second GUI will appear, asking if a local copy
+  of the \texttt{LEDA} \texttt{.txt} files has already been downloaded
+  (see paragraph \ref{sec:leda} for a more detailed explanation of the
+  way \texttt{TR8} deals with the LEDA Traitbase): if this is the case, please tick the
+  "yes" button, click "Ok" and then choose the folder which contains
+  the already downloaded files.  
+  The \texttt{tr8} function will take care of downloading the data and
+  store them in the \texttt{my\_traits} object; you can see the results
+  by printing them:
+
+@ 
+<<usage2,eval=FALSE>>=
+## see the downloaded data
+print(my_traits)
+@ %def 
+
+  Or you can convert them to a data frame using the \texttt{extract\_traits} function:
+  
+@ 
+<<extract_traits,eval=FALSE>>=
+traits_dataframe<-extract_traits(my_traits)
+@ %def 
+
+
+
+  All the traits are now contained in a data frame with species as rows
+  and columns as traits; where no trait data were available, you will
+  see a \texttt{NA}. 
+  
+  %% In order to let the user be able to choose which traits should be
+  %% downloaded, the \texttt{tr8\_config()} function multi-panel
+  %% \textit{GUI} : this selection of traits should be
+  %% run \textbf{before}  
+  %% using the \texttt{tr8()} function.
+  
+%%  @ 
+%% <<usage,eval=FALSE>>=
+%% ## run the tr8_config() function
+%% tr8_config()
+%% ## select the traits of interest and then close the window 
+
+%% ## run tr8() 
+%% my_species<-c("Apium graveolens","Holcus mollis","Lathyrus sylvestris")
+%% my_traits<-tr8(my_species)
+%% ## see the downloaded data
+%% print(my_traits)
+%%  @ %def 
+  
+  
+  In order to make the dataframe more readable,  traits' names (ie. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function: 
+
+
+<<lookup,eval=FALSE>>=
+lookup(my_traits)
+@ %def 
+
+  For a detailed explanation of each level of a trait, please refer to
+  the original websites (all the databases listed in the references
+  provide the users with very precise and detailed descriptions).
+
+
+   Tipically users will have a their vegetation data in the form of a
+   \textit{sites}*\textit{species} dataframe (or matrix), thus they
+   may want to extract traits data for the whole dataset, ie.:
+   
+@ 
+<<dataset,eval=FALSE>>=
+## suppose veg_data is our dataframe with
+## plant species as columns and sites as rows
+
+## extract species names
+specie_names<-names(veg_data)
+## use the tr8() function
+my_traits<-tr8(species_names)
+## print the results
+print(my_traits)
+@ %def 
+  
+  \textbf{A NOTE OF CAUTION}: searching the web is a time (and
+  internet band) consuming activity, thus the higher the number of
+  your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
+  not to overflow the remote databases with \texttt{http} requests, we
+  suggest to split the the list of plant species in smaller chunks.
+
+  \textbf{A (SECOND) NOTE OF CAUTION}: some users adopt the following workflow for analysing their vegetation data:
+
+  \begin{enumerate}
+  \item insert vegetation data into a \textit{spreadsheet file} with species as
+  columns' and sites' as rows
+\item export the spreadsheet file as a \texttt{.csv} file
+\item import the \texttt{.csv} file into a \textbf{R} dataframe.
+  \end{enumerate}
+  
+  When following these steps, a dot (".") will be inserted between
+Genus and Species of each plant species name (i.e. column names in the
+\texttt{R} dataframe will not be in the form \texttt{c("Abies alba", "Salix
+alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
+This may cause problems for further processing of plants'
+species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
+  option in \texttt{read.csv}. Eg. suppose that
+  \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
+  \textbf{R} console, one should use:
+
+<<import,eval=FALSE>>=
+My_data<-read.csv("my_veg_data.csv",header=T,row.names=1,check.names=F)
+@ %def 
+
+
+\section{Interpreting retrieved data}
+\label{sec:interpreting}
+
+Please note that for many traits there is more than one entry in the
+original databases: in those cases, in order to obtain a single value
+the following strategy was adopted:
+
+\begin{description}
+\item[Quantitative traits] the mean of all the values was calculated
+  (eg. when multiple values for "Seed weight mean" are available, the
+  mean of these value is calculated)
+\item[Qualitative traits] all the values are taken into account and
+  "joined" together in a single string (the values are separated by a
+  score "$-$")
+\end{description}
+\section{Citing sources of information}
+\label{sec:citing}
+
+  Users of the \texttt{TR8} package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the \texttt{bib} method; just use:
+  
+
+<<bib,eval=FALSE>>=
+bib(my_traits)
+@ %def 
+
+  
+  
+ \section{Suggested usage}
+
+  We strongly suggest to always check plant species names with the
+  \texttt{tnrs} function (from the \texttt{taxize} package) before
+  using the \texttt{tr8} function; thus a typical workflow would be
+  the following:
+  
+  \begin{enumerate}
+  \item Check plant species names (eg. with something like the following -  please refere to the \texttt{taxize} package documentation\cite{taxize} for further details)
+    
+<<one,eval=FALSE>>=
+species_names<-names(veg_data)
+checked_names<-tnrs(species_names,source="iPlant_TNRS")
+print(checked_names)
+@ %def 
+
+ Check which species (rows) in the table have a "score" value
+ lower than 1 and check their names; if needed, correct them
+ before using the tr8() function
+\item Run \texttt{tr8}
+
+<<tr8_ex1,eval=FALSE>>=
+my_traits<-tr8(species_names)
+print(my_traits)
+@ %def 
+ 
+\item You may want to have these traits available as a data frame:
+  just use the \texttt{extract\_traits} function which uses the results
+  of \texttt{tr8} (in this case it's the \texttt{my\_traits} objects)
+  and returns a data frame.
+
+<<extract, eval=FALSE>>=
+traits_df<-extract_traits(my_traits)
+@ %def 
+
+\item Observing a big data frame inside \texttt{R} could be difficult,
+  thus users may want to save the \texttt{traits\_df} data frame as a
+  \texttt{.csv} file and open that with a spreadsheet software (eg. LibreOffice)
+ 
+  \end{enumerate}
+  
+
+  
+
+
+
+\section{LEDA Traitbase}
+\label{sec:leda}
+
+  The LEDA Traitbase datafiles are \texttt{.txt} files which are
+  available for download at the LEDA website
+  (\url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}). These
+  files are (quite) big in size, thus downloading them every time the
+  \texttt{tr8()} function is used is a time consuming
+  activity\footnote{The .txt files are not distributed together with the
+    \texttt{TR8} package - which would save time and memory when executing
+    the \texttt{tr8()} function - in order to avoid possible licensing
+    conflicts between the \texttt{TR8}' license and LEDA datasets.}. We
+  thus suggest the users to run the
+  \texttt{leda\_download\_to\_local\_directory()}\footnote{The name is quite
+    self$-$explanatory...} function once to store a local copy of the LEDA
+  datafiles and use that local copy every time the \texttt{tr8()} function is run.
+  
+  
+<<label=leda_local,eval=FALSE>>=
+## run the function
+leda_download_to_local_directory()
+## and select a folder where the datafiles will be
+## downloaded (remeber this folder, since you will be later
+## ask for that when running the tr8() function)
+@ %def 
+
+  
+
+  
+
+
+ 
+\bibliography{tr8}
+
+
+
+\end{document}

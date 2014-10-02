@@ -1,0 +1,61 @@
+#+TITLE: A (tentative) manual for the TR8 package
+#+author: Gionata Bocci
+#+emai: boccigionata@gmail.com
+
+* Rationale
+The *TR8* package has been built in order to provide the user with the
+possibility of retrieveing traits data for plant species from various
+sources.
+A this stage the following databes are queried by the package:
+
+ - BiolFlor ::  [[http://www2.ufz.de/biolflor/index.jsp]]
+ - Ecological Flora of the British Isles :: [[http://www.ecoflora.co.uk/]]
+ - LEDA traitbase :: [[http://www.leda-traitbase.org/LEDAportal/]]
+
+
+* Install
+
+  In order to install the package from R, go to the *Packages* menu,
+  then choose /Install package(s) from local zip files/ and choose the
+  provided compressed package file.
+  
+  Note that that the following packages are needed for *TR8* to
+  work:
+
+  - ~plyr~
+  - ~reshape~
+  - ~RCurl~
+  - ~XML~
+
+
+* Usage
+
+  Below a simple session of work is shown.
+  First, load the package:
+
+#+BEGIN_SRC R :session *R* 
+library(TR8)
+#+END_SRC
+  
+  You will also be reminded to use proper citations any time you
+  download data using *TR8*.
+  The easiest way of retrieving traits data is throught the ~tr8()~
+  function; the user should provide a list of plant species names as
+  an argument to the function.
+
+#+BEGIN_SRC R :session *R* 
+  
+  my_traits<-tr8(c("Raphanus raphanistrum","Lolium temulentum","Sinapis alba",
+             "Xanthium strumarium"))
+  str(my_traits)
+#+END_SRC
+
+  You will now have in your workspace the ~my_traits~ data.frame which
+  contains data collected from the various databases.
+  Please note that:
+
+  - *NA* values will be used in those cases when data are not found for the species of interest.
+  - plant species names are checked with the accepted names according
+    to the  [[http://tnrs.iplantcollaborative.org/][Taxonomic Name Resolution Service]], so it is a good idea to
+    first check your species' with the *taxize* package (http://cran.r-project.org/web/packages/taxize/taxize.pdf).
+

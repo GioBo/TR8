@@ -1,0 +1,247 @@
+#+TITLE: Org file for managing thr TR8 project
+
+
+#+TODO: TODO | DONE
+#+TODO: REPORT BUG KNOWNCAUSE | FIXED
+#+TODO: | CANCELED
+#+TAGS: programming documenting email
+
+
+* Notes
+
+  lo script generate_Biolflor_lu.Rd e il risultante dataset
+  biolflor_lu sono stati inseriti in .Rbuildignore poiché sono utili
+  per me per ricreare i dataset necessari, ma non servono al package
+
+* Issues [28/30]
+
+** TODO issue#32						      :email:
+
+   - email a jonathan storkey per chiedere se si può includere nel
+     package anche la sua matrice species*traits del paper del 2006
+** TODO issue#31 [0%] 						:documenting:
+   
+   - [ ] elimina dalle vignette l'installazione da local package
+   - [ ] correggi citazione di biolflor nel man file di traits_special_biolflor (mancano gli autori)
+   
+** DONE issue#30						:documenting:
+   
+   Correggere il manuale [[file:man/Tr8-class.Rd]] : aggiungere il metodo bib()
+   
+** DONE issue#29
+   
+   Uniforma tutte le citazioni nella forma Cognome, Nome
+
+  - [ ] controlla [[file:man/tr8.Rd][tr8]]
+
+** DONE issue#28
+
+   Check all manuals
+** DONE issue#27
+   
+   install "pdf" (for "R CHECK --as-cran")
+   
+** DONE issue#26						:programming:
+
+   remove all temporary variables
+   
+** DONE issue#27						:documenting:
+
+   detailed description of how data are combined (numeric, factors, characters, etc...)
+
+
+** FIXED [#A] issue#26 :: check mail di Kurt			:programming:
+** FIXED [#A] issue#25 :: /sottometti il package al CRAN/	      :email:
+
+** DONE issue#24						      :email:
+
+ scrivi a Akhmetzhanova per comunicare l'utilizzo del dataset su AMF
+
+** DONE issue#23						:documenting:
+
+   aggiorna il manuale (vignettes)
+
+** issue#22							      :email:
+
+   scrivi a luirig per chiedere il permesso per il download dei dati sulla fioritura -> non si riesce a trovare la mail di Luigi Rignanese
+
+** DONE issue#21						:programming:
+   add an option to download LEDA files once and for all
+
+** DONE issue#20						:programming:
+   download LEDA traits directly from the web 
+		    
+*** leda_general() funziona
+*** fix the way leda_general accepts TRAITS from tr8()
+
+** CANCELED [#C] [ ] issue#19 :: disegnare uno schema UML che esemplifichi il funzionamento di tr8 :documenting:
+** DONE issue#18						:programming:
+si potrebbe provare a scaricare i dati originari direttamente dal web (es leggere il db myco.csv direttamente da esapub, eg "read.csv("http://esapubs.org/Archive/ecol/E093/059/myco_db.csv",sep=",",header=T) ")
+** DONE issue#17						:documenting:
+ scegliere la licenza per i dataset: prova a seguire le indicazioni su [[http://www.bioconductor.org/developers/package-guidelines/#license][bioconductor]]
+** DONE issue#16						:programming:
+correct the short codes in lookup() methods so that they're the same as the column names in tr8@results objects
+** DONE issue#15						:programming:
+ fix GUI codes
+** DONE issue#14						:programming:
+
+   add a GUI to select traits
+    - [X] DONE documentation for all the new methods and functions
+    - [X] update vignettes
+    - [X] fixed for Leda and Ecoflora
+    - [X] Fix for all other dbases
+    - [X] check carefully traits name for biolflor
+** DONE issue#13						:programming:
+convertire tutto a UTF-8 (es. kuhn)
+** +issue#12+ :: +add traits from either USDA ([[http://plants.usda.gov/core/profile?symbol%3DAVFA][usda]]) or Encyclopedia of Life ([[http://eol.org/pages/582592/details#comprehensive_description][eol)]]+
+** DONE issue#11						:programming:
+ load data within function in a correct way in
+ order to avoid the error message in R CMD build ;
+ see these links:
+		    http://stackoverflow.com/questions/10492747/data-inside-a-function-package-creation 
+** +issue#10 ::  may add data from http://www.garden-en.com/e/en/54-common-bugle-ajuga-reptans/+
+** DONE issue#9							:programming:
+for some italian species in luirig.altervista, the
+url pattern is not genus+specie, but genus_species
+-> try to browse this pattern if the first one does
+not work
+** +issue#8 :: re-build LEDA seed_longevity using the formula proposed by Bekkerr et al (1998)+
+** DONE issue#7							:programming:
+ add seedbank from leda or ecoflora
+** DONE issue#6							:programming:
+ add AMF according to http://esapubs.org/Archive/ecol/E093/059/default.htm
+** DONE issue#5 
+ add flowering period from luirig
+** DONE issue#4 
+ add a column for pignatti life form
+** DONE issue#3 
+ maybe columns' names in the resulting df could be shortened
+** DONE issue#2 
+ add a method "show" for class tr8 (print a pretty table or extract only the data.frame containing results : TO BE COMPLETED  probably an "export" option for Tr8::lookup is needed
+** DONE issue#1 
+ use shorten names for traits levels: use data/tables.R as a reference table for correctiong names
+
+* BUGS [100%]
+
+  
+*** FIXED bug#18: non ascii characters in data
+    
+    Si trovano i seguenti non ascii files nei dataset
+
+    - 153 in biolflor_lu$V1
+    - 100 in biolflor_check$annotations
+    - 100 in biolflor_lookup$annotations
+    - 37 in ECOFLORA_df$annotations
+      
+      Re arrange dataframes and .Rbuildignore to solve this issue:
+
+      - remove column ~annotations~ e ~V1~ from biolflor_lookup (and
+        updated man page removing the columns in the description of
+        the df)
+
+      - remove column ~annotations~ from ECOFLORA_df (and updated manpage)
+
+      - put biolfor_lu, biolflor_check (and their manpages) in .Rbuildignore
+    
+    
+*** FIXED [#A] bug#17
+    
+    Se si usa specie<-("Salix alba") e si usa pignatti con solo "life
+    form" si ottiene empty dataframe, se invece si mette anche un
+    altro trait pignatti, si ottiene la life form corretta
+    
+*** FIXED [#A] bug#16 :: "no visible binding for global variables
+
+   The following messages appears with R-devel check
+
+
+#+BEGIN_EXAMPLE
+column_conversion: no visible binding for global variable ‘column_list’
+leda: no visible binding for global variable ‘column_list’
+leda: no visible binding for global variable ‘leda_lookup’
+leda_download_to_local_directory: no visible binding for global
+  variable ‘leda_lookup’
+tr8: no visible binding for global variable ‘column_list’
+tr8_config: no visible binding for global variable ‘column_list’
+get_traits,ellenberg_pignatti: no visible binding for global variable
+  ‘pignatti’
+lookup,Tr8: no visible binding for global variable ‘column_list’
+#+END_EXAMPLE
+
+
+*** FIXED bug#15 ::  tr8("Salix alba","Alnus glutinosa") not working
+
+    - depends on LEDA
+*** DONE bug#14 :: tr8("Salix alba","Abies alba") not working for biolfor
+
+*** DONE bug#13 :: fix double names in leda_looked up data (branching AND dispersal_type)
+*** DONE bug#12 :: errore con retrieve_amf() se si usa tr8("Sinapis arvensis")
+    
+*** DONE bug#11 :: pignatti_f returns a single row dataframe
+*** DONE bug#10 :: Apera spica-venti doesn't work with ecoflora
+*** DONE bug#9 :: check get_italian_flowering for "Apera spica-venti"
+*** DONE bug#8 :: same issue as bug#7 for leda
+*** DONE bug#7 :: ecoflora and leda return NULL when "Agropyron repens"
+    is passed -> an empty dataframe with traits as
+    columns should be passed
+*** DONE bug#6 :: biolflor() raise an error for "Agropyron repens" or "Atriplex hastata" when they are passed alone -> check
+*** DONE bug#5 :: in ECOFLORA_df, some cells in the acceptedname column
+    are empty (possible bug in tnrs?) -> tentative
+                 correction:
+
+    - 1. is /species/ in /acceptedname/? y:2,n:3
+      
+    - 2. is /acceptedname/ unique? y:4,n:5
+
+    - 3. is /species/ in /matchedname/? y:6,n:7
+	
+    - 4. collect corresponding URL
+	
+    - 5. extract the URL from that species for which /species name/ == /acceptedname/
+	
+    - 6. collect corresponding URL
+	
+    - 7. extract the URL from that species for which /species name/ == /matchedname/
+*** DONE bug#4 :: Xanthium strumarium (tnrs name) in Pignatti is
+                 related to 3 species (X. italicum, X. strumarium,
+                 X. orientale) -> when double TNRS species are found
+                 in Pignatti, test whether the species name is present
+                 in the species list used originally by Pignatti and
+                 extract that
+*** DONE [X] bug#3 :: standardize names -> all species names must be based
+                 on TNRS [eg. Solanum nigrum is accepted for Biolflor,
+                 but according to tnrs should now be Solanum americana]
+*** DONE [X] bug#2 :: check that in biolflor_clean() the eval() function
+                 will be exectued *only if* the column trait is
+                 present! (to reproduce use tr8(c("Avena sativa"))
+
+*** DONE [X] bug#1 :: tr8(c("Rumex crispus")) returns 2 species (R. crispus and
+		 R. Hydrolapathum) -> check the main tr8 function and fix the
+		 "show" method for class "Tr8" in such a way that the message
+		 about duplicate species names is shown. Remove the message about databases that do not contain the searched species)
+
+
+* Future (maybe) [0%]
+
+  - [ ] issue#4 ::  add data from http://datadryad.org/resource/doi:10.5061/dryad.r3n45
+
+  - [ ] issue#3 ::  may add data from http://www.garden-en.com/e/en/54-common-bugle-ajuga-reptans/
+
+  - [ ] issue#2 :: add traits from either USDA ([[http://plants.usda.gov/core/profile?symbol%3DAVFA][usda]]) or Encyclopedia of Life ([[http://eol.org/pages/582592/details#comprehensive_description][eol)]]
+
+  - [ ] issue#1 :: add BROT
+
+    - [ ] can R directly access ods files?
+
+    - [ ] extract only the Data sheet
+
+    - [ ] join Genus and Species
+
+    - [ ] Adopt the same approach used for Leda (local save)
+
+    - [ ] Add levels of DF$Traits to TR8/data/column_list.R
+
+    - [ ] remove semi-quantitative entries
+	
+	
+  
