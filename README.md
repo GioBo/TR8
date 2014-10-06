@@ -9,3 +9,5 @@ often scattered among various databases: TR8 contains a set of tools which take 
 automatically retrieving some of those functional traits data for plant species from 
 publicly available databases (Biolflor, The Ecological Flora of the British Isles, 
 LEDA traitbase, Ellenberg values for Italian Flora, Mycorrhizal intensity database).
+
+ A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
