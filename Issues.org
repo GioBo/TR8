@@ -1,4 +1,3 @@
-#+TODO: OPEN | CLOSED
 #+TODO: OPEN | CLOSE DELETED
 
 * Bugs of TR8
@@ -7,7 +6,7 @@ nil:END:
 
 ** OPEN "prova"  DEADLINE:
 :PROPERTIES:
-nil* Bugs of TR8
+
 :PROPERTIES:
 nil:END:
 ** OPEN "mean_height[m]"  DEADLINE:
@@ -30,19 +29,3 @@ Uniform <NA> or NA in the various column of the resulting dataframe
 Fix name of column " "mean_height[m]" (remove "[m]")
 
 
-** OPEN "mean_height[m]"  DEADLINE:
-:PROPERTIES:
-nil:END:
-Fix name of column " "mean_height[m]" (remove "[m]")
-** OPEN Italian flowering DEADLINE:
-:PROPERTIES:
-nil:END:
-Website for italian flowering dates has changed, thus a rewrite of the italian_flowering function is needed
-** OPEN chec NA DEADLINE:
-:PROPERTIES:
-nil:END:
-Uniform <NA> or NA in the various column of the resulting dataframe
-** OPEN BROT DEADLINE:
-:PROPERTIES:
-nil:END:
-Add BROT database

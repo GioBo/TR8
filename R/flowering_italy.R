@@ -10,22 +10,44 @@
 ##' @return a tuple of values: beginning and ending of flowering period (or NA,NA if data are not found)
 ##' @author Gionata Bocci <boccigionata@@gmail.com>
 luirig<-function(url){
-    lookup_month<-data.frame(code=1:12,roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),stringsAsFactors = T)
     pag<-readLines(url)
-    flowering=pag[grep("Periodo",pag)]
-    if(length(flowering)>0){
-        period<-gsub(".*fioritura: (.*)<br>","\\1",flowering)
-        ## this if/else is needed because some species have URL but
-        ## they do not have flowering data, thus this field is
-        ## filled with a "-"
-        if(period!="-"){
-            begin<-gsub("(.+)-.*","\\1",period)
-            begin<-lookup_month$code[lookup_month$roman==begin]
-            end<-gsub(".+-(.+)","\\1",period)
-            end<-lookup_month$code[lookup_month$roman==end]
-            return(c(begin,end))
-        }else{return(c(NA,NA))}
+    ## names of months in Italian (as they are used on the website)
+    names_month<-c("Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre")
+    ## create a dataframe containing months' names and a column of zeroes
+    tp<-data.frame(names_month,flowering=rep(0,12))
+    ## cycle trough months' names and chech if, on the web page code, there a ""[&#9679;]" symbol
+    ## before the name or a "[ ]": in the latter case it meands that the plant is not
+    ## flowering during that month
+    for(i in tp$names_month){
+        pattern<-pag[grep(i,pag,useBytes = T)]
+        if(length(pattern)>0){
+            
+            res<-gsub(paste(".*\\[(.*)\\] ",i,".*",sep=""),"\\1",pattern)
+            ## if the plant is flowering in month "i", then put a
+            ## 1 in the tp data frame
+            if(res!=" ") tp$flowering[tp$names_month==i]<-1
+        }else{
+            ## if the month is not present for some web pages (may happen)
+            ## then put a NA in the tp dataframe
+            tp$flowering[tp$names_month==i]<-NA
+        }
     }
+    
+    ## flowering=pag[grep("Periodo",pag,useBytes = T)]
+    ## if(length(flowering)>0){
+    ##     period<-gsub(".*fioritura: (.*)<br>","\\1",flowering)
+    ##     ## this if/else is needed because some species have URL but
+    ##     ## they do not have flowering data, thus this field is
+    ##     ## filled with a "-"
+    ##     if(period!="-"){
+    ##         begin<-gsub("(.+)-.*","\\1",period)
+    ##         begin<-lookup_month$code[lookup_month$roman==begin]
+    ##         end<-gsub(".+-(.+)","\\1",period)
+    ##         end<-lookup_month$code[lookup_month$roman==end]
+    ##         return(c(begin,end))
+    ##     }else{return(c(NA,NA))}
+    ## }
+    return(tp)
 }
 
 
