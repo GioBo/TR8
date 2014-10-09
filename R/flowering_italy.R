@@ -9,7 +9,7 @@
 ##' @seealso \code{get_italian_flowering}
 ##' @return a tuple of values: beginning and ending of flowering period (or NA,NA if data are not found)
 ##' @author Gionata Bocci <boccigionata@@gmail.com>
-luirig<-function(url){
+luirig<-function(url,species){
     pag<-readLines(url)
     ## names of months in Italian (as they are used on the website)
     names_month<-c("Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre")
@@ -47,6 +47,7 @@ luirig<-function(url){
     ##         return(c(begin,end))
     ##     }else{return(c(NA,NA))}
     ## }
+    names(tp)[2]<-species
     return(tp)
 }
 
@@ -74,13 +75,13 @@ get_italian_flowering<-function(species_list,TRAITS){
     }else{
         test<-("IT_begin_flow"%in%TRAITS||"IT_end_flow"%in%TRAITS)
         if(length(TRAITS)==0||test){
+            names_month<-c("Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre")
             base_url="http://luirig.altervista.org/flora/taxa/index1.php?scientific-name="##vicia+sativa
             base_url_bis<-"http://luirig.altervista.org/schede/ae/"
-            Sys.setlocale('LC_ALL','C')
-            flower_date<-list()
-            for(cur in species_list){
-                species<-cur
-                cur<-tolower(cur)
+            flower_date<-as.data.frame(names_month)
+            for(species_name in species_list){
+                species<-species_name
+                cur<-tolower(species_name)
                 ## some species are found in url pattern base_url/genus+species
                 cur<-gsub("^([A-Za-z]+) ([A-Za-z-]+).*","\\1+\\2",cur)
                 ## other species are found in url pattern base_urlbis/genus_species.htm
@@ -89,20 +90,28 @@ get_italian_flowering<-function(species_list,TRAITS){
                 url_bis<-paste(base_url_bis,cur_bis,".htm",sep="")
                 ## check firt pattern
                 if(url.exists(url)){
-                    flower_date[[species]]<-luirig(url)
+                    flower_date<-merge(flower_date,luirig(url,species_name))
                 }else{
                     ## otherwise check second pattern
                     if(url.exists(url_bis)){
-                        flower_date[[species]]<-luirig(url_bis)
+                        flower_date[[species]]<-luirig(url_bis,species_name)
                         ##if theese don't work, use NA NA as values
-                    }else{flower_date[[species]]<-c(NA,NA)}
+                    }else{
+                        names_tmp<-names(flower_date)
+                        flower_date<-data.frame(flower_date,species=NA)
+                        names(flower_date)<-c(names_tmp,species)
+
+                    }
                 }
             }
-            results<-ldply(flower_date)
-            row.names(results)<-results[,1]
-            results<-results[,2:ncol(results)]
-            names(results)<-c("IT_begin_flow","IT_end_flow")
-            res@results<-results
+
+            flower_date$names_month<-revalue(flower_date$names_month,c("Agosto"="IFL_08Aug","Aprile"="IFL_04Apr","Dicembre"="IFL_12Dec","Febbraio"="IFL_02Feb","Gennaio"="IFL_01Jan","Giugno"="IFL_06Jun","Luglio"="IFL_07Jul","Maggio"="IFL_05May","Marzo"="IFL_03Mar","Novembre"="IFL_11Nov","Ottobre"="IFL_10Oct","Settembre"="IFL_09Sep"))
+            flower_date$names_month<-as.character(flower_date$names_month)
+            flower_date<-flower_date[order(flower_date$names_month),]
+            flower_date<-as.data.frame(flower_date[,2:ncol(flower_date)],row.names = flower_date$names_month)
+            
+
+            res@results<-data.frame(t(flower_date))
         }else{
             res@results<-NULL
         }
@@ -110,3 +119,6 @@ get_italian_flowering<-function(species_list,TRAITS){
     res@bibliography<-"Pignatti Sandro, 1982 Flora d'Italia.\nEdagricole, Bologna."
     return(res)
 }
+
+
+# get_italian_flowering(lista_specie,TRAITS)->vai

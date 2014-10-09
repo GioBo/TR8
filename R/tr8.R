@@ -288,7 +288,7 @@ tr8<-function(species_list,gui_config=TRUE){
             if(!is.null(i@results))
                 {
                     ## update the bibliography (Adding the required sources
-                    ## of information
+                    
                     bibliography[[i@bibliography]]=names(i@results)
                     tr8_traits=merge(tr8_traits,i@results,by.x=0,by.y=0,all=TRUE)
                     row.names(tr8_traits)<-tr8_traits$Row.names

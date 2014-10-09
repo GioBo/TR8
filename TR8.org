@@ -1,7 +1,7 @@
 #+TITLE: Org file for managing the TR8 project
 
 
-#+TODO: TODO | DONE
+#+TODO: OPEN | CLOSED DELETED
 #+TODO: REPORT BUG KNOWNCAUSE | FIXED
 #+TODO: | CANCELED
 #+TAGS: programming documenting email

@@ -45,10 +45,11 @@ setMethod(f="get_traits",
               row.names(DF)<-DF$Name.tnrs
               DF<-DF[,c("L","T","C","U","R","N","S","forma_biologica","corotipo")]
               names(DF)<-c("L","T","C","U","R","N","S","life_form_P","corotipo")
-              results<-DF[,.Object@traits]
+              selected<-.Object@traits[.Object@traits%in%names(DF)]
+              results<-DF[,selected]
               
               results<-as.data.frame(results)
-              names(results)<-.Object@traits
+              names(results)<-selected#.Object@traits
               row.names(results)<-row.names(DF)
               .Object@results<-results
               .Object@not_valid<-.Object@species_list[!.Object@species_list%in%pignatti$Name.tnrs]
