@@ -7,9 +7,9 @@
 #+TAGS: programming documenting email
 
 
-* BUGS [100%]
+* BUGS [80%]
 
-  
+*** BUG issue#1 :: change column_list.R and related files so that only one code is present for italian flowering
 *** FIXED bug#18: non ascii characters in data
     
     Si trovano i seguenti non ascii files nei dataset
