@@ -7,7 +7,9 @@
 #+TAGS: programming documenting email
 
 
-* BUGS [80%]
+* BUGS [66%]
+
+*** BUG issue#2 :  uniform column names
 
 *** BUG issue#1 :: change column_list.R and related files so that only one code is present for italian flowering
 *** FIXED bug#18: non ascii characters in data
