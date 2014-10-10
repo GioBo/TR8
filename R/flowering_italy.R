@@ -78,7 +78,8 @@ get_italian_flowering<-function(species_list,TRAITS){
             names_month<-c("Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre")
             base_url="http://luirig.altervista.org/flora/taxa/index1.php?scientific-name="##vicia+sativa
             base_url_bis<-"http://luirig.altervista.org/schede/ae/"
-            flower_date<-as.data.frame(names_month)
+            ##flower_date<-as.data.frame(names_month)
+            flower_date<-list()
             for(species_name in species_list){
                 species<-species_name
                 cur<-tolower(species_name)
@@ -90,28 +91,23 @@ get_italian_flowering<-function(species_list,TRAITS){
                 url_bis<-paste(base_url_bis,cur_bis,".htm",sep="")
                 ## check firt pattern
                 if(url.exists(url)){
-                    flower_date<-merge(flower_date,luirig(url,species_name))
+                    ##flower_date<-merge(flower_date,luirig(url,species_name))
+                        tp<-luirig(url,species_name)
+                        for(i in 1:nrow(tp)){
+                            flower_date[[species]][[as.character(tp$names_month[i])]]<-tp[i,species]
+                        }
                 }else{
-                    ## otherwise check second pattern
-                    if(url.exists(url_bis)){
-                        flower_date[[species]]<-luirig(url_bis,species_name)
-                        ##if theese don't work, use NA NA as values
-                    }else{
-                        names_tmp<-names(flower_date)
-                        flower_date<-data.frame(flower_date,species=NA)
-                        names(flower_date)<-c(names_tmp,species)
-
-                    }
+                    for(i in names_month){
+                            flower_date[[species]][[as.character(i)]]<-NA
+                        }
                 }
             }
-
-            flower_date$names_month<-revalue(flower_date$names_month,c("Agosto"="IFL_08Aug","Aprile"="IFL_04Apr","Dicembre"="IFL_12Dec","Febbraio"="IFL_02Feb","Gennaio"="IFL_01Jan","Giugno"="IFL_06Jun","Luglio"="IFL_07Jul","Maggio"="IFL_05May","Marzo"="IFL_03Mar","Novembre"="IFL_11Nov","Ottobre"="IFL_10Oct","Settembre"="IFL_09Sep"))
-            flower_date$names_month<-as.character(flower_date$names_month)
-            flower_date<-flower_date[order(flower_date$names_month),]
-            flower_date<-as.data.frame(flower_date[,2:ncol(flower_date)],row.names = flower_date$names_month)
-            
-
-            res@results<-data.frame(t(flower_date))
+            go<-ldply(flower_date)
+            row.names(go)<-go$.id
+            go<-go[,names(go)!=".id"]
+            names(go)<-revalue(names(go),c("Agosto"="IFL_08Aug","Aprile"="IFL_04Apr","Dicembre"="IFL_12Dec","Febbraio"="IFL_02Feb","Gennaio"="IFL_01Jan","Giugno"="IFL_06Jun","Luglio"="IFL_07Jul","Maggio"="IFL_05May","Marzo"="IFL_03Mar","Novembre"="IFL_11Nov","Ottobre"="IFL_10Oct","Settembre"="IFL_09Sep"))
+            go<-data.frame(go)
+            res@results<-data.frame(go)
         }else{
             res@results<-NULL
         }
