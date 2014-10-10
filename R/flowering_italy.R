@@ -73,7 +73,7 @@ get_italian_flowering<-function(species_list,TRAITS){
     if(is.null(TRAITS)){
         res@results<-NULL
     }else{
-        test<-("IT_begin_flow"%in%TRAITS||"IT_end_flow"%in%TRAITS)
+        test<-("IT_flowering_months"%in%TRAITS)
         if(length(TRAITS)==0||test){
             names_month<-c("Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre")
             base_url="http://luirig.altervista.org/flora/taxa/index1.php?scientific-name="##vicia+sativa
@@ -119,6 +119,3 @@ get_italian_flowering<-function(species_list,TRAITS){
     res@bibliography<-"Pignatti Sandro, 1982 Flora d'Italia.\nEdagricole, Bologna."
     return(res)
 }
-
-
-# get_italian_flowering(lista_specie,TRAITS)->vai
