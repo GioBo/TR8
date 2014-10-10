@@ -1,5 +1,5 @@
 
-/home/gionata/Work/src/tr8_github/R/biolflor.R,193
+/home/gionata/Work/src/tr8_github/R//biolflor.R,193
 llist_of_traits_Biolflor2,1
 ttraits_special_Biolflor14,425
 ttraits_pollen_Biolflor22,628
@@ -8,58 +8,58 @@ sextract40,1442
 sextract,biolflor_traits42,1520
 bbiolflor118,4602
 
-/home/gionata/Work/src/tr8_github/R/clean_table.R,24
+/home/gionata/Work/src/tr8_github/R//clean_table.R,24
 bbiolflor_clean17,705
 
-/home/gionata/Work/src/tr8_github/R/control.R,18
+/home/gionata/Work/src/tr8_github/R//control.R,18
 ccontrol20,1108
 
-/home/gionata/Work/src/tr8_github/R/ecoflora.R,113
+/home/gionata/Work/src/tr8_github/R//ecoflora.R,113
 sEcoflora7,219
 sinitialize,Ecoflora17,580
 sretrieve64,2822
 sretrieve,Ecoflora67,2907
 eecoflora141,6401
 
-/home/gionata/Work/src/tr8_github/R/flowering_italy.R,48
+/home/gionata/Work/src/tr8_github/R//flowering_italy.R,48
 lluirig12,647
 gget_italian_flowering71,3204
 
-/home/gionata/Work/src/tr8_github/R/leda_download.R,39
+/home/gionata/Work/src/tr8_github/R//leda_download.R,39
 lleda_download_to_local_directory2,1
 
-/home/gionata/Work/src/tr8_github/R/leda_general.R,43
+/home/gionata/Work/src/tr8_github/R//leda_general.R,43
 lleda_download1,0
 lleda_general30,1137
 
-/home/gionata/Work/src/tr8_github/R/LEDA.R,112
+/home/gionata/Work/src/tr8_github/R//LEDA.R,112
 aanswer_for_leda1,0
 lleda_extract_from_local_df16,526
 sLeda33,1019
 sseed_simplify50,1625
 lleda89,3731
 
-/home/gionata/Work/src/tr8_github/R/myco.R,23
+/home/gionata/Work/src/tr8_github/R//myco.R,23
 rretrieve_amf25,1105
 
-/home/gionata/Work/src/tr8_github/R/Pignatti.R,144
+/home/gionata/Work/src/tr8_github/R//Pignatti.R,144
 sellenberg_pignatti2,68
 sinitialize,ellenberg_pignatti4,194
 sget_traits19,644
 sget_traits,ellenberg_pignatti21,731
 ppignatti_f79,3350
 
-/home/gionata/Work/src/tr8_github/R/results.R,14
+/home/gionata/Work/src/tr8_github/R//results.R,14
 sresults1,0
 
-/home/gionata/Work/src/tr8_github/R/tr8_cleanup_cols.R,26
+/home/gionata/Work/src/tr8_github/R//tr8_cleanup_cols.R,26
 ccolumn_conversion9,333
 
-/home/gionata/Work/src/tr8_github/R/tr8_gui.R,41
+/home/gionata/Work/src/tr8_github/R//tr8_gui.R,41
 ttr8_config12,466
 ffix_values75,3177
 
-/home/gionata/Work/src/tr8_github/R/tr8.R,212
+/home/gionata/Work/src/tr8_github/R//tr8.R,212
 sTr816,492
 sissues23,716
 sissues,Tr827,854
@@ -72,123 +72,5 @@ sbib126,3923
 sbib,Tr8129,3994
 ttr8226,9761
 
-/home/gionata/Work/src/tr8_github/R/zzz.R,16
+/home/gionata/Work/src/tr8_github/R//zzz.R,16
 ..onAttach1,0
-
-/home/gionata/Work/src/tr8_github/man/ellenberg_pignatti-class.Rd,150
-\alias{ellenberg_pignatti-class}ellenberg_pignatti-class4,64
-\alias{get_traits,ellenberg_pignatti-method}get_traits,ellenberg_pignatti-method5,97
-
-/home/gionata/Work/src/tr8_github/man/Tr8-class.Rd,384
-\alias{Tr8-class}Tr8-class4,49
-\alias{bib,Tr8-method}bib,Tr8-method5,67
-\alias{bib}bib6,90
-\alias{issues,Tr8-method}issues,Tr8-method7,102
-\alias{lookup,Tr8-method}lookup,Tr8-method8,128
-\alias{lookup}lookup9,154
-\alias{show,Tr8-method}show,Tr8-method10,169
-\alias{extract_traits}extract_traits11,193
-\alias{extract_traits,Tr8-method}extract_traits,Tr8-method12,216
-
-/home/gionata/Work/src/tr8_github/man/leda_download_to_local_directory.Rd,79
-\alias{leda_download_to_local_directory}leda_download_to_local_directory2,40
-
-/home/gionata/Work/src/tr8_github/man/myco.Rd,23
-\alias{myco}myco3,27
-
-/home/gionata/Work/src/tr8_github/man/retrieve_amf.Rd,39
-\alias{retrieve_amf}retrieve_amf2,20
-
-/home/gionata/Work/src/tr8_github/man/biolflor.Rd,31
-\alias{biolflor}biolflor2,16
-
-/home/gionata/Work/src/tr8_github/man/TR8-package.Rd,58
-\alias{TR8}TR83,37
-\alias{TR8-package}TR8-package4,49
-
-/home/gionata/Work/src/tr8_github/man/Ecoflora-class.Rd,174
-\alias{Ecoflora-class}Ecoflora-class4,54
-\alias{initialize,Ecoflora-method}initialize,Ecoflora-method5,77
-\alias{retrieve,Ecoflora-method}retrieve,Ecoflora-method6,112
-
-/home/gionata/Work/src/tr8_github/man/biolflor_lu.Rd,37
-\alias{biolflor_lu}biolflor_lu3,34
-
-/home/gionata/Work/src/tr8_github/man/column_list.Rd,37
-\alias{column_list}column_list3,34
-
-/home/gionata/Work/src/tr8_github/man/biolflor_traits-class.Rd,132
-\alias{biolflor_traits-class}biolflor_traits-class4,61
-\alias{extract,biolflor_traits-method}extract,biolflor_traits-method5,91
-
-/home/gionata/Work/src/tr8_github/man/traits_special_Biolflor.Rd,61
-\alias{traits_special_Biolflor}traits_special_Biolflor3,46
-
-/home/gionata/Work/src/tr8_github/man/control.Rd,29
-\alias{control}control2,15
-
-/home/gionata/Work/src/tr8_github/man/ecoflora.Rd,31
-\alias{ecoflora}ecoflora2,16
-
-/home/gionata/Work/src/tr8_github/man/LEDA_df.Rd,29
-\alias{LEDA_df}LEDA_df3,30
-
-/home/gionata/Work/src/tr8_github/man/seed_simplify.Rd,41
-\alias{seed_simplify}seed_simplify2,21
-
-/home/gionata/Work/src/tr8_github/man/tr8_config.Rd,35
-\alias{tr8_config}tr8_config2,18
-
-/home/gionata/Work/src/tr8_github/man/AMF_giovannetti.Rd,45
-\alias{AMF_giovannetti}AMF_giovannetti3,38
-
-/home/gionata/Work/src/tr8_github/man/pignatti_f.Rd,35
-\alias{pignatti_f}pignatti_f2,18
-
-/home/gionata/Work/src/tr8_github/man/traits_eco.Rd,35
-\alias{traits_eco}traits_eco3,33
-
-/home/gionata/Work/src/tr8_github/man/luirig.Rd,27
-\alias{luirig}luirig2,14
-
-/home/gionata/Work/src/tr8_github/man/leda_general.Rd,39
-\alias{leda_general}leda_general2,20
-
-/home/gionata/Work/src/tr8_github/man/list_of_traits_Biolflor.Rd,61
-\alias{list_of_traits_Biolflor}list_of_traits_Biolflor3,46
-
-/home/gionata/Work/src/tr8_github/man/tr8.Rd,21
-\alias{tr8}tr82,11
-
-/home/gionata/Work/src/tr8_github/man/leda_lookup.Rd,37
-\alias{leda_lookup}leda_lookup2,19
-
-/home/gionata/Work/src/tr8_github/man/get_italian_flowering.Rd,57
-\alias{get_italian_flowering}get_italian_flowering2,29
-
-/home/gionata/Work/src/tr8_github/man/biolflor_clean.Rd,43
-\alias{biolflor_clean}biolflor_clean2,22
-
-/home/gionata/Work/src/tr8_github/man/column_conversion.Rd,49
-\alias{column_conversion}column_conversion2,25
-
-/home/gionata/Work/src/tr8_github/man/traits_pollen_Biolflor.Rd,59
-\alias{traits_pollen_Biolflor}traits_pollen_Biolflor3,45
-
-/home/gionata/Work/src/tr8_github/man/leda.Rd,23
-\alias{leda}leda2,12
-
-/home/gionata/Work/src/tr8_github/man/biolflor_check.Rd,43
-\alias{biolflor_check}biolflor_check3,37
-
-/home/gionata/Work/src/tr8_github/man/extract.Rd,29
-\alias{extract}extract2,15
-
-/home/gionata/Work/src/tr8_github/man/pignatti.Rd,31
-\alias{pignatti}pignatti4,32
-
-/home/gionata/Work/src/tr8_github/man/biolflor_lookup.Rd,45
-\alias{biolflor_lookup}biolflor_lookup3,38
-
-/home/gionata/Work/src/tr8_github/man/ECOFLORA_df.Rd,37
-\alias{ECOFLORA_df}ECOFLORA_df3,34

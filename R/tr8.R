@@ -229,7 +229,7 @@ tr8<-function(species_list,gui_config=TRUE){
     env<-new.env(parent = parent.frame())
     data(column_list,envir = env)
     column_list<-get("column_list",envir=env)
-        
+    options("guiToolkit"="tcltk")
 
 
     

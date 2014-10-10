@@ -1,6 +1,6 @@
 .onAttach<-function(...){
     packageStartupMessage(
-        "\tPlease remember to always cite the appropriate sources of traits data (see help(TR8)).
+        "\tPlease remember to always cite the appropriate sources of traits data (see ?bib).
         ")
 
     }
