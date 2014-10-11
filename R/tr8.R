@@ -65,17 +65,8 @@ setGeneric(name="lookup",def=function(.Object){standardGeneric("lookup")})
 ## @aliases lookup, Tr8-Class
 ## @param .Object an object of class Tr8
 setMethod(f="lookup",
-          
-
-
           signature="Tr8",
           definition = function(.Object){
-              ## data(column_list)
-              env<-new.env(parent = parent.frame())
-              data(column_list,envir = env)
-              column_list<-get("column_list",envir=env)
-
-
               cat("\n")
               cat("\n")
               cat("*****************************************************************")
@@ -84,16 +75,20 @@ setMethod(f="lookup",
               cat("\n")
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," code","description","reference database\n"))
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," ----","-----------","------------------\n"))
-              for(i in names(column_list)){
-                  cat(sprintf("%-30s\t%-40s\t%-30s\n",column_list[i][[1]][1],column_list[i][[1]][2],column_list[i][[1]][3]))
+              for(i in 1:nrow(.Object@reference)){
+                  cat(sprintf("%-30s\t%-40s\t%-30s\n",.Object@reference[i,2],.Object@reference[i,3],.Object@reference[i,4]))
               }
               cat("\n")
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," ****","***********","******************\n"))
-
-              remove(list=c("column_list"), envir = env)    
-
+              tp<-.Object@reference
+              tp<-tp[,c("short_code","description","db")]
+              names(tp)<-revalue(names(tp),c("short_code"="code","db"="reference database"))
+              return(invisible(tp))
           }
 )
+
+
+
 
 ## @rdname Tr8-Class
 ## @aliases show, Tr8-Class
@@ -302,21 +297,22 @@ tr8<-function(species_list,gui_config=TRUE){
                     bibliography[[i@bibliography]]=names(i@results)
                     tr8_traits=merge(tr8_traits,i@results,by.x=0,by.y=0,all=TRUE)
                     row.names(tr8_traits)<-tr8_traits$Row.names
-                    tr8_traits<-tr8_traits[,-1]
+                    tr8_traits<-tr8_traits[,-1,drop=FALSE]
                 }
         }
 
         ## remove column species_list
         row_names<-row.names(tr8_traits)
-        names_columns<-names(tr8_traits)[!(names(tr8_traits)%in%c("Row.names","species_list"))]
-        tr8_traits<-as.data.frame(tr8_traits[,names_columns],row.names = row_names)
-        names(tr8_traits)<-names_columns
-
+        ## names_columns<-names(tr8_traits)[!(names(tr8_traits)%in%c("Row.names","species_list"))]
+        ## tr8_traits<-as.data.frame(tr8_traits[,names_columns],row.names = row_names)
+        ## names(tr8_traits)<-names_columns
+        tr8_traits<-tr8_traits[,!(names(tr8_traits)%in%c("Row.names","species_list")),drop=FALSE]
+        
         obj<-new("Tr8")
         ##    obj@double_names<-unique(c(eco_traits@double_names,leda_traits@double_names))
         ##    obj@not_valid<-intersect(intersect(eco_traits@not_valid,leda_traits@not_valid),pignatti_traits@not_valid)
 
-        ## biolflor_clean shouldn't be needed any more
+        ## biolflor_clean is not needed any more
         ## tr8_traits<-biolflor_clean(tr8_traits)
         tr8_traits<-column_conversion(tr8_traits)
         obj@reference<-temp_dframe
