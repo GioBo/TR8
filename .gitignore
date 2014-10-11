@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Issues.org~
 MEE.org
 MEE.org~
 /.gitignore~
+=======
+/Issues.org~
+MEE.org
+MEE.org~
+*~
+>>>>>>> issue#7
