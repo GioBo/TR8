@@ -229,7 +229,8 @@ tr8<-function(species_list,gui_config=TRUE){
     data(column_list,envir = env)
     column_list<-get("column_list",envir=env)
     options("guiToolkit"="tcltk")
-
+    ## rest is used for Sys.sleep in all the retrieving functions
+    rest=1.5
 
     
     if(missing(species_list)||!is.character(species_list)){
@@ -261,26 +262,26 @@ tr8<-function(species_list,gui_config=TRUE){
         ## convert it to a data frame
         temp_dframe<-ldply(column_list)
         names(temp_dframe)<-c("long_code","short_code","description","db")
-
+        
         
         ## retrieve traits from ecolora function
-        eco_traits<-ecoflora(species_list,TRAITS=traits_list$ECOFLORA)
+        eco_traits<-ecoflora(species_list,TRAITS=traits_list$ECOFLORA,rest=rest)
         ## retrieve data from local LEDA datasets
         if(!exists("rearranged")){
             rearranged<-NULL}
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
 
         ## retrieve data from BiolFlor
-        biolflor_traits<-biolflor(species_list,traits_list$Biolflor)
+        biolflor_traits<-biolflor(species_list,traits_list$Biolflor,rest=rest)
         
         ## retrieve data from Pignatti
         pignatti_traits<-pignatti_f(species_list,TRAITS=traits_list$PIGNATTI)
 
         ## retrieve flowering periods for Italy
-        it_flowering<-get_italian_flowering(species_list,TRAITS=traits_list$PIGNATTI)
+        it_flowering<-get_italian_flowering(species_list,TRAITS=traits_list$PIGNATTI,rest=rest)
         
         ## add AMF
-        amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$AMF)
+        amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$AMF,rest=rest)
         
         ## merge the results
         tr8_traits<-data.frame(species_list,row.names=species_list)

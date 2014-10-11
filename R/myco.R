@@ -22,7 +22,7 @@
 ##' @examples \dontrun{
 ##' ##My_traits<-retrieve_amf(species_list=c("Abies alba"))
 ##' }
-retrieve_amf<-function(species,TRAITS){
+retrieve_amf<-function(species,TRAITS,rest){
 
     ## in this release the archive will be downloaded
     ## from the web

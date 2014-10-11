@@ -68,7 +68,7 @@ luirig<-function(url,species){
 ##' of the flowering phase
 ##' @references \url{http://luirig.altervista.org/}
 ##' @author Gionata Bocci <boccigionata@@gmail.com>
-get_italian_flowering<-function(species_list,TRAITS){
+get_italian_flowering<-function(species_list,TRAITS,rest){
     res<-new("results")
     if(is.null(TRAITS)){
         res@results<-NULL
@@ -81,6 +81,7 @@ get_italian_flowering<-function(species_list,TRAITS){
             ##flower_date<-as.data.frame(names_month)
             flower_date<-list()
             for(species_name in species_list){
+                Sys.sleep(rest)
                 species<-species_name
                 cur<-tolower(species_name)
                 ## some species are found in url pattern base_url/genus+species

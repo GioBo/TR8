@@ -4,7 +4,7 @@
 ##
 ## The class is a box containing url and traits data for species
 ## which are present in the Ecoflora website
-setClass("Ecoflora",representation=list(species_list="vector",reference="data.frame",df="data.frame",not_valid="vector",results="data.frame",traits="list",double_names="vector"))
+setClass("Ecoflora",representation=list(species_list="vector",reference="data.frame",df="data.frame",not_valid="vector",results="data.frame",traits="list",double_names="vector",rest="numeric"))
 
 
 
@@ -16,8 +16,9 @@ setClass("Ecoflora",representation=list(species_list="vector",reference="data.fr
 
 setMethod('initialize',
           signature="Ecoflora",
-          definition = function(.Object,species_list,reference,traits){          
+          definition = function(.Object,species_list,reference,traits,rest){          
               .Object@species_list<-species_list
+              .Object@rest<-rest
               ## list which will contain ecoflora
               ## web link for each species
               base_url<-"http://www.ecoflora.co.uk/search_ecochars.php?"
@@ -83,6 +84,7 @@ setMethod(f='retrieve',
                       }
                       else{
                           ## extract tabe data from the scraped web page
+                          Sys.sleep(.Object@rest)
                           eco_data<-readHTMLTable(species_url)[[2]]
                           ## for some traits there are several entries (with the same Code), thus
                           ## the retrieved table must be "aggregated" in order to have 1 entr/trait
@@ -138,7 +140,7 @@ setMethod(f='retrieve',
 #' @examples \dontrun{
 #' #' #My_data<-ecoflora(species_list=c("Abies alba"))
 #' }
-ecoflora<-function(species_list,reference=ECOFLORA_df,TRAITS)
+ecoflora<-function(species_list,reference=ECOFLORA_df,TRAITS,rest)
     {
         env<-new.env()
         res<-new("results")
@@ -161,7 +163,7 @@ ecoflora<-function(species_list,reference=ECOFLORA_df,TRAITS)
                     traits<-traits_eco[names(traits_eco)%in%TRAITS]
                 }
             
-            obj<-new("Ecoflora",species_list=species_list,reference=reference,traits=traits)
+            obj<-new("Ecoflora",species_list=species_list,reference=reference,traits=traits,rest=rest)
             ##        ret<-as.data.frame(ret@results)
             ##remove(list=c("ECOFLORA_df","traits_eco"),pos =".GlobalEnv")
             ret<-retrieve(obj)

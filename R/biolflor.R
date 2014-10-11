@@ -115,7 +115,7 @@ setMethod(f="extract",
 #' @examples \dontrun{
 #' biolflor(c("Abies alba"))
 #' }
-biolflor<-function(list_species,TRAITS){
+biolflor<-function(list_species,TRAITS,rest){
     res<-new("results")
     env<-new.env(parent = parent.frame())
     data(biolflor_lookup,envir=env)
@@ -141,7 +141,7 @@ biolflor<-function(list_species,TRAITS){
                     species_url<-with(biolflor_lookup,biolflor_lookup[acceptedname==cur&submittedname==cur,"V2"])
                 }
             }else{species_url<-"not present"}
-            
+            Sys.sleep(rest)
             prova<-new("biolflor_traits",url=species_url,list_traits=list_of_traits_Biolflor,list_special_traits=traits_special_Biolflor)
             bio_res<-extract(prova)
             go<-bio_res@extracted
