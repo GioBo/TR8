@@ -13,7 +13,7 @@
 ## @slot results dataframe containing scraped traits
 ## @slot not_valid species whose name were not present in the Ecoflora database
 ## @slot double_names species for which more than one name was found
-setClass("Tr8",representation =list(species_list="vector",results="data.frame",not_valid="vector",double_names="vector",bibliography="list"))
+setClass("Tr8",representation =list(species_list="vector",results="data.frame",not_valid="vector",double_names="vector",bibliography="list",reference="data.frame"))
 
 ## Method issues
 ##
@@ -129,6 +129,10 @@ setGeneric(name="bib",def=function(.Object){standardGeneric("bib")})
 setMethod(f="bib",
            signature="Tr8",
            definition = function(.Object){
+                   env<-new.env(parent = parent.frame())
+                   data(column_list,envir = env)
+                   column_list<-get("column_list",envir=env)
+
                    cat("\n")
                    cat("Please use the following references for the data you retrieved with tr8()\n")
                    cat("\n")
@@ -240,8 +244,8 @@ tr8<-function(species_list,gui_config=TRUE){
         ## if the user wants to manually sets the parameters to download
         if(gui_config)
             {
-                gmessage(title="TR8 reminder!","Please always use the appropriate citations for the downloaded data.\n
-\n Run the bib() function on the downloaded data to get the correct bibliographic citations to be used.\n")
+                ##gmessage(title="TR8 reminder!","Please always use the appropriate citations for the downloaded data.\n
+                ##\n Run the bib() function on the downloaded data to get the correct bibliographic citations to be used.\n")
                         
                 traits_list<-tr8_config()
             }else{
@@ -286,10 +290,13 @@ tr8<-function(species_list,gui_config=TRUE){
         ## merge the results
         tr8_traits<-data.frame(species_list,row.names=species_list)
         bibliography=list()
-        for(i in c(eco_traits,leda_traits,biolflor_traits,pignatti_traits,it_flowering,amf_traits)){
+        
+        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits)){
             ## merge the dataframes only if they contain data
             if(!is.null(i@results))
                 {
+                    ## clean dataframe column names
+                    i@results<-column_conversion(i@results)
                     ## update the bibliography (Adding the required sources
                     
                     bibliography[[i@bibliography]]=names(i@results)
@@ -306,10 +313,13 @@ tr8<-function(species_list,gui_config=TRUE){
         names(tr8_traits)<-names_columns
 
         obj<-new("Tr8")
-                                        #    obj@double_names<-unique(c(eco_traits@double_names,leda_traits@double_names))
-                                        #    obj@not_valid<-intersect(intersect(eco_traits@not_valid,leda_traits@not_valid),pignatti_traits@not_valid)
-        tr8_traits<-biolflor_clean(tr8_traits)
+        ##    obj@double_names<-unique(c(eco_traits@double_names,leda_traits@double_names))
+        ##    obj@not_valid<-intersect(intersect(eco_traits@not_valid,leda_traits@not_valid),pignatti_traits@not_valid)
+
+        ## biolflor_clean shouldn't be needed any more
+        ## tr8_traits<-biolflor_clean(tr8_traits)
         tr8_traits<-column_conversion(tr8_traits)
+        obj@reference<-temp_dframe
         obj@results<-tr8_traits
         obj@bibliography<-bibliography
         
