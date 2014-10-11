@@ -156,6 +156,9 @@ biolflor<-function(list_species,TRAITS){
         tp<-ldply(tmp_list)
         row.names(tp)<-tp$.id
         names_species<-names(tp)[names(tp)!=".id"]
+        ## drop=FALSE is necessary to avoid that single column dataframe (ie only one
+        ## trait is selected from biolflor) is converted to a vector (without names
+        ## and row.names
         tp<-data.frame(tp[,!names(tp)==".id",drop=FALSE],check.names = F)
         
         res@results<-tp
