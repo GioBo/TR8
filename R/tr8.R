@@ -249,8 +249,11 @@ tr8<-function(species_list,gui_config=TRUE){
                 traits_list<-list("Biolflor"=NULL,"LEDA"=NULL,"ECOFLORA"=NULL,"PIGNATTI"=c("L","T","C","U","R","N","S"),"AMF"=NULL)
             }
         if(!exists("traits_list")){
-            gmessage(title="TR8 reminder!","Please always use the appropriate citations for the downloaded data.\n
-\n Run the bib() function on the downloaded data to get the correct bibliographic citations to be used.\n")
+
+            ##    gmessage() is now removed (was considered as bothering by users) 
+            ## 
+            ##             gmessage(title="TR8 reminder!","Please always use the appropriate citations for the downloaded data.\n
+            ## \n Run the bib() function on the downloaded data to get the correct bibliographic citations to be used.\n")
 
             traits_list<-list("Biolflor"=as.character(),"LEDA"=as.character(),"ECOFLORA"=as.character(),"PIGNATTI"=as.character(),"AMF"=as.character())
         }
