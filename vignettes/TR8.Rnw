@@ -32,8 +32,31 @@ possibility of easily retrieving traits data for plant species from the followin
 
 \section{Installation}
 \label{sec:installation}
+%%    For the moment the package is available only as a \texttt{.zip}
+%%    file, thus you will have to manually install these other packages; to do so, run the following:
 
- The package relies on some functions provided by the following packages (which are thus needed):
+%% @ 
+%% <<dependencies,eval=FALSE>>=
+%% install.packages(c("XML","RCurl","plyr","taxize","methods","gWidgets"), dependencies=TRUE)
+%% @ %def 
+
+   
+%%   In order to install the \texttt{TR8} package from the 
+%%   \texttt{R commander} (\texttt{Rcmdr}) GUI interface,  go to the \texttt{Packages} menu,
+%%   then choose \texttt{Install package(s) from local zip files} and choose the
+%%   provided compressed package file.
+  
+  The \texttt{TR8} package is available on CRAN, thus it can be easily installed through:
+  
+@ 
+<<install,eval=FALSE>>=
+install.packages("TR8",dependencies = TRUE)
+@ %def 
+
+The option \texttt{dependencies = TRUE} takes care of installing the
+following packages (if they are not already installed) which are
+needed by \texttt{TR8} to work properly: 
+
  \begin{itemize}
   \item plyr\cite{plyr}
   \item reshape\cite{reshape}
@@ -43,19 +66,7 @@ possibility of easily retrieving traits data for plant species from the followin
   \item gWidgets\cite{gWidgets}
   \end{itemize}
   
-   For the moment the package is available only as a \texttt{.zip}
-   file, thus you will have to manually install these other packages; to do so, run the following:
 
-@ 
-<<dependencies,eval=FALSE>>=
-install.packages(c("XML","RCurl","plyr","taxize","methods","gWidgets"), dependencies=TRUE)
-@ %def 
-
-   
-  In order to install the \texttt{TR8} package from the 
-  \texttt{R commander} (\texttt{Rcmdr}) GUI interface,  go to the \texttt{Packages} menu,
-  then choose \texttt{Install package(s) from local zip files} and choose the
-  provided compressed package file.
   
   Once the package is installed, you can load it with:
 
@@ -70,7 +81,7 @@ Please note that:
 \item[The user is asked to always cite the data sources: ] the
   development of traits databases is a long and costly process,
   thus all the users of the \texttt{TR8} package are asked (and
-  reminded \textbf{every time} they load the package and use the \texttt{tr8()} function) to always cite the original sources of the data (see
+  reminded \textbf{every time} they load the package) to always cite the original sources of the data (see
   paragraph \ref{sec:citing}).
   
 \end{description}
