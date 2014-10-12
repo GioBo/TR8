@@ -52,9 +52,7 @@ luirig<-function(url,species){
 }
 
 
-##'
-##'
-##' ##' get_italian_flowering get the beginning and the end of the flowering
+##' get_italian_flowering get the beginning and the end of the flowering
 ##' phase for the italian flora. Values are based on Pignatti and retrieved
 ##' from the \url{http://luirig.altervista.org/}
 ##'

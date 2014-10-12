@@ -115,7 +115,7 @@ setMethod(f="extract",
 #' @examples \dontrun{
 #' biolflor(c("Abies alba"))
 #' }
-biolflor<-function(list_species,TRAITS,rest){
+biolflor<-function(list_species,TRAITS,rest=NULL){
     res<-new("results")
     env<-new.env(parent = parent.frame())
     data(biolflor_lookup,envir=env)

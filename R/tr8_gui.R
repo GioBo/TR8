@@ -25,16 +25,15 @@ tr8_config<-function(){
     names(temp_dframe)<-c("long_code","short_code","description","db")
 
     ## get traits for ecoflora
-    temp_ECOFLORA<-temp_dframe[temp_dframe$db=="Ecoflora",c("long_code","description")]
+    temp_Ecoflora<-temp_dframe[temp_dframe$db=="Ecoflora",c("long_code","description")]
     ## get traits for pignatti
-    temp_PIGNATTI<-temp_dframe[temp_dframe$db=="Pignatti",c("long_code","description")]
+    temp_Pignatti<-temp_dframe[temp_dframe$db=="Pignatti",c("long_code","description")]
     ## get traits for biolflor
-    temp_Biolflor<-temp_dframe[temp_dframe$db=="BiolFlor",c("long_code","description")]
+    temp_BiolFlor<-temp_dframe[temp_dframe$db=="BiolFlor",c("long_code","description")]
     ## get traits for leda
     temp_LEDA<-temp_dframe[temp_dframe$db=="LEDA",c("long_code","description")]
     ## get traits for AMF
-    ## temp_AMF<-temp_dframe$description[temp_dframe$db=="Akhmetzhanova et al."|temp_dframe$db=="Giovannetti et al."]
-    temp_AMF<-temp_dframe[temp_dframe$db=="Akhmetzhanova",c("long_code","description")]
+    temp_Akhmetzhanova<-temp_dframe[temp_dframe$db=="Akhmetzhanova",c("long_code","description")]
 
     ## create the main MODAL window
     window<-gbasicdialog(title="Traits selector for TR8")
@@ -44,30 +43,30 @@ tr8_config<-function(){
     ## create a 'notebook' object which contains different sheets
     nb=gnotebook(container=window)
     ## create a sheet of traits for 'biolflor' 
-    res_Biolflor<-gcheckboxgroup(temp_Biolflor$description,container=nb,label="Biolflor")
+    res_BiolFlor<-gcheckboxgroup(temp_BiolFlor$description,container=nb,label="BiolFlor")
     ## create a sheet of traits for 'leda' 
     res_LEDA<-gcheckboxgroup(temp_LEDA$description,container=nb,label="LEDA")
-    res_ECOFLORA<-gcheckboxgroup(temp_ECOFLORA$description,container=nb,label="ECOFLORA")
-    res_PIGNATTI<-gcheckboxgroup(temp_PIGNATTI$description,container=nb,label="Pignatti")
-    res_AMF<-gcheckboxgroup(temp_AMF$description,container=nb,label="AMF")
+    res_Ecoflora<-gcheckboxgroup(temp_Ecoflora$description,container=nb,label="Ecoflora")
+    res_Pignatti<-gcheckboxgroup(temp_Pignatti$description,container=nb,label="Pignatti")
+    res_Akhmetzhanova<-gcheckboxgroup(temp_Akhmetzhanova$description,container=nb,label="Akhmetzhanova")
     visible(window,TRUE)
 
     
-    res_Biolflor<-svalue(res_Biolflor)
+    res_BiolFlor<-svalue(res_BiolFlor)
     res_LEDA<-svalue(res_LEDA)
-    res_ECOFLORA<-svalue(res_ECOFLORA)
-    res_PIGNATTI<-svalue(res_PIGNATTI)
-    res_AMF<-svalue(res_AMF)
+    res_Ecoflora<-svalue(res_Ecoflora)
+    res_Pignatti<-svalue(res_Pignatti)
+    res_Akhmetzhanova<-svalue(res_Akhmetzhanova)
 
     
-    res_Biolflor<-fix_values(res_Biolflor,temp_Biolflor)
+    res_BiolFlor<-fix_values(res_BiolFlor,temp_BiolFlor)
     res_LEDA<-fix_values(res_LEDA,temp_LEDA)
-    res_ECOFLORA<-fix_values(res_ECOFLORA,temp_ECOFLORA)
-    res_PIGNATTI<-fix_values(res_PIGNATTI,temp_PIGNATTI)
-    res_AMF<-fix_values(res_AMF,temp_AMF)
+    res_Ecoflora<-fix_values(res_Ecoflora,temp_Ecoflora)
+    res_Pignatti<-fix_values(res_Pignatti,temp_Pignatti)
+    res_Akhmetzhanova<-fix_values(res_Akhmetzhanova,temp_Akhmetzhanova)
 
     
-    traits_list<-list("Biolflor"=res_Biolflor,"LEDA"=res_LEDA,"ECOFLORA"=res_ECOFLORA,"PIGNATTI"=res_PIGNATTI,"AMF"=res_AMF)
+    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"Akhmetzhanova"=res_Akhmetzhanova)
     return(traits_list)
 
 }
