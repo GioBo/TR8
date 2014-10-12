@@ -21,10 +21,10 @@ Encoding: UTF-8
 URL: https://github.com/GioBo/TR8
 BugReports: https://github.com/GioBo/TR8/issues
 Depends:
-    XML,
-    RCurl,
     methods
 Imports:
+    RCurl,
+    XML,
     taxize,
     plyr,
     gWidgets

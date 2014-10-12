@@ -3,13 +3,16 @@
 \title{\code{tr8}: retrieving functional traits data from various
 databases.}
 \usage{
-tr8(species_list, gui_config = TRUE)
+tr8(species_list, download_list = NULL, gui_config = FALSE)
 }
 \arguments{
   \item{species_list}{a vector containing names of the
   plant species for which traits data want to be
   extracted.}
 
+\item{download_list}{a vector containing the \code{short codes} of
+  traits which should be downlaoaded (to be used as an alternative
+to the GUI inerface)}
   \item{gui_config}{if set to TRUE a GUI for selecting
   traits of interest is shown (default is TRUE)}
 }
@@ -37,6 +40,17 @@ At the moment the following databeses are available:
 
   \item{ Mycorrhizal intensity database}
 }
+
+
+  The function can either be used in an interactive way (i.e. if the
+  \code{gui_config}  parameter is set to \code{TRUE}, a
+  multi-panel GUI will ask users to choose among lists of available
+  traits) or in a non-interactive way (providing the function with a
+  vector containing the \code{short codes} of the trait which should be
+  downloaded (in order to have an idea of the available traits and the
+  associated codes to be used for the \code{download_list}, see the
+  \code{available_traits} function).
+  
 
 
 }

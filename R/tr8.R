@@ -178,10 +178,11 @@ setMethod(f="bib",
 #' 
 #' @param species_list a vector containing names of the plant species for which
 #' traits data want to be extracted.
+#' @param download_list a 
 #' @param gui_config if set to TRUE a GUI for selecting traits of interest is shown (default is TRUE)
 #' @return data.frame containing various traits data for the species of interest
 #' @author Gionata Bocci <boccigionata@@gmail.com>
-#' @seealso \code{\link{ecoflora}}, \code{\link{leda}}, \code{\link{biolflor}},\code{\link{pignatti_f}}
+#' @seealso \code{\link{available_traits}}, \code{\link{ecoflora}}, \code{\link{leda}}, \code{\link{biolflor}},\code{\link{pignatti_f}}
 #' @references Please always use the following citations any time you use trait
 #' data retrieved with \code{tr8}
 #' 
@@ -219,10 +220,10 @@ setMethod(f="bib",
 #' Braun-Blanquetia 39, Camerino, pp.  97.
 #'
 #' #' @examples \dontrun{
-#' #My_traits<-tr8(species_list=c("Abies alba"))
+#' #My_traits<-tr8(species_list=c("Abies alba"),download_traits=c("le_area","h_max","h_min"))
 #' }
 #' @export tr8
-tr8<-function(species_list,tr8_list=NULL,gui_config=FALSE){
+tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
 
     ## get column_list dataset
     env<-new.env(parent = parent.frame())
@@ -256,43 +257,12 @@ tr8<-function(species_list,tr8_list=NULL,gui_config=FALSE){
                     
                     #db<-temp_dframe$db[temp_dframe$short_code==i]
                     data_db<-temp_dframe[temp_dframe$db==db,]
-                    if(sum(data_db$short_code%in%tr8_list)>0){
-                        code<-data_db$long_code[data_db$short_code%in%tr8_list]
+                    if(sum(data_db$short_code%in%download_list)>0){
+                        code<-data_db$long_code[data_db$short_code%in%download_list]
                     }else{code<-list(NULL)}
                     traits_list[db]<-code
                 }
-
-                ## for(i in tr8_list){
-                ##     ##users will pass a vector with the 'short_code' names of traits
-                ##     if(!i%in%temp_dframe$short_code){
-                ##         message(paste(i,"is not present in the list of available traits, please check your list of traits"))
-                ##     }else{
-                        
-                ##         db<-temp_dframe$db[temp_dframe$short_code==i]
-                ##         code<-temp_dframe$long_code[temp_dframe$short_code==i]
-                ##         traits_list[[db]]<-code
-                ##     }
-                ## }
-                
-                ## run the scripting version
-                ## for(i in c("Biolflor","LEDA","Ecoflora","Pignatti","Akhmetzhanova")){
-                ##     if(i%in%names(tr8_list)){
-                ##         traits_list[[i]]<-tr8_list[[i]]
-                ##     }else{
-                ##         traits_list[[i]]<-NULL
-                ##     }
-
                 }
-    
-        ## if(!exists("traits_list")){
-        ##     ##    gmessage() is now removed (was considered as bothering by users) 
-        ##     ## 
-        ##     ##             gmessage(title="TR8 reminder!","Please always use the appropriate citations for the downloaded data.\n
-        ##     ## \n Run the bib() function on the downloaded data to get the correct bibliographic citations to be used.\n")
-
-        ##     traits_list<-list("Biolflor"=as.character(),"LEDA"=as.character(),"ECOFLORA"=as.character(),"PIGNATTI"=as.character(),"AMF"=as.character())
-        ## }
-        
         
         ## retrieve traits from ecolora function
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
