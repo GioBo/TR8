@@ -36,3 +36,6 @@ man/biolflor_traits-class.Rd
 man/control.Rd
 man/extract.Rd
 man/retrieve_amf.Rd
+.git/.*
+.gitignore
+.*~
