@@ -22,7 +22,7 @@
 ##' @examples \dontrun{
 ##' ##My_traits<-retrieve_amf(species_list=c("Abies alba"))
 ##' }
-retrieve_amf<-function(species,TRAITS,rest,myco=NULL){
+retrieve_amf<-function(species,TRAITS,rest,myco){
 
     ## if the myco parameter is null it means that the data have not
     ## been already downloaded, thus we need to retrieve them

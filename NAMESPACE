@@ -1,6 +1,6 @@
 export(tr8)
 export(available_traits)
-export(leda_download_to_local_directory)
+#export(leda_download_to_local_directory)
 exportMethods(bib)
 exportMethods(lookup)
 exportMethods(extract_traits)

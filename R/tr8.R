@@ -291,7 +291,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         local_amf<-paste(directory,"myco_database.Rda",sep="")
         if(file.exists(local_amf)){
             load(local_leda)}else{myco<-NULL}
-        amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$AMF,rest=rest,myco=myco)
+        amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$Akhmetzhanova,rest=rest,myco=myco)
         
         ## merge the results
         tr8_traits<-data.frame(species_list,row.names=species_list)

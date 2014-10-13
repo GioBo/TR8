@@ -1,0 +1,13 @@
+library(TR8)
+context("tr8 results")
+
+test_that("all databases work", {
+	       
+ecoflora<-tr8(c("Salix alba"),download_list=c("canopy_height"))
+ecoflora<-ecoflora@results$li_form
+  expect_equal(ecoflora,"phanerophyte" )
+})
+
+
+
+
