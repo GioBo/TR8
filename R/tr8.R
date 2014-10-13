@@ -252,15 +252,14 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                 ## run the gui
                 traits_list<-tr8_config()
             }else{
-
+                traits_list<-list()
                 for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","Akhmetzhanova")){
-                    
                     #db<-temp_dframe$db[temp_dframe$short_code==i]
                     data_db<-temp_dframe[temp_dframe$db==db,]
                     if(sum(data_db$short_code%in%download_list)>0){
                         code<-data_db$long_code[data_db$short_code%in%download_list]
-                    }else{code<-list(NULL)}
-                    traits_list[db]<-code
+                    }else{code<-NULL}
+                    traits_list[db]<-list(code)
                 }
                 }
         
