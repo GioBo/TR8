@@ -46,11 +46,11 @@ setMethod(f="extract",
 
               if(.Object@url=="not present"){
                   for(trait in .Object@list_traits){
-                      .Object@extracted[trait]=NA
+                      .Object@extracted[[trait]]=NA
                   }
 
                   for(trait in .Object@list_special_traits){
-                      .Object@extracted[trait]=NA
+                      .Object@extracted[[trait]]=NA
                       }
               }
 
@@ -71,8 +71,8 @@ setMethod(f="extract",
                       value=xpathApply(temp_pag,query,xmlValue)
                       if(length(value) > 0) {
                           ##                      print(value)
-                          .Object@extracted[trait]=paste(unlist(value),collapse = " - ")
-                      }else{.Object@extracted[trait]=NA}
+                          .Object@extracted[[trait]]=paste(unlist(value),collapse = " - ")
+                      }else{.Object@extracted[[trait]]=NA}
                   }
 
                   ## extract special traits (pollen)
@@ -81,9 +81,9 @@ setMethod(f="extract",
                       value=xpathApply(temp_pag,query,xmlValue)
                       if(length(value) > 0) {
                           ##                      print(value)
-                          .Object@extracted[trait]=paste(unlist(value),collapse = " - ")
+                          .Object@extracted[[trait]]=paste(unlist(value),collapse = " - ")
                       }
-                      else{.Object@extracted[trait]=NA}
+                      else{.Object@extracted[[trait]]=NA}
                       
                   }
 
@@ -115,7 +115,7 @@ setMethod(f="extract",
 #' @examples \dontrun{
 #' biolflor(c("Abies alba"))
 #' }
-biolflor<-function(list_species,TRAITS){
+biolflor<-function(list_species,TRAITS,rest=NULL){
     res<-new("results")
     env<-new.env(parent = parent.frame())
     data(biolflor_lookup,envir=env)
@@ -141,15 +141,27 @@ biolflor<-function(list_species,TRAITS){
                     species_url<-with(biolflor_lookup,biolflor_lookup[acceptedname==cur&submittedname==cur,"V2"])
                 }
             }else{species_url<-"not present"}
-            
+            Sys.sleep(rest)
             prova<-new("biolflor_traits",url=species_url,list_traits=list_of_traits_Biolflor,list_special_traits=traits_special_Biolflor)
             bio_res<-extract(prova)
-            tmp_list[[cur]]<-data.frame(bio_res@extracted)           
+            go<-bio_res@extracted
+            ##            go<-data.frame(go,check_names=F)           
+            for(i in names(go)){
+                tmp_list[[cur]][[i]]<-go[i][[1]]
+
+            }
+
+
         }
+        tp<-ldply(tmp_list)
+        row.names(tp)<-tp$.id
+        names_species<-names(tp)[names(tp)!=".id"]
+        ## drop=FALSE is necessary to avoid that single column dataframe (ie only one
+        ## trait is selected from biolflor) is converted to a vector (without names
+        ## and row.names
+        tp<-data.frame(tp[,!names(tp)==".id",drop=FALSE],check.names = F)
         
-        
-        tmp_df<-do.call(rbind,tmp_list)
-        res@results<-tmp_df
+        res@results<-tp
 
         }
     remove(list=c("biolflor_lookup"), envir = env)    

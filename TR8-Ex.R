@@ -5,6 +5,25 @@ library('TR8')
 
 base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 cleanEx()
+nameEx("AMF_giovannetti")
+### * AMF_giovannetti
+
+flush(stderr()); flush(stdout())
+
+### Name: AMF_giovannetti
+### Title: AMF inoculation potential
+### Aliases: AMF_giovannetti
+### Keywords: datasets
+
+### ** Examples
+
+## Not run: 
+##D #' data(AMF_giovannetti)
+## End(Not run)
+
+
+
+cleanEx()
 nameEx("ECOFLORA_df")
 ### * ECOFLORA_df
 
@@ -17,9 +36,9 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D data(ECOFLORA_df)
-## End(Not run)
+## observe the data for the first few species
+head(ECOFLORA_df)
+
 
 
 
@@ -71,15 +90,17 @@ flush(stderr()); flush(stdout())
 ### Title: TR8: a tool for retrieving functional traits data for plant
 ###   species.
 ### Aliases: TR8 TR8-package
-### Keywords: functional package, traits
+### Keywords: functional package traits
 
 ### ** Examples
 
-## Not run: 
-##D ## store the resulting data.frame in \code{My_traits}
-##D 
-##D #My_traits<-tr8(c("Abutilon theophrasti","Trifolium campestre"))
-## End(Not run)
+
+## download trait data for Abies alba and store
+## them in a dataframe called My_traits (beware: at the moment
+## setting gui_config=FALSE will only retrieve Ellenberg
+## data from Italian Flora's species
+My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)
+
 
 
 
@@ -98,7 +119,23 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-showClass("Tr8")
+## the bib() methods let the user have the exact
+## bibliographic citations to be used for the
+## retrieved data
+
+## download trait data for Abies alba (beware: at the moment
+## setting gui_config=FALSE will only retrieve Ellenberg
+## data from Italian Flora's species)
+My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)
+
+## See what citations should be used for the data
+bib(My_traits)
+
+## to see a short explanation for the codes used to identify
+## the traits use lookup()
+
+lookup(My_traits)
+
 
 
 
@@ -134,9 +171,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D #data(biolflor_check)
-## End(Not run)
+## See the first lines of the data frame 
+head(biolflor_check)
 
 
 
@@ -172,9 +208,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D data(biolflor_lookup)
-## End(Not run)
+head(biolflor_lookup)
 
 
 
@@ -192,7 +226,8 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 ## Not run: 
-##D #data(biolflor_lu)
+##D #data(
+##D biolflor_lu)
 ## End(Not run)
 
 
@@ -228,9 +263,9 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D #data(myco)
-## End(Not run)
+## inspect the structure of the list
+str(column_list)
+
 
 
 
@@ -290,6 +325,24 @@ flush(stderr()); flush(stdout())
 
 
 cleanEx()
+nameEx("leda_download_to_local_directory")
+### * leda_download_to_local_directory
+
+flush(stderr()); flush(stdout())
+
+### Name: leda_download_to_local_directory
+### Title: A utility to download a local copy of the LEDA data files.
+### Aliases: leda_download_to_local_directory
+### Keywords: tr8() LEDA
+
+### ** Examples
+
+## Dont' run
+## leda_download_to_local_directory()
+
+
+
+cleanEx()
 nameEx("leda_general")
 ### * leda_general
 
@@ -303,7 +356,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## age_of_first_flowering<-leda_general(url="age%20of%20first%20flowering.txt",skip_row = 4,column="age of first flowering",out_name="age_first_flowering",species=species)
+##
+##age_of_first_flowering<-leda_general(url="age%20of%20first%20flowering.txt",
+##   skip_row =4, column="age of first flowering", out_name="age_first_flowering",
+##   species=species)
 
 
 
@@ -316,13 +372,13 @@ flush(stderr()); flush(stdout())
 
 ### Name: leda_lookup
 ### Title: List with reference variables needed to download traits from
-###   LEDA Traitbas
+###   LEDA Traitbase
 ### Aliases: leda_lookup
 ### Keywords: datasets
 
 ### ** Examples
 
-data(leda_lookup)
+head(leda_lookup)
 
 
 
@@ -339,8 +395,27 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+## have a look at the first rows of the dataset
+head(list_of_traits_Biolflor)
+
+
+
+
+cleanEx()
+nameEx("myco")
+### * myco
+
+flush(stderr()); flush(stdout())
+
+### Name: myco
+### Title: myco
+### Aliases: myco
+### Keywords: dataframe
+
+### ** Examples
+
 ## Not run: 
-##D #data(list_of_traits_Biolflor)
+##D #data(myco)
 ## End(Not run)
 
 
@@ -358,9 +433,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D data(pignatti)
-## End(Not run)
+## inspect the first rows of the dataset
+head(pignatti)
 
 
 
@@ -389,15 +463,15 @@ nameEx("tr8")
 flush(stderr()); flush(stdout())
 
 ### Name: tr8
-### Title: 'tr8': a function for retrieving functional traits data from
-###   various databases.
+### Title: 'tr8': retrieving functional traits data from various databases.
 ### Aliases: tr8
 
 ### ** Examples
 
-## Not run: 
-##D #My_traits<-tr8(species_list=c("Abies alba"))
-## End(Not run)
+## download trait data for Abies alba (beware: at the moment
+## setting gui_config=FALSE will only retrieve Ellenberg
+## data from Italian Flora's species
+My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)
 
 
 
@@ -414,9 +488,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D data(traits_eco)
-## End(Not run)
+## observe the sructure of the dataset
+str(traits_eco)
 
 
 
@@ -452,9 +525,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-## Not run: 
-##D #data(traits_special_Biolflor)
-## End(Not run)
+traits_special_Biolflor
 
 
 

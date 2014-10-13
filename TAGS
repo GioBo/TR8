@@ -1,65 +1,65 @@
 
-/home/gionata/Work/src/tr8/TR8/R//biolflor.R,195
+/home/gionata/Work/src/tr8_github/R//biolflor.R,193
 llist_of_traits_Biolflor2,1
-ttraits_special_Biolflor61,4332
-ttraits_pollen_Biolflor69,4535
-sbiolflor_traits82,5093
-sextract87,5349
-sextract,biolflor_traits89,5427
-bbiolflor165,8509
+ttraits_special_Biolflor14,425
+ttraits_pollen_Biolflor22,628
+sbiolflor_traits35,1186
+sextract40,1442
+sextract,biolflor_traits42,1520
+bbiolflor118,4602
 
-/home/gionata/Work/src/tr8/TR8/R//clean_table.R,24
+/home/gionata/Work/src/tr8_github/R//clean_table.R,24
 bbiolflor_clean17,705
 
-/home/gionata/Work/src/tr8/TR8/R//control.R,18
+/home/gionata/Work/src/tr8_github/R//control.R,18
 ccontrol20,1108
 
-/home/gionata/Work/src/tr8/TR8/R//ecoflora.R,113
+/home/gionata/Work/src/tr8_github/R//ecoflora.R,113
 sEcoflora7,219
 sinitialize,Ecoflora17,580
 sretrieve64,2822
 sretrieve,Ecoflora67,2907
 eecoflora141,6401
 
-/home/gionata/Work/src/tr8/TR8/R//flowering_italy.R,48
+/home/gionata/Work/src/tr8_github/R//flowering_italy.R,48
 lluirig12,647
-gget_italian_flowering48,2114
+gget_italian_flowering71,3204
 
-/home/gionata/Work/src/tr8/TR8/R//leda_download.R,39
+/home/gionata/Work/src/tr8_github/R//leda_download.R,39
 lleda_download_to_local_directory2,1
 
-/home/gionata/Work/src/tr8/TR8/R//leda_general.R,43
+/home/gionata/Work/src/tr8_github/R//leda_general.R,43
 lleda_download1,0
 lleda_general30,1137
 
-/home/gionata/Work/src/tr8/TR8/R//LEDA.R,112
+/home/gionata/Work/src/tr8_github/R//LEDA.R,112
 aanswer_for_leda1,0
 lleda_extract_from_local_df16,526
 sLeda33,1019
 sseed_simplify50,1625
 lleda89,3731
 
-/home/gionata/Work/src/tr8/TR8/R//myco.R,23
+/home/gionata/Work/src/tr8_github/R//myco.R,23
 rretrieve_amf25,1105
 
-/home/gionata/Work/src/tr8/TR8/R//Pignatti.R,144
+/home/gionata/Work/src/tr8_github/R//Pignatti.R,144
 sellenberg_pignatti2,68
 sinitialize,ellenberg_pignatti4,194
 sget_traits19,644
 sget_traits,ellenberg_pignatti21,731
-ppignatti_f78,3279
+ppignatti_f79,3350
 
-/home/gionata/Work/src/tr8/TR8/R//results.R,14
+/home/gionata/Work/src/tr8_github/R//results.R,14
 sresults1,0
 
-/home/gionata/Work/src/tr8/TR8/R//tr8_cleanup_cols.R,26
+/home/gionata/Work/src/tr8_github/R//tr8_cleanup_cols.R,26
 ccolumn_conversion9,333
 
-/home/gionata/Work/src/tr8/TR8/R//tr8_gui.R,41
+/home/gionata/Work/src/tr8_github/R//tr8_gui.R,41
 ttr8_config12,466
 ffix_values75,3177
 
-/home/gionata/Work/src/tr8/TR8/R//tr8.R,212
+/home/gionata/Work/src/tr8_github/R//tr8.R,212
 sTr816,492
 sissues23,716
 sissues,Tr827,854
@@ -72,5 +72,5 @@ sbib126,3923
 sbib,Tr8129,3994
 ttr8226,9761
 
-/home/gionata/Work/src/tr8/TR8/R//zzz.R,16
+/home/gionata/Work/src/tr8_github/R//zzz.R,16
 ..onAttach1,0

@@ -22,20 +22,23 @@
 ##' @examples \dontrun{
 ##' ##My_traits<-retrieve_amf(species_list=c("Abies alba"))
 ##' }
-retrieve_amf<-function(species,TRAITS){
+retrieve_amf<-function(species,TRAITS,rest,myco){
 
-    ## in this release the archive will be downloaded
-    ## from the web
-    myco_url <- "http://esapubs.org/Archive/ecol/E093/059/myco_db.csv"
-    myco<- tryCatch(read.csv(myco_url,sep=",",header=T),
-                    error=function(res){
-                        message("URL does not seem to exist:")
-                        return(NA)},
-                    warning=function(res){
-                        message("URL does not seem to exist:")
-                        return(NA)
-                    } )
-        
+    ## if the myco parameter is null it means that the data have not
+    ## been already downloaded, thus we need to retrieve them
+    if(is.null(myco)){
+        ## in this release the archive will be downloaded
+        ## from the web
+        myco_url <- "http://esapubs.org/Archive/ecol/E093/059/myco_db.csv"
+        myco<- tryCatch(read.csv(myco_url,sep=",",header=T),
+                        error=function(res){
+                            message("URL does not seem to exist:")
+                            return(NA)},
+                        warning=function(res){
+                            message("URL does not seem to exist:")
+                            return(NA)
+                        } )
+    }
     res<-new("results")
     if(is.null(TRAITS)){
         results<-NULL

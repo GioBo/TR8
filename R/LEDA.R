@@ -103,14 +103,9 @@ leda<-function(species_list,TRAITS,rearranged){
     data(leda_lookup,envir = env)
     leda_lookup<-get("leda_lookup",envir=env)
 
-
-
-    
     leda_traits<-ldply(column_list)
     leda_traits<-with(leda_traits,.id[V3=="LEDA"])
 
-
-    
     leda_lu<-ldply(leda_lookup)
     
     if(is.null(TRAITS)){
@@ -121,7 +116,7 @@ leda<-function(species_list,TRAITS,rearranged){
         }else{
             tr_list<-TRAITS
         }
-                                        #TRAITS<-list()
+        ##TRAITS<-list()
 
         column_variables<-leda_lu$V4[leda_lu$.id%in%tr_list]
 
@@ -130,18 +125,18 @@ leda<-function(species_list,TRAITS,rearranged){
         }else{
             ## ask whether a local copy of LEDA files
             ## has already been downloaded
-            ans<-answer_for_leda()
+            ## ans<-answer_for_leda()
             
-            if(ans=="Yes"){
-                ##window<-gwindow("Select source for LEDA Traitbase")
+            ## if(ans=="Yes"){
+            ##     ##window<-gwindow("Select source for LEDA Traitbase")
 
-                ## ask the user where the local copies of
-                ## LEDA files are to be found
-                directory<-gfile(type="selectdir")
+            ##     ## ask the user where the local copies of
+            ##     ## LEDA files are to be found
+            ##     directory<-gfile(type="selectdir")
 
-                load(file=paste(directory,"leda_database.Rda",sep="/"))
-                spec<-leda_extract_from_local_df(rearranged,species_list,column_variables)
-            }else{
+            ##     load(file=paste(directory,"leda_database.Rda",sep="/"))
+            ##     spec<-leda_extract_from_local_df(rearranged,species_list,column_variables)
+            ## }else{
 
 
                 ##extract only data about selected traits
@@ -158,7 +153,7 @@ leda<-function(species_list,TRAITS,rearranged){
                     names_of_column<-names(spec)[!(names(spec)%in%c("Row.names","species_list"))]
                     spec<-as.data.frame(spec[,!(names(spec)%in%c("Row.names","species_list"))],row.names = species_list)
                     names(spec)<-names_of_column
-                }
+                ##}
             }
 
 
