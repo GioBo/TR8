@@ -64,6 +64,8 @@ needed by \texttt{TR8} to work properly:
   \item XML\cite{XML}
   \item taxize\cite{taxize}
   \item gWidgets\cite{gWidgets}
+  \item gWidgetstcltk
+  \item rappdirs
   \end{itemize}
   
 
@@ -90,15 +92,18 @@ Please note that:
 \label{sec:usage}
 
   Using the \texttt{TR8} package is fairly simple: users just need to
-  call the \texttt{tr8} function passing, as argument, a vector of
-  plant species names:
+  call the \texttt{tr8} function passing, as arguments, a vector of
+  plant species names and a vector containing the codes corresponding
+  to the traits which are to be downloaded:
   
 @ 
 <<usage,eval=FALSE>>=
 ## a vector containing a list of plant species names
 my_species<-c("Apium graveolens","Holcus mollis","Lathyrus sylvestris")
+## a vector of traits
+to_be_downloaded<-c("reprod_B","strategy")
 ## now run tr8 and store the results in the my_traits object
-my_traits<-tr8(my_species)
+my_traits<-tr8(species_list = my_species,download_list = to_be_downloaded)
 @ %def 
 
 

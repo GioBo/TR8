@@ -1,6 +1,4 @@
 export(tr8)
-export(available_traits)
-#export(leda_download_to_local_directory)
 exportMethods(bib)
 exportMethods(lookup)
 exportMethods(extract_traits)
@@ -12,4 +10,3 @@ import(rappdirs)
 import(plyr)
 importFrom("gWidgets",gbasicdialog,ggroup,glabel,gnotebook,gcheckboxgroup,visible,svalue,gradio,gfile,gmessage)
 importFrom("gWidgetstcltk",.gbasicdialog,.ggroup,.glabel,.gnotebook,.gcheckboxgroup,.visible,.svalue,.gradio,.gfile,.gmessage)
-

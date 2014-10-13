@@ -1,7 +1,7 @@
-##' The function is meant to help users in showing which traits (and from which
-##' databases) can be downloaded
+##' The function is used to create the available_traits data frame which is meant to help users
+##' in showing which traits (and from which databases) can be downloaded
 ##'
-##' Users can call the function to see what data are available for download
+##' The function shows what data are available for download
 ##' and decide which one should be passed to the \code{tr8()} function (in the
 ##'  \code{download_list} argument); the codes to be used as the \code{download_list} argument
 ##' are those contained \code{short_code} column.
@@ -29,3 +29,4 @@ available_traits<-function(){
     return(temp_dframe[,c("short_code","description","db")])
 
 }
+
