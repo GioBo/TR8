@@ -27,5 +27,6 @@ Imports:
     XML,
     taxize,
     plyr,
+    rappdirs,
     gWidgets,
     gWidgetstcltk

@@ -238,6 +238,11 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
     options("guiToolkit"="tcltk")
     ## rest is used for Sys.sleep in all the retrieving functions
     rest=1.5
+    
+    appname <- "TR8"
+    appauthor <- "GioBo"
+    directory<-user_data_dir(appname, appauthor)
+    
 
     
     if(missing(species_list)||!is.character(species_list)){
@@ -265,9 +270,12 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         
         ## retrieve traits from ecolora function
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
-        ## retrieve data from local LEDA datasets
-        if(!exists("rearranged")){
-            rearranged<-NULL}
+
+        ## check if an already downloaded version of the LEDA database
+        ## exists and, if so, use it
+        local_leda<-paste(directory,"leda_database.Rda",sep="/")
+        if(file.exists(local_leda)){
+            load(local_leda)}else{rearranged<-NULL}
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
 
         ## retrieve data from BiolFlor
@@ -280,7 +288,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         it_flowering<-get_italian_flowering(species_list,TRAITS=traits_list$Pignatti,rest=rest)
         
         ## add AMF
-        amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$AMF,rest=rest)
+        local_amf<-paste(directory,"myco_database.Rda",sep="")
+        if(file.exists(local_amf)){
+            load(local_leda)}else{myco<-NULL}
+        amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$AMF,rest=rest,myco=myco)
         
         ## merge the results
         tr8_traits<-data.frame(species_list,row.names=species_list)

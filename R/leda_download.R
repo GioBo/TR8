@@ -1,7 +1,7 @@
 
-leda_download_to_local_directory<-function(){
-    gmessage(title="","Downloading LEDA files is a time-consuming activity, \nthus you are suggested to download the dataset once\nand store them in a local directory.\n\nYou will now be asked to choose such a directory.")
-    directory<-gfile(type="selectdir")
+leda_download_to_local_directory<-function(directory){
+    ## gmessage(title="","Downloading LEDA files is a time-consuming activity, \nthus you are suggested to download the dataset once\nand store them in a local directory.\n\nYou will now be asked to choose such a directory.")
+    ##directory<-gfile(type="selectdir")
     ## load the list containing the data (url, names, etc..) of the txt files
     ## data(leda_lookup)
     ## convert it to a dframe
