@@ -27,4 +27,5 @@ Imports:
     XML,
     taxize,
     plyr,
-    gWidgets
+    gWidgets,
+    gWidgetstcltk
