@@ -1,7 +1,9 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.18)  14 OCT 2014 01:41
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.18)  14 OCT 2014 19:10
 entering extended mode
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**\input TR8.tex
+**\catcode126=12 \def\normaltilde{~}\catcode126=13 \let~\normaltilde  \input ./
+TR8.tex
 (./TR8.tex (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size10.clo
@@ -166,25 +168,25 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )))) (./TR8.aux)
 \openout1 = `TR8.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 13.
 
 (/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    ... okay on input line 13.
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -200,55 +202,88 @@ LaTeX Font Info:    ... okay on input line 10.
 \everyMPtoPDFconversion=\toks16
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 11.
+(Font)              <12> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 11.
+(Font)              <8> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 11.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 21.
+(Font)              <6> on input line 14.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 30.
  (/usr/share/texmf-texlive/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 25.
+(Font)              <7> on input line 34.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 25.
-LaTeX Font Info:    Try loading font information for TS1+aer on input line 53.
+(Font)              <5> on input line 34.
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 62.
 
 (/usr/share/texmf/tex/latex/R/tex/latex/ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 53.
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 62.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] (./TR8
-.bbl [7]) [8] (./TR8.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
+
+ []
+
+[8]
+
+LaTeX Font Warning: Font shape `T1/aett/bx/n' undefined
+(Font)              using `T1/aett/m/n' instead on input line 548.
+
+(./TR8.bbl [9]
+Underfull \hbox (badness 3199) in paragraph at lines 22--32
+\T1/aer/m/n/10 M.~Sonnenschein, P.~Poschlod, J.~M. van Groe-nen-dael, L.~Klimes
+,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--32
+\T1/aer/m/n/10 J.~Klimesova, S.~Klotz, G.~M. Rusch, M.~Hermy, D.~Adriaens,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--32
+\T1/aer/m/n/10 C.~Römermann, M.~Stadler, J.~Schlegelmilch, H.~J. Steen-dam,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--32
+\T1/aer/m/n/10 O.~Tackenberg, B.~Wilmann, J.~H.~C. Cor-nelis-sen, O.~Eriksson,
+ []
+
+) [10] (./TR8.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2362 strings out of 495061
- 31351 string characters out of 1182621
- 77838 words of memory out of 3000000
- 5489 multiletter control sequences out of 15000+50000
- 33698 words of font info for 70 fonts, out of 3000000 for 9000
+ 2373 strings out of 495061
+ 31463 string characters out of 1182621
+ 77877 words of memory out of 3000000
+ 5495 multiletter control sequences out of 15000+50000
+ 36843 words of font info for 76 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 35i,8n,21p,671b,278s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/gionata/.texmf-var/fonts/pk/ljfour/jknappen/
-ec/tcrm1000.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx
-10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fo
-nts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsltt10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmtt8.pfb>
-Output written on TR8.pdf (8 pages, 212478 bytes).
+ 35i,8n,21p,741b,290s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/gionata/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+tt10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on TR8.pdf (10 pages, 211329 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
+ 96 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

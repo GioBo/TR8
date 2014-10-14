@@ -4,12 +4,21 @@
 \bibliographystyle{plain}
 %% \VignetteIndexEntry{Plants traits data}
 %%\VignetteDepends{TR8}
+
+
+
 \title{TR8: Extract traits data for plant species}
 \author{Gionata Bocci\\Pisa (ITALY)\\ {boccigionata@gmail.com}}
 \begin{document}
 \maketitle
 \SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,strip.white=true,keep.source=TRUE}
 \SweaveOpts{include=FALSE}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+\fvset{listparameters={\setlength{\topsep}{0pt}}}
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+
 
 \section{Rationale}
 \label{sec:rationale}
@@ -245,7 +254,8 @@ species names, thus, in order to avoid this problem, please use the \texttt{chec
   \textbf{R} console, one should use:
 
 <<import,eval=FALSE>>=
-My_data<-read.csv("my_veg_data.csv",header=T,row.names=1,check.names=F)
+My_data<-read.csv("my_veg_data.csv",
+                  header=T,row.names=1,check.names=F)
 @ %def 
 
 
@@ -344,7 +354,7 @@ traits_df<-extract_traits(my_traits)
   thus suggest the users to run the 
   \texttt{local\_storage}\footnote{The name is quite
     self$-$explanatory...} function once to store a local copy of these datafiles
-  datafiles and use that local copy every time the \texttt{tr8()} function is run and LEDA or Akhmetzhanova are requested\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details}.
+  datafiles and use that local copy every time the \texttt{tr8()} function is run and LEDA or Akhmetzhanova are requested\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details).}.
   
   
 <<label=leda_local,eval=FALSE>>=
@@ -352,9 +362,176 @@ traits_df<-extract_traits(my_traits)
 local_storage()
 @ %def 
 
+
+
+\section{A 'real life' workflow}
+\label{sec:workflow}
+
+
+   In this paragraph I will describe a typical workflow for a researcher
+   interested in using the \texttt{TR8} package: this is meant to be a
+   step-by-step guide involving most of the common problems that are
+   faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lenghty in order to 
+   describe each single step in detail; users which are confident in the use of R could make most of the steps much shorter than what's presented here.}.
+    This section relies on the data set used by Sandau et al.(2014)\cite{dryad_Sandau} which is publicly available at \texttt{dryad}\cite{dryad_Sandau}.
+  
  
+\subsection{Retrieve original data}
+
+   The dataset is available as a \texttt{xlsx} file (which is a common
+   case); several alternatives are available to import this kind of files into \texttt{R} (eg. you can download the
+   dataset and load it into an \texttt{R} session or you could save
+   a \texttt{.csv} version of the file and then load it into
+   \texttt{R} using \texttt{read.csv()}); in this case we will use
+   \texttt{XLConnect} to download and load the dataset.
+
+@ 
+<<dryad,eval=FALSE>>=
+## the XLConnect package is needed
+install.packages("XLConnect",dependencies = T)
+library(XLConnect)
+## store the  url of the dryad package
+url<-"http://datadryad.org/bitstream/handle//
+    10255/dryad.65646/MEE-13-11-651R2_data.xlsx?sequence=1"
+## choose the extension for the temp file where 
+## data will be stored
+tmp = tempfile(fileext = ".xlsx")
+## download the data
+download.file(url = url, destfile = tmp)
+## we first read the "metadata" sheet from the xlsx file
+metadata<-readWorksheetFromFile(file = tmp, sheet = "metadata", 
+ header = FALSE, startRow = 15, startCol = 1, endCol = 3)
+## then read the vegetation data
+veg_data <-readWorksheetFromFile(file = tmp, sheet = "data.txt", 
+       header = TRUE, startRow = 1, startCol = 11, endCol = 123)
+## round veg_data numbers to the second digit
+veg_data<-round(veg_data,digits = 2)
+@ %def 
+ 
+  The dataframe \texttt{metadata} contains two columns, \texttt{Col1}
+  contains short codes used by the authors as surrogates of the full
+  scientific names of species  for the species which are stored in the
+  \texttt{Col2} column.
+
+\subsection{Check species names}
+
+  The first suggested step is to check species names using the
+  \texttt{taxize} package in order to see whether there are
+  misspelled names; the \texttt{tnrs} function accepts a vector of
+  plant species names and tries to match them with \textit{accepted}
+  scientific names; the function
+  returns a dataframe with various columns: in the column
+  \texttt{score} each entry is given a score according to the level of
+  "resemblance" with correct names; the score is "1" if the name is
+  correct, less than "1" if some problems with the name are
+  found. \textbf{NOTA BENE}: from the \texttt{tnrs} help page "If there
+  is no match in the Taxosaurus database, nothing is returned, so you
+  will not get anything back for non matches" thus we should worry of
+  both "less than 1" scores \textbf{AND} missing entries in the
+  dataframe returned by \texttt{tnrs}.
+  
+@ 
+<<taxize,eval=FALSE>>=
+library(taxize)
+check_names<-tnrs(metadata$Col2,source="iPlant_TNRS")
+@ %def 
+
+   Check now if there are species which were discarded by
+   \texttt{tnrs} output since they were not found in reference
+   databases. 
+   
+@ 
+<<discarded,eval=FALSE>>=
+setdiff(metadata$Col2,check_names$submittedname)
+@ %def 
+
+   The results is 0, thus \texttt{tnrs} found at least a partial match for all the species names we provided.
+   Next we should check which species got a \texttt{score} which is less than 1.
+@ 
+<<taxize2,eval=FALSE>>=
+issues<-with(check_names,check_names[score!="1",])
+issues[,c("score","submittedname")]
+@ %def 
+
+\texttt{  
+    score                          submittedname\\
+34    0.9                 Poaceae (undetermined)\\
+36    0.9                          Epilobium sp.\\
+44    0.9                          Cerastium sp.\\
+53   0.96      Fallopia convolvulus (L.) A. L\"owe\\
+54    0.9                            Festuca sp.\\
+55    0.9                        Chenopodium sp.\\
+63    0.9                   Phleum pratense agg.\\
+69    0.9                          Polygonum sp.\\
+72    0.9 Polygonum mite (=Persicaria laxiflora)\\
+76    0.9                              Rubus sp.\\
+79    0.9                             Juncus sp.\\
+83    0.9                          Orobanche sp.\\
+97    0.9                           Triticum sp.\\
+100   0.9              Taraxacum officinale!!!!!\\
+107  0.96         Setaria pumila (Poir.) Schult.\\
+}
+
+We see here that for some entries, only the Genus is present, thus
+   \texttt{tr8} function will not be able to return traits values for
+   those species; entry 83 is \texttt{Taraxacum officinale!!!!!}: in
+   this case we should remove the \texttt{"!"} from the species names.
+
+@ 
+<<substitution,eval=FALSE>>=
+## which entry in the metadata dataframe
+## correspond to "Taraxacum officinale!!!!!"?
+mistake<-which(metadata$Col2=="Taraxacum officinale!!!!!")
+## now correct the entry (both the
+## name and the score)
+metadata[mistake,]<-c("1","Taraxacum officinale F.H. Wigg.")
+## 
+@ %def 
+
+ My suggestion is to remove those entries for which only the Genus is provided (for which the score is "0.9"):
+
+@ 
+<<two,eval=FALSE>>=
+## we go back using the check_names data frame
+## which contains both correct and problematic species
+## and remove problematic ones from them
+
+#convert score from string to numeric
+check_names$score<-as.numeric(check_names$score)
+accepted_species<-check_names[check_names$score>0.9,
+                        c("submittedname","acceptedname")]
+## and now merge it with the metadata dataset
+final_df<-merge(metadata,accepted_species,
+                by.x="Col2",by.y="submittedname")
+
+@ %def 
+
+  In this way we now have the \texttt{temp\_df} data frame in which
+  each entry has the name present in the original dataset and the
+  correct scientific names, which should be passed to the \texttt{tr8}
+function.
+
+
+\subsection{Using the \texttt{tr8} function}
+
+ 
+  
+
+%
+%include use of the mapvalue function to recode vegdata matrix
+% http://www.cookbook-r.com/Manipulating_data/Mapping_vector_values/
+%
+
 \bibliography{tr8}
 
-
-
 \end{document}
+
+
+
+
+
+
+
+
+
+

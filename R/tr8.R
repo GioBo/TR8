@@ -234,7 +234,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
     temp_dframe<-ldply(column_list)
     names(temp_dframe)<-c("long_code","short_code","description","db")
 
-
+    op<-options()
     options("guiToolkit"="tcltk")
     ## rest is used for Sys.sleep in all the retrieving functions
     rest=1.5
@@ -333,7 +333,8 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                                         #    issues(obj)
         ##return(obj)
                                         #    return(tr8_traits)
-        
+
+        options(op)
         remove(list=c("column_list"), envir = env)    
         return(obj)
     }
