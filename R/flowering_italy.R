@@ -114,3 +114,15 @@ get_italian_flowering<-function(species_list,TRAITS,rest){
     res@bibliography<-"Pignatti Sandro, 1982 Flora d'Italia.\nEdagricole, Bologna."
     return(res)
 }
+
+
+temp_luirig<-(specie,url){
+    base_url<-"http://luirig.altervista.org/flora/taxa/floraspecie.php?genere="
+    
+    genus<-gsub("(^[a-zA-Z]+) .*","\\1",specie,useBytes = TRUE)
+    url<-paste(base_url,genus,sep = "")
+    tables<-readHTMLTable(url)
+    flowering<-tables[[2]][,c(1,6)]
+    names(flowering)<-c("Scentific_name","flowering_period")
+
+}
