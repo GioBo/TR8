@@ -81,7 +81,9 @@ column_list<-list(
 
     ## Flowering italiano
 
-    "IT_flowering_months"=c("IT_flowering_months","Months in which the species is flowering","Pignatti")
-
+#    "IT_flowering_months"=c("IT_flowering_months","Months in which the species is flowering","Pignatti")
+     "IT_beg_flow"=c("IT_beg_flow","Beginning of flowering in Italy","Pignatti"),
+    "IT_end_flow"=c("IT_end_flow","End of flowering in Italy","Pignatti")
+    
     )
 
