@@ -1,18 +1,3 @@
-answer_for_leda<-function(){
-
-    ## Here "gWidgets::gbasicdialog" is used since it makes
-    ## the window modal (ie. the script has to wait for the
-    ## user's choiche before moving on)
-    window<-gbasicdialog(title="Select source for LEDA Traitbase")
-    glabel("\nHave you already downloaded a local copy of the LEDA txt files?\n",container=window)
-    scaricati<-gradio(items=c("No","Yes"),container=window)
-    glabel("\n",container=window)
-    visible(window,set=TRUE)
-    ans<-svalue(scaricati)
-    return(ans)
-}
-
-
 leda_extract_from_local_df<-function(local_df,species_list,column_variables){
     as.data.frame(species_list)->spec
     TEMP<-as.data.frame(local_df[,column_variables])
@@ -158,7 +143,7 @@ leda<-function(species_list,TRAITS,rearranged){
 
 
         }
-
+        names(spec)<-mapvalues(names(spec),leda_lu$V4,leda_lu$.id,warn_missing = FALSE)
         res@results<-spec
     }
     
