@@ -23,7 +23,7 @@ column_list<-list(
     "branching"=c("branching","Branching","LEDA"),
     "bud_bank_seasonality_soil"=c("bud_bank_seasonality_soil","Bud bank seasonality at soil level","LEDA"),
     "buoyancy"=c("buoyancy","Buoyancy","LEDA"),
-    "canopy_height"=c("canopy_height","Mean canopy height [m]","LEDA"),
+    "canopy_height"=c("canopy_height","Mean canopy height","LEDA"),
     "dispersal"=c("dispersal","Dispersal type","LEDA"),
     "leaf_distribution"=c("leaf_distribution","Leaf distribution along the stem","LEDA"),
     "leaf_dmc"=c("leaf_dmc","Leaf dry matter content ","LEDA"),
