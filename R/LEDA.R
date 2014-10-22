@@ -18,9 +18,9 @@ leda_extract_from_local_df<-function(local_df,species_list,column_variables){
     TEMP<-as.data.frame(local_df[,column_variables])
     row.names(TEMP)<-row.names(local_df)
     spec<-merge(spec,TEMP,by.x="species_list",by.y=0,all.x=T)
-    spec<-as.data.frame(spec[,2:ncol(spec)],row.names = species_list)
-    names(spec)<-column_variables
-    return(spec)
+    DF<-spec[,column_variables]
+    row.names(DF)<-spec$species_list
+    return(DF)
 }
 
 
@@ -161,9 +161,6 @@ leda<-function(species_list,TRAITS,rearranged){
 
         res@results<-spec
     }
-    
-
-
     
     ##res@results<-obj@results
     ##obj<-new("Leda",results=spec)
