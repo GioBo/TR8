@@ -67,6 +67,10 @@ setGeneric(name="lookup",def=function(.Object){standardGeneric("lookup")})
 setMethod(f="lookup",
           signature="Tr8",
           definition = function(.Object){
+              REF<-.Object@reference
+              RES<-.Object@results
+              DF<-REF[REF$short_code%in%names(RES),]
+
               cat("\n")
               cat("\n")
               cat("*****************************************************************")
@@ -75,13 +79,17 @@ setMethod(f="lookup",
               cat("\n")
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," code","description","reference database\n"))
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," ----","-----------","------------------\n"))
-              for(i in 1:nrow(.Object@reference)){
-                  cat(sprintf("%-30s\t%-40s\t%-30s\n",.Object@reference[i,2],.Object@reference[i,3],.Object@reference[i,4]))
-              }
+#              for(i in 1:nrow(.Object@reference)){
+#                  cat(sprintf("%-30s\t%-40s\t%-30s\n",.Object@reference[i,2],.Object@reference[i,3],.Object@reference[i,4]))
+              for(i in 1:nrow(DF)){
+                  cat(sprintf("%-30s\t%-40s\t%-30s\n",DF[i,2],DF[i,3],DF[i,4]))
+ 
+          }
               cat("\n")
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," ****","***********","******************\n"))
-              tp<-.Object@reference
-              tp<-tp[,c("short_code","description","db")]
+              ##tp<-.Object@reference
+              ##tp<-tp[,c("short_code","description","db")]
+              tp<-DF[,c("short_code","description","db")]
               names(tp)<-revalue(names(tp),c("short_code"="code","db"="reference database"))
               return(invisible(tp))
           }
