@@ -1,15 +1,15 @@
 
-list_of_traits_Biolflor=c(
-    "Life form"                        
-    ,"Life span"                              
-    ,"Rosettes"                               
-    ,"Vegetative propagation"                 
-    ,"Storage organs"                         
-    ,"Type of reproduction"                   
-    ,"Type of seed production"                
-    ,"Strategy type"                          
-    ,"Pollen vector"
-    )
+## list_of_traits_Biolflor=c(
+##     "Life form"                        
+##     ,"Life span"                              
+##     ,"Rosettes"                               
+##     ,"Vegetative propagation"                 
+##     ,"Storage organs"                         
+##     ,"Type of reproduction"                   
+##     ,"Type of seed production"                
+##     ,"Strategy type"                          
+##     ,"Pollen vector"
+##     )
 
 traits_special_Biolflor=c(
     "Flower class after MUELLER",
