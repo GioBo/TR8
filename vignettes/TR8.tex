@@ -1,6 +1,9 @@
 \documentclass{article}
 \usepackage{nameref}
 \usepackage{url}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\lstset{language=R}    
 \bibliographystyle{plain}
 %% \VignetteIndexEntry{Plants traits data}
 %%\VignetteDepends{TR8}
@@ -35,7 +38,9 @@ possibility of easily retrieving traits data for plant species from the followin
 \item[Ecological Flora of the British Isles] \url{http://www.ecoflora.co.uk/} \cite{ecoflora}
 \item[LEDA traitbase] \url{http://www.leda-traitbase.org/LEDAportal/} \cite{leda}
 \item[Ellenberg values for Italian Flora] \cite{pignatti}
+\item[Flowering period for Italian Flora] \cite{pignatti} (data retrieved from \url{http://luirig.altervista.org/})
 \item[Mycorrhizal intensity database] \cite{amf}
+
 \end{description}
 
   Please note that not all the traits available on the listed
@@ -90,8 +95,9 @@ Please note that:
   
 \end{description}
 
-  The devel version of the package is hosted on github at the
-  following address \url{https://github.com/GioBo/TR8}: to use this
+\subsection{Using the development version}
+
+  The devel version of the package is hosted on github at \url{https://github.com/GioBo/TR8}: to use this
   version (insted of the stable one, released from CRAN), you'll need
   the \texttt{devtools} package (\url{https://github.com/hadley/devtools}):
   
@@ -133,11 +139,11 @@ Please note that:
 \end{Sinput}
 \end{Schunk}
 
-  The codes to be used are contained in the \texttt{available\_tr8} database:
+  The codes which are accepted by \textsc{tr8} are listed in the \texttt{available\_tr8} database:
 
 \begin{Schunk}
 \begin{Sinput}
-> ## see the firs lines of available_traits database
+> ## see the firs lines of available_tr8 database
 > head(available_tr8)
 \end{Sinput}
 \begin{Soutput}
@@ -153,10 +159,9 @@ Please note that:
 
  The database is composed of three columns:
  \begin{description}
- \item[short\_code] contains the codes corresponding to the traits which can be downloaded through the \texttt{tr8} function.
-   These are the codes that should be passed to the \texttt{download\_list} argument of the \texttt{tr8} function.
+ \item[short\_code] contains the codes that should be passed to the \texttt{download\_list} argument of the \texttt{tr8} function.
  \item[description] contains short description of each trait (please refer to the original sources for detalied descriptions).
- \item[db] referso to the databases containing the traits
+ \item[db] refers to the databases from which are providing traits data
  \end{description}
 
  Suppose the user is interested in dowloading the \textit{maximum
@@ -216,7 +221,7 @@ Please note that:
 
     Up to now we've been using the \texttt{tr8} function in a non-interactive way. In order to help those user which are more familiar with a GUI approach,
     the function can also be run setting the \texttt{gui\_config} parameter to \texttt{TRUE} (without providing any trait in the \texttt{download\_list} parameter) and a multi-panel window will appear: the user is asked to choose those
-  traits which are to be downloaded from the various databases.
+  traits which are to be downloaded from the various databases \footnote{A note for Mac users: the GUI relies on the \texttt{Tcl/Tk} toolkit, thus if you want to run the GUI, please make sure that the \texttt{X11} package is installed - see "Tcl/Tk" issues at \url{http://cran.r-project.org/bin/macosx/RMacOSX-FAQ.html}}.
 
   For a detailed explanation of each level of a trait, please refer to
   the original websites (all the databases listed in the references
@@ -349,14 +354,15 @@ the following strategy was adopted:
 
 \item Observing a big data frame inside \texttt{R} could be difficult,
   thus users may want to save the \texttt{traits\_df} data frame as a
-  \texttt{.csv} file and open that with a spreadsheet software (eg. LibreOffice)
- 
+  \texttt{.csv} file:  
 \begin{Schunk}
 \begin{Sinput}
-> 
+> save(traits_df,file="traits_df.csv")
 \end{Sinput}
 \end{Schunk}
   
+and then open that file with a spreadsheet software (eg. LibreOffice).
+
   
   \end{enumerate}
   
@@ -409,7 +415,7 @@ the following strategy was adopted:
    case); several alternatives are available to import this kind of files into \texttt{R} (eg. you can download the
    dataset and load it into an \texttt{R} session or you could save
    a \texttt{.csv} version of the file and then load it into
-   \texttt{R} using \texttt{read.csv()}); in this case we will use
+   \texttt{R} using \texttt{read.csv()}; if you are following these strategies, feel free to skip this paragraph); for this tutorial we will use
    \texttt{XLConnect} to download and load the dataset.
 
 \begin{Schunk}
@@ -480,65 +486,105 @@ the following strategy was adopted:
 \begin{Schunk}
 \begin{Sinput}
 > issues<-with(check_names,check_names[score!="1",])
-> issues[,c("score","submittedname")]
+> issues[,c("submittedname","acceptedname","score")]
 \end{Sinput}
 \end{Schunk}
 
-\texttt{  
-    score                          submittedname\\
-34    0.9                 Poaceae (undetermined)\\
-36    0.9                          Epilobium sp.\\
-44    0.9                          Cerastium sp.\\
-53   0.96      Fallopia convolvulus (L.) A. L\"owe\\
-54    0.9                            Festuca sp.\\
-55    0.9                        Chenopodium sp.\\
-63    0.9                   Phleum pratense agg.\\
-69    0.9                          Polygonum sp.\\
-72    0.9 Polygonum mite (=Persicaria laxiflora)\\
-76    0.9                              Rubus sp.\\
-79    0.9                             Juncus sp.\\
-83    0.9                          Orobanche sp.\\
-97    0.9                           Triticum sp.\\
-100   0.9              Taraxacum officinale!!!!!\\
-107  0.96         Setaria pumila (Poir.) Schult.\\
-}
+\small
+\begin{verbatim}
+                         submittedname score         acceptedname               authority
+                Poaceae (undetermined)   0.9              Poaceae                Barnhart
+                         Epilobium sp.   0.9            Epilobium                      L.
+                         Cerastium sp.   0.9            Cerastium                      L.
+     Fallopia convolvulus (L.) A. Löwe  0.96 Fallopia convolvulus            (L.) Á. Löve
+                           Festuca sp.   0.9              Festuca                      L.
+                       Chenopodium sp.   0.9          Chenopodium                      L.
+                  Phleum pratense agg.   0.9      Phleum pratense                      L.
+                         Polygonum sp.   0.9            Polygonum                      L.
+Polygonum mite (=Persicaria laxiflora)   0.9     Persicaria mitis       (Schrank) Assenov
+                             Rubus sp.   0.9                Rubus                      L.
+                            Juncus sp.   0.9               Juncus                      L.
+                         Orobanche sp.   0.9            Orobanche                      L.
+                          Triticum sp.   0.9             Triticum                      L.
+             Taraxacum officinale!!!!!   0.9            Taraxacum              F.H. Wigg.
+        Setaria pumila (Poir.) Schult.  0.96       Setaria pumila (Poir.) Roem. & Schult.
 
-We see here that for some entries, only the Genus is present, thus
-   \texttt{tr8} function will not be able to return traits values for
-   those species; entry 83 is \texttt{Taraxacum officinale!!!!!}: in
-   this case we should remove the \texttt{"!"} from the species names.
+\end{verbatim}
+
+\normalsize
+ We observe here some important points:
+ 
+ 
+ \begin{itemize}
+ \item for some species only the Genus is present, thus \texttt{tr8} function will not be able to return traits values for
+   those species; those species names can't be used with \texttt{tr8};
+ \item in the case of \textit{Taraxacum officinale!!!!!} we should remove the extra \texttt{"!"} from the species names;
+ \item \textit{Polygonum mite} is not recognized as an accepted name; for this tutorial we convert it into \textit{Persicaria mitis};
+ \item the aggregate species \texttt{Phleum pratense agg.} poses some problems: for this tutorial we decide to accept it as \textit{Phleum pratense};
+ \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names ( for \textit{F. convolvulus} "A." should be acccented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} name is missing).
+\end{itemize}
+
+  The last point is not strictly relevant for using the \texttt{tr8} function
+  since authors' names should not be included in the list of species
+  names passed to the function (but we correct the authors names anyway so that when we re-run \texttt{tnrs} function, no mistakes are found) . 
+
+  We adopt the following fixes for the issues we've found:
+\small
+\begin{Schunk}
+\begin{Sinput}
+> library(plyr)
+> ## we use the revalue function in the plyr package
+> ## to fix all the above mentioned issues
+> metadata$Col2<-revalue(metadata$Col2, 
++      c("Taraxacum officinale!!!!!"="Taraxacum officinale F.H. Wigg."))
+> metadata$Col2<-revalue(metadata$Col2,
++      c("Polygonum mite (=Persicaria laxiflora)"="Persicaria mitis (Schrank) Assenov"))
+> metadata$Col2<-revalue(metadata$Col2,
++      c("Fallopia convolvulus (L.) A. Löwe"="Fallopia convolvulus (L.) Á. Löve"))
+> metadata$Col2<-revalue(metadata$Col2,
++      c("Setaria pumila (Poir.) Schult."="Setaria pumila (Poir.) Roem. & Schult."))
+> metadata$Col2<-revalue(metadata$Col2,
++      c("Phleum pretense agg."="Phleum pratense L."))
+\end{Sinput}
+\end{Schunk}
+
+\normalsize
+  And re-run the \texttt{tnrs} function as a cross-check:
+  
+\begin{Schunk}
+\begin{Sinput}
+> library(taxize)
+> check_names<-tnrs(metadata$Col2,source="iPlant_TNRS")
+> issues<-with(check_names,check_names[score!="1",])
+> issues[,c("submittedname","acceptedname","score")]
+\end{Sinput}
+\end{Schunk}
+
+\begin{verbatim}
+         submittedname acceptedname score
+Poaceae (undetermined)      Poaceae   0.9
+         Epilobium sp.    Epilobium   0.9
+         Cerastium sp.    Cerastium   0.9
+           Festuca sp.      Festuca   0.9
+       Chenopodium sp.  Chenopodium   0.9
+         Polygonum sp.    Polygonum   0.9
+             Rubus sp.        Rubus   0.9
+            Juncus sp.       Juncus   0.9
+         Orobanche sp.    Orobanche   0.9
+          Triticum sp.     Triticum   0.9
+\end{verbatim}
+
+  We observe now that only those entries which were identified at the
+  Genus level raise some issues; my suggestion is to remove them
+  (i.e. those entries for which the score is "0.9") from the original \texttt{metadata} dataframe:
 
 \begin{Schunk}
 \begin{Sinput}
-> ## which entry in the metadata dataframe
-> ## correspond to "Taraxacum officinale!!!!!"?
-> mistake<-which(metadata$Col2=="Taraxacum officinale!!!!!")
-> ## now correct the entry (both the
-> ## name and the score)
-> metadata[mistake,]<-c("1","Taraxacum officinale F.H. Wigg.")
-> ## 
+> final_dataframe<-metadata[!metadata$Col2%in%issues$submittedname,]
 \end{Sinput}
 \end{Schunk}
 
- My suggestion is to remove those entries for which only the Genus is provided (for which the score is "0.9"):
-
-\begin{Schunk}
-\begin{Sinput}
-> ## we go back using the check_names data frame
-> ## which contains both correct and problematic species
-> ## and remove problematic ones from them
-> 
-> #convert score from string to numeric
-> check_names$score<-as.numeric(check_names$score)
-> accepted_species<-check_names[check_names$score>0.9,
-+                         c("submittedname","acceptedname")]
-> ## and now merge it with the metadata dataset
-> final_df<-merge(metadata,accepted_species,
-+                 by.x="Col2",by.y="submittedname")
-> 
-\end{Sinput}
-\end{Schunk}
-
+  
   In this way we now have the \texttt{temp\_df} data frame in which
   each entry has the name present in the original dataset and the
   correct scientific names, which should be passed to the \texttt{tr8}
@@ -548,8 +594,15 @@ function.
 \subsection{Using the \texttt{tr8} function}
 
 
+
+
+
+
+  
+
 %
 %include use of the mapvalue function to recode vegdata matrix
+% http://www.cookbook-r.com/Manipulating_data/Mapping_vector_values/
 %
 
 \bibliography{tr8}
