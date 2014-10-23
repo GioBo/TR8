@@ -16,34 +16,28 @@
 ##' default is NULL;
 ##' @return nothing
 ##' @author Gionata Bocci <boccigionata@@gmail.com>>
-local_storage<-function(directory=NULL){
+local_storage<-function(db=c("LEDA","AMF"),directory){
 
-    appname <- "TR8"
-    appauthor <- "GioBo"
-
-    if(is.null(directory)){
-        directory<-user_data_dir(appname, appauthor)
-        if(!dir.exists(directory)){
+    if(!dir.exists(directory)){
             dir.create(directory)
         }
-    }
-
-
     
     ## download AMF data
-    myco_url <- "http://esapubs.org/Archive/ecol/E093/059/myco_db.csv"
-    myco<- tryCatch(read.csv(myco_url,sep=",",header=T),
-                    error=function(res){
-                        message("URL does not seem to exist:")
-                        return(NA)},
-                    warning=function(res){
-                        message("URL does not seem to exist:")
-                        return(NA)
-                    } )
-    save(file=paste(directory,"myco.Rda",sep="/"),myco,precheck = F) 
-
-
-    ## download LEDA data
-    leda_download_to_local_directory(directory)
+    if("AMF"%in%db){
+        myco_url <- "http://esapubs.org/Archive/ecol/E093/059/myco_db.csv"
+        myco<- tryCatch(read.csv(myco_url,sep=",",header=T),
+                        error=function(res){
+                            message("URL does not seem to exist:")
+                            return(NA)},
+                        warning=function(res){
+                            message("URL does not seem to exist:")
+                            return(NA)
+                        } )
+        save(file=paste(directory,"myco.Rda",sep="/"),myco,precheck = F) 
+    }
     
+    if("LEDA"%in%db){
+        ## download LEDA data
+        leda_download_to_local_directory(directory)
+    }
 }

@@ -1,9 +1,10 @@
 leda_extract_from_local_df<-function(local_df,species_list,column_variables){
     as.data.frame(species_list)->spec
     TEMP<-as.data.frame(local_df[,column_variables])
+    names(TEMP)<-column_variables
     row.names(TEMP)<-row.names(local_df)
     spec<-merge(spec,TEMP,by.x="species_list",by.y=0,all.x=T)
-    DF<-spec[,column_variables]
+    DF<-spec[,column_variables,drop=FALSE]
     row.names(DF)<-spec$species_list
     return(DF)
 }
@@ -103,28 +104,13 @@ leda<-function(species_list,TRAITS,rearranged){
         }
         ##TRAITS<-list()
 
+        #column_variables<-leda_lu$V4[leda_lu$.id%in%tr_list]
         column_variables<-leda_lu$V4[leda_lu$.id%in%tr_list]
-
+        
         if(!is.null(rearranged)){
             spec<-leda_extract_from_local_df(rearranged,species_list,column_variables)
         }else{
-            ## ask whether a local copy of LEDA files
-            ## has already been downloaded
-            ## ans<-answer_for_leda()
-            
-            ## if(ans=="Yes"){
-            ##     ##window<-gwindow("Select source for LEDA Traitbase")
 
-            ##     ## ask the user where the local copies of
-            ##     ## LEDA files are to be found
-            ##     directory<-gfile(type="selectdir")
-
-            ##     load(file=paste(directory,"leda_database.Rda",sep="/"))
-            ##     spec<-leda_extract_from_local_df(rearranged,species_list,column_variables)
-            ## }else{
-
-
-                ##extract only data about selected traits
                 leda_subset<-leda_lu[leda_lu$.id%in%tr_list,]
                 
                 spec<-as.data.frame(species_list)
@@ -138,7 +124,7 @@ leda<-function(species_list,TRAITS,rearranged){
                     names_of_column<-names(spec)[!(names(spec)%in%c("Row.names","species_list"))]
                     spec<-as.data.frame(spec[,!(names(spec)%in%c("Row.names","species_list"))],row.names = species_list)
                     names(spec)<-names_of_column
-                ##}
+
             }
 
 

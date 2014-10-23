@@ -73,7 +73,7 @@ setMethod(f='retrieve',
                   ## downloaded ecological traits
                   eco<-list()
 
-
+                  
                   for(species in .Object@df$species){
                       ## url of the web page for the species of interest
                       species_url<-.Object@df$web_link[.Object@df$species==species]
@@ -140,7 +140,7 @@ setMethod(f='retrieve',
 #' @examples \dontrun{
 #' #' #My_data<-ecoflora(species_list=c("Abies alba"))
 #' }
-ecoflora<-function(species_list,reference=ECOFLORA_df,TRAITS,rest)
+ecoflora<-function(species_list,TRAITS,rest)
     {
         env<-new.env()
         res<-new("results")
@@ -148,9 +148,18 @@ ecoflora<-function(species_list,reference=ECOFLORA_df,TRAITS,rest)
         data("traits_eco",envir=env)
         ECOFLORA_df<-get("ECOFLORA_df",envir=env)
         traits_eco<-get("traits_eco",envir=env)
+        ## test if Ecoflora is providing data (if not the web page
+        ##  http://www.ecoflora.co.uk/search_species.php will contain
+        ## "No Species currently available"
+        eco_check<-readLines("http://www.ecoflora.co.uk/search_species.php",warn=FALSE)
+        res_check<-length(grep("No Species currently available",eco_check))
+        ## if Ecoflora is not working, res_check will be equal to 1
+        
+
         ## if traits is NULL it means that the user did not selected
         ## a subset of traits (by means of the tr8_config function, thus
         ## all the traits should be downloaded
+        
         
         if(is.null(TRAITS)){
             res@results<-NULL
@@ -162,12 +171,17 @@ ecoflora<-function(species_list,reference=ECOFLORA_df,TRAITS,rest)
                     ## corresponding codes should be used
                     traits<-traits_eco[names(traits_eco)%in%TRAITS]
                 }
+            if(res_check==1){
+                message("Ecoflora is not working at the moment, please retry later.")
+                res@results<-NULL
+            }else{
             
-            obj<-new("Ecoflora",species_list=species_list,reference=reference,traits=traits,rest=rest)
+                obj<-new("Ecoflora",species_list=species_list,reference=ECOFLORA_df,traits=traits,rest=rest)
             ##        ret<-as.data.frame(ret@results)
             ##remove(list=c("ECOFLORA_df","traits_eco"),pos =".GlobalEnv")
-            ret<-retrieve(obj)
-            res@results<-ret@results
+                ret<-retrieve(obj)
+                res@results<-ret@results
+            }
         }
         remove(list=c("ECOFLORA_df","traits_eco"),envir = env)
         res@bibliography<-"Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database,\nJ. Ecol., 82, 415-425.  http://www.ecoflora.co.uk"

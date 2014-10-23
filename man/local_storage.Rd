@@ -2,17 +2,19 @@
 \alias{local_storage}
 \title{A utility to storage a local copy of traits data}
 \usage{
-local_storage(directory = NULL)
+local_storage(db,directory)
 }
 \arguments{
+  \item{db}{can contain the following values: "AMF" and "LEDA" depending
+  on the database which should be downloaded}
   \item{directory}{the directory where the local Rda files
-  will be stored; default is NULL;}
+  will be stored}
 }
 \value{
 nothing
 }
 \description{
-local_storage will download traits data from LEDA and
+local_storage can download traits data from LEDA and
 Akhmetzhanova databases and store them in a local folder.
 }
 \details{
