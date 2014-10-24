@@ -39,3 +39,4 @@ man/retrieve_amf.Rd
 .git/.*
 .gitignore
 .*~
+retrieved_traits

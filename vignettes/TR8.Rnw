@@ -6,6 +6,7 @@
 \usepackage{longtable}
 \usepackage{afterpage}
 \usepackage{enumitem}
+\usepackage[normalem]{ulem} 
 \lstset{language=R}    
 \bibliographystyle{plain}
 %% \VignetteIndexEntry{Plants traits data}
@@ -102,7 +103,7 @@ Please note that:
 \subsection{Using the development version}
 
   The devel version of the package is hosted on github at \url{https://github.com/GioBo/TR8}: to use this
-  version (insted of the stable one, released from CRAN), you'll need
+  version (instead of the stable one, released from CRAN), you'll need
   the \texttt{devtools} package (\url{https://github.com/hadley/devtools}):
   
 @ 
@@ -128,7 +129,8 @@ dev_mode(on=F)
 
   Using the \texttt{TR8} package is fairly simple: users just need to
   call the \texttt{tr8} function passing, as arguments, a vector of
-  plant species names (\textbf{withouth authors' names!}) and a vector containing the codes corresponding
+  plant species names (\textbf{withouth authors' names!}\footnote{This is needed since some traitbases do not include authors' names in the species' names.})
+  and a vector containing the codes corresponding
   to the traits which are to be downloaded:
   
 @ 
@@ -156,11 +158,11 @@ head(available_tr8)
  The database is composed of three columns:
  \begin{description}
  \item[short\_code] contains the codes that should be passed to the \texttt{download\_list} argument of the \texttt{tr8} function.
- \item[description] contains short description of each trait (please refer to the original sources for detalied descriptions).
+ \item[description] contains short description of each trait (please refer to the original sources for detailed descriptions).
  \item[db] refers to the databases from which are providing traits data
  \end{description}
 
- Suppose the user is interested in dowloading the \textit{maximum
+ Suppose the user is interested in downloading the \textit{maximum
    height}, the \textit{leaf area} and the \textit{life form} (which
  are available through the \textit{Ecolfora} database) for
  \textit{Salix alba} and \textit{Populus nigra} and store the resulting data in the \texttt{my\_Data} object; the command should be:
@@ -194,7 +196,7 @@ traits_dataframe<-extract_traits(my_Data)
   see a \texttt{NA}. 
 
   
-  In order to make the dataframe more readable,  traits' names (ie. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function: 
+  In order to make the dataframe more readable,  traits' names (i.e. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function: 
 
 
 <<lookup,eval=FALSE>>=
@@ -209,17 +211,20 @@ my_lookup<-lookup(my_Data)
 head(my_lookup)
 @ %def 
 
+\subsection{Interactive use of \texttt{tr8}}
+
+
     Up to now we've been using the \texttt{tr8} function in a non-interactive way. In order to help those user which are more familiar with a GUI approach,
-    the function can also be run setting the \texttt{gui\_config} parameter to \texttt{TRUE} (without providing any trait in the \texttt{download\_list} parameter) and a multi-panel window will appear: the user is asked to choose those
+    the function can also be run setting the \texttt{gui\_config} parameter to \texttt{TRUE} (without providing any trait to the \texttt{download\_list} parameter) and a multi-panel window will appear: the user is asked to choose those
   traits which are to be downloaded from the various databases \footnote{A note for Mac users: the GUI relies on the \texttt{Tcl/Tk} toolkit, thus if you want to run the GUI, please make sure that the \texttt{X11} package is installed - see "Tcl/Tk" issues at \url{http://cran.r-project.org/bin/macosx/RMacOSX-FAQ.html}}.
 
   For a detailed explanation of each level of a trait, please refer to
   the original websites (all the databases listed in the references
   provide the users with very precise and detailed descriptions).
 
-   Tipically users will have a their vegetation data in the form of a
+   Typically users will have a their vegetation data in the form of a
    \textit{sites}*\textit{species} dataframe (or matrix), thus they
-   may want to extract traits data for the whole dataset (this time using the GUI to select traits), ie. :
+   may want to extract traits data for the whole dataset (this time using the GUI to select traits), i.e. :
    
 @ 
 <<dataset,eval=FALSE>>=
@@ -236,11 +241,13 @@ print(my_traits)
 @ %def 
 
 
-  
+\subsection{Some notes on using \texttt{tr8}}
+
+
   \textbf{A NOTE OF CAUTION}: searching the web is a time (and
-  internet band) consuming activity, thus the higher the number of
+  Internet band) consuming activity, thus the higher the number of
   your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
-  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will alway pause between one search and the following one.
+  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.\\
 
   \textbf{A (SECOND) NOTE OF CAUTION}: some users adopt the following workflow for analysing their vegetation data:
 
@@ -257,7 +264,7 @@ Genus and Species of each plant species name (i.e. column names in the
 alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
 This may cause problems for further processing of plants'
 species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
-  option in \texttt{read.csv}. Eg. suppose that
+  option in \texttt{read.csv}. E.g. suppose that
   \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
   \textbf{R} console, one should use:
 
@@ -276,7 +283,7 @@ the following strategy was adopted:
 
 \begin{description}
 \item[Quantitative traits] the mean of all the values was calculated
-  (eg. when multiple values for "Seed weight mean" are available, the
+  (e.g. when multiple values for "Seed weight mean" are available, the
   mean of these value is calculated)
 \item[Qualitative traits] all the values are taken into account and
   "joined" together in a single string (the values are separated by a
@@ -304,7 +311,7 @@ bib(my_traits)
   the following:
   
   \begin{enumerate}
-  \item Check plant species names (eg. with something like the following -  please refere to the \texttt{taxize} package documentation\cite{taxize} for further details)
+  \item Check plant species names (e.g. with something like the following -  please refere to the \texttt{taxize} package documentation\cite{taxize} for further details)
     
 <<one,eval=FALSE>>=
 species_names<-names(veg_data)
@@ -339,15 +346,31 @@ traits_df<-extract_traits(my_traits)
 save(traits_df,file="traits_df.csv")
 @ %def 
   
-and then open that file with a spreadsheet software (eg. LibreOffice).
+and then open that file with a spreadsheet software (e.g. LibreOffice).
 
   
   \end{enumerate}
   
 
   
+\section{Further steps}
 
-
+  The \texttt{TR8} package comes with another vignette, called
+  \texttt{TR8\_workflow}, which shows a typical workflow describing
+  all the steps needed for retrieving and analysing traits data with \texttt{tr8}, listing  the most
+  common problems that could be faced and the possible solutions to
+  fix them.\\
+  The vignette can be opened from within R, using:
+  
+@ 
+<<vignette,eval=FALSE>>=
+vignette("TR8_workflow")
+@ %def 
+  
+  
+  
+  
+  
 
 \section{Local storage of LEDA and Akhmetzhanova data}
 \label{sec:leda}
@@ -366,373 +389,8 @@ and then open that file with a spreadsheet software (eg. LibreOffice).
   copy is stored in a local directory and made available to future requests\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details).}.
 
 
-\section{A 'real life' workflow}
-\label{sec:workflow}
-
-
-   In this paragraph I will describe a typical workflow for a researcher
-   interested in using the \texttt{TR8} package: this is meant to be a
-   step-by-step guide involving most of the common problems that are
-   faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lenghty in order to 
-   describe each single step in detail; users which are confident in the use of R could make most of the steps much shorter than what's presented here.}.
-    This section relies on the data set used by Sandau et
-    al.(2014)\cite{dryad_Sandau} which is publicly available at
-    \texttt{dryad}\cite{dryad_Sandau}.
-    \textbf{NOTA BENE}: this dataset is here merely used as
-    a tool to demonstrate some important points related to
-    \texttt{TR8} functioning; the changes to the original species names that are
-    proposed in this tutorial should be intended as a \textit{proof of
-    concept}, not as corrections for the original dataset. 
-  
- 
-\subsection{Retrieve original data}
-
-   The dataset is available as a \texttt{xlsx} file (which is a common
-   case); several alternatives are available to import this kind of files into \texttt{R} (eg. you can download the
-   dataset and load it into an \texttt{R} session or you could save
-   a \texttt{.csv} version of the file and then load it into
-   \texttt{R} using \texttt{read.csv()}; if you are following these strategies, feel free to skip this paragraph); for this tutorial we will use
-   \texttt{XLConnect} to download and load the dataset.
-
-@ 
-<<dryad,eval=FALSE>>=
-## the XLConnect package is needed
-install.packages("XLConnect",dependencies = T)
-library(XLConnect)
-## store the  url of the dryad package
-url<-"http://datadryad.org/bitstream/handle//
-    10255/dryad.65646/MEE-13-11-651R2_data.xlsx?sequence=1"
-## choose the extension for the temp file where 
-## data will be stored
-tmp = tempfile(fileext = ".xlsx")
-## download the data
-download.file(url = url, destfile = tmp)
-## we first read the "metadata" sheet from the xlsx file
-metadata<-readWorksheetFromFile(file = tmp, sheet = "metadata", 
- header = FALSE, startRow = 15, startCol = 1, endCol = 3)
-## then read the vegetation data
-veg_data <-readWorksheetFromFile(file = tmp, sheet = "data.txt", 
-       header = TRUE, startRow = 1, startCol = 11, endCol = 123)
-## round veg_data numbers to the second digit
-veg_data<-round(veg_data,digits = 2)
-@ %def 
- 
-  The dataframe \texttt{metadata} contains two columns, \texttt{Col1}
-  contains short codes used by the authors as surrogates of the full
-  scientific names of species  for the species which are stored in the
-  \texttt{Col2} column.
-
-\subsection{Check species names}
-
-  The first suggested step is to check species names using the
-  \texttt{taxize} package in order to see whether there are
-  misspelled names; the \texttt{tnrs} function accepts a vector of
-  plant species names and tries to match them with \textit{accepted}
-  scientific names; the function
-  returns a dataframe with various columns: in the column
-  \texttt{score} each entry is given a score according to the level of
-  "resemblance" with correct names; the score is "1" if the name is
-  correct, less than "1" if some problems with the name are
-  found. \textbf{NOTA BENE}: from the \texttt{tnrs} help page "If there
-  is no match in the Taxosaurus database, nothing is returned, so you
-  will not get anything back for non matches" thus we should worry of
-  both "less than 1" scores \textbf{AND} missing entries in the
-  dataframe returned by \texttt{tnrs}.
-  
-@ 
-<<taxize,eval=FALSE>>=
-library(taxize)
-check_names<-tnrs(metadata$Col2,source="iPlant_TNRS")
-@ %def 
-
-   Check now if there are species which were discarded by
-   \texttt{tnrs} output since they were not found in reference
-   databases. 
-   
-@ 
-<<discarded,eval=FALSE>>=
-setdiff(metadata$Col2,check_names$submittedname)
-@ %def 
-
-   The results is 0, thus \texttt{tnrs} found at least a partial match for all the species names we provided.
-   Next we should check which species got a \texttt{score} which is less than 1.
-@ 
-<<taxize2,eval=FALSE>>=
-issues<-with(check_names,check_names[score!="1",])
-issues[,c("submittedname","score","acceptedname","authority")]
-@ %def 
-
-\footnotesize
-\begin{verbatim}
-                         submittedname score         acceptedname               authority
-                Poaceae (undetermined)   0.9              Poaceae                Barnhart
-                         Epilobium sp.   0.9            Epilobium                      L.
-                         Cerastium sp.   0.9            Cerastium                      L.
-     Fallopia convolvulus (L.) A. Löwe  0.96 Fallopia convolvulus            (L.) Á. Löve
-                           Festuca sp.   0.9              Festuca                      L.
-                       Chenopodium sp.   0.9          Chenopodium                      L.
-                  Phleum pratense agg.   0.9      Phleum pratense                      L.
-                         Polygonum sp.   0.9            Polygonum                      L.
-Polygonum mite (=Persicaria laxiflora)   0.9     Persicaria mitis       (Schrank) Assenov
-                             Rubus sp.   0.9                Rubus                      L.
-                            Juncus sp.   0.9               Juncus                      L.
-                         Orobanche sp.   0.9            Orobanche                      L.
-                          Triticum sp.   0.9             Triticum                      L.
-             Taraxacum officinale!!!!!   0.9            Taraxacum              F.H. Wigg.
-        Setaria pumila (Poir.) Schult.  0.96       Setaria pumila (Poir.) Roem. & Schult.
-
-\end{verbatim}
-
-\normalsize
- We observe here some important points:
- 
- 
- \begin{itemize}
- \item for some species only the Genus is present, thus \texttt{tr8} function will not be able to return traits values for
-   those species; those species names can't be used with \texttt{tr8};
- \item in the case of \textit{Taraxacum officinale!!!!!} we should remove the extra \texttt{"!"} from the species names;
- \item \textit{Polygonum mite} is not recognized as an accepted name; for this tutorial we assume that it should be changed to \textit{Persicaria mitis};
- \item the aggregate species \texttt{Phleum pratense agg.} poses some problems: for this tutorial we decide to accept it as \textit{Phleum pratense};
- \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names ( for \textit{F. convolvulus} "A." should be acccented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} author name is missing).
-\end{itemize}
-
-  The last point is not strictly relevant for using the \texttt{tr8} function
-  since authors' names should not be included in the list of species
-  names passed to the function (but we correct the authors names anyway so that when we re-run \texttt{tnrs} function, no mistakes are found) . 
-
-  We adopt the following fixes for the issues we've found:
-\small
-@ 
-<<substitution,eval=FALSE>>=
-library(plyr)
-## we use the revalue function in the plyr package
-## to fix all the above mentioned issues
-metadata$Col2<-revalue(metadata$Col2, 
-     c("Taraxacum officinale!!!!!"="Taraxacum officinale F.H. Wigg."))
-metadata$Col2<-revalue(metadata$Col2,
-     c("Polygonum mite (=Persicaria laxiflora)"="Persicaria mitis (Schrank) Assenov"))
-metadata$Col2<-revalue(metadata$Col2,
-     c("Fallopia convolvulus (L.) A. Löwe"="Fallopia convolvulus (L.) Á. Löve"))
-metadata$Col2<-revalue(metadata$Col2,
-     c("Setaria pumila (Poir.) Schult."="Setaria pumila (Poir.) Roem. & Schult."))
-metadata$Col2<-revalue(metadata$Col2,
-     c("Phleum pratense agg."="Phleum pratense L."))
-@ %def 
-
-\normalsize
-  And re-run the \texttt{tnrs} function as a cross-check:
-  
-@ 
-<<taxize_2,eval=FALSE>>=
-check_names<-tnrs(metadata$Col2,source="iPlant_TNRS")
-issues<-with(check_names,check_names[score!="1",])
-issues[,c("submittedname","acceptedname","score")]
-@ %def 
-
-\begin{verbatim}
-         submittedname acceptedname score
-Poaceae (undetermined)      Poaceae   0.9
-         Epilobium sp.    Epilobium   0.9
-         Cerastium sp.    Cerastium   0.9
-           Festuca sp.      Festuca   0.9
-       Chenopodium sp.  Chenopodium   0.9
-         Polygonum sp.    Polygonum   0.9
-             Rubus sp.        Rubus   0.9
-            Juncus sp.       Juncus   0.9
-         Orobanche sp.    Orobanche   0.9
-          Triticum sp.     Triticum   0.9
-\end{verbatim}
-
-  We observe now that only those entries which were identified at the
-  Genus level raise some issues; my suggestion is to remove them
-  (i.e. those entries for which the score is "0.9") from the original \texttt{metadata} dataframe. 
-  
-
-@ 
-<<two,eval=FALSE>>=
-final_dataframe<-merge(metadata,check_names,by.x = "Col2",by.y="submittedname")
-final_dataframe<-final_dataframe[!final_dataframe$Col2%in%issues$submittedname,]
-@ %def 
-
-  
-  In this way we now have the \texttt{temp\_df} data frame in which
-  each entry has the name present in the original dataset and the
-  correct scientific names, which should be passed to the \texttt{tr8}
-function.
-
-
-\subsection{Using the \texttt{tr8} function}
-
-
-  We can now use the \texttt{tr8} function; suppose we are interested
-  in downloading the following traits:
-  \begin{itemize}
-  \item  \texttt{Maximum height},
-  \item \texttt{Leaf area},
-  \item \texttt{Leaf mass},
-  \item \texttt{Life form},
-  \item \texttt{Strategy type}
-  \end{itemize}
-
-  Observing the \texttt{available\_tr8} dataframe (simply write
-  \texttt{available\_tr8} in the R console), we see the followig correspondences:
-
-
-  \begin{description}
-  \item  [\texttt{Maximum height}] is available in Ecoflora and its
-    short code is \texttt{h\_max},
-  \item [\texttt{Leaf area}] is available in Ecoflora and its short
-    code is \texttt{le\_area},
-   \item [\texttt{Leaf mass}] is available in LEDA and its short
-     code is \texttt{leaf\_mass},
- \item [\texttt{Life form}] is available in BiolFlor\footnote{Life form
-     is also avaialbe in Ecoflora; here we opt for BiolFlor in order
-     to increase the range of queried databases} and its short code is \texttt{li\_form\_B},
-  \item [\texttt{Strategy type}] is available in BiolFlor and its short
-    code is \texttt{strategy}
-  \end{description}
-
-  Thus the \texttt{tr8} should be run as follows (\textbf{beware}: this may take some time!)
-
-@ 
-<<tr8_ex,eval=FALSE>>=
-cspecies_names<-final_dataframe$acceptedname
-my_traits<-c("h_max","le_area","leaf_mass","li_form_B","strategy")
-retrieved_traits<-tr8(species_list = species_names,download_list = my_traits)
-@ %def 
- 
-The results are reported in table \ref{tab:tr8res}: the table here
-shown is a condensed version of what you will get with the above
-commands: the traits returned from BiolFlor contain strings within
-brackets which explain the value of each trait (e.g. "csr
-(competitors/stress-tolerators/ruderals)"); these are useful for
-interpreting the data, but made our table clumsy, thus I removed them.\\
-Having a look at the table, some points should be noted:
-
-\begin{enumerate}[label=\Alph*)]
-\item \texttt{h\_max} for \textit{C. arvensis} reports two values (75;10): this is because Ecoflora provides these two values; it is left to the user to decide which one should be used! (you may decide to calculate a mean)
-\item for some species \texttt{le\_area} reports more than one class (e.g. for \textit{A. pseudoplatanus} we have 0-100;100-1000): here again the user should cope with this ambiguity.
-\end{enumerate}
- 
-  
-
 \bibliography{tr8}
 
-
-\afterpage{
-\begin{longtable}[!p]{rllllr}
-%\centering
-  \hline
- & h\_max & le\_area & li\_form\_B & strategy & leaf\_mass \\ 
-  \hline
-Acer pseudoplatanus & 3000 & 10-100;100-1000 & M  & c  & NA \\ 
-  Achillea millefolium & 45 & 1-10 & H  & c  & 21.76 \\ 
-  Aethusa cynapium & 120 &  & H  - T  & cr  & 118.21 \\ 
-  Agrostemma githago & 100 & 1-10 & H  - T  & cr  & 57.23 \\ 
-  Agrostis stolonifera & 100 & 1-10 & H  & csr  & 9.41 \\ 
-  Amaranthus retroflexus &  &  & T  & cr  & 265.49 \\ 
-  Anagallis arvensis & 30 & 0.1-1 & T  & r  & 2.76 \\ 
-  Apera spica-venti & 100 & 1-10 & H  - T  & cr  & 43.95 \\ 
-  Arrhenatherum elatius & 150 & 10-100 & H  & c  & 30.65 \\ 
-  Brassica napus & 100 &  & T  & cr  & NA \\ 
-  Campanula patula & 60 & 1-10 & H  & csr  & NA \\ 
-  Capsella bursa-pastoris & 40 & 10-100 & H  - T  & r  & 60.89 \\ 
-  Centaurea cyanus & 90 &  & H  - T  & cr  & 33.62 \\ 
-  Centaurea jacea &  &  & H  & c  & NA \\ 
-  Chaenorhinum minus & 25 & 0.1-1 & T  & r  & 3.46 \\ 
-  Chenopodium album & 100 & 1-10 & T  & cr  & 148.55 \\ 
-  Chenopodium polyspermum & 100 & 1-10 & T  & cr  & 36.84 \\ 
-  Cichorium intybus & 120 &  & H  & c  & 556.12 \\ 
-  Cirsium arvense & 90 & 10-100 & G  & c  & 190.54 \\ 
-  Convolvulus arvensis & 75;10 & 1-10 & G  & cr  & 40.73 \\ 
-  Conyza canadensis & 100 &  & H  - T  & cr  & 24.74 \\ 
-  Cota tinctoria &  &  & H  & cs  & NA \\ 
-  Crepis biennis & 120 & 10-100 & H  & cr  & 189.01 \\ 
-  Dactylis glomerata & 100 & 10-100 & H  & c  & 49.9 \\ 
-  Daucus carota & 100 & 10-100 & H  & cr  & 12.84 \\ 
-  Digitaria sanguinalis &  &  & T  & r  & 8.62 \\ 
-  Dipsacus fullonum & 150 &  & H  & cr  & 1118.24 \\ 
-  Echinochloa crus-galli &  &  & T  & cr  & 76.9 \\ 
-  Echium vulgare & 90 & 10-100 & H  & cr  & 282.5 \\ 
-  Elytrigia repens subsp. repens & 120 & 10-100 & G  - H  & c  & NA \\ 
-  Equisetum arvense & 80 &  & G  & cr  & 178.64 \\ 
-  Euphorbia helioscopia & 50 & 1-10 & H  - T  & r  & 12.88 \\ 
-  Euphorbia stricta & 80 & 1-10 & H  - T  & r  & NA \\ 
-  Fallopia convolvulus & 120 & 10-100 & T  & cr  & 44.26 \\ 
-  Galinsoga quadriradiata & 80 & 1-10 & T  & cr  & NA \\ 
-  Galium aparine & 120 & 1-10;0.1-1 & H  - T  & cr  & 5.7 \\ 
-  Galium mollugo subsp. album &  &  & H  & c  & NA \\ 
-  Geranium rotundifolium & 40 & 1-10 & T  & r  & NA \\ 
-  Glechoma hederacea & 30 & 1-10 & G  - H  & csr  & 20.96 \\ 
-  Gnaphalium uliginosum & 20 & 1-10;0.1-1 & T  & r  & NA \\ 
-  Holcus lanatus & 100 & 10-100;1-10 & H  & c  & 21.8 \\ 
-  Hypericum perforatum & 100 & 1-10 & H  & c  & 8.72 \\ 
-  Juglans regia &  &  & M  & c  & NA \\ 
-  Juncus bufonius & 25 & 0.1-1 & T  & r  & 4.55 \\ 
-  Kickxia elatine & 50 & 1-10 & T  & r  & NA \\ 
-  Kickxia spuria & 50 & 1-10 & T  & r  & NA \\ 
-  Lactuca serriola & 200 &  & H  - T  & cr  & 397.12 \\ 
-  Lamium amplexicaule & 25 & 1-10 & H  - T  & r  & 8.46 \\ 
-  Lamium purpureum & 45 & 1-10 & H  - T  & r  & 11.32 \\ 
-  Leucanthemum vulgare & 100 & 1-10 & H  & c  & 27.12 \\ 
-  Linaria vulgaris & 80 & 1-10 & G  & csr  & 5.68 \\ 
-  Lolium perenne & 90 & 1-10 & H  & c  & 14.53 \\ 
-  Lotus corniculatus & 35 & 1-10 & H  & csr  & 4.5 \\ 
-  Malva moschata & 80 & 10-100 & H  & c  & 176.06 \\ 
-  Malva sylvestris & 90 & 10-100 & H  & c  & 341.6 \\ 
-  Matricaria chamomilla & 60 &  & H  - T  & r  & NA \\ 
-  Medicago lupulina & 60 & 1-10 & H  - T  & csr  & 17.28 \\ 
-  Medicago sativa & 90 & 1-10 & NA & NA & 29.19 \\ 
-  Melilotus albus & 150 & 1-10 & H  - T  & cr  & NA \\ 
-  Mentha arvensis & 60 & 1-10 & H  & c  & 14.21 \\ 
-  Mercurialis annua & 50 & 1-10 & T  & r  & 17.07 \\ 
-  Myosotis arvensis & 60 & 1-10 & H  - T  & r  & 28.22 \\ 
-  Oenothera biennis & 100 & 10-100 & H  & cr  & NA \\ 
-  Onobrychis viciifolia & 60 & 10-100 & H  & c  & 164.05 \\ 
-  Origanum vulgare & 80 & 1-10 & H  & csr  & 23.37 \\ 
-  Oxalis stricta & 40 & 1-10 & NA & NA & NA \\ 
-  Papaver rhoeas & 60 & 10-100 & H  - T  & cr  & 166.81 \\ 
-  Pastinaca sativa & 180 & 10-100 & H  & c  & 382.98 \\ 
-  Persicaria mitis &  &  & NA & NA & NA \\ 
-  Phleum pratense & 150 & 10-100 & H  & c  & 9.91 \\ 
-  Plantago lanceolata & 40 & 10-100 & H  & csr  & 82.79 \\ 
-  Plantago major & 60 & 10-100 & H  & csr  & 1016.91 \\ 
-  Poa annua & 30 & 1-10 & H  - T  & r  & 3.21 \\ 
-  Polygonum aviculare & 200 & 1-10 & T  & r  & 13.01 \\ 
-  Potentilla reptans & 100 & 1-10 & H  & csr  & 53.72 \\ 
-  Prunella vulgaris & 30 & 1-10 & C  - H  & csr  & 16.11 \\ 
-  Ranunculus repens & 60 & 10-100 & H  & csr  & 193.94 \\ 
-  Rumex obtusifolius & 120 & 100-1000;10-100 & H  & c  & 1449.89 \\ 
-  Sagina apetala & 10 &  & T  & r  & 0.32 \\ 
-  Salix alba & 2500 & 10-100 & M  & c  & 63.36 \\ 
-  Salix caprea & 1000 & 10-100;1-10 & M  - N  & c  & NA \\ 
-  Scrophularia nodosa & 80 & 10-100 & H  & cs  & 313.6 \\ 
-  Senecio vulgaris & 45 & 10-100 & H  - T  & r  & 17.59 \\ 
-  Setaria pumila &  &  & T  & r  & 75.09 \\ 
-  Silene latifolia & 100 & 10-100 & H  & c  & 78.06 \\ 
-  Sinapis alba & 80 & 10-100 & T  & cr  & 84.21 \\ 
-  Solanum americanum & 60 &  & T  & r  & NA \\ 
-  Sonchus arvensis & 150 &  & H  & cr  & 549.53 \\ 
-  Sonchus asper & 150 & 100-1000 & H  - T  & cr  & 216.37 \\ 
-  Sonchus oleraceus & 150 & 10-100 & H  - T  & cr  & 341.14 \\ 
-  Stellaria media & 40 & 1-10 & H  - T  & cr  & 8.75 \\ 
-  Tanacetum vulgare & 120 &  & H  & c  & 427.99 \\ 
-  Taraxacum officinale & 30 &  & NA & NA & NA \\ 
-  Trifolium pratense & 100 & 1-10 & H  & c  & 32.58 \\ 
-  Trifolium repens & 50 & 1-10 & H  & csr  & 11.76 \\ 
-  Urtica dioica & 150 & 10-100 & C  - H  & c  & 101.22 \\ 
-  Verbascum lychnitis & 150 & 100-1000 & H  & cs  & 1265 \\ 
-  Verbascum thapsus & 200 & 100-1000 & H  & c  & 1595.28 \\ 
-  Verbena officinalis & 60 & 1-10 & H  - T  & cr  & 26.92 \\ 
-  Veronica persica & 40 & 1-10 & H  - T  & r  & 13.71 \\ 
-  Veronica serpyllifolia & 30 & 0.1-1 & H  & csr  & 8.02 \\ 
-  Vicia hirsuta & 30 & 1-10 & H  - T  & r  & 10.51 \\ 
-  Viola arvensis & 45 &  & H  - T  & r  & 23.1 \\ 
-   \hline
-\caption{Traits data collected through the \texttt{tr8} function; please note that to improve the readability of the table, in  \texttt{li\_form\_B} and \texttt{strategy} the traits explanation between brackets were removed (e.g. "cr (competitors/ruderals)" was converted to "cr" and "M (Macrophanerophyte) - N (Nanophanerophyte)" to "M - N".}
-\label{tab:tr8res}
-\end{longtable}
-}
  
 
 \end{document}
