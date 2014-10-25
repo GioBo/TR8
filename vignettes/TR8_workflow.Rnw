@@ -39,7 +39,7 @@
    In this vignette I will describe a typical workflow for a researcher
    interested in using the \texttt{TR8} package: this is meant to be a
    step-by-step guide involving most of the common problems that are
-   faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lenghty in order to 
+   faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lengthy in order to 
    describe each single step in detail; users which are confident in the use of R could make most of the steps much shorter than what's presented here.}.
     This section relies on the data set used by Sandau et
     al.(2014)\cite{Sandau} which is publicly available at
@@ -62,7 +62,7 @@
     \end{description}
     
    The dataset is available as a \texttt{xlsx} file (which is a common
-   case); several alternatives are available to import this kind of files into \texttt{R} (eg. you can download the
+   case); several alternatives are available to import this kind of files into \texttt{R} (e.g. you can download the
    dataset and load it into an \texttt{R} session or you could save
    a \texttt{.csv} version of the file and then load it into
    \texttt{R} using \texttt{read.csv()}; if you are following these strategies, feel free to skip this paragraph); for this tutorial we will use
@@ -176,7 +176,7 @@ Polygonum mite (=Persicaria laxiflora)   0.9     Persicaria mitis       (Schrank
  \item in the case of \textit{Taraxacum officinale!!!!!} we should remove the extra \texttt{"!"} from the species names;
  \item \textit{Polygonum mite} is not recognized as an accepted name; for this tutorial we assume that it should be changed to \textit{Persicaria mitis};
  \item the aggregate species \texttt{Phleum pratense agg.} poses some problems: for this tutorial we decide to accept it as \textit{Phleum pratense} L.;
- \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names ( for \textit{F. convolvulus} "A." should be acccented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} author name is missing).
+ \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names ( for \textit{F. convolvulus} "A." should be accented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} author name is missing).
 \end{itemize}
 
   The last point is not strictly relevant for using the \texttt{tr8} function
@@ -268,7 +268,7 @@ function.
   \end{itemize}
 
   Observing the \texttt{available\_tr8} dataframe (simply write
-  \texttt{available\_tr8} in the R console), we see the followig correspondences:
+  \texttt{available\_tr8} in the R console), we see the following correspondences:
 
 
   \begin{description}
@@ -289,7 +289,7 @@ function.
 
 @ 
 <<tr8_ex,eval=FALSE>>=
-cspecies_names<-final_dataframe$acceptedname
+species_names<-final_dataframe$acceptedname
 my_traits<-c("h_max","le_area","leaf_mass","li_form_B","strategy")
 retrieved_traits<-tr8(species_list = species_names,download_list = my_traits)
 @ %def 
@@ -413,7 +413,7 @@ traits$strategy<-as.factor(traits$strategy)
   The analysis presented here follow the very same steps described by
   Kleyer et al. \cite{Kleyer2012} in the Supporting information to
   their paper, thus readers are strongly encouraged to read that
-  pubblication.
+  publication.
   In this case we will adopt the \textbf{RLQ} analysis, thus the following data are required:
   
   \begin{description}
@@ -443,9 +443,10 @@ row.names(traits)<-mapvalues(row.names(traits),
   data for some species: this will cause problems for the algorithm we
   will use, thus we need to remove those species from the datasets
   (this will impair the results of the whole analysis, but for the
-  moment we do not have other choiches):
+  moment we do not have other choices):
 @ 
-<<b,evak=FALSE>>=
+
+<<b,eval=FALSE>>=
 traits<-traits[complete.cases(traits),]
 @ %def 
 
@@ -459,7 +460,7 @@ traits<-traits[complete.cases(traits),]
 vegetation<-veg_data[,names(veg_data)%in%row.names(traits)]
 @ %def 
  
-\item we can now (try to) perform the first multivariate analyses; first we use a Correspondance analysis on the \textbf{L} dataset (the \texttt{vegetation} dataframe); for this we will need the \texttt{ade4} package:
+\item we can now (try to) perform the first multivariate analyses; first we use a Correspondance analysis on the \textbf{L} dataset (the \texttt{vegetation} dataframe); for this we will need the \texttt{ade4} package\cite{ade4}:
 
 @ 
 <<d,eval=FALSE>>=
@@ -512,7 +513,7 @@ coa<-dudi.coa(vegetation,scannf=F)
 traits.hill<-dudi.hillsmith(traits,row.w=coa$cw,scannf = F)
 @ %def 
 
-\item And perform \texttt{dudi.hillsmith} also on the \texttt{env\_data} dataset:
+\item And perform \texttt{dudi.hillsmith} on the \texttt{env\_data} dataset as well:
 
 @ 
 <<i,eval=FALSE>>=
@@ -525,14 +526,14 @@ env.hill<-dudi.hillsmith(env_data,row.w=coa$lw,scannf = FALSE)
 Error in x * w : non-numeric argument to binary operator
 \end{verbatim}
  
-    This is due to the fact that the \texttt{Treat} variable in \texttt{env\_data} is of clas "character", while \texttt{dudi.hillsmith} accepts either a quantitative or a factor variable; we thus should convert the variable to a factor:
+    This is due to the fact that the \texttt{Treat} variable in \texttt{env\_data} is of class "character", while \texttt{dudi.hillsmith} accepts either a quantitative or a factor variable; we thus should convert the variable to a factor:
     
 @ 
 <<l,eval=FALSE>>=
 env_data$Treat<-as.factor(env_data$Treat)
 @ %def 
     
-   Now we rerun the analysis:
+   Now we re-run the analysis:
 @ 
 <<i,eval=FALSE>>=
 env.hill<-dudi.hillsmith(env_data,row.w=coa$lw,scannf = FALSE)
@@ -552,20 +553,152 @@ plot(rlq_tr8)
 @ %def 
 \includegraphics{rlq_tr8}
 
-\item 
+  Several plotting functions are available for \texttt{ade4} objects, please refer to the package documentation for further detailed information.
 
+\item We now perform a clustering and its results will be used for building functional groups. Following the example provided by Kleyer et al. \cite{Kleyer2012} we use the Ward Minimum variance clustering:
+  
 @ 
-<<cluster,eval=FALSE>>=
+<<m,eval=FALSE>>=
 clust<-hclust(dist(rlq_tr8$lQ),method="ward.D2")
-plot(clust)
+plot(clust,sub="Ward minimum variance clustering",xlab="TR8 tutorial")
+@ %def 
+  
+\includegraphics[width=1.2\textwidth]{cluster}
+
+\item We should now decide where the dendrogram should be cut: several
+  criteria exist: in this case
+  (not to over-complicate the tutorial),
+  based on the visual estimation of the graph, we decide that 6 main
+  groups are present: 2-single species ones (i.e. \textit{S. alba} and \textit{U. dioica}) and 4 multi-species groups.
+  We can thus cut our plot:
+@ 
+<<o,eval=FALSE>>=
 rect.hclust(clust,k=6)
+@ %def 
+  
+\includegraphics[width=1.1\textwidth]{cluster_cut}
+  
+  And save the results of this \textit{cutting} for later graphs:
+  
+@ 
+<<p,eval=FALSE>>=
 cuts<-cutree(clust,6)
-s.class(rlq_tr8$lQ,as.factor(cuts),col=1:6,add.plot = T)
-s.arrow(rlq_tr8$c1)
+@ %def 
+  
+\item We can now plot an ordination graph of the species, grouped according to the newly defined functionale groups and plot, on top of that graph, traits data:
+  
+@ 
+<<q,eval=FALSE>>=
+s.class(rlq_tr8$lQ,as.factor(cuts),col=1:6)
+s.arrow(rlq_tr8$c1,add.plot = TRUE)
+@ %def %
+
+\includegraphics{funct_groups}
+
+\item And finally the created grouping can be interpreted in terms of traits (the results can be seen in figure at page \pageref{fig:results}):
+  
+@ 
+<<aa,eval=FALSE>>=
+par(mfrow=c(3,2))
+plot(traits$h_max~as.factor(cuts),main="Maxim height",
+     ylab="max height",border = 1:6,xlab="Group number")
+plot(traits$le_area~as.factor(cuts),main="Leaf area",
+     ylab="leaf area",border = 1:6,xlab="Group number")
+plot(traits$leaf_mass~as.factor(cuts),main="Leaf mass",
+     ylab="leaf mass",border = 1:6,xlab="Group number")
+plot(table(cuts,traits$strategy),main="CSR strategy",
+     ylab="strategy",border = 1:6,xlab="Group number")
+plot(table(cuts,traits$li_form_B),main="Life form",
+     ylab="life form",border = 1:6,xlab="Group number")
+par(mfrow=c(1,1))
 @ %def 
 
-  \item 
+
+\begin{figure}
+  \centering
+  \includegraphics{Traits_groups}
+  \label{fig:results}
+  \caption{Results of traits ditribution in defined functional groups.}
+\end{figure}
+
+
+   From the graphs we are able to say that \textit{group 1} is composed of only   "Hemicryptophyte" species, while \textit{group 2 } has a more homogeneous combination of "Geophytes", "Hemicryptophytes" and  "Hemicryptophyte - Therophyte" species. If we look at \texttt{maximum height}, there's a group which is clearly different from all the rest: this is the one which is composed of only \textit{Salix alba}: this is the only woody species in our analyzed dataset, thus it's clear that, when considering the \texttt{maximum height} trait, it would be separated from all the other species. 
+   In terms of \texttt{leaf area}, \texttt{group 4} is composed of some of the broadleaf species which have the maximum values for his trait (e.g. \textit{Verbascum thapsus} and \textit{V. lychnitis}.
   \end{enumerate}
+   
+\section{Some concluding remarks}
+
+   What has been presented above, is just an example of a workflow, thus the results obtained and the graphs presented \uline{should be considered as potential outcomes of the process, not as valid scientific results}.\\
+   There are also many points which were not included in the analysis and should be considered in order to make it more "scientifically sound"; among the most important ones, I list the following:
+   
+   \begin{itemize}
+   \item We did not transform original data: it would have made sense to transform the original abundance data, e.g. using standardization algorithm provided by the \texttt{decostand()} function in \texttt{vegan}.
+   \item In the end we excluded many species from our analysis since we had not found trait data for them; we could have searched for data in different databases (e.g. \texttt{life\_form} is also available in \texttt{Ecolfora}) or we could have got data from other sources - like books, floras, etc... - and added those values to the downloaded traits).
+   \item We used trait values retrieved from databases\footnote{This is what \texttt{TR8} was created for...} and assumed that those were correct for our analysis; this poses some problems, e.g the case of \textit{S. alba} is striking in this respect: looking at the abundance data, it's clear that what were sampled were small individuals, but using data retrieved by \texttt{tr8} we used a value of 25 m for it \texttt{maximum height} value.
+   \item \texttt{Leaf area} values could have been coded as ordered factors, instead of using midpoint values of each class (which is probably one of the reason for the shape of the boxes in the boxplot in figure at page \pageref{fig:results}).
+     
+   \end{itemize}
+
+   We could repeat all the analyses taking these points (and many other relevant ones) into account, but this, as in any tutorial which deserves its name, is left to the reader as an exercise.
+
+%\includegraphics{le\_area}
+
+%% @
+%% <<rimuovi,eval=FALSE>>=
+
+%% png("h_max.png")
+%% plot(traits$h_max~as.factor(cuts),main="Maxim height",ylab="max height",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% png("le_area.png")
+%% plot(traits$le_area~as.factor(cuts),main="Leaf area",ylab="leaf area",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% png("le_mass.png")
+%% plot(traits$leaf_mass~as.factor(cuts),main="Leaf mass",ylab="leaf mass",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% png("strategy.png")
+%% plot(table(cuts,traits$strategy),main="CSR strategy",ylab="strategy",border = 1:6,xlab="Group number")
+%% dev.off()
+
+
+%% png("li_form.png")
+%% plot(table(cuts,traits$li_form_B),main="Life form",ylab="life form",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% ###
+%% op<-par()
+%% png("Traits_groups.png",width = 600,height = 900)
+%% par(mfrow=c(3,2))
+%% plot(traits$h_max~as.factor(cuts),main="Maxim height",ylab="max height",border = 1:6,xlab="Group number")
+%% plot(traits$le_area~as.factor(cuts),main="Leaf area",ylab="leaf area",border = 1:6,xlab="Group number")
+%% plot(traits$leaf_mass~as.factor(cuts),main="Leaf mass",ylab="leaf mass",border = 1:6,xlab="Group number")
+%% plot(table(cuts,traits$strategy),main="CSR strategy",ylab="strategy",border = 1:6,xlab="Group number")
+%% plot(table(cuts,traits$li_form_B),main="Life form",ylab="life form",border = 1:6,xlab="Group number")
+%% dev.off()
+
+
+
+
+
+
+
+%% %% png("cluster_cut.png",width=1000,height=500)
+%% %% plot(clust,sub="Ward minimum variance clustering",xlab="TR8 tutorial",cex=.7)
+%% %% rect.hclust(clust,k=6)
+%% %% dev.off()
+
+%% %% png("funct_groups.png")
+%% %% s.class(rlq_tr8$lQ,as.factor(cuts),col=1:6)
+%% %% s.arrow(rlq_tr8$c1,add.plot = TRUE)
+%% %% dev.off()
+
+%% @ %def 
+
+
+
+
 
 
 \bibliography{tr8}
