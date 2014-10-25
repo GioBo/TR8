@@ -41,9 +41,9 @@
    step-by-step guide involving most of the common problems that are
    faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lengthy in order to 
    describe each single step in detail; users which are confident in the use of R could make most of the steps much shorter than what's presented here.}.
-    This section relies on the data set used by Sandau et
+    This section relies on the dataset used by Sandau et
     al.(2014)\cite{Sandau} which is publicly available at
-    \texttt{dryad}\cite{dryad_Sandau}.
+    \texttt{dryad}\cite{dryad_Sandau} (under a CC0 1.0 licence ).
     \textbf{NOTA BENE}: this dataset is here merely used as
     a tool to demonstrate some important points related to the functioning of
     \texttt{TR8}, thus what is proposed in this tutorial
@@ -102,7 +102,7 @@ env_data<-readWorksheetFromFile(file = tmp, sheet = "data.txt",
   scientific names of species  for the species which are stored in the
   \texttt{Col2} column
 \item[veg\_data] contains a $sites*species$ table of biomass values
-\item[env\_data] contains the level for the experimental factors
+\item[env\_data] contains the experimental variables
   \end{description}
 
 \subsection{Check species names}
@@ -116,7 +116,7 @@ env_data<-readWorksheetFromFile(file = tmp, sheet = "data.txt",
   \texttt{score} each entry is given a score according to the level of
   "resemblance" with correct names; the score is "1" if the name is
   correct, less than "1" if some problems with the name are
-  found. \textbf{NOTA BENE}: from the \texttt{tnrs} help page "If there
+  found\footnote{Note that \texttt{score} contains strings, not numbers, thus we cannot use the "score<1" condition, but must rely on searching those strings which are "different from 1"}. \textbf{NOTA BENE}: from the \texttt{tnrs} help page "If there
   is no match in the Taxosaurus database, nothing is returned, so you
   will not get anything back for non matches" thus we should worry of
   both "less than 1" scores \textbf{AND} missing entries in the
@@ -176,12 +176,12 @@ Polygonum mite (=Persicaria laxiflora)   0.9     Persicaria mitis       (Schrank
  \item in the case of \textit{Taraxacum officinale!!!!!} we should remove the extra \texttt{"!"} from the species names;
  \item \textit{Polygonum mite} is not recognized as an accepted name; for this tutorial we assume that it should be changed to \textit{Persicaria mitis};
  \item the aggregate species \texttt{Phleum pratense agg.} poses some problems: for this tutorial we decide to accept it as \textit{Phleum pratense} L.;
- \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names ( for \textit{F. convolvulus} "A." should be accented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} author name is missing).
+ \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names (for \textit{F. convolvulus} "A." should be accented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} author name is missing).
 \end{itemize}
 
   The last point is not strictly relevant for using the \texttt{tr8} function
   since \uline{authors' names should not be included in the list of species
-  names passed to the function} (but we correct the authors names anyway so that when we re-run \texttt{tnrs} function, no mistakes are found) . 
+  names passed to the function} (but we correct the authors names anyway so that when we re-run \texttt{tnrs} function, no mistakes are found for these entries) . 
 
   We adopt the following fixes for the issues we've found:
 \small
@@ -232,14 +232,14 @@ Poaceae (undetermined)      Poaceae   0.9
   
      First we merge the original \textit{metadata} dataframe with
      \textit{check\_names} so that we have original names (with short
-     codes used by authors)  and the corrected ones:
+     codes used by authors) and the corrected ones in a single object:
 @ 
 <<two,eval=FALSE>>=
 final_dataframe<-merge(metadata,check_names,
          by.x = "Col2",by.y="submittedname")
 @ %def 
 
-  Then we exlude those species which we identified at the Genus level, i.e. those contained in the \textit{issues} dataframe:
+  Then we exlude those species which were identified at the Genus level, i.e. those contained in the \textit{issues} dataframe:
 
 @ 
 <<three,eval=FALSE>>=
@@ -249,7 +249,7 @@ final_dataframe<-final_dataframe[
 
 
 In this way we now have the \texttt{final\_dataframe} data frame in which
-  each entry has the name present in the original dataset and the
+  each entry has both the name present in the original dataset and the
   correct scientific names (\texttt{acceptedname}), which should be passed to the \texttt{tr8}
 function.
 
@@ -260,10 +260,10 @@ function.
   We can now use the \texttt{tr8} function; suppose we are interested
   in downloading the following traits:
   \begin{itemize}
-  \item \texttt{Maximum height},
-  \item \texttt{Leaf area},
-  \item \texttt{Leaf mass},
-  \item \texttt{Life form},
+  \item \texttt{Maximum height}
+  \item \texttt{Leaf area}
+  \item \texttt{Leaf mass}
+  \item \texttt{Life form}
   \item \texttt{Strategy type}
   \end{itemize}
 
@@ -299,11 +299,11 @@ shown is a condensed version of what you will get with the above
 commands: the traits returned from BiolFlor contain strings within
 brackets which explain the value of each trait (e.g. "csr
 (competitors/stress-tolerators/ruderals)"); these are useful for
-interpreting the data, but made our table clumsy, thus I removed them.\\
+interpreting the data, but made our table clumsy, thus I removed them).\\
 Having a look at the table, some points should be noted:
 
 \begin{enumerate}[label=\Alph*)]
-\item \texttt{h\_max} for \textit{C. arvensis} reports two values (75;10): this is because Ecoflora provides these two values; it is left to the user to decide which one should be used! (you may decide to calculate a mean)
+\item \texttt{h\_max} for \textit{C. arvensis} reports two values (75;10) since because Ecoflora provides two values for this species; it is left to the user to decide which one should be used! (you may decide to calculate a mean)
 \item for some species \texttt{le\_area} reports more than one class (e.g. for \textit{A. pseudoplatanus} we have 0-100;100-1000): here again the user should decide how to cope with this ambiguity.
 \end{enumerate}
  
@@ -410,7 +410,7 @@ traits$strategy<-as.factor(traits$strategy)
   technique according to the research aims.\\
   In this paragraph I present an example of a series of statistical
   analyses applied to trait data. 
-  The analysis presented here follow the very same steps described by
+  The analyses presented here follow the very same steps described by
   Kleyer et al. \cite{Kleyer2012} in the Supporting information to
   their paper, thus readers are strongly encouraged to read that
   publication.
@@ -423,16 +423,15 @@ traits$strategy<-as.factor(traits$strategy)
   \end{description}
   
 
-  In order to perform the analysis we must be sure that the analysis
-  can be run, there are a few more fixes needed by our datasets.\\
+  In order be able to run the desired analyses, our datasets need a few more fixes.\\
   Please note that I will follow a trial\&error approach here, showing
   what is likely to go wrong and what solutions should be adopted.\\
   
   \begin{enumerate}
 
   \item We change species names in the \texttt{traits} dataframe switching
-    back to the short codes so that the same names used in
-    \texttt{traits} and \texttt{veg\_data} are the same: 
+    back to the short codes so that the same names are used in
+    \texttt{traits} and \texttt{veg\_data}:
 @ 
 <<a,eval=FALSE>>=
 row.names(traits)<-mapvalues(row.names(traits),
@@ -467,7 +466,7 @@ vegetation<-veg_data[,names(veg_data)%in%row.names(traits)]
 library(ade4)
 coa<-dudi.coa(vegetation,scannf=F)
 @ %def 
-\item Then we need to perform and ordination on our \texttt{trait} dataframe; Kleyer et al.\cite{Kleyer2012} used a Principal component analysis (\texttt{dudi.pca} in \texttt{ade4}); in our case the \texttt{trait} dataframe contains both quantitative and factors variables, thus the \texttt{dudi.pca} can't be used; we therefor opt for \texttt{dudi.hillsmith} which accepts both type of variables.   
+\item Then we need to perform and ordination on our \texttt{trait} dataframe; Kleyer et al.\cite{Kleyer2012} used a Principal component analysis (\texttt{dudi.pca} in \texttt{ade4}); in our case the \texttt{trait} dataframe contains both quantitative and factors variables, thus the \texttt{dudi.pca} can't be used; we therefore opt for \texttt{dudi.hillsmith} which accepts both type of variables.   
 
 @ 
 <<e,eval=FALSE>>=
@@ -555,7 +554,7 @@ plot(rlq_tr8)
 
   Several plotting functions are available for \texttt{ade4} objects, please refer to the package documentation for further detailed information.
 
-\item We now perform a clustering and its results will be used for building functional groups. Following the example provided by Kleyer et al. \cite{Kleyer2012} we use the Ward Minimum variance clustering:
+\item We now perform a clustering and its results will be used for building functional groups. Following the example provided by Kleyer et al. \cite{Kleyer2012} we use the Ward minimum variance clustering:
   
 @ 
 <<m,eval=FALSE>>=
@@ -585,7 +584,7 @@ rect.hclust(clust,k=6)
 cuts<-cutree(clust,6)
 @ %def 
   
-\item We can now plot an ordination graph of the species, grouped according to the newly defined functionale groups and plot, on top of that graph, traits data:
+\item We can now plot an ordination graph of the species, grouped according to the newly defined functional groups and plot, on top of that graph, traits data:
   
 @ 
 <<q,eval=FALSE>>=
@@ -628,7 +627,7 @@ par(mfrow=c(1,1))
    
 \section{Some concluding remarks}
 
-   What has been presented above, is just an example of a workflow, thus the results obtained and the graphs presented \uline{should be considered as potential outcomes of the process, not as valid scientific results}.\\
+   What has been presented above is just an example of a workflow, thus the results obtained and the graphs presented \uline{should be considered as potential outcomes of the process, not as valid scientific results}.\\
    There are also many points which were not included in the analysis and should be considered in order to make it more "scientifically sound"; among the most important ones, I list the following:
    
    \begin{itemize}
