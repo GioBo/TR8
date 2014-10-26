@@ -1,15 +1,31 @@
 \documentclass{article}
 \usepackage{nameref}
 \usepackage{url}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage[normalem]{ulem} 
+\lstset{language=R}    
 \bibliographystyle{plain}
 %% \VignetteIndexEntry{Plants traits data}
 %%\VignetteDepends{TR8}
+
+
+
 \title{TR8: Extract traits data for plant species}
 \author{Gionata Bocci\\Pisa (ITALY)\\ {boccigionata@gmail.com}}
 \begin{document}
 \maketitle
 \SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,strip.white=true,keep.source=TRUE}
 \SweaveOpts{include=FALSE}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+\fvset{listparameters={\setlength{\topsep}{0pt}}}
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+
 
 \section{Rationale}
 \label{sec:rationale}
@@ -29,7 +45,9 @@ possibility of easily retrieving traits data for plant species from the followin
 \item[Ecological Flora of the British Isles] \url{http://www.ecoflora.co.uk/} \cite{ecoflora}
 \item[LEDA traitbase] \url{http://www.leda-traitbase.org/LEDAportal/} \cite{leda}
 \item[Ellenberg values for Italian Flora] \cite{pignatti}
+\item[Flowering period for Italian Flora] \cite{pignatti} (data retrieved from \url{http://luirig.altervista.org/})
 \item[Mycorrhizal intensity database] \cite{amf}
+
 \end{description}
 
   Please note that not all the traits available on the listed
@@ -82,9 +100,10 @@ Please note that:
   
 \end{description}
 
-  The devel version of the package is hosted on github at the
-  following address \url{https://github.com/GioBo/TR8}: to use this
-  version (insted of the stable one, released from CRAN), you'll need
+\subsection{Using the development version}
+
+  The devel version of the package is hosted on github at \url{https://github.com/GioBo/TR8}: to use this
+  version (instead of the stable one, released from CRAN), you'll need
   the \texttt{devtools} package (\url{https://github.com/hadley/devtools}):
   
 @ 
@@ -110,7 +129,8 @@ dev_mode(on=F)
 
   Using the \texttt{TR8} package is fairly simple: users just need to
   call the \texttt{tr8} function passing, as arguments, a vector of
-  plant species names and a vector containing the codes corresponding
+  plant species names (\textbf{withouth authors' names!}\footnote{This is needed since some traitbases do not include authors' names in the species' names.})
+  and a vector containing the codes corresponding
   to the traits which are to be downloaded:
   
 @ 
@@ -123,7 +143,7 @@ to_be_downloaded<-c("reprod_B","strategy")
 my_traits<-tr8(species_list = my_species,download_list = to_be_downloaded)
 @ %def 
 
-  The codes to be used are contained in the \texttt{available\_tr8} database:
+  The codes which are accepted by \textsc{tr8} are listed in the \texttt{available\_tr8} database:
 @ 
 <<load_TR8,echo=FALSE>>=
 library(TR8)
@@ -131,19 +151,18 @@ library(TR8)
 
 @ 
 <<available_traits>>=
-## see the firs lines of available_traits database
+## see the firs lines of available_tr8 database
 head(available_tr8)
 @ %def 
 
  The database is composed of three columns:
  \begin{description}
- \item[short\_code] contains the codes corresponding to the traits which can be downloaded through the \texttt{tr8} function.
-   These are the codes that should be passed to the \texttt{download\_list} argument of the \texttt{tr8} function.
- \item[description] contains short description of each trait (please refer to the original sources for detalied descriptions).
- \item[db] referso to the databases containing the traits
+ \item[short\_code] contains the codes that should be passed to the \texttt{download\_list} argument of the \texttt{tr8} function.
+ \item[description] contains short description of each trait (please refer to the original sources for detailed descriptions).
+ \item[db] refers to the databases from which are providing traits data
  \end{description}
 
- Suppose the user is interested in dowloading the \textit{maximum
+ Suppose the user is interested in downloading the \textit{maximum
    height}, the \textit{leaf area} and the \textit{life form} (which
  are available through the \textit{Ecolfora} database) for
  \textit{Salix alba} and \textit{Populus nigra} and store the resulting data in the \texttt{my\_Data} object; the command should be:
@@ -177,7 +196,7 @@ traits_dataframe<-extract_traits(my_Data)
   see a \texttt{NA}. 
 
   
-  In order to make the dataframe more readable,  traits' names (ie. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function: 
+  In order to make the dataframe more readable,  traits' names (i.e. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function: 
 
 
 <<lookup,eval=FALSE>>=
@@ -192,17 +211,20 @@ my_lookup<-lookup(my_Data)
 head(my_lookup)
 @ %def 
 
+\subsection{Interactive use of \texttt{tr8}}
+
+
     Up to now we've been using the \texttt{tr8} function in a non-interactive way. In order to help those user which are more familiar with a GUI approach,
-    the function can also be run setting the \texttt{gui\_config} parameter to \texttt{TRUE} (without providing any trait in the \texttt{download\_list} parameter) and a multi-panel window will appear: the user is asked to choose those
-  traits which are to be downloaded from the various databases.
+    the function can also be run setting the \texttt{gui\_config} parameter to \texttt{TRUE} (without providing any trait to the \texttt{download\_list} parameter) and a multi-panel window will appear: the user is asked to choose those
+  traits which are to be downloaded from the various databases \footnote{A note for Mac users: the GUI relies on the \texttt{Tcl/Tk} toolkit, thus if you want to run the GUI, please make sure that the \texttt{X11} package is installed - see "Tcl/Tk" issues at \url{http://cran.r-project.org/bin/macosx/RMacOSX-FAQ.html}}.
 
   For a detailed explanation of each level of a trait, please refer to
   the original websites (all the databases listed in the references
   provide the users with very precise and detailed descriptions).
 
-   Tipically users will have a their vegetation data in the form of a
+   Typically users will have a their vegetation data in the form of a
    \textit{sites}*\textit{species} dataframe (or matrix), thus they
-   may want to extract traits data for the whole dataset (this time using the GUI to select traits), ie. :
+   may want to extract traits data for the whole dataset (this time using the GUI to select traits), i.e. :
    
 @ 
 <<dataset,eval=FALSE>>=
@@ -219,11 +241,13 @@ print(my_traits)
 @ %def 
 
 
-  
+\subsection{Some notes on using \texttt{tr8}}
+
+
   \textbf{A NOTE OF CAUTION}: searching the web is a time (and
-  internet band) consuming activity, thus the higher the number of
+  Internet band) consuming activity, thus the higher the number of
   your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
-  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will alway pause between one search and the following one.
+  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.\\
 
   \textbf{A (SECOND) NOTE OF CAUTION}: some users adopt the following workflow for analysing their vegetation data:
 
@@ -240,12 +264,13 @@ Genus and Species of each plant species name (i.e. column names in the
 alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
 This may cause problems for further processing of plants'
 species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
-  option in \texttt{read.csv}. Eg. suppose that
+  option in \texttt{read.csv}. E.g. suppose that
   \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
   \textbf{R} console, one should use:
 
 <<import,eval=FALSE>>=
-My_data<-read.csv("my_veg_data.csv",header=T,row.names=1,check.names=F)
+My_data<-read.csv("my_veg_data.csv",
+                  header=T,row.names=1,check.names=F)
 @ %def 
 
 
@@ -258,7 +283,7 @@ the following strategy was adopted:
 
 \begin{description}
 \item[Quantitative traits] the mean of all the values was calculated
-  (eg. when multiple values for "Seed weight mean" are available, the
+  (e.g. when multiple values for "Seed weight mean" are available, the
   mean of these value is calculated)
 \item[Qualitative traits] all the values are taken into account and
   "joined" together in a single string (the values are separated by a
@@ -278,7 +303,7 @@ bib(my_traits)
 
   
   
- \section{Suggested usage}
+ \section{Suggested workflow}
 
   We strongly suggest to always check plant species names with the
   \texttt{tnrs} function (from the \texttt{taxize} package) before
@@ -286,7 +311,7 @@ bib(my_traits)
   the following:
   
   \begin{enumerate}
-  \item Check plant species names (eg. with something like the following -  please refere to the \texttt{taxize} package documentation\cite{taxize} for further details)
+  \item Check plant species names (e.g. with something like the following -  please refere to the \texttt{taxize} package documentation\cite{taxize} for further details)
     
 <<one,eval=FALSE>>=
 species_names<-names(veg_data)
@@ -300,7 +325,7 @@ print(checked_names)
 \item Run \texttt{tr8}  (in this case using the GUI):
 
 <<tr8_ex1,eval=FALSE>>=
-my_traits<-tr8(species_names)
+my_traits<-tr8(species_names,gui_config = TRUE)
 print(my_traits)
 @ %def 
  
@@ -315,20 +340,38 @@ traits_df<-extract_traits(my_traits)
 
 \item Observing a big data frame inside \texttt{R} could be difficult,
   thus users may want to save the \texttt{traits\_df} data frame as a
-  \texttt{.csv} file and open that with a spreadsheet software (eg. LibreOffice)
- 
+  \texttt{.csv} file:  
 @ 
 <<store_to_csv,eval=FALSE>>=
-
+save(traits_df,file="traits_df.csv")
 @ %def 
   
+and then open that file with a spreadsheet software (e.g. LibreOffice).
+
   
   \end{enumerate}
   
 
   
+\section{Further steps}
 
-
+  The \texttt{TR8} package comes with another vignette, called
+  \texttt{TR8\_workflow}, which shows a typical workflow describing
+  all the steps needed for retrieving and analysing traits data with \texttt{tr8}, listing  the most
+  common problems that could be faced and the possible solutions to
+  fix them.\\
+  The vignette can be opened from within R, using:
+  
+@ 
+<<vignette,eval=FALSE>>=
+vignette("TR8_workflow")
+@ %def 
+  
+    Another vignette (called \texttt{Expanding\_TR8}) shows to programmers how  sources of data can be added to \texttt{TR8} (i.e. how functions for retrieving data should be written so that they can be easily integrated in \texttt{TR8}).
+    
+  
+  
+  
 
 \section{Local storage of LEDA and Akhmetzhanova data}
 \label{sec:leda}
@@ -340,21 +383,25 @@ traits_df<-extract_traits(my_traits)
   activity\footnote{The text files are not distributed together with the
     \texttt{TR8} package - which would save time and memory when executing
     the \texttt{tr8()} function - in order to avoid possible licensing
-    conflicts between the \texttt{TR8}' GPL license and these datasets.}. We
-  thus suggest the users to run the 
-  \texttt{local\_storage}\footnote{The name is quite
-    self$-$explanatory...} function once to store a local copy of these datafiles
-  datafiles and use that local copy every time the \texttt{tr8()} function is run and LEDA or Akhmetzhanova are requested\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details}.
-  
-  
-<<label=leda_local,eval=FALSE>>=
-## run the function
-local_storage()
-@ %def 
+    conflicts between the \texttt{TR8}' GPL license and these datasets.}. 
+  In order to make data retrieval more efficient, when \texttt{tr8} is
+  run for the first time requiring traits data contained in the LEDA
+  or in the Akhmetzhanova databases, these data are downaloaded and a
+  copy is stored in a local directory and made available to future requests\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details).}.
 
- 
+
 \bibliography{tr8}
 
-
+ 
 
 \end{document}
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,3 @@
-
-
-
 ##
 ## Class Tr8 is used as a "containter" for all other functions and classes
 ## Class Tr8
@@ -67,6 +64,10 @@ setGeneric(name="lookup",def=function(.Object){standardGeneric("lookup")})
 setMethod(f="lookup",
           signature="Tr8",
           definition = function(.Object){
+              REF<-.Object@reference
+              RES<-.Object@results
+              DF<-REF[REF$short_code%in%names(RES),]
+
               cat("\n")
               cat("\n")
               cat("*****************************************************************")
@@ -75,18 +76,18 @@ setMethod(f="lookup",
               cat("\n")
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," code","description","reference database\n"))
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," ----","-----------","------------------\n"))
-              for(i in 1:nrow(.Object@reference)){
-                  cat(sprintf("%-30s\t%-40s\t%-30s\n",.Object@reference[i,2],.Object@reference[i,3],.Object@reference[i,4]))
-              }
+              for(i in 1:nrow(DF)){
+                  cat(sprintf("%-30s\t%-40s\t%-30s\n",DF[i,2],DF[i,3],DF[i,4]))
+          }
               cat("\n")
               cat(sprintf("%-30s\t%-40s\t%-40s\n"," ****","***********","******************\n"))
-              tp<-.Object@reference
-              tp<-tp[,c("short_code","description","db")]
+              ##tp<-.Object@reference
+              ##tp<-tp[,c("short_code","description","db")]
+              tp<-DF[,c("short_code","description","db")]
               names(tp)<-revalue(names(tp),c("short_code"="code","db"="reference database"))
               return(invisible(tp))
           }
 )
-
 
 
 
@@ -234,7 +235,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
     temp_dframe<-ldply(column_list)
     names(temp_dframe)<-c("long_code","short_code","description","db")
 
-
+    op<-options()
     options("guiToolkit"="tcltk")
     ## rest is used for Sys.sleep in all the retrieving functions
     rest=1.5
@@ -257,7 +258,6 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                 ## run the gui
                 traits_list<-tr8_config()
             }else{
-                traits_list<-list()
                 for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","Akhmetzhanova")){
                     #db<-temp_dframe$db[temp_dframe$short_code==i]
                     data_db<-temp_dframe[temp_dframe$db==db,]
@@ -272,10 +272,16 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
 
         ## check if an already downloaded version of the LEDA database
-        ## exists and, if so, use it
+        ## exists and, if so, use it otherwise download a copy, but only
+        ## if at least one LEDA trait is needed
         local_leda<-paste(directory,"leda_database.Rda",sep="/")
         if(file.exists(local_leda)){
-            load(local_leda)}else{rearranged<-NULL}
+            load(local_leda)}else{
+                if(length(traits_list$LEDA)>0){
+                    local_storage(db="LEDA",directory)
+                    load(local_leda)
+            }else{rearranged<-NULL}
+            }
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
 
         ## retrieve data from BiolFlor
@@ -288,9 +294,19 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         it_flowering<-get_italian_flowering(species_list,TRAITS=traits_list$Pignatti,rest=rest)
         
         ## add AMF
-        local_amf<-paste(directory,"myco_database.Rda",sep="")
+        ## if AMF is not already downloaded, local_storage is run (but only
+        ## if this trait is requred
+        local_amf<-paste(directory,"myco.Rda",sep="/")
         if(file.exists(local_amf)){
-            load(local_leda)}else{myco<-NULL}
+            load(local_amf)}else{
+
+                if(length(traits_list$Akhmetzhanova)>0){
+                    local_storage(db="AMF",directory)
+                    load(local_amf)
+                }else{myco<-NULL}
+            }
+
+
         amf_traits<-retrieve_amf(species_list,TRAITS=traits_list$Akhmetzhanova,rest=rest,myco=myco)
         
         ## merge the results
@@ -333,7 +349,8 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                                         #    issues(obj)
         ##return(obj)
                                         #    return(tr8_traits)
-        
+
+        options(op)
         remove(list=c("column_list"), envir = env)    
         return(obj)
     }

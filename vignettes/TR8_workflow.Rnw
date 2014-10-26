@@ -1,0 +1,827 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{nameref}
+\usepackage{url}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem} 
+\lstset{language=R}    
+\bibliographystyle{plain}
+%% \VignetteIndexEntry{Plants traits data}
+%%\VignetteDepends{TR8}
+
+
+
+\title{A 'real life' workflow for the \texttt{TR8} package}
+\author{Gionata Bocci\\Pisa (ITALY)\\ {boccigionata@gmail.com}}
+\begin{document}
+\maketitle
+\SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,strip.white=true,keep.source=TRUE}
+\SweaveOpts{include=FALSE}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+\fvset{listparameters={\setlength{\topsep}{0pt}}}
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+
+
+
+
+
+\section{A 'real life' workflow}
+\label{sec:workflow}
+
+
+   In this vignette I will describe a typical workflow for a researcher
+   interested in using the \texttt{TR8} package: this is meant to be a
+   step-by-step guide involving most of the common problems that are
+   faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lengthy in order to 
+   describe each single step in detail; users which are confident in the use of R could make most of the steps much shorter than what's presented here.}.
+    This section relies on the dataset used by Sandau et
+    al.(2014)\cite{Sandau} which is publicly available at
+    \texttt{dryad}\cite{dryad_Sandau} (under a CC0 1.0 licence ).
+    \textbf{NOTA BENE}: this dataset is here merely used as
+    a tool to demonstrate some important points related to the functioning of
+    \texttt{TR8}, thus what is proposed in this tutorial
+    should be considered just as
+    a \textit{proof of concept} (i.e. \uline{I am not suggesting that the species' names in the original 
+      dataset should be changed neither I am proposing a different statistical analysis for the data}).
+ 
+\subsection{Retrieve original data}
+
+    The dataset contains \texttt{total above-ground biomass} data of
+    species sampled in 12 wildflower strips in Switzerland. The experimental factors are:
+    
+    \begin{description}
+    \item [SDiv] Species richness of sown mixtures (2,6,12,20)
+    \item[Treat] Control of herbivores and predators (C: control, PE: exclusion of predators, PHE: exclusion of predators and herbivores)
+    \end{description}
+    
+   The dataset is available as a \texttt{xlsx} file (which is a common
+   case); several alternatives are available to import this kind of files into \texttt{R} (e.g. you can download the
+   dataset and load it into an \texttt{R} session or you could save
+   a \texttt{.csv} version of the file and then load it into
+   \texttt{R} using \texttt{read.csv()}; if you are following these strategies, feel free to skip this paragraph); for this tutorial we will use
+   \texttt{XLConnect} to download and load the dataset.
+
+@ 
+<<dryad,eval=FALSE>>=
+## the XLConnect package is needed
+## install.packages("XLConnect",dependencies = T)
+library(XLConnect)
+## store the  url of the dryad package
+url<-"http://datadryad.org/bitstream/handle//
+    10255/dryad.65646/MEE-13-11-651R2_data.xlsx?sequence=1"
+## choose the extension for the temp file where 
+## data will be stored
+tmp = tempfile(fileext = ".xlsx")
+## download the data
+download.file(url = url, destfile = tmp)
+
+## we first read the "metadata" sheet from the xlsx file
+metadata<-readWorksheetFromFile(file = tmp, sheet = "metadata", 
+ header = FALSE, startRow = 15, startCol = 1, endCol = 3)
+## then read the vegetation data
+veg_data <-readWorksheetFromFile(file = tmp, sheet = "data.txt", 
+       header = TRUE, startRow = 1, startCol = 11, endCol = 123)
+## round veg_data numbers to the second digit
+veg_data<-round(veg_data,digits = 2)
+env_data<-readWorksheetFromFile(file = tmp, sheet = "data.txt",
+         header = TRUE, startRow = 1, startCol = 3, endCol = 4)
+@ %def 
+
+  We now have the following dataframes:
+  
+  \begin{description}
+  \item[metadata]  contains two columns, \texttt{Col1}
+  contains short codes used by the authors as surrogates of the full
+  scientific names of species  for the species which are stored in the
+  \texttt{Col2} column
+\item[veg\_data] contains a $sites*species$ table of biomass values
+\item[env\_data] contains the experimental variables
+  \end{description}
+
+\subsection{Check species names}
+
+  The first suggested step is to check species names using the
+  \texttt{taxize} package in order to see whether there are
+  misspelled names; the \texttt{tnrs} function accepts a vector of
+  plant species names and tries to match them with \textit{accepted}
+  scientific names; the function
+  returns a dataframe with various columns: in the column
+  \texttt{score} each entry is given a score according to the level of
+  "resemblance" with correct names; the score is "1" if the name is
+  correct, less than "1" if some problems with the name are
+  found\footnote{Note that \texttt{score} contains strings, not numbers, thus we cannot use the "score<1" condition, but must rely on searching those strings which are "different from 1"}. \textbf{NOTA BENE}: from the \texttt{tnrs} help page "If there
+  is no match in the Taxosaurus database, nothing is returned, so you
+  will not get anything back for non matches" thus we should worry of
+  both "less than 1" scores \textbf{AND} missing entries in the
+  dataframe returned by \texttt{tnrs}.
+  
+@ 
+<<taxize,eval=FALSE>>=
+library(taxize)
+check_names<-tnrs(metadata$Col2,source="iPlant_TNRS")
+@ %def 
+
+   Check now if there are species which were discarded by
+   \texttt{tnrs} output since they were not found in reference
+   databases. 
+   
+@ 
+<<discarded,eval=FALSE>>=
+setdiff(metadata$Col2,check_names$submittedname)
+@ %def 
+
+   The results is 0, thus \texttt{tnrs} found at least a partial match for all the species names we provided.
+   Next we should check which species got a \texttt{score} which is less than 1.
+@ 
+<<taxize2,eval=FALSE>>=
+issues<-with(check_names,check_names[score!="1",])
+issues[,c("submittedname","score","acceptedname","authority")]
+@ %def 
+
+\footnotesize
+\begin{verbatim}
+                         submittedname score         acceptedname               authority
+                Poaceae (undetermined)   0.9              Poaceae                Barnhart
+                         Epilobium sp.   0.9            Epilobium                      L.
+                         Cerastium sp.   0.9            Cerastium                      L.
+     Fallopia convolvulus (L.) A. Löwe  0.96 Fallopia convolvulus            (L.) Á. Löve
+                           Festuca sp.   0.9              Festuca                      L.
+                       Chenopodium sp.   0.9          Chenopodium                      L.
+                  Phleum pratense agg.   0.9      Phleum pratense                      L.
+                         Polygonum sp.   0.9            Polygonum                      L.
+Polygonum mite (=Persicaria laxiflora)   0.9     Persicaria mitis       (Schrank) Assenov
+                             Rubus sp.   0.9                Rubus                      L.
+                            Juncus sp.   0.9               Juncus                      L.
+                         Orobanche sp.   0.9            Orobanche                      L.
+                          Triticum sp.   0.9             Triticum                      L.
+             Taraxacum officinale!!!!!   0.9            Taraxacum              F.H. Wigg.
+        Setaria pumila (Poir.) Schult.  0.96       Setaria pumila (Poir.) Roem. & Schult.
+
+\end{verbatim}
+
+\normalsize
+ We observe here some important points:
+ 
+ 
+ \begin{itemize}
+ \item for some species only the Genus is present, thus \texttt{tr8} function will not be able to return traits values for
+   those species; those species names can't be used with \texttt{tr8};
+ \item in the case of \textit{Taraxacum officinale!!!!!} we should remove the extra \texttt{"!"} from the species names;
+ \item \textit{Polygonum mite} is not recognized as an accepted name; for this tutorial we assume that it should be changed to \textit{Persicaria mitis};
+ \item the aggregate species \texttt{Phleum pratense agg.} poses some problems: for this tutorial we decide to accept it as \textit{Phleum pratense} L.;
+ \item for \textit{Fallopia convolvulus} and \textit{Setaria pumila} the issues are related to authors names (for \textit{F. convolvulus} "A." should be accented ("Á."), while in \textit{S. pumila}, \texttt{Roem.} author name is missing).
+\end{itemize}
+
+  The last point is not strictly relevant for using the \texttt{tr8} function
+  since \uline{authors' names should not be included in the list of species
+  names passed to the function} (but we correct the authors names anyway so that when we re-run \texttt{tnrs} function, no mistakes are found for these entries) . 
+
+  We adopt the following fixes for the issues we've found:
+\small
+@ 
+<<substitution,eval=FALSE>>=
+library(plyr)
+## we use the revalue function in the plyr package
+## to fix all the above mentioned issues
+metadata$Col2<-revalue(metadata$Col2, 
+     c("Taraxacum officinale!!!!!"="Taraxacum officinale F.H. Wigg."))
+metadata$Col2<-revalue(metadata$Col2,
+     c("Polygonum mite (=Persicaria laxiflora)"="Persicaria mitis (Schrank) Assenov"))
+metadata$Col2<-revalue(metadata$Col2,
+     c("Fallopia convolvulus (L.) A. Löwe"="Fallopia convolvulus (L.) Á. Löve"))
+metadata$Col2<-revalue(metadata$Col2,
+     c("Setaria pumila (Poir.) Schult."="Setaria pumila (Poir.) Roem. & Schult."))
+metadata$Col2<-revalue(metadata$Col2,
+     c("Phleum pratense agg."="Phleum pratense L."))
+@ %def 
+
+\normalsize
+  And re-run the \texttt{tnrs} function as a cross-check:
+  
+@ 
+<<taxize_2,eval=FALSE>>=
+check_names<-tnrs(metadata$Col2,source="iPlant_TNRS")
+issues<-with(check_names,check_names[score!="1",])
+issues[,c("submittedname","acceptedname","score")]
+@ %def 
+
+\begin{verbatim}
+         submittedname acceptedname score
+Poaceae (undetermined)      Poaceae   0.9
+         Epilobium sp.    Epilobium   0.9
+         Cerastium sp.    Cerastium   0.9
+           Festuca sp.      Festuca   0.9
+       Chenopodium sp.  Chenopodium   0.9
+         Polygonum sp.    Polygonum   0.9
+             Rubus sp.        Rubus   0.9
+            Juncus sp.       Juncus   0.9
+         Orobanche sp.    Orobanche   0.9
+          Triticum sp.     Triticum   0.9
+\end{verbatim}
+
+  We observe now that only those entries which were identified at the
+  Genus level raise some issues; my suggestion is to remove them
+  (i.e. those entries for which the score is "0.9") from the original \texttt{metadata} dataframe. 
+  
+     First we merge the original \textit{metadata} dataframe with
+     \textit{check\_names} so that we have original names (with short
+     codes used by authors) and the corrected ones in a single object:
+@ 
+<<two,eval=FALSE>>=
+final_dataframe<-merge(metadata,check_names,
+         by.x = "Col2",by.y="submittedname")
+@ %def 
+
+  Then we exlude those species which were identified at the Genus level, i.e. those contained in the \textit{issues} dataframe:
+
+@ 
+<<three,eval=FALSE>>=
+final_dataframe<-final_dataframe[
+        !final_dataframe$Col2%in%issues$submittedname,]  
+@ %def 
+
+
+In this way we now have the \texttt{final\_dataframe} data frame in which
+  each entry has both the name present in the original dataset and the
+  correct scientific names (\texttt{acceptedname}), which should be passed to the \texttt{tr8}
+function.
+
+
+\subsection{Use the \texttt{tr8} function}
+
+
+  We can now use the \texttt{tr8} function; suppose we are interested
+  in downloading the following traits:
+  \begin{itemize}
+  \item \texttt{Maximum height}
+  \item \texttt{Leaf area}
+  \item \texttt{Leaf mass}
+  \item \texttt{Life form}
+  \item \texttt{Strategy type}
+  \end{itemize}
+
+  Observing the \texttt{available\_tr8} dataframe (simply write
+  \texttt{available\_tr8} in the R console), we see the following correspondences:
+
+
+  \begin{description}
+  \item  [\texttt{Maximum height}] is available in Ecoflora and its
+    short code is \texttt{h\_max},
+  \item [\texttt{Leaf area}] is available in Ecoflora and its short
+    code is \texttt{le\_area},
+   \item [\texttt{Leaf mass}] is available in LEDA and its short
+     code is \texttt{leaf\_mass},
+ \item [\texttt{Life form}] is available in BiolFlor\footnote{Life form
+     is also avaialbe in Ecoflora; here we opt for BiolFlor in order
+     to increase the range of queried databases} and its short code is \texttt{li\_form\_B},
+  \item [\texttt{Strategy type}] is available in BiolFlor and its short
+    code is \texttt{strategy}
+  \end{description}
+
+  Thus the \texttt{tr8} should be run as follows (\textbf{beware}: this may take some time!)
+
+@ 
+<<tr8_ex,eval=FALSE>>=
+species_names<-final_dataframe$acceptedname
+my_traits<-c("h_max","le_area","leaf_mass","li_form_B","strategy")
+retrieved_traits<-tr8(species_list = species_names,download_list = my_traits)
+@ %def 
+ 
+The results are reported in table \ref{tab:tr8res}: the table here
+shown is a condensed version of what you will get with the above
+commands: the traits returned from BiolFlor contain strings within
+brackets which explain the value of each trait (e.g. "csr
+(competitors/stress-tolerators/ruderals)"); these are useful for
+interpreting the data, but made our table clumsy, thus I removed them).\\
+Having a look at the table, some points should be noted:
+
+\begin{enumerate}[label=\Alph*)]
+\item \texttt{h\_max} for \textit{C. arvensis} reports two values (75;10) since because Ecoflora provides two values for this species; it is left to the user to decide which one should be used! (you may decide to calculate a mean)
+\item for some species \texttt{le\_area} reports more than one class (e.g. for \textit{A. pseudoplatanus} we have 0-100;100-1000): here again the user should decide how to cope with this ambiguity.
+\end{enumerate}
+ 
+
+ In order to be able to carry on some statistical analysis, we adopt the following decisions:
+ 
+ \begin{itemize}
+ \item for for \textit{C. arvensis} we calculate the mean between 75 and 10 and use that as the \texttt{h\_max}
+@ 
+<<cirsium,eval=FALSE>>=
+## we extract the data from the object returned by tr8()
+traits<-extract_traits(retrieved_traits)
+## first I convert the column to character
+traits$h_max<-as.character(traits$h_max)
+traits$h_max[which(row.names(traits)=="Convolvulus arvensis")]<-"42.5"
+@ %def 
+
+\item the \texttt{h\_max} column can now be converted to a \texttt{numeric} variable (it should be treated as such in a statistical analysis)
+@ 
+<<convert,eval=FALSE>>=
+traits$h_max<-as.numeric(traits$h_max)
+@ %def 
+
+ 
+ \item for \texttt{le\_area} we propose to use the midpoint of the range indicated for each species (e.g. \textit{A. stolonifera} has a \texttt{le\_area} range of 1-10, thus it will be assigned a value of 5.5); for those species who have 2 ranges, the common value among those ranges will be the selected one (e.g. \textit{R. obtusifolius} has two ranges, 100-1000 and 10-100, thus 100 will be the selected value.
+
+@ 
+<<leArea,eval=FALSE>>=
+traits$le_area<-revalue(traits$le_area,
+      c("0.1-1"=0.55,
+        "1-10"=5.5,
+        "10-100"=55,
+        "100-1000"=550,
+        "1-10;0.1-1"=1,
+        "10-100;1-10"=10,
+        "100-1000;10-100"=100,
+        "10-100;100-1000"=100))
+## and convert them to numeric
+traits$le_area<-as.numeric(as.character(traits$le_area))
+@ %def 
+
+ 
+ \item We recode \texttt{li\_form\_B}  values in order to have shorter labels on the graphs:
+   \begin{itemize}
+   \item "C (Chamaephyte) - H (Hemicryptophyte)" becomes "C - H"
+   \item  "G (Geophyte)" becomes "G"
+   \item  "G (Geophyte) - H (Hemicryptophyte)"  becomes "G - H"
+   \item  "H (Hemicryptophyte)" becomes "H"
+   \item  "H (Hemicryptophyte) - T (Therophyte)" becomes "H - T"
+   \item  "M (Macrophanerophyte)" becomes "M"
+   \item  "M (Macrophanerophyte) - N (Nanophanerophyte)" becomes "M - N"
+   \item  "T (Therophyte)" becomes  "T"
+   \end{itemize}
+
+@ 
+<<liform,eval=FALSE>>=
+
+
+traits$li_form_B<-revalue(traits$li_form_B,
+  c("C (Chamaephyte) - H (Hemicryptophyte)"="C - H",
+    "G (Geophyte)"="G",
+    "G (Geophyte) - H (Hemicryptophyte)"="G - H",
+    "H (Hemicryptophyte)"="H",
+    "H (Hemicryptophyte) - T (Therophyte)"="H - T",
+    "M (Macrophanerophyte)"="M",
+    "M (Macrophanerophyte) - N (Nanophanerophyte)"="M - N",
+    "T (Therophyte)"="T"))
+## convert it to factor
+traits$li_form_B<-as.factor(traits$li_form_B)
+@ %def 
+
+ \item We also recode \texttt{strategy} values:
+   
+   \begin{itemize}
+   \item  "c (competitors)" becomes "c"
+   \item  "cr (competitors/ruderals)" becomes "cr"
+   \item  "cs (competitors/stress-tolerators)" becomes "cs"
+   \item  "csr (competitors/stress-tolerators/ruderals)" becomes "csr"
+   \item  "r (ruderals)" becomes "r"
+   \end{itemize}
+
+@ 
+<<strategy,eval=FALSE>>=
+traits$strategy<-revalue(traits$strategy,c("c (competitors)"="c",
+ "cr (competitors/ruderals)"="cr",
+ "cs (competitors/stress-tolerators)"="cs",
+ "csr (competitors/stress-tolerators/ruderals)"="csr",
+ "r (ruderals)"="r"))
+traits$strategy<-as.factor(traits$strategy)
+@ %def 
+
+   
+ \end{itemize}
+ 
+
+
+\section{An example of analysis}
+
+  Plant traits data are often used to assess species or
+  community-level trait response to environmental gradient. Several
+  statistical techniques can be applied: Kleyer et
+  al. \cite{Kleyer2012} present an interesting classification of
+  various techniques and propose some criteria to choose the best
+  technique according to the research aims.\\
+  In this paragraph I present an example of a series of statistical
+  analyses applied to trait data. 
+  The analyses presented here follow the very same steps described by
+  Kleyer et al. \cite{Kleyer2012} in the Supporting information to
+  their paper, thus readers are strongly encouraged to read that
+  publication.
+  In this case we will adopt the \textbf{RLQ} analysis, thus the following data are required:
+  
+  \begin{description}
+  \item[R] the "environment" dataset: this corresponds to \texttt{env\_data} dataframe (please note: for the sake of having a complete example of analysis, we are here assuming that the two variables included in the dataset represent \textit{environmental variables})
+  \item[L] is the \textit{species*sites} dataset (our \texttt{veg\_data} dataframe)
+  \item[Q] is the \textit{trait*species} dataframe (our \texttt{trait} dataframe)
+  \end{description}
+  
+
+  In order be able to run the desired analyses, our datasets need a few more fixes.\\
+  Please note that I will follow a trial\&error approach here, showing
+  what is likely to go wrong and what solutions should be adopted.\\
+  
+  \begin{enumerate}
+
+  \item We change species names in the \texttt{traits} dataframe switching
+    back to the short codes so that the same names are used in
+    \texttt{traits} and \texttt{veg\_data}:
+@ 
+<<a,eval=FALSE>>=
+row.names(traits)<-mapvalues(row.names(traits),
+   from=final_dataframe$acceptedname,to=final_dataframe$Col1)
+@ %def 
+
+\item   In the \texttt{traits} dataframe, we were not able to find trait
+  data for some species: this will cause problems for the algorithm we
+  will use, thus we need to remove those species from the datasets
+  (this will impair the results of the whole analysis, but for the
+  moment we do not have other choices):
+@ 
+
+<<b,eval=FALSE>>=
+traits<-traits[complete.cases(traits),]
+@ %def 
+
+\item \textbf{Beware:} the same species should be present in
+  \textbf{L} and \textbf{Q} tables, thus we should remove from
+  \texttt{veg\_data} those species which were eliminated from
+  \texttt{traits} with the previous operation:
+  
+@ 
+<<c,eval=FALSE>>=
+vegetation<-veg_data[,names(veg_data)%in%row.names(traits)]
+@ %def 
+ 
+\item we can now (try to) perform the first multivariate analyses; first we use a Correspondance analysis on the \textbf{L} dataset (the \texttt{vegetation} dataframe); for this we will need the \texttt{ade4} package\cite{ade4}:
+
+@ 
+<<d,eval=FALSE>>=
+library(ade4)
+coa<-dudi.coa(vegetation,scannf=F)
+@ %def 
+\item Then we need to perform and ordination on our \texttt{trait} dataframe; Kleyer et al.\cite{Kleyer2012} used a Principal component analysis (\texttt{dudi.pca} in \texttt{ade4}); in our case the \texttt{trait} dataframe contains both quantitative and factors variables, thus the \texttt{dudi.pca} can't be used; we therefore opt for \texttt{dudi.hillsmith} which accepts both type of variables.   
+
+@ 
+<<e,eval=FALSE>>=
+hil.traits<-dudi.hillsmith(traits,row.w=coa$cw,scannf = FALSE)
+@ %def 
+ 
+   which returns:
+   
+\begin{verbatim}
+Error in eigen(df, symmetric = TRUE) : infinite or missing values in 'x'
+\end{verbatim}
+
+   The problem here is due to the fact that in the \texttt{vegetation} dataset there are some species (columns) which have zero values in all the samplings (rows); these species should be removed:
+   
+@ 
+<<f,eval=FALSE>>=
+##select which columns have at least one non-zero value
+selection<-colSums(vegetation)>0
+## and now we choose only those columns
+vegetation<-vegetation[,selection]
+@ %def 
+   
+\item As stressed before, \texttt{L} and \texttt{Q} matrix should have the same species, thus we should be sure that those species with all-zero-values are removed from \texttt{traits} as well:
+  
+@ 
+<<g,eval=FALSE>>=
+traits<-traits[row.names(traits)%in%names(vegetation),]
+@ %def 
+
+\item Let's also order species names in both dataframes:
+  
+@ 
+<<hh,eval=FALSE>>=
+vegetation<- vegetation[,order(names(vegetation))]
+traits<-traits[order(row.names(traits)),]
+@ %def 
+  
+\item We now re-perform the \texttt{pca} on \texttt{vegetation} and \texttt{dudi.hillsmith} on \texttt{traits} datasets:
+  
+@ 
+<<h,eval=FALSE>>=
+coa<-dudi.coa(vegetation,scannf=F)
+traits.hill<-dudi.hillsmith(traits,row.w=coa$cw,scannf = F)
+@ %def 
+
+\item And perform \texttt{dudi.hillsmith} on the \texttt{env\_data} dataset as well:
+
+@ 
+<<i,eval=FALSE>>=
+env.hill<-dudi.hillsmith(env_data,row.w=coa$lw,scannf = FALSE)
+@ %def 
+ 
+ which returns:
+
+\begin{verbatim}
+Error in x * w : non-numeric argument to binary operator
+\end{verbatim}
+ 
+    This is due to the fact that the \texttt{Treat} variable in \texttt{env\_data} is of class "character", while \texttt{dudi.hillsmith} accepts either a quantitative or a factor variable; we thus should convert the variable to a factor:
+    
+@ 
+<<l,eval=FALSE>>=
+env_data$Treat<-as.factor(env_data$Treat)
+@ %def 
+    
+   Now we re-run the analysis:
+@ 
+<<i,eval=FALSE>>=
+env.hill<-dudi.hillsmith(env_data,row.w=coa$lw,scannf = FALSE)
+@ %def 
+
+\item And (finally) we can perform the \texttt{rlq} analysis using the previusly created objects:
+  
+@ 
+<<l,eval=FALSE>>=
+rlq_tr8<-rlq(env.hill,coa,traits.hill,scannf = F)
+@ %def 
+  
+\item The object created can be passed to the \texttt{plot} function
+@ 
+<<m,eval=FALSE>>=
+plot(rlq_tr8)
+@ %def 
+\includegraphics{rlq_tr8}
+
+  Several plotting functions are available for \texttt{ade4} objects, please refer to the package documentation for further detailed information.
+
+\item We now perform a clustering and its results will be used for building functional groups. Following the example provided by Kleyer et al. \cite{Kleyer2012} we use the Ward minimum variance clustering:
+  
+@ 
+<<m,eval=FALSE>>=
+clust<-hclust(dist(rlq_tr8$lQ),method="ward.D2")
+plot(clust,sub="Ward minimum variance clustering",xlab="TR8 tutorial")
+@ %def 
+  
+\includegraphics[width=1.2\textwidth]{cluster}
+
+\item We should now decide where the dendrogram should be cut: several
+  criteria exist: in this case
+  (not to over-complicate the tutorial),
+  based on the visual estimation of the graph, we decide that 6 main
+  groups are present: 2-single species ones (i.e. \textit{S. alba} and \textit{U. dioica}) and 4 multi-species groups.
+  We can thus cut our plot:
+@ 
+<<o,eval=FALSE>>=
+rect.hclust(clust,k=6)
+@ %def 
+  
+\includegraphics[width=1.1\textwidth]{cluster_cut}
+  
+  And save the results of this \textit{cutting} for later graphs:
+  
+@ 
+<<p,eval=FALSE>>=
+cuts<-cutree(clust,6)
+@ %def 
+  
+\item We can now plot an ordination graph of the species, grouped according to the newly defined functional groups and plot, on top of that graph, traits data:
+  
+@ 
+<<q,eval=FALSE>>=
+s.class(rlq_tr8$lQ,as.factor(cuts),col=1:6)
+s.arrow(rlq_tr8$c1,add.plot = TRUE)
+@ %def %
+
+\includegraphics{funct_groups}
+
+\item And finally the created grouping can be interpreted in terms of traits (the results can be seen in figure at page \pageref{fig:results}):
+  
+@ 
+<<aa,eval=FALSE>>=
+par(mfrow=c(3,2))
+plot(traits$h_max~as.factor(cuts),main="Maxim height",
+     ylab="max height",border = 1:6,xlab="Group number")
+plot(traits$le_area~as.factor(cuts),main="Leaf area",
+     ylab="leaf area",border = 1:6,xlab="Group number")
+plot(traits$leaf_mass~as.factor(cuts),main="Leaf mass",
+     ylab="leaf mass",border = 1:6,xlab="Group number")
+plot(table(cuts,traits$strategy),main="CSR strategy",
+     ylab="strategy",border = 1:6,xlab="Group number")
+plot(table(cuts,traits$li_form_B),main="Life form",
+     ylab="life form",border = 1:6,xlab="Group number")
+par(mfrow=c(1,1))
+@ %def 
+
+
+\begin{figure}
+  \centering
+  \includegraphics{Traits_groups}
+  \label{fig:results}
+  \caption{Results of traits ditribution in defined functional groups.}
+\end{figure}
+
+
+   From the graphs we are able to say that \textit{group 1} is composed of only   "Hemicryptophyte" species, while \textit{group 2 } has a more homogeneous combination of "Geophytes", "Hemicryptophytes" and  "Hemicryptophyte - Therophyte" species. If we look at \texttt{maximum height}, there's a group which is clearly different from all the rest: this is the one which is composed of only \textit{Salix alba}: this is the only woody species in our analyzed dataset, thus it's clear that, when considering the \texttt{maximum height} trait, it would be separated from all the other species. 
+   In terms of \texttt{leaf area}, \texttt{group 4} is composed of some of the broadleaf species which have the maximum values for his trait (e.g. \textit{Verbascum thapsus} and \textit{V. lychnitis}.
+  \end{enumerate}
+   
+\section{Some concluding remarks}
+
+   What has been presented above is just an example of a workflow, thus the results obtained and the graphs presented \uline{should be considered as potential outcomes of the process, not as valid scientific results}.\\
+   There are also many points which were not included in the analysis and should be considered in order to make it more "scientifically sound"; among the most important ones, I list the following:
+   
+   \begin{itemize}
+   \item We did not transform original data: it would have made sense to transform the original abundance data, e.g. using standardization algorithm provided by the \texttt{decostand()} function in \texttt{vegan}.
+   \item In the end we excluded many species from our analysis since we had not found trait data for them; we could have searched for data in different databases (e.g. \texttt{life\_form} is also available in \texttt{Ecolfora}) or we could have got data from other sources - like books, floras, etc... - and added those values to the downloaded traits).
+   \item We used trait values retrieved from databases\footnote{This is what \texttt{TR8} was created for...} and assumed that those were correct for our analysis; this poses some problems, e.g the case of \textit{S. alba} is striking in this respect: looking at the abundance data, it's clear that what were sampled were small individuals, but using data retrieved by \texttt{tr8} we used a value of 25 m for it \texttt{maximum height} value.
+   \item \texttt{Leaf area} values could have been coded as ordered factors, instead of using midpoint values of each class (which is probably one of the reason for the shape of the boxes in the boxplot in figure at page \pageref{fig:results}).
+     
+   \end{itemize}
+
+   We could repeat all the analyses taking these points (and many other relevant ones) into account, but this, as in any tutorial which deserves its name, is left to the reader as an exercise.
+
+%\includegraphics{le\_area}
+
+%% @
+%% <<rimuovi,eval=FALSE>>=
+
+%% png("h_max.png")
+%% plot(traits$h_max~as.factor(cuts),main="Maxim height",ylab="max height",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% png("le_area.png")
+%% plot(traits$le_area~as.factor(cuts),main="Leaf area",ylab="leaf area",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% png("le_mass.png")
+%% plot(traits$leaf_mass~as.factor(cuts),main="Leaf mass",ylab="leaf mass",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% png("strategy.png")
+%% plot(table(cuts,traits$strategy),main="CSR strategy",ylab="strategy",border = 1:6,xlab="Group number")
+%% dev.off()
+
+
+%% png("li_form.png")
+%% plot(table(cuts,traits$li_form_B),main="Life form",ylab="life form",border = 1:6,xlab="Group number")
+%% dev.off()
+
+%% ###
+%% op<-par()
+%% png("Traits_groups.png",width = 600,height = 900)
+%% par(mfrow=c(3,2))
+%% plot(traits$h_max~as.factor(cuts),main="Maxim height",ylab="max height",border = 1:6,xlab="Group number")
+%% plot(traits$le_area~as.factor(cuts),main="Leaf area",ylab="leaf area",border = 1:6,xlab="Group number")
+%% plot(traits$leaf_mass~as.factor(cuts),main="Leaf mass",ylab="leaf mass",border = 1:6,xlab="Group number")
+%% plot(table(cuts,traits$strategy),main="CSR strategy",ylab="strategy",border = 1:6,xlab="Group number")
+%% plot(table(cuts,traits$li_form_B),main="Life form",ylab="life form",border = 1:6,xlab="Group number")
+%% dev.off()
+
+
+
+
+
+
+
+%% %% png("cluster_cut.png",width=1000,height=500)
+%% %% plot(clust,sub="Ward minimum variance clustering",xlab="TR8 tutorial",cex=.7)
+%% %% rect.hclust(clust,k=6)
+%% %% dev.off()
+
+%% %% png("funct_groups.png")
+%% %% s.class(rlq_tr8$lQ,as.factor(cuts),col=1:6)
+%% %% s.arrow(rlq_tr8$c1,add.plot = TRUE)
+%% %% dev.off()
+
+%% @ %def 
+
+
+
+
+
+
+\bibliography{tr8}
+
+
+\afterpage{
+\begin{longtable}[!p]{rllllr}
+%\centering
+  \hline
+ & h\_max & le\_area & li\_form\_B & strategy & leaf\_mass \\ 
+  \hline
+Acer pseudoplatanus & 3000 & 10-100;100-1000 & M  & c  & NA \\ 
+  Achillea millefolium & 45 & 1-10 & H  & c  & 21.76 \\ 
+  Aethusa cynapium & 120 &  & H  - T  & cr  & 118.21 \\ 
+  Agrostemma githago & 100 & 1-10 & H  - T  & cr  & 57.23 \\ 
+  Agrostis stolonifera & 100 & 1-10 & H  & csr  & 9.41 \\ 
+  Amaranthus retroflexus &  &  & T  & cr  & 265.49 \\ 
+  Anagallis arvensis & 30 & 0.1-1 & T  & r  & 2.76 \\ 
+  Apera spica-venti & 100 & 1-10 & H  - T  & cr  & 43.95 \\ 
+  Arrhenatherum elatius & 150 & 10-100 & H  & c  & 30.65 \\ 
+  Brassica napus & 100 &  & T  & cr  & NA \\ 
+  Campanula patula & 60 & 1-10 & H  & csr  & NA \\ 
+  Capsella bursa-pastoris & 40 & 10-100 & H  - T  & r  & 60.89 \\ 
+  Centaurea cyanus & 90 &  & H  - T  & cr  & 33.62 \\ 
+  Centaurea jacea &  &  & H  & c  & NA \\ 
+  Chaenorhinum minus & 25 & 0.1-1 & T  & r  & 3.46 \\ 
+  Chenopodium album & 100 & 1-10 & T  & cr  & 148.55 \\ 
+  Chenopodium polyspermum & 100 & 1-10 & T  & cr  & 36.84 \\ 
+  Cichorium intybus & 120 &  & H  & c  & 556.12 \\ 
+  Cirsium arvense & 90 & 10-100 & G  & c  & 190.54 \\ 
+  Convolvulus arvensis & 75;10 & 1-10 & G  & cr  & 40.73 \\ 
+  Conyza canadensis & 100 &  & H  - T  & cr  & 24.74 \\ 
+  Cota tinctoria &  &  & H  & cs  & NA \\ 
+  Crepis biennis & 120 & 10-100 & H  & cr  & 189.01 \\ 
+  Dactylis glomerata & 100 & 10-100 & H  & c  & 49.9 \\ 
+  Daucus carota & 100 & 10-100 & H  & cr  & 12.84 \\ 
+  Digitaria sanguinalis &  &  & T  & r  & 8.62 \\ 
+  Dipsacus fullonum & 150 &  & H  & cr  & 1118.24 \\ 
+  Echinochloa crus-galli &  &  & T  & cr  & 76.9 \\ 
+  Echium vulgare & 90 & 10-100 & H  & cr  & 282.5 \\ 
+  Elytrigia repens subsp. repens & 120 & 10-100 & G  - H  & c  & NA \\ 
+  Equisetum arvense & 80 &  & G  & cr  & 178.64 \\ 
+  Euphorbia helioscopia & 50 & 1-10 & H  - T  & r  & 12.88 \\ 
+  Euphorbia stricta & 80 & 1-10 & H  - T  & r  & NA \\ 
+  Fallopia convolvulus & 120 & 10-100 & T  & cr  & 44.26 \\ 
+  Galinsoga quadriradiata & 80 & 1-10 & T  & cr  & NA \\ 
+  Galium aparine & 120 & 1-10;0.1-1 & H  - T  & cr  & 5.7 \\ 
+  Galium mollugo subsp. album &  &  & H  & c  & NA \\ 
+  Geranium rotundifolium & 40 & 1-10 & T  & r  & NA \\ 
+  Glechoma hederacea & 30 & 1-10 & G  - H  & csr  & 20.96 \\ 
+  Gnaphalium uliginosum & 20 & 1-10;0.1-1 & T  & r  & NA \\ 
+  Holcus lanatus & 100 & 10-100;1-10 & H  & c  & 21.8 \\ 
+  Hypericum perforatum & 100 & 1-10 & H  & c  & 8.72 \\ 
+  Juglans regia &  &  & M  & c  & NA \\ 
+  Juncus bufonius & 25 & 0.1-1 & T  & r  & 4.55 \\ 
+  Kickxia elatine & 50 & 1-10 & T  & r  & NA \\ 
+  Kickxia spuria & 50 & 1-10 & T  & r  & NA \\ 
+  Lactuca serriola & 200 &  & H  - T  & cr  & 397.12 \\ 
+  Lamium amplexicaule & 25 & 1-10 & H  - T  & r  & 8.46 \\ 
+  Lamium purpureum & 45 & 1-10 & H  - T  & r  & 11.32 \\ 
+  Leucanthemum vulgare & 100 & 1-10 & H  & c  & 27.12 \\ 
+  Linaria vulgaris & 80 & 1-10 & G  & csr  & 5.68 \\ 
+  Lolium perenne & 90 & 1-10 & H  & c  & 14.53 \\ 
+  Lotus corniculatus & 35 & 1-10 & H  & csr  & 4.5 \\ 
+  Malva moschata & 80 & 10-100 & H  & c  & 176.06 \\ 
+  Malva sylvestris & 90 & 10-100 & H  & c  & 341.6 \\ 
+  Matricaria chamomilla & 60 &  & H  - T  & r  & NA \\ 
+  Medicago lupulina & 60 & 1-10 & H  - T  & csr  & 17.28 \\ 
+  Medicago sativa & 90 & 1-10 & NA & NA & 29.19 \\ 
+  Melilotus albus & 150 & 1-10 & H  - T  & cr  & NA \\ 
+  Mentha arvensis & 60 & 1-10 & H  & c  & 14.21 \\ 
+  Mercurialis annua & 50 & 1-10 & T  & r  & 17.07 \\ 
+  Myosotis arvensis & 60 & 1-10 & H  - T  & r  & 28.22 \\ 
+  Oenothera biennis & 100 & 10-100 & H  & cr  & NA \\ 
+  Onobrychis viciifolia & 60 & 10-100 & H  & c  & 164.05 \\ 
+  Origanum vulgare & 80 & 1-10 & H  & csr  & 23.37 \\ 
+  Oxalis stricta & 40 & 1-10 & NA & NA & NA \\ 
+  Papaver rhoeas & 60 & 10-100 & H  - T  & cr  & 166.81 \\ 
+  Pastinaca sativa & 180 & 10-100 & H  & c  & 382.98 \\ 
+  Persicaria mitis &  &  & NA & NA & NA \\ 
+  Phleum pratense & 150 & 10-100 & H  & c  & 9.91 \\ 
+  Plantago lanceolata & 40 & 10-100 & H  & csr  & 82.79 \\ 
+  Plantago major & 60 & 10-100 & H  & csr  & 1016.91 \\ 
+  Poa annua & 30 & 1-10 & H  - T  & r  & 3.21 \\ 
+  Polygonum aviculare & 200 & 1-10 & T  & r  & 13.01 \\ 
+  Potentilla reptans & 100 & 1-10 & H  & csr  & 53.72 \\ 
+  Prunella vulgaris & 30 & 1-10 & C  - H  & csr  & 16.11 \\ 
+  Ranunculus repens & 60 & 10-100 & H  & csr  & 193.94 \\ 
+  Rumex obtusifolius & 120 & 100-1000;10-100 & H  & c  & 1449.89 \\ 
+  Sagina apetala & 10 &  & T  & r  & 0.32 \\ 
+  Salix alba & 2500 & 10-100 & M  & c  & 63.36 \\ 
+  Salix caprea & 1000 & 10-100;1-10 & M  - N  & c  & NA \\ 
+  Scrophularia nodosa & 80 & 10-100 & H  & cs  & 313.6 \\ 
+  Senecio vulgaris & 45 & 10-100 & H  - T  & r  & 17.59 \\ 
+  Setaria pumila &  &  & T  & r  & 75.09 \\ 
+  Silene latifolia & 100 & 10-100 & H  & c  & 78.06 \\ 
+  Sinapis alba & 80 & 10-100 & T  & cr  & 84.21 \\ 
+  Solanum americanum & 60 &  & T  & r  & NA \\ 
+  Sonchus arvensis & 150 &  & H  & cr  & 549.53 \\ 
+  Sonchus asper & 150 & 100-1000 & H  - T  & cr  & 216.37 \\ 
+  Sonchus oleraceus & 150 & 10-100 & H  - T  & cr  & 341.14 \\ 
+  Stellaria media & 40 & 1-10 & H  - T  & cr  & 8.75 \\ 
+  Tanacetum vulgare & 120 &  & H  & c  & 427.99 \\ 
+  Taraxacum officinale & 30 &  & NA & NA & NA \\ 
+  Trifolium pratense & 100 & 1-10 & H  & c  & 32.58 \\ 
+  Trifolium repens & 50 & 1-10 & H  & csr  & 11.76 \\ 
+  Urtica dioica & 150 & 10-100 & C  - H  & c  & 101.22 \\ 
+  Verbascum lychnitis & 150 & 100-1000 & H  & cs  & 1265 \\ 
+  Verbascum thapsus & 200 & 100-1000 & H  & c  & 1595.28 \\ 
+  Verbena officinalis & 60 & 1-10 & H  - T  & cr  & 26.92 \\ 
+  Veronica persica & 40 & 1-10 & H  - T  & r  & 13.71 \\ 
+  Veronica serpyllifolia & 30 & 0.1-1 & H  & csr  & 8.02 \\ 
+  Vicia hirsuta & 30 & 1-10 & H  - T  & r  & 10.51 \\ 
+  Viola arvensis & 45 &  & H  - T  & r  & 23.1 \\ 
+   \hline
+\caption{Traits data collected through the \texttt{tr8} function; please note that to improve the readability of the table, in  \texttt{li\_form\_B} and \texttt{strategy} the traits explanation between brackets were removed (e.g. "cr (competitors/ruderals)" was converted to "cr" and "M (Macrophanerophyte) - N (Nanophanerophyte)" to "M - N".}
+\label{tab:tr8res}
+\end{longtable}
+}
+
+
+
+
+
+
+
+\end{document}

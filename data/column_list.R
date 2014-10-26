@@ -20,10 +20,10 @@ column_list<-list(
 
     ##LEDA
     "age_of_first_flowering"=c("age_first_flowering","Age of first flowering","LEDA"),
-    "branching"=c("branching","branching","LEDA"),
+    "branching"=c("branching","Branching","LEDA"),
     "bud_bank_seasonality_soil"=c("bud_bank_seasonality_soil","Bud bank seasonality at soil level","LEDA"),
-    "buoyancy"=c("buoyancy","buoyancy","LEDA"),
-    "canopy_height"=c("canopy_height","Mean canopy height [m]","LEDA"),
+    "buoyancy"=c("buoyancy","Buoyancy","LEDA"),
+    "canopy_height"=c("canopy_height","Mean canopy height","LEDA"),
     "dispersal"=c("dispersal","Dispersal type","LEDA"),
     "leaf_distribution"=c("leaf_distribution","Leaf distribution along the stem","LEDA"),
     "leaf_dmc"=c("leaf_dmc","Leaf dry matter content ","LEDA"),
@@ -74,14 +74,13 @@ column_list<-list(
     "S"=c("ell_S_it","Ellenberg value for salinity in Italy","Pignatti"),
     "life_form_P"=c("life_form_P","Life form for Italian Flora","Pignatti"),
     "corotipo"=c("distribution_p","Distributions of species for the Italian Flora","Pignatti"),
-
-    ## AMF
-    "Myco_infection"=c("Myco_infection","Infection of AMF", "Akhmetzhanova"),
-#    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti"),
-
     ## Flowering italiano
 
-    "IT_flowering_months"=c("IT_flowering_months","Months in which the species is flowering","Pignatti")
-
+#    "IT_flowering_months"=c("IT_flowering_months","Months in which the species is flowering","Pignatti")
+     "IT_beg_flow"=c("IT_beg_flow","Beginning of flowering in Italy","Pignatti"),
+    "IT_end_flow"=c("IT_end_flow","End of flowering in Italy","Pignatti"),
+    ## AMF
+    "Myco_infection"=c("Myco_infection","Infection of AMF", "Akhmetzhanova")
+#    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti")
     )
 

@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{nameref}
+\usepackage{url}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{afterpage}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem} 
+\lstset{language=R}    
+\bibliographystyle{plain}
+%% \VignetteIndexEntry{Plants traits data}
+%%\VignetteDepends{TR8}
+
+
+
+\title{How to expand \texttt{TR8}}
+\author{Gionata Bocci\\Pisa (ITALY)\\ {boccigionata@gmail.com}}
+\begin{document}
+\maketitle
+\SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,strip.white=true,keep.source=TRUE}
+\SweaveOpts{include=FALSE}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+\fvset{listparameters={\setlength{\topsep}{0pt}}}
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+
+This document briefly explains how users can include their functions for downloading traits in to the \texttt{TR8} package.\\
+\textbf{Beware:} this document assumes that the reader has a good knowledge of the R programming language and has experience in writing R packages.\\
+The best way to proceed is to clone the github repository (at \url{https://github.com/GioBo/TR8}) and try to work on that.\\
+Suppose that the user has created a function called \texttt{funct\_tr} which retrieves the following traits
+\begin{itemize}
+\item Height
+\item Dispersal type
+\item Clonality
+\end{itemize}
+
+   from a  database  called \texttt{New\_db}  which is available on the Internet.\\
+
+   \section{Adapt your function to TR8}
+
+   The function should be structured in such a way that:
+   
+   \begin{itemize}
+   \item it accepts the following parameters
+     
+     \begin{description}
+     \item[species\_list] the list of species names provided by the user (without authors' names);
+     \item[TRAITS] the list of traits chosen by the user among those made available by \texttt{New\_db} (either passing them to the \texttt{tr8} function or choosing them through the GUI);
+     \item[rest] a number which establishes the \texttt{Sys.sleep} pause before each new query to \texttt{New\_db} (\texttt{TR8} uses \texttt{Sys.sleep} in order not to overload remote servers: please always conform to this policy in writing extensions to \texttt{TR8}).
+     \end{description} 
+ 
+   \item within the function an object of class \texttt{results} is created (the definition of this \texttt{S4} class is defined inside \texttt{TR8})
+<<aa,eval=FALSE>>=
+res<-new("results")
+@ 
+\item if \texttt{TRAIT} is \texttt{NULL}, then \texttt{res@results} should be set to \texttt{NULL} (it means that these traits were not required by the user)
+<<zz,eval=FALSE>>=
+res@results<-NULL
+@   
+   \item \textbf{OR}, if \texttt{TRAIT} is not \texttt{NULL} then the selected traits for the requested species should be  retrieved from \texttt{New\_db} and a dataframe \texttt{species*trait} is created (let's call it \texttt{datatraits});  NA must be used for data which are not available (thus a plant species which is not present in \texttt{New\_db} should have all NAs in such a dataframe)
+   \item the dataframe \texttt{species*traits} is included in the \texttt{@result} slot of the object
+<<bb,eval=FALSE>>=
+res@results<-datatraits
+@      
+\item a string representing the correct bibliographic citation is put in the slot \texttt{@bibliography}
+<<cc,eval=FALSE>>=
+res@bibliography<-"Di Sarli, C. and Troilo, A., 2014. 
+   TRAITS: A new web traitbase for the flora of Argentina. 
+   http://www.pichuco.edu"
+@      
+
+\item \texttt{funct\_tr} returns the whole object
+<<dd,eval=FALSE>>=
+ return(res)
+@   
+   \end{itemize}
+
+
+\section{Adjust tr8() function}
+
+
+   Then a call to \texttt{funct\_tr} should be put in \texttt{TR8/R/tr8.R} inside the \texttt{tr8()} definition (eg. after the call to \texttt{it\_flowering}) and its results saved into an object:
+   
+<<tt,eval=FALSE>>=
+it_flowering<-get_italian_flowering(species_list,
+                          TRAITS=traits_list$Pignatti,rest=rest)
+my_exp<-funct_tr(species_list,TRAITS=traits_list$New_db,rest=rest)
+@    
+   please note that the variables passed as parameters are created within the \texttt{tr8} function, thus the call to \texttt{funct\_tr} should be just like it has been shown here (do not change names).\\
+   Then the \texttt{my\_exp} name should be added to those already existing in in the following cycle (toward the end of \texttt{tr8()}):
+   
+<<zx,eval=FALSE>>=
+        for(i in c(eco_traits,biolflor_traits,
+                   leda_traits,pignatti_traits,it_flowering,amf_traits)){
+            ## merge the dataframes only if they contain data
+       ...
+   }
+@    
+   
+  which should become:
+   
+<<zy,eval=FALSE>>=
+        for(i in c(my_exp,eco_traits,biolflor_traits,
+                   leda_traits,pignatti_traits,it_flowering,amf_traits)){
+            ## merge the dataframes only if they contain data
+       ...
+   }
+@    
+  
+
+\section{Adjust other variables}
+
+   The available traits should be added to the \texttt{TR8/data/column\_list.R} list; this is a list of vectors in the form of 
+  $$[[code\_for\_trait]]==c("short\_code","short description","Traitbase")$$
+
+  thus, in this case, we should add there the following lines:
+ 
+@ 
+<<a,eval=FALSE>>=
+column_list<-list(
+    ## already existing traits
+    ## ...
+    ## ...
+    "height"=c("height","height of a species","New_db"),
+    "dispersal_type"=c("disp_type","Typology of dispersal","New_db"),
+    "clonality"=c("clonality","Type of clonal species","New_db")
+    )
+@ %def 
+   
+   This dataframe is used by \texttt{tr8} to build the GUI and to pass traits to all the sub-functions which actually retrieve data frome remote servers.\\
+   Convert \texttt{column\_list} to a dataframe (retaining the short code, the short description and the database columns) and save it as \texttt{available\_tr8.Rd} in \texttt{TR8/data}:
+
+<<sa,eval=FALSE>>=
+library(plyr)
+tp<-ldply(column_list)[2:4]
+names(tp)<-c("short_code","description","db")
+save(tp,file="TR8/man/available_tr8.Rd")
+@    
+
+   \section{A last remark}
+
+   This workflow is working for \texttt{TR8} versio 0.9: the inner work of the package is likely to be changed in future versions, thus users are invited to always check the latest version of the documentation.
+
+
+
+\end{document}
