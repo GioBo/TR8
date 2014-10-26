@@ -367,7 +367,8 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
 vignette("TR8_workflow")
 @ %def 
   
-  
+    Another vignette (called \texttt{Expanding\_TR8}) shows to programmers how  sources of data can be added to \texttt{TR8} (i.e. how functions for retrieving data should be written so that they can be easily integrated in \texttt{TR8}).
+    
   
   
   
