@@ -40,7 +40,7 @@ The TR8 name, inspired by "car plates" jokes, was chosen since
 ## them in a dataframe called My_traits (beware: at the moment
 ## setting gui_config=FALSE will only retrieve Ellenberg
 ## data from Italian Flora's species
-My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)
+\dontrun{My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)}
 
 }
 
