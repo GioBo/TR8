@@ -21,7 +21,7 @@ function is internally used by \code{tr8()}, users do not
 need to run it.
 }
 \examples{
-\dontrun{
+\donttest{
 bolflor_clean(biolflor("Avena sativa"))
 }
 }

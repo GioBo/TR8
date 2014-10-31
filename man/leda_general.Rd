@@ -53,11 +53,11 @@ Gionata Bocci \email{boccigionata@gmail.com>}
   tr8()
 }
 \examples{
-##
-##age_of_first_flowering<-leda_general(url="age%20of%20first%20flowering.txt",
-##   skip_row =4, column="age of first flowering", out_name="age_first_flowering",
-##   species=species)
-
+\dontrun{
+age_of_first_flowering<-leda_general(url="age%20of%20first%20flowering.txt",
+   skip_row =4, column="age of first flowering", out_name="age_first_flowering",
+   species=species)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

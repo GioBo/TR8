@@ -31,7 +31,7 @@ functional traits as columns.
 }
 \examples{
 \dontrun{
-#' #My_data<-ecoflora(species_list=c("Abies alba"))
+ #My_data<-ecoflora(species_list=c("Abies alba"))
 }
 }
 \author{

@@ -18,9 +18,8 @@
 ##' @author Gionata Bocci <boccigionata@@gmail.com>>
 local_storage<-function(db=c("LEDA","AMF"),directory){
 
-    if(!dir.exists(directory)){
-            dir.create(directory)
-        }
+    dir.create(directory,showWarnings=FALSE)
+
     
     ## download AMF data
     if("AMF"%in%db){
