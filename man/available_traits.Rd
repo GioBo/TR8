@@ -23,7 +23,7 @@ argument are those contained \code{short_code} column.
 ## If the traits \\code{Maximum area}  and \\code{Leaf area} from
 ## Ecoflora are needed for the species Salix alba and Populus nigra, type
 
-\dontrun{tr8(species_list=c("Salix alba","Populus nigra"),download_list=c("h_max","le_area"))}
+\donttest{tr8(species_list=c("Salix alba","Populus nigra"),download_list=c("h_max","le_area"))}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>

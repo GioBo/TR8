@@ -55,9 +55,10 @@ At the moment the following databeses are available:
 
 }
 \examples{
-## download, for Salix alba, the Ellenberg values for Light and Temperature
-## for the Italian Flora
-## My_traits<-tr8(species_list = c("Salix alba"),download_list = c("L","T"))
+## download some trait data for Abies alba 
+\donttest{
+My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)
+}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>

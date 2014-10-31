@@ -1,7 +1,7 @@
 Package: TR8
 Type: Package
 Title: A tool for downloading functional traits data for plant species
-Version: 0.9
+Version: 0.9.11
 Date: 2014-02-27
 Author: Gionata Bocci <boccigionata@gmail.com>
 Maintainer: Gionata Bocci <boccigionata@gmail.com>
