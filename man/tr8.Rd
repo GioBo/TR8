@@ -55,10 +55,10 @@ At the moment the following databeses are available:
 
 }
 \examples{
-## download trait data for Abies alba (beware: at the moment
-## setting gui_config=FALSE will only retrieve Ellenberg
-## data from Italian Flora's species
-My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)
+## download some trait data for Abies alba 
+\donttest{
+My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)
+}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>
