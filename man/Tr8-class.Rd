@@ -58,12 +58,10 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
 ## bibliographic citations to be used for the
 ## retrieved data
 
-## download trait data for Abies alba (beware: at the moment
-## setting gui_config=FALSE will only retrieve Ellenberg
-## data from Italian Flora's species)
+## download some trait data for Abies alba
 
 \donttest{
-My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)
+My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)
 
 ## See what citations should be used for the data
 bib(My_traits)
