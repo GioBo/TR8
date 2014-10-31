@@ -18,12 +18,14 @@ traits data for plant species from the following sources:
   \item{ Ellenberg values for Italian Flora}
 
   \item{ Mycorrhizal intensity database}
+
+  \item{\url{http://luirig.altervista.org/}}
 }
   
 }
 \details{
 \tabular{ll}{ Package: \tab TR8\cr Type: \tab Package\cr
-Version: \tab 1.0\cr Date: \tab 2014-02-27\cr License: \tab
+Version: \tab 0.9\cr Date: \tab 2014-10-30\cr License: \tab
 GPL>=2\cr Depends: \tab XML, RCurl, plyr, taxize\cr }
 
 The easiest way of using the package is through the
@@ -37,10 +39,8 @@ The TR8 name, inspired by "car plates" jokes, was chosen since
 \examples{
 
 ## download trait data for Abies alba and store
-## them in a dataframe called My_traits (beware: at the moment
-## setting gui_config=FALSE will only retrieve Ellenberg
-## data from Italian Flora's species
-\dontrun{My_traits<-tr8(species_list=c("Abies alba"),gui_config=FALSE)}
+## them in a dataframe called My_traits 
+\dontrun{My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)}
 
 }
 
