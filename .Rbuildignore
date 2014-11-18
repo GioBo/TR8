@@ -40,3 +40,4 @@ man/retrieve_amf.Rd
 .gitignore
 .*~
 retrieved_traits
+Notes_for_brot.org
