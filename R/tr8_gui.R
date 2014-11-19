@@ -33,7 +33,7 @@ tr8_config<-function(){
     ## get traits for leda
     temp_LEDA<-temp_dframe[temp_dframe$db=="LEDA",c("long_code","description")]
     ## get traits for AMF
-    temp_Akhmetzhanova<-temp_dframe[temp_dframe$db=="Akhmetzhanova",c("long_code","description")]
+    temp_AMF<-temp_dframe[temp_dframe$db=="AMF",c("long_code","description")]
 
     ## create the main MODAL window
     window<-gbasicdialog(title="Traits selector for TR8")
@@ -48,7 +48,7 @@ tr8_config<-function(){
     res_LEDA<-gcheckboxgroup(temp_LEDA$description,container=nb,label="LEDA")
     res_Ecoflora<-gcheckboxgroup(temp_Ecoflora$description,container=nb,label="Ecoflora")
     res_Pignatti<-gcheckboxgroup(temp_Pignatti$description,container=nb,label="Pignatti")
-    res_Akhmetzhanova<-gcheckboxgroup(temp_Akhmetzhanova$description,container=nb,label="Akhmetzhanova")
+    res_AMF<-gcheckboxgroup(temp_AMF$description,container=nb,label="AMF")
     visible(window,TRUE)
 
     
@@ -56,17 +56,17 @@ tr8_config<-function(){
     res_LEDA<-svalue(res_LEDA)
     res_Ecoflora<-svalue(res_Ecoflora)
     res_Pignatti<-svalue(res_Pignatti)
-    res_Akhmetzhanova<-svalue(res_Akhmetzhanova)
+    res_AMF<-svalue(res_AMF)
 
     
     res_BiolFlor<-fix_values(res_BiolFlor,temp_BiolFlor)
     res_LEDA<-fix_values(res_LEDA,temp_LEDA)
     res_Ecoflora<-fix_values(res_Ecoflora,temp_Ecoflora)
     res_Pignatti<-fix_values(res_Pignatti,temp_Pignatti)
-    res_Akhmetzhanova<-fix_values(res_Akhmetzhanova,temp_Akhmetzhanova)
+    res_AMF<-fix_values(res_AMF,temp_AMF)
 
     
-    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"Akhmetzhanova"=res_Akhmetzhanova)
+    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"AMF"=res_AMF)
     return(traits_list)
 
 }

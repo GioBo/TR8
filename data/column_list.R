@@ -80,7 +80,9 @@ column_list<-list(
      "IT_beg_flow"=c("IT_beg_flow","Beginning of flowering in Italy","Pignatti"),
     "IT_end_flow"=c("IT_end_flow","End of flowering in Italy","Pignatti"),
     ## AMF
-    "Myco_infection"=c("Myco_infection","Infection of AMF", "Akhmetzhanova")
+    "Myco_infection"=c("Myco_infection","Infection of AMF according to Akhmetzhanova et al.", "AMF"),
+    "MycoFlor"=c("MycoFlor","Infection of AMF according to MycoFlor", "AMF")
+    
 #    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti")
     )
 

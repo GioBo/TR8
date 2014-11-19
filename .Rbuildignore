@@ -40,3 +40,4 @@ man/retrieve_amf.Rd
 .gitignore
 .*~
 retrieved_traits
+R/BROT.R
