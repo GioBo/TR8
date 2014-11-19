@@ -14,7 +14,7 @@ the following publicly available databases:
 * [LEDA traitbase](http://www.leda-traitbase.org/LEDAportal/)
 * Ellenberg values for Italian Flora
 * [Mycorrhizal intensity database](http://esapubs.org/Archive/ecol/E093/059/default.htm)
-* [MycolFlor](http://www.esajournals.org/doi/abs/10.1890/12-1700.1)
+* [MycoFlor](http://www.esajournals.org/doi/abs/10.1890/12-1700.1)
 
  A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
 
