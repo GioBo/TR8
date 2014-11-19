@@ -22,23 +22,8 @@
 ##' @examples \dontrun{
 ##' ##My_traits<-retrieve_amf(species_list=c("Abies alba"))
 ##' }
-retrieve_amf<-function(species,TRAITS,rest,myco){
+retrieve_amf<-function(species,TRAITS,rest,data_myco){
 
-    ## if the myco parameter is null it means that the data have not
-    ## been already downloaded, thus we need to retrieve them
-    if(is.null(myco)){
-        ## in this release the archive will be downloaded
-        ## from the web
-        myco_url <- "http://esapubs.org/Archive/ecol/E093/059/myco_db.csv"
-        myco<- tryCatch(read.csv(myco_url,sep=",",header=T),
-                        error=function(res){
-                            message("URL does not seem to exist:")
-                            return(NA)},
-                        warning=function(res){
-                            message("URL does not seem to exist:")
-                            return(NA)
-                        } )
-    }
     res<-new("results")
     if(is.null(TRAITS)){
         results<-NULL
@@ -46,7 +31,7 @@ retrieve_amf<-function(species,TRAITS,rest,myco){
 
         temp_df<-as.data.frame(species,row.names = species)
         list_temp<-list()
-        res_df<-myco[myco$Species%in%species,c("Species","Intensity.of.mycorrhizal.infection")]
+        res_df<-data_myco[data_myco$Species%in%species,c("Species","Intensity.of.mycorrhizal.infection")]
         temp_df<-merge(temp_df,res_df,by.x=0,by.y="Species",all.x=T)
         ## remove NAs
         ##res_df<-res_df[!is.na(res_df$Intensity.of.mycorrhizal.infection),]
