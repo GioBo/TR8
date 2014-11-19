@@ -31,10 +31,8 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
                         warning=function(res){
                             message("URL does not seem to exist:")
                             return(NA)
-                        } )
+                        })
         save(file=paste(directory,"myco.Rda",sep="/"),myco,precheck = F) 
-     
-        
     }
 
     if("MycoFlor"%in%db){
@@ -50,7 +48,7 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
         save(file=paste(directory,"MycoFlor.Rda",sep="/"),MycoFlor,precheck = F) 
     }
 
-    
+     
     if("LEDA"%in%db){
         ## download LEDA data
         leda_download_to_local_directory(directory)

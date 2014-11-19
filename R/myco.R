@@ -22,7 +22,7 @@
 ##' @examples \dontrun{
 ##' ##My_traits<-retrieve_amf(species_list=c("Abies alba"))
 ##' }
-retrieve_amf<-function(species,TRAITS,rest,myco){
+retrieve_amf<-function(species,TRAITS,rest,data_myco){
 
     res<-new("results")
     if(is.null(TRAITS)){
@@ -31,7 +31,7 @@ retrieve_amf<-function(species,TRAITS,rest,myco){
 
         temp_df<-as.data.frame(species,row.names = species)
         list_temp<-list()
-        res_df<-myco[myco$Species%in%species,c("Species","Intensity.of.mycorrhizal.infection")]
+        res_df<-data_myco[data_myco$Species%in%species,c("Species","Intensity.of.mycorrhizal.infection")]
         temp_df<-merge(temp_df,res_df,by.x=0,by.y="Species",all.x=T)
         ## remove NAs
         ##res_df<-res_df[!is.na(res_df$Intensity.of.mycorrhizal.infection),]

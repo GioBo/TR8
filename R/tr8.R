@@ -299,7 +299,6 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         TRAIT_AK="Akhmetzhanova"
         ##is the user interested in downloadin Akhmetzhanova?
         if("Myco_infection"%in%traits_list$AMF){
-
             ## then check if the dataset has already been downloaded
             local_amf<-paste(directory,"myco.Rda",sep="/")
             if(file.exists(local_amf)){
@@ -308,11 +307,11 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                     local_storage(db="Akhmetzhanova",directory)
                     load(local_amf)
                 }
-        }else{
-            TRAIT_AK=NULL
-        }
-
-        amf_traits<-retrieve_amf(species_list,TRAITS=TRAIT_AK,rest=rest,myco=myco)
+        }else{myco<-NULL
+              TRAIT_AK<-NULL
+          }
+    
+        amf_traits<-retrieve_amf(species_list,TRAITS=TRAIT_AK,rest=rest,data_myco=myco)
 
         ## check&download mycoflor
 
@@ -329,10 +328,11 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                     load(local_amf)
                 }
         }else{
-            TRAIT_MYC=NULL
+            MycoFlor<-NULL
+            TRAIT_MYC<-NULL
         }
 
-        amf_MycoFlor<-retrieve_MycoFlor(species_list,TRAITS=TRAIT_MYC,rest=rest,MycoFlor=MycoFlor)
+        amf_MycoFlor<-retrieve_MycoFlor(species_list,TRAITS=TRAIT_MYC,rest=rest,data_myco=MycoFlor)
 
 
         
