@@ -47,6 +47,7 @@ possibility of easily retrieving traits data for plant species from the followin
 \item[Ellenberg values for Italian Flora] \cite{pignatti}
 \item[Flowering period for Italian Flora] \cite{pignatti} (data retrieved from \url{http://luirig.altervista.org/})
 \item[Mycorrhizal intensity database] \cite{amf}
+  \item[MycoFlor database]\cite{Hempel2013}
 
 \end{description}
 
