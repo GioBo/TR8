@@ -19,7 +19,7 @@ the following publicly available databases:
  A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
 
 
-Istall the package
+Install the package
 ==================
 
   You can either install the stable relase of the package using the version available on CRAN:
@@ -28,4 +28,21 @@ Istall the package
 install.packages(TR8,dependencies=TRUE)
 ```
 
-  Or, if you want to try the devel version of the package hosted here, you will need the  
+  Or, if you want to try the devel version of the package hosted here, you will need [devtools](https://github.com/hadley/devtools):
+  
+```R
+## install the package
+install.packages("devtools")
+## load it
+library(devtools)
+## activate dev_mode
+dev_mode(on=T)
+## install TR8
+install_github("GioBo/TR8")
+## you can now work with TR8 functions
+
+## if you want to go back and use the CRAN version
+## already installed, simply deactivate dev_mode
+dev_mode(on=F)
+```
+  
