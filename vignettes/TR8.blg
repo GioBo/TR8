@@ -2,44 +2,44 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: TR8.aux
 The style file: plain.bst
 Database file #1: tr8.bib
-You've used 11 entries,
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            565 strings with 6390 characters,
-and the built_in function-call counts, 4219 in all, are:
-= -- 375
-> -- 324
+            571 strings with 6666 characters,
+and the built_in function-call counts, 4727 in all, are:
+= -- 422
+> -- 362
 < -- 0
-+ -- 131
-- -- 118
-* -- 355
-:= -- 766
-add.period$ -- 33
-call.type$ -- 11
-change.case$ -- 89
++ -- 146
+- -- 132
+* -- 406
+:= -- 853
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 99
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 113
-empty$ -- 241
-format.name$ -- 118
-if$ -- 804
+cite$ -- 12
+duplicate$ -- 124
+empty$ -- 270
+format.name$ -- 132
+if$ -- 901
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 8
-newline$ -- 58
-num.names$ -- 22
-pop$ -- 78
+int.to.str$ -- 12
+missing$ -- 9
+newline$ -- 63
+num.names$ -- 24
+pop$ -- 86
 preamble$ -- 1
-purify$ -- 81
+purify$ -- 90
 quote$ -- 0
-skip$ -- 79
+skip$ -- 86
 stack$ -- 0
-substring$ -- 171
-swap$ -- 14
+substring$ -- 207
+swap$ -- 15
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
+type$ -- 48
 warning$ -- 0
-while$ -- 31
-width$ -- 13
-write$ -- 119
+while$ -- 35
+width$ -- 14
+write$ -- 130
