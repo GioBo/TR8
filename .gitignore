@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 Issues.org~
 MEE.org
 MEE.org~
 /.gitignore~
-=======
-/Issues.org~
-MEE.org
-MEE.org~
-*~
->>>>>>> issue#7
 /.Rhistory
 /R/.Rhistory
 /R/vai
@@ -34,3 +27,7 @@ MEE.org~
 /vignettes/texput.log
 /vignettes/Expanding_TR8.tex
 /Notes_for_brot.org
+/Notes_for_brot.org~
+/inst/COPYRIGHTS~
+/man/TR8-package.Rd~
+*~
