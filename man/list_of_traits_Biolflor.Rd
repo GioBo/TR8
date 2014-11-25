@@ -9,7 +9,7 @@ Biolflor
 }
 \examples{
 ## have a look at the first rows of the dataset
-head(list_of_traits_Biolflor)
+##head(list_of_traits_Biolflor)
 
 }
 \author{

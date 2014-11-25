@@ -19,7 +19,7 @@ argument); the codes to be used as the \code{download_list}
 argument are those contained \code{short_code} column.
 }
 \examples{
-available_traits()
+## available_traits()
 ## If the traits \\code{Maximum area}  and \\code{Leaf area} from
 ## Ecoflora are needed for the species Salix alba and Populus nigra, type
 

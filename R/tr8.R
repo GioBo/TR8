@@ -238,7 +238,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
     op<-options()
     options("guiToolkit"="tcltk")
     ## rest is used for Sys.sleep in all the retrieving functions
-    rest=1.5
+    rest=0.01
     
     appname <- "TR8"
     appauthor <- "GioBo"

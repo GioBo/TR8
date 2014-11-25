@@ -64,7 +64,7 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
 My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)
 
 ## See what citations should be used for the data
-bib(My_traits)
+## bib(My_traits)
 
 ## to see a short explanation for the codes used to identify
 ## the traits use lookup()
