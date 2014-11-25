@@ -39,6 +39,8 @@ At the moment the following databeses are available:
   \item{ Ellenberg values for Italian Flora}
 
   \item{ Mycorrhizal intensity database}
+
+  \item{ MycoFlor }
 }
 
 
@@ -108,6 +110,12 @@ Biondicazione attraverso le piante vascolari. Valori di
 indicazione secondo Ellenberg (Zeigerwerte) per le specie
 della Flora d'Italia. Braun-Blanquetia 39, Camerino, pp.
 97.
+
+\bold{MycoFlor}
+
+Mycorrhizas in the Central European flora: relationships with plant life history traits and ecology
+Stefan Hempel, Lars Götzenberger, Ingolf Kühn, Stefan G. Michalski, Matthias C. Rillig, Martin Zobel, and Mari Moora
+Ecology 2013 94:6, 1389-1399
 
 } 
 \seealso{
