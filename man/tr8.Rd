@@ -17,7 +17,7 @@ to the GUI inerface)}
   traits of interest is shown (default is TRUE)}
 }
 \value{
-data.frame containing various traits data for the species
+An object of class \code{Tr8}; the slots \code{@results} contains various traits data for the species
 of interest
 }
 \description{
@@ -38,9 +38,9 @@ At the moment the following databeses are available:
 
   \item{ Ellenberg values for Italian Flora}
 
-  \item{ Mycorrhizal intensity database}
+  \item{ Mycorrhizal intensity database \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}}
 
-  \item{ MycoFlor }
+  \item{ MycoFlor \url{http://www.esajournals.org/doi/abs/10.1890/12-1700.1}}
 }
 
 
@@ -59,7 +59,7 @@ At the moment the following databeses are available:
 \examples{
 ## download some trait data for Abies alba 
 \donttest{
-My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)
+My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P")))
 }
 }
 \author{

@@ -61,7 +61,7 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
 ## download some trait data for Abies alba
 
 \donttest{
-My_traits<-tr8(species_list=c("Abies alba"),gui_config=TRUE)
+My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
 
 ## See what citations should be used for the data
 ## bib(My_traits)

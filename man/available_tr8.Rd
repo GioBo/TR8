@@ -29,7 +29,7 @@
 
 \examples{
 data(available_tr8)
-\donttest{tr8(species_list=c("Salix alba","Populus nigra"),download_list=c("h_max","le_area"))}
+\donttest{tr8(species_list=c("Salix alba","Populus nigra"),download_list=c("life_form_P"))}
 }
 \keyword{TR8,tr8}
 \author{

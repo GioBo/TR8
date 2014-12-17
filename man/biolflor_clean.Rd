@@ -22,7 +22,7 @@ need to run it.
 }
 \examples{
 \donttest{
-bolflor_clean(biolflor("Avena sativa"))
+biolflor_clean(biolflor("Avena sativa"))
 }
 }
 \author{
