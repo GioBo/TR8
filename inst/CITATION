@@ -1,13 +1,23 @@
 citHeader("Please use the following references whenever using data retrieved with tr8():")
+
+
+
+citEntry(entry = "Article", 
+         author = personList(as.person("Bocci Gionata")),
+         title = "TR8: an R package for easily retrieving plant species traits", 
+         journal = "Methods in Ecology and Evolution", year = 2015, 
+         volume = "" , pages = "", 
+         url = "http://dx.doi.org/10.1111/2041-210X.12327",
+         textVersion = paste("Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits.","Methods in Ecology and Evolution, http://dx.doi.org/10.1111/2041-210X.12327"))
+
+
 citEntry(entry = "Article", 
          author = personList(as.person("Klotz Stefan"),as.person("Kühn Ingolf"),as.person("Durka Walter")),
          title = "BIOLFLOR - Eine Datenbank zu biologisch-ökologischen Merkmalen zur Flora von Deutschland. 38: 1-333.  (Bundesamt für. Bonn, Bundesamt für Naturschutz)", 
          journal = "Schriftenreihe für Vegetationskunde", year = 2002, 
          volume = 38, pages = "1-333", 
          url = "http://dx.doi.org/10.1111/j.1366-9516.2004.00106.x",
-         textVersion = paste("BIOLFLOR - Eine Datenbank zu biologisch-ökologischen","Merkmalen zur Flora von Deutschland.","Schriftenreihe für Vegetationskunde 38: 1-333.","(Bundesamt für. Bonn, Bundesamt für Naturschutz)"))
-
-
+         textVersion = paste("Klotz, S., Kühn, I., Durka, W. (eds) (2002).","BIOLFLOR - Eine Datenbank zu biologisch-ökologischen","Merkmalen zur Flora von Deutschland.","Schriftenreihe für Vegetationskunde 38: 1-333.","(Bundesamt für. Bonn, Bundesamt für Naturschutz)"))
 
 
 citEntry(
@@ -28,7 +38,7 @@ citEntry(
     journal=" Journal of Ecology",
     volume=82,
     pages="415-425",
-    textVersion="Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database, J. Ecol., 82, 415-425.")
+    textVersion="Fitter, A . H. and Peat , H. J. (1994). The Ecological Flora Database, J. Ecol., 82, 415-425.")
 
 citEntry(
     entry="Article",
@@ -37,7 +47,7 @@ citEntry(
     journal="Braun-Blanquetia",
     pages="97",
     year=2005,
-    textVersion="Pignatti S., Menegoni P., Pietrosanti S., 2005, Biondicazione attraverso le piante vascolari. Valori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora d'Italia. Braun-Blanquetia 39, Camerino, pp.  97.")
+    textVersion="Pignatti, S., Menegoni, P., Pietrosanti, S. (2005). Biondicazione attraverso le piante vascolari. Valori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora d'Italia. Braun-Blanquetia 39, Camerino, pp.  97.")
 
 citEntry(
     entry="Article",
@@ -47,7 +57,7 @@ citEntry(
     pages="689",
     title="A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants species across the former Soviet Union",
     author=personList(as.person("Asem A. Akhmetzhanova"), as.person("Nadejda A. Soudzilovskaia"), as.person("Vladimir G. Onipchenko"), as.person("Will K. Cornwell"), as.person("Vladimir A. Agafonov"), as.person("Ivan A. Selivanov"),as.person("Johannes H. C. Cornelissen")),
-    textVersion="Asem A. Akhmetzhanova, Nadejda A. Soudzilovskaia, Vladimir G. Onipchenko, Will K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen. 2012. A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants species across the former Soviet Union. Ecology 93:689."
+    textVersion="Asem A. Akhmetzhanova, Nadejda A. Soudzilovskaia, Vladimir G. Onipchenko, Will K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen (2012). A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants species across the former Soviet Union. Ecology 93:689."
     )
 citFooter("As tr8 is continually evolving, you may want to cite its version number. Find it with 'help(package=tr8)'.")
 

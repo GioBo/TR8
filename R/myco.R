@@ -32,7 +32,7 @@ retrieve_amf<-function(species,TRAITS,rest,data_myco){
         temp_df<-as.data.frame(species,row.names = species)
         list_temp<-list()
         res_df<-data_myco[data_myco$Species%in%species,c("Species","Intensity.of.mycorrhizal.infection")]
-        temp_df<-merge(temp_df,res_df,by.x=0,by.y="Species",all.x=T)
+        temp_df<-merge(temp_df,res_df,by.x=0,by.y="Species",all.x=TRUE)
         ## remove NAs
         ##res_df<-res_df[!is.na(res_df$Intensity.of.mycorrhizal.infection),]
         temp_df$species<-as.character(temp_df$species)

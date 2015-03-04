@@ -37,7 +37,7 @@ leda_general<-function(url,skip_row,species,column,out_name){
     
     temp_df<-as.data.frame(species,row.names = species)
     ## merge the species list with the retrieved data
-    temp_df<-merge(temp_df,rearranged,by.x=0,by.y=0,all.x=T)
+    temp_df<-merge(temp_df,rearranged,by.x=0,by.y=0,all.x=TRUE)
     row.names(temp_df)<-as.character(temp_df$Row.names)
     results<-data.frame(temp_df$variable)
     row.names(results)<-row.names(temp_df)

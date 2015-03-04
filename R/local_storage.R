@@ -24,7 +24,7 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
     ## download AMF data
     if("Akhmetzhanova"%in%db){
         myco_url <- "http://esapubs.org/Archive/ecol/E093/059/myco_db.csv"
-        myco<- tryCatch(read.csv(myco_url,sep=",",header=T),
+        myco<- tryCatch(read.csv(myco_url,sep=",",header=TRUE),
                         error=function(res){
                             message("URL does not seem to exist:")
                             return(NA)},
@@ -37,7 +37,7 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
 
     if("MycoFlor"%in%db){
         mycoflor_url<-"http://www.esapubs.org/archive/ecol/E094/123/MycoFlor.txt"
-        MycoFlor<- tryCatch(read.delim(mycoflor_url,header=T),
+        MycoFlor<- tryCatch(read.delim(mycoflor_url,header=TRUE),
                             error=function(res){
                                 message("URL does not seem to exist:")
                                 return(NA)},
