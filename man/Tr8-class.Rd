@@ -30,7 +30,7 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
 }
 \section{Methods}{
   \describe{
-    \item{bib}{\code{signature(.Object = "Tr8")}: method to get bibliographice references for the downloaded data }
+    \item{bib}{\code{signature(.Object = "Tr8")}: method to get bibliographic references for the downloaded data }
     \item{issues}{\code{signature(.Object = "Tr8")}: method to underline
       'problematic' species}
     \item{extract_traits}{\code{signature(object = "Tr8")}: method to
@@ -60,7 +60,6 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
 
 ## download some trait data for Abies alba
 
-\donttest{
 My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
 
 ## See what citations should be used for the data
@@ -70,6 +69,6 @@ My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
 ## the traits use lookup()
 
 lookup(My_traits)
-}
+
 }
 \keyword{classes}

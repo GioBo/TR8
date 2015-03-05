@@ -45,6 +45,6 @@ retrieve_amf<-function(species,TRAITS,rest,data_myco){
     ## remove(list=c("myco"),pos =".GlobalEnv")
     
         
-    res@bibliography<-"Asem A. Akhmetzhanova, Nadejda A. Soudzilovskaia, Vladimir G. Onipchenko,\nWill K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen. 2012.\nA rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants\nspecies across the former Soviet Union. Ecology 93:689.\n"
+    res@bibliography<-"Akhmetzhanova, A. A., Soudzilovskaia, N. A., Onipchenko, V. G.,\n Cornwell, W. K., Agafonov, V.A., Selivanov, I. A., and Cornelissen, J. H. C., 2012.\nA rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants\nspecies across the former Soviet Union. Ecology 93:689.\n"
     return(res)
 }

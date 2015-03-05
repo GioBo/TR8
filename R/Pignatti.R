@@ -96,7 +96,7 @@ pignatti_f<-function(species,TRAITS){
 #        row.names
                       res@results<-obj@results}
     }
-    res@bibliography<-"Pignatti S., Menegoni P., Pietrosanti S., 2005, Biondicazione attraverso le piante vascolari.\nValori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora di Italia. \nBraun-Blanquetia 39, Camerino, pp.  97.\n"
+    res@bibliography<-"Pignatti, S., Menegoni, P., Pietrosanti. S., 2005. Biondicazione attraverso le piante vascolari.\nValori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora di Italia. \nBraun-Blanquetia 39, Camerino, pp.  97.\n"
     return(res)
         
 }

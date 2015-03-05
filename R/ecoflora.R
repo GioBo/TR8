@@ -184,7 +184,7 @@ ecoflora<-function(species_list,TRAITS,rest)
             }
         }
         remove(list=c("ECOFLORA_df","traits_eco"),envir = env)
-        res@bibliography<-"Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database,\nJ. Ecol., 82, 415-425.  http://www.ecoflora.co.uk"
+        res@bibliography<-"Fitter, A . H. and Peat , H. J., 1994. The Ecological Flora Database,\nJ. Ecol., 82, 415-425.  http://www.ecoflora.co.uk"
            
         return(res)
 

@@ -12,7 +12,7 @@ retrieve_MycoFlor<-function(species,TRAITS,rest,data_myco){
     }
     res@results<-results
     ## remove(list=c("myco"),pos =".GlobalEnv")
-    stringa<-"Stefan Hempel, Lars G\303\266tzenberger, Ingolf K\303\274hn, Stefan G. Michalski,\n Matthias C. Rillig, Martin Zobel, and Mari Moora. 2013. Mycorrhizas in the Central European flora:\n relationships with plant life history traits and ecology. Ecology 94: 1389-1399.\n"
+    stringa<-"Hempel, S., G\303\266tzenberger, L., K\303\274hn. I., Michalski, S.G.,\n Rillig, M.C., Zobel, M., and Moora, M., 2013. Mycorrhizas in the Central European flora:\n relationships with plant life history traits and ecology. Ecology 94: 1389-1399.\n"
     Encoding(stringa)<-"unicode"
     res@bibliography<-stringa
     return(res)

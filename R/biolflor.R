@@ -165,7 +165,7 @@ biolflor<-function(list_species,TRAITS,rest=NULL){
 
         }
     remove(list=c("biolflor_lookup"), envir = env)    
-    stringa<-"Klotz, S., K\303\274hn, I., Durka, W. (eds) (2002). BIOLFLOR - Eine Datenbank zu \nbiologisch-\303\266kologischen Merkmalen zur Flora von Deutschland. Schriftenreihe\nf\303\274r Vegetationskunde 38: 1-333. (Bundesamt f\303\274r. Bonn, Bundesamt f\303\274r Naturschutz).\n"
+    stringa<-"Klotz, S., K\303\274hn, I., Durka, W. (eds), 2002. BIOLFLOR - Eine Datenbank zu \nbiologisch-\303\266kologischen Merkmalen zur Flora von Deutschland. Schriftenreihe\nf\303\274r Vegetationskunde 38: 1-333. (Bundesamt f\303\274r. Bonn, Bundesamt f\303\274r Naturschutz).\n"
     Encoding(stringa)<-"unicode"
     res@bibliography<-stringa
     

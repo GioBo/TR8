@@ -136,7 +136,7 @@ leda<-function(species_list,TRAITS,rearranged){
     ##res@results<-obj@results
     ##obj<-new("Leda",results=spec)
     ##obj@not_valid<-species_list[!species_list%in%LEDA_df$SBS.name]
-    stringa<-"Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P, Thompson, K., Sonnenschein, M., Poschlod, P., \nVan Groenendael, J.M., Klimes, L., Klimesov\303\241, J., Klotz, S., Rusch, G.M., Hermy, M., Adriaens, D.,\nBoedeltje, G., Bossuyt, B., Dannemann, A., Endels, P., G\303\266tzenberger, L., Hodgson, J.G., Jackel, A-K.,\nK\303\274hn, I., Kunzmann, D., Ozinga, W.A., R\303\266mermann, C., Stadler, M., Schlegelmilch, J., Steendam, H.J.,\nTackenberg, O., Wilmann, B., Cornelissen, J.H.C., Eriksson, O., Garnier, E., Peco, B. (2008):\nThe LEDA Traitbase: A database of life-history traits of Northwest European flora.\nJournal of Ecology 96: 1266-1274.\n"
+    stringa<-"Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P, Thompson, K., Sonnenschein, M., Poschlod, P., \nVan Groenendael, J.M., Klimes, L., Klimesov\303\241, J., Klotz, S., Rusch, G.M., Hermy, M., Adriaens, D.,\nBoedeltje, G., Bossuyt, B., Dannemann, A., Endels, P., G\303\266tzenberger, L., Hodgson, J.G., Jackel, A-K.,\nK\303\274hn, I., Kunzmann, D., Ozinga, W.A., R\303\266mermann, C., Stadler, M., Schlegelmilch, J., Steendam, H.J.,\nTackenberg, O., Wilmann, B., Cornelissen, J.H.C., Eriksson, O., Garnier, E., Peco, B., 2008.\nThe LEDA Traitbase: A database of life-history traits of Northwest European flora.\nJournal of Ecology 96: 1266-1274.\n"
     Encoding(stringa)<-"unicode"
     res@bibliography<-stringa
     remove(list=c("column_list","leda_lookup"), envir = env)    
