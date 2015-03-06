@@ -6,6 +6,12 @@
 #+TODO: | CANCELED
 #+TAGS: programming documenting email
 
+* New features
+
+** Catminat
+
+   - check species names with ~taxize~ : eg. x Galiasperula x hyb. (sans nom 1)  [Asperula cynanchica L. x Galium glaucum L.]
+
 
 * BUGS [66%]
 
