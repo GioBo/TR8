@@ -15,6 +15,23 @@
 
 * BUGS [66%]
 
+*** BUG [#A] bug#18 
+
+    If not connected to the network, the following error is raised,
+    even though only Pignatti's data (which are locally stored) are requested
+
+#+BEGIN_SRC R
+ tr8(species_list=c("Salix alba"),gui_config=TRUE)
+Error in file(con, "r") : cannot open the connection
+In addition: Warning message:
+In file(con, "r") : unable to resolve 'www.ecoflora.co.uk'
+
+#+END_SRC    
+
+
+
+
+
 *** BUG issue#2 :  uniform column names
 
 *** BUG issue#1 :: change column_list.R and related files so that only one code is present for italian flowering
