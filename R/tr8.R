@@ -226,6 +226,10 @@ setMethod(f="bib",
 #' @export tr8
 tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
 
+    if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+        stop("You need a working internet connection to use tr8()")
+    }
+    
     ## get column_list dataset
     env<-new.env(parent = parent.frame())
     data(column_list,envir = env)
