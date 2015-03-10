@@ -25,7 +25,7 @@ traits data for plant species from the following sources:
 }
 \details{
 \tabular{ll}{ Package: \tab TR8\cr Type: \tab Package\cr
-Version: \tab 0.9.12\cr Date: \tab 2014-02-27\cr License: \tab
+Version: \tab 0.9.13\cr Date: \tab 2015-03-10\cr License: \tab
 GPL>=2\cr Depends: \tab XML, RCurl, plyr, taxize\cr }
 
 The easiest way of using the package is through the

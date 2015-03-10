@@ -151,8 +151,8 @@ ecoflora<-function(species_list,TRAITS,rest)
         ## test if Ecoflora is providing data (if not the web page
         ##  http://www.ecoflora.co.uk/search_species.php will contain
         ## "No Species currently available"
-        eco_check<-readLines("http://www.ecoflora.co.uk/search_species.php",warn=FALSE)
-        res_check<-length(grep("No Species currently available",eco_check))
+        #eco_check<-readLines("http://www.ecoflora.co.uk/search_species.php",warn=FALSE)
+        #res_check<-length(grep("No Species currently available",eco_check))
         ## if Ecoflora is not working, res_check will be equal to 1
         
 
@@ -164,6 +164,18 @@ ecoflora<-function(species_list,TRAITS,rest)
         if(is.null(TRAITS)){
             res@results<-NULL
         }else{
+            ## check that internet connection is working
+            ## otherwise it will stop and provide an error 
+            if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                stop("You need a working internet connection to download traits from Ecolflora")
+            }
+
+            ## check that ecoflora is up and working
+            
+            eco_check<-readLines("http://www.ecoflora.co.uk/search_species.php",warn=FALSE)
+            res_check<-length(grep("No Species currently available",eco_check))
+            
+            
             if(length(TRAITS)==0){
                 traits<-traits_eco}else{
                     

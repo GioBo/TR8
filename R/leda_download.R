@@ -48,5 +48,5 @@ leda_download_to_local_directory<-function(directory){
     ## save the compleate dataset in a file called "leda_database.Rda"
     ## in the directory chosen by the user
     remove(list=c("leda_lookup"), envir = env)    
-    save(file=paste(directory,"leda_database.Rda",sep="/"),rearranged)
+    save(file=file.path(directory,"leda_database.Rda"),rearranged)
 }

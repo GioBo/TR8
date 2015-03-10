@@ -226,6 +226,10 @@ setMethod(f="bib",
 #' @export tr8
 tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
 
+    ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+    ##     stop("You need a working internet connection to use tr8()")
+    ## }
+    
     ## get column_list dataset
     env<-new.env(parent = parent.frame())
     data(column_list,envir = env)
@@ -274,10 +278,13 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         ## check if an already downloaded version of the LEDA database
         ## exists and, if so, use it otherwise download a copy, but only
         ## if at least one LEDA trait is needed
-        local_leda<-paste(directory,"leda_database.Rda",sep="/")
+        local_leda<-file.path(directory,"leda_database.Rda")
         if(file.exists(local_leda)){
             load(local_leda)}else{
                 if(length(traits_list$LEDA)>0){
+                    if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                        stop("You neither have a working internet connection nor locally stored LEDA files.\n  Please re-run tr8() function when your internet connection is working.")
+                    }
                     local_storage(db="LEDA",directory)
                     load(local_leda)
             }else{rearranged<-NULL}
@@ -300,11 +307,14 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         ##is the user interested in downloadin Akhmetzhanova?
         if("Myco_infection"%in%traits_list$AMF){
             ## then check if the dataset has already been downloaded
-            local_amf<-paste(directory,"myco.Rda",sep="/")
+            local_amf<-file.path(directory,"myco.Rda")
             if(file.exists(local_amf)){
                 load(local_amf)}else{
                     ## otherwise download it now
+                   if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                        stop("You neither have a working internet connection nor locally stored files from Akhmetzhanova et al.\n  Please re-run tr8() function when your internet connection is working.")
                     local_storage(db="Akhmetzhanova",directory)
+                    }
                     load(local_amf)
                 }
         }else{myco<-NULL
@@ -320,10 +330,14 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         if("MycoFlor"%in%traits_list$AMF){
 
             ## then check if the dataset has already been downloaded
-            local_amf<-paste(directory,"MycoFlor.Rda",sep="/")
+            local_amf<-file.path(directory,"MycoFlor.Rda")
             if(file.exists(local_amf)){
                 load(local_amf)}else{
                     ## otherwise download it now
+                    if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                        stop("You neither have a working internet connection nor locally stored files from MycoFlor.\n  Please re-run tr8() function when your internet connection is working.")
+                    }
+
                     local_storage(db="MycoFlor",directory)
                     load(local_amf)
                 }

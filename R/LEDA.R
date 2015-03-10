@@ -111,12 +111,12 @@ leda<-function(species_list,TRAITS,rearranged){
             spec<-leda_extract_from_local_df(rearranged,species_list,column_variables)
         }else{
 
-                leda_subset<-leda_lu[leda_lu$.id%in%tr_list,]
-                
-                spec<-as.data.frame(species_list)
-                row.names(spec)<-species_list
+            leda_subset<-leda_lu[leda_lu$.id%in%tr_list,]
+            
+            spec<-as.data.frame(species_list)
+            row.names(spec)<-species_list
 
-                for(trait in 1:nrow(leda_subset)){
+            for(trait in 1:nrow(leda_subset)){
                     extract<-leda_subset[trait,]
                     leda_temp<-leda_general(url=extract$V1 , skip_row=as.numeric(extract$V2), column=extract$V3, out_name=extract$V4,species=species_list)
                     spec<-merge(spec,leda_temp,by.x=0,by.y=0,all.x=TRUE)
@@ -124,9 +124,7 @@ leda<-function(species_list,TRAITS,rearranged){
                     names_of_column<-names(spec)[!(names(spec)%in%c("Row.names","species_list"))]
                     spec<-as.data.frame(spec[,!(names(spec)%in%c("Row.names","species_list"))],row.names = species_list)
                     names(spec)<-names_of_column
-
             }
-
 
         }
         names(spec)<-mapvalues(names(spec),leda_lu$V4,leda_lu$.id,warn_missing = FALSE)
