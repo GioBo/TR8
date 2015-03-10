@@ -278,7 +278,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         ## check if an already downloaded version of the LEDA database
         ## exists and, if so, use it otherwise download a copy, but only
         ## if at least one LEDA trait is needed
-        local_leda<-paste(directory,"leda_database.Rda",sep="/")
+        local_leda<-file.path(directory,"leda_database.Rda")
         if(file.exists(local_leda)){
             load(local_leda)}else{
                 if(length(traits_list$LEDA)>0){
@@ -307,7 +307,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         ##is the user interested in downloadin Akhmetzhanova?
         if("Myco_infection"%in%traits_list$AMF){
             ## then check if the dataset has already been downloaded
-            local_amf<-paste(directory,"myco.Rda",sep="/")
+            local_amf<-file.path(directory,"myco.Rda")
             if(file.exists(local_amf)){
                 load(local_amf)}else{
                     ## otherwise download it now
@@ -330,7 +330,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         if("MycoFlor"%in%traits_list$AMF){
 
             ## then check if the dataset has already been downloaded
-            local_amf<-paste(directory,"MycoFlor.Rda",sep="/")
+            local_amf<-file.path(directory,"MycoFlor.Rda")
             if(file.exists(local_amf)){
                 load(local_amf)}else{
                     ## otherwise download it now

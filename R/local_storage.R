@@ -32,7 +32,7 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
                             message("URL does not seem to exist:")
                             return(NA)
                         })
-        save(file=paste(directory,"myco.Rda",sep="/"),myco,precheck = F) 
+        save(file=file.path(directory,"myco.Rda"),myco,precheck = F) 
     }
 
     if("MycoFlor"%in%db){
@@ -45,7 +45,7 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
                                 message("URL does not seem to exist:")
                                 return(NA)
                             } )
-        save(file=paste(directory,"MycoFlor.Rda",sep="/"),MycoFlor,precheck = F) 
+        save(file=file.path(directory,"MycoFlor.Rda",MycoFlor,precheck = F) 
     }
 
      
