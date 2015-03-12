@@ -313,9 +313,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                     ## otherwise download it now
                    if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
                         stop("You neither have a working internet connection nor locally stored files from Akhmetzhanova et al.\n  Please re-run tr8() function when your internet connection is working.")
-                    local_storage(db="Akhmetzhanova",directory)
                     }
-                    load(local_amf)
+
+                   local_storage(db="Akhmetzhanova",directory)
+                   load(local_amf)
                 }
         }else{myco<-NULL
               TRAIT_AK<-NULL
@@ -328,7 +329,6 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         TRAIT_MYC="MycoFlor"
         ##is the user interested in downloadin MycoFlor?
         if("MycoFlor"%in%traits_list$AMF){
-
             ## then check if the dataset has already been downloaded
             local_amf<-file.path(directory,"MycoFlor.Rda")
             if(file.exists(local_amf)){
