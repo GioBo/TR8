@@ -166,9 +166,9 @@ ecoflora<-function(species_list,TRAITS,rest)
         }else{
             ## check that internet connection is working
             ## otherwise it will stop and provide an error 
-            if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
-                stop("You need a working internet connection to download traits from Ecolflora")
-            }
+            ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+            ##     stop("You need a working internet connection to download traits from Ecolflora")
+            ## }
 
             ## check that ecoflora is up and working
             
