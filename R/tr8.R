@@ -282,9 +282,11 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         if(file.exists(local_leda)){
             load(local_leda)}else{
                 if(length(traits_list$LEDA)>0){
-                    if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
-                        stop("You neither have a working internet connection nor locally stored LEDA files.\n  Please re-run tr8() function when your internet connection is working.")
-                    }
+
+                    ## unfortunately nls() does not work on Windows, thus I think it's better to remove that
+                    ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                    ##     stop("You neither have a working internet connection nor locally stored LEDA files.\n  Please re-run tr8() function when your internet connection is working.")
+                    ## }
                     local_storage(db="LEDA",directory)
                     load(local_leda)
             }else{rearranged<-NULL}
@@ -310,10 +312,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
             local_amf<-file.path(directory,"myco.Rda")
             if(file.exists(local_amf)){
                 load(local_amf)}else{
-                    ## otherwise download it now
-                   if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
-                        stop("You neither have a working internet connection nor locally stored files from Akhmetzhanova et al.\n  Please re-run tr8() function when your internet connection is working.")
-                    }
+                   ##  ## otherwise download it now
+                   ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                   ##      stop("You neither have a working internet connection nor locally stored files from Akhmetzhanova et al.\n  Please re-run tr8() function when your internet connection is working.")
+                   ##  }
 
                    local_storage(db="Akhmetzhanova",directory)
                    load(local_amf)
@@ -333,10 +335,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
             local_amf<-file.path(directory,"MycoFlor.Rda")
             if(file.exists(local_amf)){
                 load(local_amf)}else{
-                    ## otherwise download it now
-                    if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
-                        stop("You neither have a working internet connection nor locally stored files from MycoFlor.\n  Please re-run tr8() function when your internet connection is working.")
-                    }
+                    ## ## otherwise download it now
+                    ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                    ##     stop("You neither have a working internet connection nor locally stored files from MycoFlor.\n  Please re-run tr8() function when your internet connection is working.")
+                    ## }
 
                     local_storage(db="MycoFlor",directory)
                     load(local_amf)
