@@ -123,9 +123,9 @@ biolflor<-function(list_species,TRAITS,rest=NULL){
     if(is.null(TRAITS)){
         res@results<-NULL
     }else{
-        if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
-            stop("You do not have a working internet connection.\n  Please re-run tr8() function when your internet connection is working.")
-        }
+        ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+        ##     stop("You do not have a working internet connection.\n  Please re-run tr8() function when your internet connection is working.")
+        ## }
         if(length(TRAITS)>0){
             ## otherwise chech which of the selected traits are available
             list_of_traits_Biolflor<-list_of_traits_Biolflor[list_of_traits_Biolflor%in%TRAITS]
