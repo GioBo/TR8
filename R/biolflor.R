@@ -127,7 +127,7 @@ biolflor<-function(list_species,TRAITS,rest=NULL){
         ##     stop("You do not have a working internet connection.\n  Please re-run tr8() function when your internet connection is working.")
         ## }
         if(length(TRAITS)>0){
-            ## otherwise chech which of the selected traits are available
+            ## otherwise check which of the selected traits are available
             list_of_traits_Biolflor<-list_of_traits_Biolflor[list_of_traits_Biolflor%in%TRAITS]
             ## check also the "special biolflor traits"
             traits_special_Biolflor<-traits_special_Biolflor[traits_special_Biolflor%in%TRAITS]

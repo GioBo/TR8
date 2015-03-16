@@ -81,8 +81,34 @@ column_list<-list(
     "IT_end_flow"=c("IT_end_flow","End of flowering in Italy","Pignatti"),
     ## AMF
     "Myco_infection"=c("Myco_infection","Infection of AMF according to Akhmetzhanova et al.", "AMF"),
-    "MycoFlor"=c("MycoFlor","Infection of AMF according to MycoFlor", "AMF")
+    "MycoFlor"=c("MycoFlor","Infection of AMF according to MycoFlor", "AMF"),
     
-#    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti")
+###    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti")
+    
+    #catminat
+
+    "inflorescence_fr"=c("inflorescence_fr","Type of inflorescence","Catminat"),
+    "sex_reprod_fr"=c("sex_reprod_fr","Type of sexual reproduction","Catminat"),
+    "poll_vect_fr"=c("poll_vect_fr","Pollen vector","Catminat"),
+    "fruit_type_fr"=c("fruit_type_fr","Type of fruit","Catminat"),
+    "dissemination_fr"=c("dissemination_fr","Type of dissemination","Catminat"),
+    "flower_colour_fr"=c("flower_colour_fr","Flower colour","Catminat"),
+    "ell_L_fr"=c("ell_L_fr","Ellenberg values for Light","Catminat"),
+    "elle_T_fr"=c("elle_T_fr","Ellenberg values for temperature","Catminat"),
+    "ell_C_fr"=c("ell_C_fr","Ellenberg values for continentality","Catminat"),
+    "ell_U_atm_fr"=c("ell_U_atm_fr","Ellenberg values for atmospheric moisture","Catminat"),
+    "ell_U_fr"=c("ell_U_fr","Ellenberg values for moisture","Catminat"),
+    "ell_R_fr"=c("ell_R_fr","Ellenberg values for soil reaction","Catminat"),
+    "ell_N_fr"=c("ell_N_fr","Ellenberg values for nitrogen","Catminat"),
+    "ell_S_fr"=c("ell_S_fr","Ellenberg values for salt","Catminat"),
+    "Soil_texture_fr"=c("Soil_texture_fr","Type of soil texture","Catminat"),
+    "organic_matter_fr"=c("organic_matter_fr","Organic matter in the soil","Catminat"),
+    "beg_flow_fr"=c("beg_flow_fr","Beginning of flowering (month)","Catminat"),
+    "end_flow_fr"=c("end_flow_fr","End of flowering (month)","Catminat")
+    ##"order_of_maturation"=c("order_of_maturation","","Catminat"),
+    ##"macule"=c("macule","","Catminat"),
+    ##"type_ligneux"=c("type_ligneux","","Catminat"),
+    ##"TYPE_BIOLOGIQUE"=c("TYPE_BIOLOGIQUE","","Catminat"),
+
     )
 

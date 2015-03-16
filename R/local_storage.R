@@ -16,7 +16,7 @@
 ##' default is NULL;
 ##' @return nothing
 ##' @author Gionata Bocci <boccigionata@@gmail.com>>
-local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
+local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor","Catminat"),directory){
 
     dir.create(directory,showWarnings=FALSE)
 
@@ -53,4 +53,11 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor"),directory){
         ## download LEDA data
         leda_download_to_local_directory(directory)
     }
+
+    ## download AMF data
+    if("Catminat"%in%db){
+        catminat_download_to_local_directory(directory)
+    }
+    
+
 }
