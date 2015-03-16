@@ -41,6 +41,9 @@ At the moment the following databeses are available:
   \item{ Mycorrhizal intensity database \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}}
 
   \item{ MycoFlor \url{http://www.esajournals.org/doi/abs/10.1890/12-1700.1}}
+
+  \item{ Catminat \url{http://philippe.julve.pagesperso-orange.fr/catminat.htm}}
+
 }
 
 
@@ -115,7 +118,15 @@ Mycorrhizas in the Central European flora: relationships with plant life history
 Stefan Hempel, Lars Götzenberger, Ingolf Kühn, Stefan G. Michalski, Matthias C. Rillig, Martin Zobel, and Mari Moora
 Ecology 2013 94:6, 1389-1399
 
+\bold{Catminat}
+
+Julve, Ph., 1998 ff. - Baseflor. Index botanique, écologique et
+chorologique de la flore de France. Version : 26 November 2014.
+http://perso.wanadoo.fr/philippe.julve/catminat.htm
+
+
 } 
+
 \seealso{
 \code{bib()}
 }
