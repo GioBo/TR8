@@ -1,4 +1,7 @@
-catminat/
+catminat/baseflor.csv
+catminat/baseflor.xlsx
+catminat/legenda.ods
+catminat/legende.csv
 Issues.org~
 MEE.org
 MEE.org~
@@ -33,3 +36,4 @@ MEE.org~
 /man/TR8-package.Rd~
 *~
 /inst/.Rhistory
+/catminat/.~lock.legende.csv#
