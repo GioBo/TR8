@@ -130,7 +130,7 @@ catminat_download_to_local_directory<-function(directory){
         "rac.{1}me d'ombelles"="Raceme of umbels",
         "rac.{1}me de capitules"="Raceme of capitula",
         "ra.{1}me de cymes bipares"="Raceme of double cymes",             
-        "rac.{1}me de cymes unipares h.{1]lico.{1}des"="Raceme of helicoid cymes",
+        "rac.{1}me de cymes unipares h.{1}lico.{1}des"="Raceme of helicoid cymes",
         "rac.{1}me de cymes unipares scorpio.{1}des"="Raceme of scorpioid cymes",
         "rac.{1}me de rac.{1}mes"="Raceme of racemes",
         "rac.{1}me simple"="Simple raceme",                       
