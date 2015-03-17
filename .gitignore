@@ -12,7 +12,6 @@ MEE.org~
 /vignettes/TR8.log
 /vignettes/TR8.tex
 /retrieved_traits
-/*R*
 /vignettes/#TR8_workflow.R#
 /vignettes/.#TR8_workflow.R
 /vignettes/TR8_workflow.R
@@ -28,8 +27,10 @@ MEE.org~
 /vignettes/Expanding_TR8.tex
 /Notes_for_brot.org
 /Notes_for_brot.org~
+/R/BROT.R	
+/R/create_available_traits.R
 /inst/COPYRIGHTS~
 /man/TR8-package.Rd~
 *~
 /inst/.Rhistory
-
+/R/BROT.R
