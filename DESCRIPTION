@@ -29,4 +29,5 @@ Imports:
     plyr,
     rappdirs,
     gWidgets,
-    gWidgetstcltk
+    gWidgetstcltk,
+    gdata

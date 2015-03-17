@@ -20,6 +20,9 @@ traits data for plant species from the following sources:
   \item{ Mycorrhizal intensity database}
 
   \item{\url{http://luirig.altervista.org/}}
+
+  \item{\url{http://perso.wanadoo.fr/philippe.julve/catminat.htm}}
+
 }
   
 }
@@ -88,6 +91,12 @@ Biondicazione attraverso le piante vascolari. Valori di
 indicazione secondo Ellenberg (Zeigerwerte) per le specie
 della Flora d'Italia. Braun-Blanquetia 39, Camerino, pp.
 97.
+
+\bold{Catminat}
+
+Julve, Ph., 1998 ff. - Baseflor. Index botanique, écologique et
+chorologique de la flore de France. Version : 26 November 2014.
+http://perso.wanadoo.fr/philippe.julve/catminat.htm
 
 } 
 \seealso{

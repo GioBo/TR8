@@ -262,7 +262,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                 ## run the gui
                 traits_list<-tr8_config()
             }else{
-                for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF")){
+                for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF","Catminat")){
                     #db<-temp_dframe$db[temp_dframe$short_code==i]
                     data_db<-temp_dframe[temp_dframe$db==db,]
                     if(sum(data_db$short_code%in%download_list)>0){
@@ -351,13 +351,31 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         amf_MycoFlor<-retrieve_MycoFlor(species_list,TRAITS=TRAIT_MYC,rest=rest,data_myco=MycoFlor)
 
 
+
+        
+        ## check if an already downloaded version of the Catminat database
+        ## exists and, if so, use it otherwise download a copy, but only
+        ## if at least one Catminat trait is needed
+        local_Catminat<-file.path(directory,"catminat.Rda")
+        if(file.exists(local_Catminat)){
+            load(local_Catminat)}else{
+                if(length(traits_list$Catminat)>0){
+                    local_storage(db="Catminat",directory)
+                    load(local_Catminat)
+            }else{rearranged<-NULL}
+            }
+        ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
+        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat)
+
+
+        
         
         
         ## merge the results
         tr8_traits<-data.frame(species_list,row.names=species_list)
         bibliography=list()
         
-        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor)){
+        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits)){
             ## merge the dataframes only if they contain data
             if(!is.null(i@results))
                 {
