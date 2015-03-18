@@ -16,6 +16,7 @@ the following publicly available databases:
 * [Mycorrhizal intensity database](http://esapubs.org/Archive/ecol/E093/059/default.htm)
 * [http://luirig.altervista.org/](http://luirig.altervista.org/)
 * [MycoFlor](http://www.esajournals.org/doi/abs/10.1890/12-1700.1)
+* [Catminat](http://perso.wanadoo.fr/philippe.julve/catminat.htm)
 
  A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
 
