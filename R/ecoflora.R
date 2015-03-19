@@ -218,6 +218,7 @@ ecoflora<-function(species_list,TRAITS,rest)
             ##remove(list=c("ECOFLORA_df","traits_eco"),pos =".GlobalEnv")
                 ret<-retrieve(obj)
                 res@results<-ret@results
+                res@issues<-ret@issues
             }
         }
         remove(list=c("ECOFLORA_df","traits_eco"),envir = env)
