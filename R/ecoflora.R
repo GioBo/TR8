@@ -4,7 +4,7 @@
 ##
 ## The class is a box containing url and traits data for species
 ## which are present in the Ecoflora website
-setClass("Ecoflora",representation=list(species_list="vector",reference="data.frame",df="data.frame",not_valid="vector",results="data.frame",traits="list",double_names="vector",rest="numeric"))
+setClass("Ecoflora",representation=list(species_list="vector",reference="data.frame",df="data.frame",not_valid="vector",results="data.frame",traits="list",double_names="vector",rest="numeric",issues="ANY"))
 
 
 
@@ -34,7 +34,32 @@ setMethod('initialize',
                       {
                           ## if multiple species are found, just take the url for that species which has acceptedname==ecoflora name
                           if(nrow(results)>1){
+
                               results2<-with(reference,reference[matchedname==i&species==i&acceptedname==i,])
+
+                              ## in some cases Ecoflora has two species names (not accepted) which
+                              ## correspond to a single accepted name eg. but are both different from that
+                              ##
+                              ##           species           web_link      acceptedname     score     matchedname
+                              ## Bromopsis benekenii  plant_no=1930440110  Bromus ramosus     1    Bromopsis benekenii
+                              ## Bromopsis ramosa     plant_no=1930440100  Bromus ramosus     1     Bromopsis ramosa
+                              ##
+                              ## in those cases results2 will have 0 rows => use back'results' and choose the first occurence
+                              ## plus put a  warning message in .Object@issues
+                              
+                              if(nrow(results2)==0){
+                                  stringa<-"\n\tBEWARE: Ecoflora contains the following species:\n\t - "
+                                  stringa1<-paste(results$species,collapse="\n\t - ")
+                                  stringa2<-paste("\n\twhich correspond to the same accepted name: ",unique(results$acceptedname))
+                                  stringa3<-paste("\n\tIn this case only data corresponding to Ecoflora species",results$species[1],"will be used.\n",sep=" ")
+                                  stringa4<-paste("\n\tYou may want to re-run tr8 using the other Ecoflora species names to get traits for them\n")
+                                  tot_alert<-paste(stringa,stringa1,stringa2,stringa3,stringa4)
+                                  
+                                  .Object@issues<-c(.Object@issues,tot_alert)
+                                  results2<-results[1,]
+                              }
+
+
                               lookup[[i]]<-paste(base_url,results2$web_link,sep="")
                           }
                           else
@@ -197,7 +222,7 @@ ecoflora<-function(species_list,TRAITS,rest)
         }
         remove(list=c("ECOFLORA_df","traits_eco"),envir = env)
         res@bibliography<-"Fitter, A . H. and Peat , H. J., 1994. The Ecological Flora Database,\nJ. Ecol., 82, 415-425.  http://www.ecoflora.co.uk"
-           
+
         return(res)
 
     }

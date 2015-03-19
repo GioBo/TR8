@@ -4,10 +4,13 @@ citHeader("Please use the first reference in the following list whenever using T
 citEntry(entry = "Article", 
          author = personList(as.person("Bocci Gionata")),
          title = "TR8: an R package for easily retrieving plant species traits", 
-         journal = "Methods in Ecology and Evolution", year = 2015, 
-         volume = "" , pages = "", 
+         journal = "Methods in Ecology and Evolution",
+         year = 2015, 
+         volume = "6" ,
+         number = "3",
+         pages = "347--350", 
          url = "http://dx.doi.org/10.1111/2041-210X.12327",
-         textVersion = paste("Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits.","Methods in Ecology and Evolution, http://dx.doi.org/10.1111/2041-210X.12327"))
+         textVersion = paste("Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits.","Methods in Ecology and Evolution, 6(3):347-350, http://dx.doi.org/10.1111/2041-210X.12327"))
 
 
 ## citEntry(entry = "Article", 
