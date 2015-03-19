@@ -18,7 +18,7 @@
 ##' @author Gionata Bocci <boccigionata@@gmail.com>>
 local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor","Catminat"),directory){
 
-    dir.create(directory,showWarnings=FALSE)
+    ##dir.create(directory,showWarnings=FALSE)
 
     
     ## download AMF data
