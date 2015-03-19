@@ -1,7 +1,7 @@
 catminat<-function(species_list,TRAITS){
     res<-new("results")
     env<-new.env(parent = parent.frame())
-    data(local_Catminat,envir = env)
+    load(local_Catminat,envir = env)
     catminat_df<-get("catminat_df",envir=env)
 
     if(is.null(TRAITS)){
