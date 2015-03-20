@@ -48,7 +48,8 @@ possibility of easily retrieving traits data for plant species from the followin
 \item[Flowering period for Italian Flora] \cite{pignatti} (data retrieved from \url{http://luirig.altervista.org/})
 \item[Mycorrhizal intensity database] \cite{amf}
   \item[MycoFlor database]\cite{Hempel2013}
-
+  \item[Catminat database]\cite{catminat} 
+    
 \end{description}
 
   Please note that not all the traits available on the listed
@@ -66,23 +67,10 @@ possibility of easily retrieving traits data for plant species from the followin
 install.packages("TR8",dependencies = TRUE)
 @ %def 
 
-The option \texttt{dependencies = TRUE} takes care of installing the
-following packages (if they are not already installed) which are
-needed by \texttt{TR8} to work properly: 
+The option \texttt{dependencies = TRUE} takes care of installing those packages which are
+needed by \texttt{TR8} to work properly.
 
- \begin{itemize}
-  \item plyr\cite{plyr}
-  \item reshape\cite{reshape}
-  \item RCurl\cite{RCurl}
-  \item XML\cite{XML}
-  \item taxize\cite{taxize}
-  \item gWidgets\cite{gWidgets}
-  \item gWidgetstcltk
-  \item rappdirs
-  \end{itemize}
-  
 
-  
   Once the package is installed, you can load it with:
 
 @ 
@@ -101,6 +89,17 @@ Please note that:
   
 \end{description}
 
+
+\subsection{A very important note for Windows users}
+
+
+   If you want to be able to use data from the \texttt{Catminat}
+   database you need to have \texttt{Perl} installed on your machine.
+   If you do not have it, please go at
+   \url{https://www.perl.org/get.html} and install either
+   \texttt{Strawberry Perl} (the one I suggest) or \texttt{ActiveState Perl}.
+
+  
 \subsection{Using the development version}
 
   The devel version of the package is hosted on github at \url{https://github.com/GioBo/TR8}: to use this
@@ -117,6 +116,8 @@ library(devtools)
 dev_mode(on=T)
 ## install TR8
 install_github("GioBo/TR8",ref="master")
+## load it
+library(TR8)
 ## you can now work with TR8 functions
 
 ## if you want to go back and use the CRAN version
@@ -212,6 +213,25 @@ my_lookup<-lookup(my_Data)
 head(my_lookup)
 @ %def 
 
+\subsection{Checking retrieved data}
+
+   Several steps can go wrong during the data retrieval process (e.g. a database
+   may contain two entries for the same species); \texttt{tr8()} will
+   keep track of some of this problematic cases and the \texttt{issues()}
+   function can be used to see whether any problem was faced during
+   the process.
+   
+@ 
+<<issues,eval=FALSE>>=
+my_species<-c("Salix alba","Populus nigra")
+my_traits<-c("h_max","le_area","li_form")
+my_Data<-tr8(species_list = my_species, download_list = my_traits)
+issues(my_Data)
+@ %def 
+   
+   
+   
+
 \subsection{Interactive use of \texttt{tr8}}
 
 
@@ -242,7 +262,61 @@ print(my_traits)
 @ %def 
 
 
-\subsection{Some notes on using \texttt{tr8}}
+\section{Interpreting retrieved data}
+\label{sec:interpreting}
+
+Please note that for many traits there is more than one entry in the
+original databases: in those cases, in order to obtain a single value
+the following strategy was adopted:
+
+\begin{description}
+\item[Quantitative traits] the mean of all the values was calculated
+  (e.g. when multiple values for "Seed weight mean" are available, the
+  mean of these value is calculated)
+\item[Qualitative traits] all the values are taken into account and
+  "joined" together in a single string (the values are separated by a
+  score "$-$")
+\end{description}
+
+\textbf{Nota bene}: in some cases some traits are stored as \textit{string} in the original databases, even though they should be treated as numbers (e.g. the number \textit{five} is stored as a string - i.e. "5", not as the numeric value \texttt{5}): in those case \texttt{tr8} function is not able to interpret that entry as a numeric, thus, applying the above mentioned criteria to merge multiple traits, strange outputs may result from \texttt{tr8}, e.g. if a species has two entries for the trait \texttt{height} - day 3 and 3.5 meters - the merged value will not be the numeric mean (3.25) but the union of the two strings ("3-3.5").
+
+\section{Citing the package}
+   
+   Please use the following citation when using \texttt{TR8} package:\\
+\vspace{3mm}
+     
+Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits. Methods in Ecology and Evolution, 6(3):347-350.
+
+     \vspace{3mm}
+   Or, if you use BibTeX:
+\begin{verbatim}
+
+  @Article{,
+    author = {Bocci Gionata},
+    title = {TR8: an R package for easily retrieving plant species traits},
+    journal = {Methods in Ecology and Evolution},
+    year = {2015},
+    volume = {6},
+    number = {3},
+    pages = {347--350},
+    url = {http://dx.doi.org/10.1111/2041-210X.12327},
+  }
+\end{verbatim}
+
+
+\section{Citing sources of information}
+\label{sec:citing}
+
+  Users of the \texttt{TR8} package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the \texttt{bib} method; just use:
+  
+
+<<bib,eval=FALSE>>=
+bib(my_traits)
+@ %def 
+
+
+
+\section{Some notes on using \texttt{tr8}}
 
 
   \textbf{A NOTE OF CAUTION}: searching the web is a time (and
@@ -275,34 +349,7 @@ My_data<-read.csv("my_veg_data.csv",
 @ %def 
 
 
-\section{Interpreting retrieved data}
-\label{sec:interpreting}
 
-Please note that for many traits there is more than one entry in the
-original databases: in those cases, in order to obtain a single value
-the following strategy was adopted:
-
-\begin{description}
-\item[Quantitative traits] the mean of all the values was calculated
-  (e.g. when multiple values for "Seed weight mean" are available, the
-  mean of these value is calculated)
-\item[Qualitative traits] all the values are taken into account and
-  "joined" together in a single string (the values are separated by a
-  score "$-$")
-\end{description}
-
-\textbf{Nota bene}: in some cases some traits are stored as \textit{string} in the original databases, even though they should be treated as numbers (e.g. the number \textit{five} is stored as a string - i.e. "5", not as the numeric value \texttt{5}): in those case \texttt{tr8} function is not able to interpret that entry as a numeric, thus, applying the above mentioned criteria to merge multiple traits, strange outputs may result from \texttt{tr8}, e.g. if a species has two entries for the trait \texttt{height} - day 3 and 3.5 meters - the merged value will not be the numeric mean (3.25) but the union of the two strings ("3-3.5").
-\section{Citing sources of information}
-\label{sec:citing}
-
-  Users of the \texttt{TR8} package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the \texttt{bib} method; just use:
-  
-
-<<bib,eval=FALSE>>=
-bib(my_traits)
-@ %def 
-
-  
   
  \section{Suggested workflow}
 
@@ -330,6 +377,15 @@ my_traits<-tr8(species_names,gui_config = TRUE)
 print(my_traits)
 @ %def 
  
+   Check whether \texttt{tr8()} had any problems in retrieving data:
+
+<<issue_workflow,eval=FALSE>>=
+my_traits<-tr8(species_names,gui_config = TRUE)
+issues(my_traits)
+@ %def 
+
+
+
 \item You may want to have these traits available as a data frame:
   just use the \texttt{extract\_traits} function which uses the results
   of \texttt{tr8} (in this case it's the \texttt{my\_traits} objects)
@@ -374,11 +430,22 @@ vignette("TR8_workflow")
   
   
 
-\section{Local storage of LEDA and Akhmetzhanova data}
+\section{Local storage of remote data}
 \label{sec:leda}
 
-  The LEDA Traitbase datafiles and Akhmetzhanova database are text files (either \texttt{.txt} or \texttt{.csv} files) which are
-  available for download at the LEDA (\url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}) and at the\textit{ Ecological Archives} websites . These
+  The following databases are stored as files (\texttt{.txt},\texttt{.csv} or \texttt{xlsx}) on the remote servers:
+  
+  \begin{itemize}
+  \item LEDA
+  \item Akhmetzhanova
+  \item MycoFlor
+  \item Catminat
+  \end{itemize}
+  
+  
+  %% LEDA Traitbase datafiles and Akhmetzhanova database are text files (either \texttt{.txt} or \texttt{.csv} files) which are
+  %% available for download at the LEDA (\url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}) and at the\textit{ Ecological Archives} websites . 
+  These
   files are (quite) big in size, thus downloading them every time the
   \texttt{tr8()} function is used is a time consuming
   activity\footnote{The text files are not distributed together with the
@@ -386,8 +453,7 @@ vignette("TR8_workflow")
     the \texttt{tr8()} function - in order to avoid possible licensing
     conflicts between the \texttt{TR8}' GPL license and these datasets.}. 
   In order to make data retrieval more efficient, when \texttt{tr8} is
-  run for the first time requiring traits data contained in the LEDA
-  or in the Akhmetzhanova databases, these data are downaloaded and a
+  run AND traits data from the above mentioned databases are requested for the first time, these files are downloaded and an R version (\texttt{.Rda})
   copy is stored in a local directory and made available to future requests\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details).}.
 
 

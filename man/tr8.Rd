@@ -120,7 +120,7 @@ Ecology 2013 94:6, 1389-1399
 
 \bold{Catminat}
 
-Julve, Ph., 1998 ff. - Baseflor. Index botanique, écologique et
+Julve, P., 1998 ff. - Baseflor. Index botanique, écologique et
 chorologique de la flore de France. Version : 26 November 2014.
 http://perso.wanadoo.fr/philippe.julve/catminat.htm
 

@@ -15,7 +15,7 @@ catminat<-function(species_list,TRAITS,catminat_df){
 
         res@results<-DF
     }
-    stringa<-"Julve, Ph., 1998 ff. - Baseflor. Index botanique, \303\251cologique et chorologique de la flore de France. Version : 26 November 2014 . http://perso.wanadoo.fr/philippe.julve/catminat.htm"
+    stringa<-"Julve, P., 1998 ff. - Baseflor. Index botanique, \303\251cologique et chorologique de la flore de France. Version : 26 November 2014 . http://perso.wanadoo.fr/philippe.julve/catminat.htm"
     Encoding(stringa)<-"unicode"
     res@bibliography<-stringa
     return(res)

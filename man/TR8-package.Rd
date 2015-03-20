@@ -94,7 +94,7 @@ della Flora d'Italia. Braun-Blanquetia 39, Camerino, pp.
 
 \bold{Catminat}
 
-Julve, Ph., 1998 ff. - Baseflor. Index botanique, écologique et
+Julve, P., 1998 ff. - Baseflor. Index botanique, écologique et
 chorologique de la flore de France. Version : 26 November 2014.
 http://perso.wanadoo.fr/philippe.julve/catminat.htm
 

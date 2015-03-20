@@ -5,6 +5,7 @@
 \alias{bib,Tr8-method}
 \alias{bib}
 \alias{issues,Tr8-method}
+\alias{issues}
 \alias{lookup,Tr8-method}
 \alias{lookup}
 \alias{show,Tr8-method}
@@ -36,7 +37,11 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
     \item{extract_traits}{\code{signature(object = "Tr8")}: method to
       extract the object@results dataframe from a Tr8 object }
     \item{lookup}{\code{signature(.Object = "Tr8")}: a method to show  brief reference for the downloaded data }
-    %% \item{show}{\code{signature(object = "Tr8")}: pretty printig for the
+    \item{issues}{\code{signature(.Object = "Tr8")}: method to print
+      species names for which data retrieval was problematic
+      (e.g. double entries in remote databases).}
+
+        %% \item{show}{\code{signature(object = "Tr8")}: pretty printig for the
     %% retrieved data}
 	 }
 }
