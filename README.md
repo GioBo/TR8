@@ -41,6 +41,8 @@ library(devtools)
 dev_mode(on=T)
 ## install TR8
 install_github("GioBo/TR8")
+## load TR8
+library(TR8)
 ## you can now work with TR8 functions
 
 ## if you want to go back and use the CRAN version
