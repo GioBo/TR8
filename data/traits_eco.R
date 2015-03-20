@@ -16,7 +16,11 @@ traits_eco=list(
     "Ellenberg_pH_Eco"="7.16",
     "Ellenberg_nitrogen_Eco"="7.17",
     "Ellenberg_salt_Eco"="7.18",
-    "Seedbank_longevity"="5.50"
+    "Seedbank_longevity"="5.50",
+    "Flower_colour"="5.58",
+    "Inflorescence_type"="5.65",
+    "Pollen_viability"="5.14",
+    "Fertilization"="5.19"
     )
 
 ## traits_eco contains pairs
