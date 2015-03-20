@@ -1,12 +1,13 @@
-catminat<-function(species_list,TRAITS){
+catminat<-function(species_list,TRAITS,catminat_df){
     res<-new("results")
-    env<-new.env(parent = parent.frame())
-    load(local_Catminat,envir = env)
-    catminat_df<-get("catminat_df",envir=env)
+    ## env<-new.env(parent = parent.frame())
+    ## load(local_Catminat,envir = env)
+    ## catminat_df<-get("catminat_df",envir=env)
 
     if(is.null(TRAITS)){
         res@results<-NULL
     }else{
+
         DF<-catminat_df[catminat_df$species_name%in%species_list,c("species_name",TRAITS)]
         row.names(DF)<-DF$species_name
         DF<-DF[,TRAITS]

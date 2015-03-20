@@ -380,10 +380,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                 if(length(traits_list$Catminat)>0){
                     local_storage(db="Catminat",directory)
                     load(local_Catminat)
-            }else{local_Catminat<-NULL}
+            }else{catminat_df<-NULL}
             }
         ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
-        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat)
+        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df)
 
 
         
