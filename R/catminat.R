@@ -8,9 +8,10 @@ catminat<-function(species_list,TRAITS,catminat_df){
         res@results<-NULL
     }else{
 
+        
         DF<-catminat_df[catminat_df$species_name%in%species_list,c("species_name",TRAITS)]
         row.names(DF)<-DF$species_name
-        DF<-DF[,TRAITS]
+        DF<-DF[,TRAITS,drop=FALSE]
 
         res@results<-DF
     }
