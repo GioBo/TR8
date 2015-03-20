@@ -15,7 +15,8 @@ catminat_download_to_local_directory<-function(directory){
 
 
     url<-"http://philippe.julve.pagesperso-orange.fr/baseflor.xlsx"
-    baseflor<-read.xls (url, sheet = 1, header=T,method="tab")
+    ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab")
+    baseflor<-read.xls (url, sheet = 1, header=T,method="tab",fileEncoding="utf-8")
 
 
     ## I create a copy of baseflor called catminat_df
