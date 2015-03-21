@@ -19,6 +19,8 @@ traits data for plant species from the following sources:
 
   \item{ Mycorrhizal intensity database}
 
+  \item{MycoFlor}
+  
   \item{\url{http://luirig.altervista.org/}}
 
   \item{\url{http://perso.wanadoo.fr/philippe.julve/catminat.htm}}
@@ -83,6 +85,12 @@ Cornwell, W. K., Agafonov, V. A., Selivanov, I.A., and Cornelissen,
 J. H. C. (2012): A rediscovered treasure: mycorrhizal intensity database for
 3000 vascular plants species across the former Soviet
 Union. Ecology 93:689. \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+
+\bold{Hempel et al, 2013}
+Hempel, S., Götzenberger, L., Kühn. I., Michalski, S.G.,
+Rillig, M.C., Zobel, M., and Moora, M., 2013. Mycorrhizas in the Central European flora:
+relationships with plant life history traits and ecology. Ecology 94: 1389-1399.
+
 
 \bold{Pignatti et al., 2005}
 
