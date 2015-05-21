@@ -217,7 +217,7 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df<-catminat_df[!(catminat_df$species_name=="Juncus articulatus" & catminat_df$sex_reprod==""),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Capparis spinosa" & catminat_df$PhytobaseID=="13450"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Centaurium ery. erythraea" & catminat_df$PhytobaseID=="2361"),]
-    catminat_df<-catminat_df[!(catminat_df$species_name=="Centaurium ery. erythraea" & catminat_df$PhytobaseID=="2361"),]
+##    catminat_df<-catminat_df[!(catminat_df$species_name=="Centaurium ery. erythraea" & catminat_df$PhytobaseID=="2361"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Chenopodium ambrosioides" & catminat_df$flower_colour_fr==""),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Chenopodium opulifolium" & catminat_df$CHOROLOGIE=="cosmopolite"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Cornus sanguinea" & catminat_df$PhytobaseID=="2258"),]
@@ -225,7 +225,7 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df<-catminat_df[!(catminat_df$species_name=="Daphne laureola" & catminat_df$PhytobaseID=="2084"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Eryngium bourgatii" & catminat_df$PhytobaseID=="11913"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Festuca ovi. ovina" & catminat_df$PhytobaseID=="352"),]
-    catminat_df<-catminat_df[!(catminat_df$species_name=="Gaudina fragilis" & catminat_df$TYPE_BIOLOGIQUE=="test(hbis)"),]
+    catminat_df<-catminat_df[!(catminat_df$species_name=="Gaudinia fragilis" & catminat_df$TYPE_BIOLOGIQUE=="test(hbis)"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Genista salzmannii" & catminat_df$PhytobaseID=="12481"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Medicacatminat_df turbinata" & catminat_df$PhytobaseID=="12456"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Ophrys bertolonii" & catminat_df$PhytobaseID=="725"),]
@@ -233,17 +233,27 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df<-catminat_df[!(catminat_df$species_name=="Rhamnus saxatilis" & catminat_df$PhytobaseID=="16181"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Rosmarinus officinalis" & catminat_df$PhytobaseID=="16080"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Salix rosmarinifolia" & catminat_df$PhytobaseID=="795"),]
-    catminat_df<-catminat_df[!(catminat_df$species_name=="Salvia officinalis" & catminat_df$PhytobaseID=="14256"),]
+    catminat_df<-catminat_df[!(catminat_df$species_name=="Salvia officinalis" & catminat_df$PhytobaseID=="14526"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Taraxacum sagittilobum" & catminat_df$PhytobaseID=="15326"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Thlaspi rot. rotundifolium" & catminat_df$PhytobaseID=="1274"),]
 
-    ## identique double entries for Erodium glandolosum, remove the first
-    catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Erodium glandulosum")[1]),]
-    catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Erodium rupicola")[1]),]
-    catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Linum bienne")[1]),]
-    catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Onosma echioides")[1]),]
-    catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Rubus cinerascens")[1]),]
-    catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Rubus conspicuus")[1]),]
+    catminat_df<-catminat_df[!(catminat_df$species_name=="Linum bienne" & catminat_df$TYPE_BIOLOGIQUE=="test(hbis)"),]
 
+    ## remove double entries
+    catminat_df<-catminat_df[!(duplicated(catminat_df)),]
+
+    ## fix flowering dates for Medicago turbinata
+    catminat_df[catminat_df$PhytobaseID==12456,c("beg_flow_fr","end_flow_fr")]<-c(4,6)
+    ## and remove double entry
+    catminat_df<-catminat_df[catminat_df$PhytobaseID!=11083,]
+
+    ## fix CHOROLOGIE for Rubus cinerascens and  Rubus conspicuus and then remove double entries
+    catminat_df<-catminat_df[(1:nrow(catminat_df))!=which(catminat_df$species_name=="Rubus cinerascens")[1],]
+    catminat_df<-catminat_df[(1:nrow(catminat_df))!=which(catminat_df$species_name=="Rubus conspicuus")[1],]
+
+    ##catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Erodium glandulosum")[1]),]
+    ##catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Erodium rupicola")[1]),]
+    ##catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Onosma echioides")[1]),]
+    
     save(file=file.path(directory,"catminat.Rda"),catminat_df)
 }
