@@ -1,44 +1,31 @@
 
 luirig<-function(species){
+    lookup_month<-data.frame(code=c(1:12,NA),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""),stringsAsFactors = T)
     base_url<-"http://luirig.altervista.org/flora/taxa/floraspecie.php?genere="
     genus<-gsub("(^[a-zA-Z]+) .*","\\1",species,useBytes = TRUE)
     url<-paste(base_url,genus,sep = "")
     RES<-list()
     if(url.exists(url)){
         tables<-readHTMLTable(url)
-        flowering<-tables[[2]][,c(1,6)]
-        names(flowering)<-c("Scientific_name","IT_beg_flow")
-        
-        tp_names<-as.character(flowering$Scientific_name)
-        
-        deh<-lapply(tp_names,function(x){
-            tp<-unlist(strsplit(x,"\n"))[[1]]
-            return(tp)
-        })
-        deh<-unlist(deh)
-        deh<-gsub("^[ ]*[0-9]+) (.*)","\\1",deh)
-        flowering$Scientific_name<-deh
-        fioritura<-with(flowering,IT_beg_flow[grep(species,Scientific_name)])
-        
-        as.character(flowering$IT_beg_flow)->tp
-        flowering<-cbind(flowering,"IT_end_flow"=tp)
-        
-        flowering$IT_beg_flow<-gsub("^(.*)-.*","\\1",flowering$IT_beg_flow)
-        flowering$IT_end_flow<-gsub("^.*-(.*)","\\1",flowering$IT_end_flow)
-        
-        lookup_month<-data.frame(code=c(1:12,NA),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""),stringsAsFactors = T)
-        FLOW<-data.frame(IT_beg_flow=mapvalues(flowering$IT_beg_flow,lookup_month$roman,lookup_month$code,warn_missing = F),IT_end_flow=mapvalues(flowering$IT_end_flow,lookup_month$roman,lookup_month$code,warn_missing = F),row.names = flowering$Scientific_name)
-        
 
-        FOUND<-FLOW[grep(species,row.names(FLOW)),]
-    ## if the species was not found, return a df with NA NA
-        if(nrow(FOUND)>0){
-            RES[[species]]["IT_beg_flow"]=as.numeric(as.character(FOUND[1,"IT_beg_flow"]))
-        RES[[species]]["IT_end_flow"]=as.numeric(as.character(FOUND[1,"IT_end_flow"]))
-    }else{
-        RES[[species]]["IT_beg_flow"]=NA
-        RES[[species]]["IT_end_flow"]=NA
-    }
+        if(grep(species,tables[[1]]$"Nome scientifico")){
+        ##
+        ## New version based on new structure of luirig.altervista.it pages
+        ##
+            
+            res<-tables[[1]]$"Nome scientifico"[grep(species,tables[[1]]$"Nome scientifico")]
+            res<-as.character(res)
+            IT_beg_flow<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\1",res)
+            IT_end_flow<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\2",res)
+            IT_beg_flow<-mapvalues(IT_beg_flow,lookup_month$roman,lookup_month$code,warn_missing = F)
+            IT_end_flow<-mapvalues(IT_end_flow,lookup_month$roman,lookup_month$code,warn_missing = F)
+
+            RES[[species]]["IT_beg_flow"]=as.numeric(IT_beg_flow)
+            RES[[species]]["IT_end_flow"]=as.numeric(IT_end_flow)
+        }else{
+            RES[[species]]["IT_beg_flow"]=NA
+            RES[[species]]["IT_end_flow"]=NA
+        }
     }else{
         RES[[species]]["IT_beg_flow"]=NA
         RES[[species]]["IT_end_flow"]=NA
@@ -47,6 +34,8 @@ luirig<-function(species){
 }
 
 
+
+    
 
 ##' ##' get_italian_flowering get the beginning and the end of the flowering
 ##' phase for the italian flora. Values are based on Pignatti and retrieved
