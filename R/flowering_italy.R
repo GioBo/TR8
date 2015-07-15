@@ -1,38 +1,98 @@
 
+
 luirig<-function(species){
-    lookup_month<-data.frame(code=c(1:12,NA),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""),stringsAsFactors = T)
+    ## The website provides flowering periods with month expressed
+    ## as roman numbers, thus a lookup table is needed for
+    ## conversion purposes
+
+    ##lookup_month<-data.frame(code=c(1:12,"NA"),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"," "),stringsAsFactors = T)
+    lookup_month<-data.frame(code=c(1:12),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),stringsAsFactors = T)
     base_url<-"http://luirig.altervista.org/flora/taxa/floraspecie.php?genere="
+    ## a single page contains all the data for all the species belonginh to the same genus
     genus<-gsub("(^[a-zA-Z]+) .*","\\1",species,useBytes = TRUE)
     url<-paste(base_url,genus,sep = "")
     RES<-list()
+    ## check if the URL exists
     if(url.exists(url)){
+        RES<-list()
+        ## download the data in the form of a R-list
         tables<-readHTMLTable(url)
+        ## extract the data in the form of a data frame
+        tabella<-tables[[1]]
 
-        if(length(grep(species,tables[[1]]$"Nome scientifico"))>0){
-        ##
-        ## New version based on new structure of luirig.altervista.it pages
-        ##
+        
+        tmp_table<-tabella[,"Nome scientifico",drop=F]
+        tmp_table$"Nome scientifico"<-as.character(tmp_table$"Nome scientifico")
+        ## get the names listed in luirig (avoiding synonims)
+        ## and add them back to the temporary downloaded dataframe
+        tp<-strsplit(as.character(tmp_table$"Nome scientifico"),"\n")
+        tp<-unlist(lapply(tp,function(x)x[[1]]))
+        tmp_table$nomi<-gsub("^\\s*[0-9]+\\)\\s+(.+)$","\\1",tp)
+
+        ## check if our species of interest is present in the downloaded webpage
+        TEST<-grep(species,tmp_table$nomi)
+        if(length(TEST)>0){
+
+            ## in case the species is present, retain only those species
+            ##  which contain its name (this is a first selection)
+            subtab<-tmp_table[TEST,,drop=FALSE]
+
+            ## calculate beginning a end of flowering for these species
+            ## and add their values as columns to the table
+            begin_fl<-lapply(subtab$"Nome scientifico",function(x){
+                if(length(grep("Fiorit:-",x))!=0){
+                    value<-NA}else{
+                    value<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\1",x)
+                }
+                value
+            }
+            )
             
-            res<-tables[[1]]$"Nome scientifico"[grep(species,tables[[1]]$"Nome scientifico")]
-            res<-as.character(res)
-            IT_beg_flow<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\1",res)
-            IT_end_flow<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\2",res)
-            IT_beg_flow<-mapvalues(IT_beg_flow,lookup_month$roman,lookup_month$code,warn_missing = F)
-            IT_end_flow<-mapvalues(IT_end_flow,lookup_month$roman,lookup_month$code,warn_missing = F)
+            end_fl<-lapply(subtab$"Nome scientifico",function(x){
+                if(length(grep("Fiorit:-",x))!=0){
+                    value<-NA}else{
+                    value<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\2",x)
+                }
+                value
+            }
+            )
 
-            RES[[species]]["IT_beg_flow"]=as.numeric(IT_beg_flow)
-            RES[[species]]["IT_end_flow"]=as.numeric(IT_end_flow)
+            ## change roman numbers (for months) to arabic
+            subtab$IT_beg_fl<-mapvalues(unlist(begin_fl),lookup_month$roman,lookup_month$cod,warn_missing=FALSE)
+            subtab$IT_end_fl<-mapvalues(unlist(end_fl),lookup_month$roman,lookup_month$cod,warn_missing=FALSE)
+
+            ## chech what is the complete name of our species of interest (with
+            ## author names, since this is the format used on luirigi website)
+            specie_check<-gnr_resolve(species,data_source_ids = 11,best_match_only = T,highestscore = TRUE)$results
+            ## check data for our species (with its complete name) are available
+            ## in the downloaded dataframe
+            res<-specie_check$matched_name[specie_check$score>0.9]
+
+            if(length(res)==0){
+                RES[[species]]["IT_beg_flow"]=NA
+                RES[[species]]["IT_end_flow"]=NA
+            }else{
+                RES[[species]]["IT_beg_flow"]=subtab$IT_beg_fl[subtab$nomi==res]
+                RES[[species]]["IT_end_flow"]=subtab$IT_end_fl[subtab$nomi==res]
+            }
+
         }else{
             RES[[species]]["IT_beg_flow"]=NA
             RES[[species]]["IT_end_flow"]=NA
         }
-    }else{
-        RES[[species]]["IT_beg_flow"]=NA
-        RES[[species]]["IT_end_flow"]=NA
+        }else{
+            RES[[species]]["IT_beg_flow"]=NA
+            RES[[species]]["IT_end_flow"]=NA
+            
     }
+
     return(RES[[species]])
 }
 
+
+
+
+    
 
 
     
