@@ -97,103 +97,103 @@ catminat_download_to_local_directory<-function(directory){
 
     ## recode inflorescenses types
     inflorescences<-c(
-        "capitule de capitules"="Compound capitulum",
-        "capitule simple"="Capitulum",
-        "c.*ne"="Cone",                                
-        "corymbe"="Corymb",
-        "corymbe de capitules"="Corymb of capitula",
-        "cyathe"="Cyathium",
-        "cyme bipare"="Dichasia cyme",                         
-        "cyme biscorpio.*de"="Scorpioid cyme",
-        "cyme capituliforme"="Capituliform cyme ",
-        "cyme d'.+pis"="Cyme of spikes",
-        "cyme d'ombelles"="Cyme of umbels",                     
-        "cyme de capitules"="Cyme of capitula",
-        "cyme de glom.+rules"="Cyme of glomerula",
-        "cyme multipare"="Pleiochasium",
-        "cyme unipare h.*lico.*de"="Helicoid cyme",              
-        "cyme unipare scorpio.*de"="Scorpioid cyme",
-        ".*pi d'.+pillets"="Spike of spikelets",
-        ".*pi de capitules"="Spike of capitula",
-        ".+pi de cymes triflores"="Spike of three-flowers cymes",              
-        ".+pi simple"="Simple spike",
-        "fleur solitaire lat.+rale"="Solitary lateral flower",
-        "fleur solitaire terminale"="Solitary terminal flower",
-        "glom.+rules"="Glomerula",                          
-        "glom.*rules spiciformes"="Spike-like glomerula",
-        "ombelle d'ombellules"="Umbel of umbels",
-        "ombelle simple"="Simple umbel",
-        "ombelle simple d'.+pis"="Simple umbel of spikes",               
-        "ombelle simple de capitules"="Simple umbel of capitula",
-        "panicule d'.+pillets"="Panicle of spikelets",
-        "panicule spiciforme"="Spike-like panicle",
-        "rac.{1}me capituliforme"="Capitulum-like raceme",                 
-        "rac.{1}me d'.+pis"="Raceme of spikes",
-        "rac.{1}me d'ombelles"="Raceme of umbels",
-        "rac.{1}me de capitules"="Raceme of capitula",
-        "ra.{1}me de cymes bipares"="Raceme of dichasia cymes",             
-        "rac.{1}me de cymes unipares h.{1}lico.{1}des"="Raceme of helicoid cymes",
-        "rac.{1}me de cymes unipares scorpio.{1}des"="Raceme of scorpioid cymes",
-        "rac.{1}me de rac.{1}mes"="Raceme of racemes",
-        "rac.{1}me simple"="Simple raceme",                       
-        "rac.{1}me de cymes bipares"="Raceme of dichasia cymes", 
-        "spadice"="Spadix",
-        "verticille d'ombelles"="Verticil of umbels"               
+        "capitule de capitules$"="Compound capitulum",
+        "capitule simple$"="Capitulum",
+        "c.*ne$"="Cone",                                
+        "corymbe$"="Corymb",
+        "corymbe de capitules$"="Corymb of capitula",
+        "cyathe$"="Cyathium",
+        "cyme bipare$"="Dichasia cyme",                         
+        "cyme biscorpio.*de$"="Scorpioid cyme",
+        "cyme capituliforme$"="Capituliform cyme ",
+        "cyme d'.+pis$"="Cyme of spikes",
+        "cyme d'ombelles$"="Cyme of umbels",                     
+        "cyme de capitules$"="Cyme of capitula",
+        "cyme de glom.+rules$"="Cyme of glomerula",
+        "cyme multipare$"="Pleiochasium",
+        "cyme unipare h.*lico.*de$"="Helicoid cyme",              
+        "cyme unipare scorpio.*de$"="Scorpioid cyme",
+        ".*pi d'.+pillets$"="Spike of spikelets",
+        ".*pi de capitules$"="Spike of capitula",
+        ".+pi de cymes triflores$"="Spike of three-flowers cymes",              
+        ".+pi simple$"="Simple spike",
+        "fleur solitaire lat.+rale$"="Solitary lateral flower",
+        "fleur solitaire terminale$"="Solitary terminal flower",
+        "glom.+rules$"="Glomerula",                          
+        "glom.*rules spiciformes$"="Spike-like glomerula",
+        "ombelle d'ombellules$"="Umbel of umbels",
+        "ombelle simple$"="Simple umbel",
+        "ombelle simple d'.+pis$"="Simple umbel of spikes",               
+        "ombelle simple de capitules$"="Simple umbel of capitula",
+        "panicule d'.+pillets$"="Panicle of spikelets",
+        "panicule spiciforme$"="Spike-like panicle",
+        "rac.{1}me capituliforme$"="Capitulum-like raceme",                 
+        "rac.{1}me d'.+pis$"="Raceme of spikes",
+        "rac.{1}me d'ombelles$"="Raceme of umbels",
+        "rac.{1}me de capitules$"="Raceme of capitula",
+        "ra.{1}me de cymes bipares$"="Raceme of dichasia cymes",             
+        "rac.{1}me de cymes unipares h.{1}lico.{1}des$"="Raceme of helicoid cymes",
+        "rac.{1}me de cymes unipares scorpio.{1}des$"="Raceme of scorpioid cymes",
+        "rac.{1}me de rac.{1}mes$"="Raceme of racemes",
+        "rac.{1}me simple$"="Simple raceme",                       
+        "rac.{1}me de cymes bipares$"="Raceme of dichasia cymes", 
+        "spadice$"="Spadix",
+        "verticille d'ombelles$"="Verticil of umbels"               
         )
     catminat_df$inflorescence_fr<-catminat_replace(catminat_df$inflorescence_fr,inflorescences)
 
     ## recode fruit types
-    fruit_types=c("ak.{1}ne"="achene",
-        "baie"="berry",
-        "capsule"="capsule",
-        "caryopse"="caryopsis",
-        "c.{1}ne"="cone",
-        "drupe"="drupe",
-        "follicule"="follicle",
-        "catminat_dfusse"="legume",
-        "pyxide"="pyxid",
-        "samare"="samara",
-        "silique"="silique"  
+    fruit_types=c("ak.{1}ne$"="achene",
+        "baie$"="berry",
+        "capsule$"="capsule",
+        "caryopse$"="caryopsis",
+        "c.{1}ne$"="cone",
+        "drupe$"="drupe",
+        "follicule$"="follicle",
+        "catminat_dfusse$"="legume",
+        "pyxide$"="pyxid",
+        "samare$"="samara",
+        "silique$"="silique"  
         )
     catminat_df$fruit_type_fr<-catminat_replace(catminat_df$fruit_type_fr,fruit_types)
 
     ## recode flower colours
-    flower_colours<-c("blanc"="white",
-                      "jaune"="yellow",
-                      "vert"="green",
-                      "marron"="brown",
-                      "bleu"="blue",
-                      "jaune"="yellow",
-                      "jauna"="yellow",
-                      "noir"="black"
+    flower_colours<-c("blanc$"="white",
+                      "jaune$"="yellow",
+                      "vert$"="green",
+                      "marron$"="brown",
+                      "bleu$"="blue",
+                      "jaune$"="yellow",
+                      "jauna$"="yellow",
+                      "noir$"="black"
                       )
     catminat_df$flower_colour_fr<-catminat_replace(catminat_df$flower_colour_fr,flower_colours)
 
     ## recode dissemination types
     dissemination<-c(
-        "an.*mochore"="anemochores",
-        "myrm.*cochore"="myrmecochores",
-        "myrm.*cochore"="myrmecochores",
-        "autochore"="autochores",
-        "barochore"="barochores",
-        "endozoochore"="endozoochores",
-        "endozoochorie"="endozoochores",
-        ".+pizoochore"="epizoochores",              
-        "dyszoochore"="dyszoochores", 
-        "hydrochore"="hydrochores"                             
+        "an.*mochore$"="anemochores",
+        "myrm.*cochore$"="myrmecochores",
+        "myrm.*cochore$"="myrmecochores",
+        "autochore$"="autochores",
+        "barochore$"="barochores",
+        "endozoochore$"="endozoochores",
+        "endozoochorie$"="endozoochores",
+        ".+pizoochore$"="epizoochores",              
+        "dyszoochore$"="dyszoochores", 
+        "hydrochore$"="hydrochores"                             
         )
     catminat_df$dissemination_fr<-catminat_replace(catminat_df$dissemination_fr,dissemination)
 
     ## recode sexual reproduction types
     sex_reprod<-c(
-        "androdio.{1}que"="Androdioecy",
+        "androdio.{1}que$"="Androdioecy",
         "gynomono.{1}que" ="Gynomonoecious",
-        "gynodio.{1}que"="Gynodioecious",
-        "polygame"="Polygamous",
-        "mono.{1}que"="Monoecious",
-        "dio.{1}que"="Dioecious",
-        "hermaphrodite"="Hermaphroditic",
-        "polygame"="Polygamous"
+        "gynodio.{1}que$"="Gynodioecious",
+        "polygame$"="Polygamous",
+        "mono.{1}que$"="Monoecious",
+        "dio.{1}que$"="Dioecious",
+        "hermaphrodite$"="Hermaphroditic",
+        "polygame$"="Polygamous"
         )
     catminat_df$sex_reprod_fr<-catminat_replace(catminat_df$sex_reprod_fr,sex_reprod)
 
@@ -201,7 +201,7 @@ catminat_download_to_local_directory<-function(directory){
     ## "sans nom" is found
     catminat_df<-catminat_df[grep("sans nom",catminat_df$species_name,invert=TRUE),]
 
-
+   
     ##
     catminat_df$species_name<-gsub("\\s+\\[.*$","",catminat_df$species_name,perl=TRUE)
     catminat_df$species_name<-gsub("&amp","&",catminat_df$species_name,perl=TRUE)
@@ -255,6 +255,9 @@ catminat_download_to_local_directory<-function(directory){
     ##catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Erodium glandulosum")[1]),]
     ##catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Erodium rupicola")[1]),]
     ##catminat_df<-catminat_df[row.names(catminat_df)!=(which(catminat_df$species_name=="Onosma echioides")[1]),]
+
+    ## remove CHOROLOGIE column
+    catminat_df<-catminat_df[,names(catminat_df)!="CHOROLOGIE"]
     
     save(file=file.path(directory,"catminat.Rda"),catminat_df)
 }
