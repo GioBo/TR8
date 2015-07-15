@@ -8,7 +8,7 @@ luirig<-function(species){
     if(url.exists(url)){
         tables<-readHTMLTable(url)
 
-        if(grep(species,tables[[1]]$"Nome scientifico")){
+        if(length(grep(species,tables[[1]]$"Nome scientifico"))>0){
         ##
         ## New version based on new structure of luirig.altervista.it pages
         ##
