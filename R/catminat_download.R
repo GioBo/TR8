@@ -201,7 +201,17 @@ catminat_download_to_local_directory<-function(directory){
     ## "sans nom" is found
     catminat_df<-catminat_df[grep("sans nom",catminat_df$species_name,invert=TRUE),]
 
-   
+    ## recode pollen vector
+    poll_vec<-c(
+        "an.{1}mogame"="wind",
+        "autogame"="self",
+        "apogame"="apogamy",
+        "entomogame"="insect",
+        "hydrogame"="water"
+        )
+    catminat_df$poll_vect_fr<-catminat_replace(as.character(catminat_df$poll_vect_fr),poll_vec)
+
+    
     ##
     catminat_df$species_name<-gsub("\\s+\\[.*$","",catminat_df$species_name,perl=TRUE)
     catminat_df$species_name<-gsub("&amp","&",catminat_df$species_name,perl=TRUE)
