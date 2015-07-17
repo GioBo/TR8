@@ -15,11 +15,32 @@ luirig<-function(species){
     ## check if the URL exists
     if(url.exists(url)){
         RES<-list()
+
+
+        ##  
+        ##  
+        ##  This part is tricky; the website contains tables of flowering data where species 
+        ##  names contains Authors name as well; tr8 users, instead, SHOULD use plant names
+        ##   without authors; thus, the following steps are taken:
+        ##  
+        ##  1. first the data table are extracted from the website
+        ##  2. then,using grep, all the entried which contains the 
+        ##     focus species are extracted (eg. if "Calystegia sepium"
+        ##    is the focus species, then all the entries containing it ("Calystegia sepium (L.) R.Br.", 
+        ##    "Calystegia sepium subsp. pulchra (Brummitt & Heywood) Tutin", etc...) are extracted.
+        ##  3. these names are checked with gnr_resolve and the resulting "matched_name" and "score"
+        ##     are added to the table
+        ##  4. we check the focus species with gnr_resolve as well
+        ##  5. a cross-check is performed: we search which species in luirig has the same
+        ##     accepted_name as our focus species and we retain only that one with the highest score
+        ##  6. for only this species flowering data are passed to tr8
+        ##  
+
         ## download the data in the form of a R-list
         tables<-readHTMLTable(url)
         ## extract the data in the form of a data frame
         tabella<-tables[[1]]
-
+        
         
         tmp_table<-tabella[,"Nome scientifico",drop=F]
         tmp_table$"Nome scientifico"<-as.character(tmp_table$"Nome scientifico")
@@ -40,7 +61,8 @@ luirig<-function(species){
             ## calculate beginning a end of flowering for these species
             ## and add their values as columns to the table
             begin_fl<-lapply(subtab$"Nome scientifico",function(x){
-                if(length(grep("Fiorit:-",x))!=0){
+                ##                if(length(grep("Fiorit:-",x))!=0){
+                if(!grepl(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*",x)==TRUE){
                     value<-NA}else{
                     value<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\1",x)
                 }
@@ -49,7 +71,8 @@ luirig<-function(species){
             )
             
             end_fl<-lapply(subtab$"Nome scientifico",function(x){
-                if(length(grep("Fiorit:-",x))!=0){
+                ##if(length(grep("Fiorit:-",x))!=0){
+                if(!grepl(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*",x)==TRUE){
                     value<-NA}else{
                     value<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\2",x)
                 }
@@ -61,19 +84,30 @@ luirig<-function(species){
             subtab$IT_beg_fl<-mapvalues(unlist(begin_fl),lookup_month$roman,lookup_month$cod,warn_missing=FALSE)
             subtab$IT_end_fl<-mapvalues(unlist(end_fl),lookup_month$roman,lookup_month$cod,warn_missing=FALSE)
 
+            ##tp_nomi<-as.data.frame(gnr_resolve(subtab$nomi,data_source_ids = 11,best_match_only = T,highestscore = TRUE)$results)
+            tp_nomi<-as.data.frame(gnr_resolve(subtab$nomi,data_source_ids = 11,highestscore = TRUE)$results)
+            ##subtab<-cbind(subtab,tp_nomi[,c("matched_name","score")])
             ## chech what is the complete name of our species of interest (with
             ## author names, since this is the format used on luirigi website)
             specie_check<-gnr_resolve(species,data_source_ids = 11,best_match_only = T,highestscore = TRUE)$results
+            
+
+
             ## check data for our species (with its complete name) are available
             ## in the downloaded dataframe
             res<-specie_check$matched_name[specie_check$score>0.9]
-
+            
             if(length(res)==0){
                 RES[[species]]["IT_beg_flow"]=NA
                 RES[[species]]["IT_end_flow"]=NA
             }else{
-                RES[[species]]["IT_beg_flow"]=subtab$IT_beg_fl[subtab$nomi==res]
-                RES[[species]]["IT_end_flow"]=subtab$IT_end_fl[subtab$nomi==res]
+
+                subtp<-tp_nomi[which(tp_nomi$matched_name==specie_check$matched_name),,drop=F]
+                sp_link<-subtp[which.max(subtp$score),"matched_name"]
+                ##subsubtab<-subset(subtab,matched_name==specie_check$matched_name)
+                ##sp_link<-subsubtab$nomi[which.max(subsubtab$score)]
+                RES[[species]]["IT_beg_flow"]=subtab$IT_beg_fl[subtab$nomi==sp_link]
+                RES[[species]]["IT_end_flow"]=subtab$IT_end_fl[subtab$nomi==sp_link]
             }
 
         }else{
