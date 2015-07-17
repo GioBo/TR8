@@ -8,7 +8,7 @@ luirig<-function(species){
     ##lookup_month<-data.frame(code=c(1:12,"NA"),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"," "),stringsAsFactors = T)
     lookup_month<-data.frame(code=c(1:12),roman=c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"),stringsAsFactors = T)
     base_url<-"http://luirig.altervista.org/flora/taxa/floraspecie.php?genere="
-    ## a single page contains all the data for all the species belonginh to the same genus
+    ## a single page contains all the data for all the species belonging to the same genus
     genus<-gsub("(^[a-zA-Z]+) .*","\\1",species,useBytes = TRUE)
     url<-paste(base_url,genus,sep = "")
     RES<-list()
