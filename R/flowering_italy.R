@@ -40,13 +40,18 @@ luirig<-function(species){
             ## extract flowering dates
             beg_fl<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\1",vai)
             end_fl<-gsub(".*Fiorit:([IVX]+)-([IVX]*)Tipo.*","\\2",vai)        
-
+            
             beg_fl<-mapvalues(beg_fl,lookup_month$roman,lookup_month$cod,warn_missing=FALSE)
             end_fl<-mapvalues(end_fl,lookup_month$roman,lookup_month$cod,warn_missing=FALSE)
             
-            RES[[species]]["IT_beg_flow"]=beg_fl
-            RES[[species]]["IT_end_flow"]=end_fl
+            if(beg_fl%in%1:12&end_fl%in%1:12){
+                RES[[species]]["IT_beg_flow"]=beg_fl
+                RES[[species]]["IT_end_flow"]=end_fl
             }else{
+                RES[[species]]["IT_beg_flow"]=NA
+                RES[[species]]["IT_end_flow"]=NA
+            }
+        }else{
             RES[[species]]["IT_beg_flow"]=NA
             RES[[species]]["IT_end_flow"]=NA
         }
