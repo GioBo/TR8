@@ -40,7 +40,7 @@
    interested in using the \texttt{TR8} package: this is meant to be a
    step-by-step guide involving most of the common problems that are
    faced in importing data, checking them and running \texttt{tr8}\footnote{The process described here is rather lengthy in order to 
-   describe each single step in detail; users which are confident in the use of R could make most of the steps much shorter than what's presented here.}.
+   describe each single step in detail; users who are confident in the use of R could make most of the steps much shorter than what's presented here.}.
     This section relies on the dataset used by Sandau et
     al.(2014)\cite{Sandau} which is publicly available at
     \texttt{dryad}\cite{dryad_Sandau} (under a CC0 1.0 licence ).
@@ -622,7 +622,7 @@ par(mfrow=c(1,1))
 
 
    From the graphs we are able to say that \textit{group 1} is composed of only   "Hemicryptophyte" species, while \textit{group 2 } has a more homogeneous combination of "Geophytes", "Hemicryptophytes" and  "Hemicryptophyte - Therophyte" species. If we look at \texttt{maximum height}, there's a group which is clearly different from all the rest: this is the one which is composed of only \textit{Salix alba}: this is the only woody species in our analyzed dataset, thus it's clear that, when considering the \texttt{maximum height} trait, it would be separated from all the other species. 
-   In terms of \texttt{leaf area}, \texttt{group 4} is composed of some of the broadleaf species which have the maximum values for his trait (e.g. \textit{Verbascum thapsus} and \textit{V. lychnitis}.
+   In terms of \texttt{leaf area}, \texttt{group 4} is composed of some of the broadleaf species which have the maximum values for his trait (e.g. \textit{Verbascum thapsus} and \textit{V. lychnitis}).
   \end{enumerate}
    
 \section{Some concluding remarks}
@@ -633,7 +633,7 @@ par(mfrow=c(1,1))
    \begin{itemize}
    \item We did not transform original data: it would have made sense to transform the original abundance data, e.g. using standardization algorithm provided by the \texttt{decostand()} function in \texttt{vegan}.
    \item In the end we excluded many species from our analysis since we had not found trait data for them; we could have searched for data in different databases (e.g. \texttt{life\_form} is also available in \texttt{Ecolfora}) or we could have got data from other sources - like books, floras, etc... - and added those values to the downloaded traits).
-   \item We used trait values retrieved from databases\footnote{This is what \texttt{TR8} was created for...} and assumed that those were correct for our analysis; this poses some problems, e.g the case of \textit{S. alba} is striking in this respect: looking at the abundance data, it's clear that what were sampled were small individuals, but using data retrieved by \texttt{tr8} we used a value of 25 m for it \texttt{maximum height} value.
+   \item We used trait values retrieved from databases\footnote{This is what \texttt{TR8} was created for...} and assumed that those were correct for our analysis; this poses some problems, e.g the case of \textit{S. alba} is striking in this respect: looking at the abundance data, it's clear that what were sampled were small individuals, but using data retrieved by \texttt{tr8} we used a value of 25 m for its \texttt{maximum height} value.
    \item \texttt{Leaf area} values could have been coded as ordered factors, instead of using midpoint values of each class (which is probably one of the reason for the shape of the boxes in the boxplot in figure at page \pageref{fig:results}).
      
    \end{itemize}
