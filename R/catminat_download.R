@@ -16,11 +16,16 @@ catminat_download_to_local_directory<-function(directory){
 
     url<-"http://philippe.julve.pagesperso-orange.fr/baseflor.xlsx"
     ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab")
-    baseflor<-read.xls (url, sheet = 1, header=T,method="tab",fileEncoding="utf-8")
+    ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab",fileEncoding="utf-8")
+    temp_dest<-tempfile(fileext=".xlsx")
+    download.file(url,temp_dest)
+    catminat_df<-read_excel(temp_dest,sheet=1,col_names=T,col_types=rep("text",60))
+    
+    catminat_df<-catminat_df[grep("[0-9]+",catminat_df$rang_taxinomiqu,invert=T),]
 
 
-    ## I create a copy of baseflor called catminat_df
-    catminat_df<-baseflor
+    ##### TODO correggere nomi delle specie\
+
 
     ## remove entries for which CHOROLOGIE=="?"
     catminat_df<-catminat_df[catminat_df$CHOROLOGIE!="?",]
@@ -44,7 +49,7 @@ catminat_download_to_local_directory<-function(directory){
                               "fruit"="fruit_type_fr",
                               "sexualit.*"="sex_reprod_fr",
                               "ordre_maturation"="order_of_maturation",
-                              ##"NOM_SCIENTIFIQUE"="species_name"
+                              "NOM_SCIENTIFIQUE"="species_name",
                               "inflorescence"="inflorescence_fr",
                               "Nom.Phytobase"="species_name"
                               )
@@ -52,8 +57,9 @@ catminat_download_to_local_directory<-function(directory){
     for(i in names(recode_catminat_values)){
         names(catminat_df)<-gsub(i,recode_catminat_values[i],names(catminat_df))
     }
-    catminat_df$species_name<-as.character(catminat_df$species_name)
 
+    catminat_df$species_name<-as.character(catminat_df$species_name)
+    catminat_df<-catminat_df[!is.na(catminat_df$species_name),]
     ## I split flowering dates into 2 columns,
     ## flower begin and end
     flowering<-as.character(catminat_df$floraison)
@@ -218,6 +224,9 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df$species_name<-gsub("\\s+\\*$","",catminat_df$species_name,perl=TRUE)
     catminat_df$species_name<-gsub("\\s+A$","",catminat_df$species_name,perl=TRUE)
     catminat_df$species_name<-gsub("\\s+B$","",catminat_df$species_name,perl=TRUE)
+    ## added new "char removal"...in names like  "Cryptomeria japonica (L.f.) D.Don "
+    ## this removes everything from "(" to the end
+    catminat_df$species_name<-gsub("\\s+\\(.*$","",catminat_df$species_name,perl=TRUE)
 
     ## remove entries without species names
     catminat_df<-catminat_df[catminat_df$species_name!="",]
@@ -269,4 +278,23 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df<-catminat_df[,names(catminat_df)!="CHOROLOGIE"]
     
     save(file=file.path(directory,"catminat.Rda"),catminat_df)
+}
+
+
+pulisci_catminat<-function(lista){
+
+    ##  Loefl. ex L.
+    ##  D.E.Allen & L.J.Margetts
+    ##  Späth ex H.L.Späth
+    ##  Ehrh. ex L.f.
+    ##  H.L.Wendl. ex Pfeiff.
+    ## \\s\{\1\}L\\.\\s\{0,1\}
+
+
+    lista<-gsub("\\S+\\s*\\bex\\b\\s*.*$","",lista, perl=T)
+    lista<-gsub("\\S+\\s* & \\s*.*$","",lista, perl=T)
+    lista<-gsub(" L.","",lista, perl=F)
+
+    return(lista)
+    
 }
