@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{taxize}
 { Chamberlain, S.} and {Szocs, E.}
@@ -56,34 +56,5 @@ S.~Pignatti, P.~Menegoni, and S.~Pietrosanti.
 \newblock {Biondicazione attraverso le piante vascolari. Valori di indicazione
   secondo Ellenberg (Zeigerwerte) per le specie della Flora d'Italia}.
 \newblock {\em Braun-Blanquetia}, 39:97, 2005.
-
-\bibitem{RCurl}
-D.~Temple~Lang.
-\newblock {\em RCurl: General network (HTTP/FTP/...) client interface for R},
-  2013.
-\newblock R package version 1.95-4.1.
-
-\bibitem{XML}
-D.~Temple~Lang.
-\newblock {\em XML: Tools for parsing and generating XML within R and S-Plus.},
-  2013.
-\newblock R package version 3.98-1.1.
-
-\bibitem{gWidgets}
-J.. Based on the iwidgets code of Simon~Urbanek Verzani, suggestions~by
-  Simon~Urbanek, Philippe Grosjean, and Michael Lawrence.
-\newblock {\em gWidgets: gWidgets API for building toolkit-independent,
-  interactive GUIs}, 2012.
-\newblock R package version 0.0-52.
-
-\bibitem{reshape}
-H.~Wickham.
-\newblock Reshaping data with the reshape package.
-\newblock {\em Journal of Statistical Software}, 21(12), 2007.
-
-\bibitem{plyr}
-H.~Wickham.
-\newblock The split-apply-combine strategy for data analysis.
-\newblock {\em Journal of Statistical Software}, 40(1):1--29, 2011.
 
 \end{thebibliography}

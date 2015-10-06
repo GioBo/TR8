@@ -47,8 +47,8 @@ possibility of easily retrieving traits data for plant species from the followin
 \item[Ellenberg values for Italian Flora] \cite{pignatti}
 \item[Flowering period for Italian Flora] \cite{pignatti} (data retrieved from \url{http://luirig.altervista.org/})
 \item[Mycorrhizal intensity database] \cite{amf}
-  \item[MycoFlor database]\cite{Hempel2013}
-  \item[Catminat database]\cite{catminat} 
+\item[MycoFlor database]\cite{Hempel2013}
+\item[Catminat database]\cite{catminat} 
     
 \end{description}
 
@@ -90,14 +90,14 @@ Please note that:
 \end{description}
 
 
-\subsection{A very important note for Windows users}
+%% \subsection{A very important note for Windows users}
 
 
-   If you want to be able to use data from the \texttt{Catminat}
-   database you need to have \texttt{Perl} installed on your machine.
-   If you do not have it, please go at
-   \url{https://www.perl.org/get.html} and install either
-   \texttt{Strawberry Perl} (the one I suggest) or \texttt{ActiveState Perl}.
+%%    If you want to be able to use data from the \texttt{Catminat}
+%%    database you need to have \texttt{Perl} installed on your machine.
+%%    If you do not have it, please go at
+%%    \url{https://www.perl.org/get.html} and install either
+%%    \texttt{Strawberry Perl} (the one I suggest) or \texttt{ActiveState Perl}.
 
   
 \subsection{Using the development version}
@@ -318,13 +318,19 @@ bib(my_traits)
 
 \section{Some notes on using \texttt{tr8}}
 
+\subsubsection*{A NOTE OF CAUTION}
 
-  \textbf{A NOTE OF CAUTION}: searching the web is a time (and
+
+  Searching the web is a time (and
   Internet band) consuming activity, thus the higher the number of
   your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
-  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.\\
+  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.
 
-  \textbf{A (SECOND) NOTE OF CAUTION}: some users adopt the following workflow for analysing their vegetation data:
+  \subsubsection*{A (SECOND) NOTE OF CAUTION}
+
+
+  
+ Some users adopt the following workflow for analysing their vegetation data:
 
   \begin{enumerate}
   \item insert vegetation data into a \textit{spreadsheet file} with species as

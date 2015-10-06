@@ -16,11 +16,17 @@ catminat_download_to_local_directory<-function(directory){
 
     url<-"http://philippe.julve.pagesperso-orange.fr/baseflor.xlsx"
     ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab")
-    baseflor<-read.xls (url, sheet = 1, header=T,method="tab",fileEncoding="utf-8")
+    ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab",fileEncoding="utf-8")
+    temp_dest<-tempfile(fileext=".xlsx")
+    download.file(url,temp_dest)
+
+    catminat_df<-read_excel(temp_dest,sheet=1,col_names=T,col_types=rep("text",60))
+    
+    catminat_df<-catminat_df[grep("[0-9]+",catminat_df$rang_taxinomiqu,invert=T),]
 
 
-    ## I create a copy of baseflor called catminat_df
-    catminat_df<-baseflor
+    ##### TODO correggere nomi delle specie\
+
 
     ## remove entries for which CHOROLOGIE=="?"
     catminat_df<-catminat_df[catminat_df$CHOROLOGIE!="?",]
@@ -44,7 +50,6 @@ catminat_download_to_local_directory<-function(directory){
                               "fruit"="fruit_type_fr",
                               "sexualit.*"="sex_reprod_fr",
                               "ordre_maturation"="order_of_maturation",
-                              ##"NOM_SCIENTIFIQUE"="species_name"
                               "inflorescence"="inflorescence_fr",
                               "Nom.Phytobase"="species_name"
                               )
@@ -52,7 +57,20 @@ catminat_download_to_local_directory<-function(directory){
     for(i in names(recode_catminat_values)){
         names(catminat_df)<-gsub(i,recode_catminat_values[i],names(catminat_df))
     }
+
     catminat_df$species_name<-as.character(catminat_df$species_name)
+    catminat_df<-catminat_df[!is.na(catminat_df$species_name),]
+
+
+    
+    catminat_df$species_name<-gsub("&amp","&",catminat_df$species_name,perl=TRUE)
+    catminat_df$species_name<-gsub(";","",catminat_df$species_name,perl=TRUE)
+    catminat_df$species_name<-gsub("\\s+\\*$","",catminat_df$species_name,perl=TRUE)
+    catminat_df$species_name<-gsub("\\s+A$","",catminat_df$species_name,perl=TRUE)
+    catminat_df$species_name<-gsub("\\s+B$","",catminat_df$species_name,perl=TRUE)
+
+
+    
 
     ## I split flowering dates into 2 columns,
     ## flower begin and end
@@ -210,25 +228,20 @@ catminat_download_to_local_directory<-function(directory){
         )
     catminat_df$poll_vect_fr<-catminat_replace(as.character(catminat_df$poll_vect_fr),poll_vec)
 
-    
-    ##
-    catminat_df$species_name<-gsub("\\s+\\[.*$","",catminat_df$species_name,perl=TRUE)
-    catminat_df$species_name<-gsub("&amp","&",catminat_df$species_name,perl=TRUE)
-    catminat_df$species_name<-gsub(";","",catminat_df$species_name,perl=TRUE)
-    catminat_df$species_name<-gsub("\\s+\\*$","",catminat_df$species_name,perl=TRUE)
-    catminat_df$species_name<-gsub("\\s+A$","",catminat_df$species_name,perl=TRUE)
-    catminat_df$species_name<-gsub("\\s+B$","",catminat_df$species_name,perl=TRUE)
 
     ## remove entries without species names
     catminat_df<-catminat_df[catminat_df$species_name!="",]
 
 
     ## Remove double entries
-    catminat_df<-catminat_df[!(catminat_df$species_name=="Juncus articulatus" & catminat_df$sex_reprod==""),]
+
+    ## beware: catminat is now read with readxl package and empty cells are coded as <NA>. not as empty strings
+    ##    catminat_df<-catminat_df[!(catminat_df$species_name=="Juncus articulatus" & catminat_df$sex_reprod_fr==""),]
+    catminat_df<-catminat_df[!(catminat_df$species_name=="Juncus articulatus" & is.na(catminat_df$sex_reprod_fr)),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Capparis spinosa" & catminat_df$PhytobaseID=="13450"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Centaurium ery. erythraea" & catminat_df$PhytobaseID=="2361"),]
 ##    catminat_df<-catminat_df[!(catminat_df$species_name=="Centaurium ery. erythraea" & catminat_df$PhytobaseID=="2361"),]
-    catminat_df<-catminat_df[!(catminat_df$species_name=="Chenopodium ambrosioides" & catminat_df$flower_colour_fr==""),]
+    catminat_df<-catminat_df[!(catminat_df$species_name=="Chenopodium ambrosioides" & is.na(catminat_df$flower_colour_fr)),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Chenopodium opulifolium" & catminat_df$CHOROLOGIE=="cosmopolite"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Cornus sanguinea" & catminat_df$PhytobaseID=="2258"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Crataegus mon. monogyna" & catminat_df$PhytobaseID=="1657"),]
@@ -237,7 +250,7 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df<-catminat_df[!(catminat_df$species_name=="Festuca ovi. ovina" & catminat_df$PhytobaseID=="352"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Gaudinia fragilis" & catminat_df$TYPE_BIOLOGIQUE=="test(hbis)"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Genista salzmannii" & catminat_df$PhytobaseID=="12481"),]
-    catminat_df<-catminat_df[!(catminat_df$species_name=="Medicacatminat_df turbinata" & catminat_df$PhytobaseID=="12456"),]
+    catminat_df<-catminat_df[!(catminat_df$species_name=="Medicago turbinata" & catminat_df$PhytobaseID=="12456"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Ophrys bertolonii" & catminat_df$PhytobaseID=="725"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Populus nigra" & catminat_df$PhytobaseID=="7038"),]
     catminat_df<-catminat_df[!(catminat_df$species_name=="Rhamnus saxatilis" & catminat_df$PhytobaseID=="16181"),]
@@ -270,3 +283,4 @@ catminat_download_to_local_directory<-function(directory){
     
     save(file=file.path(directory,"catminat.Rda"),catminat_df)
 }
+
