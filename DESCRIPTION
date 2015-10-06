@@ -30,4 +30,4 @@ Imports:
     rappdirs,
     gWidgets,
     gWidgetstcltk,
-    gdata
+    readxl
