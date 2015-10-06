@@ -25,7 +25,6 @@ Depends:
 Imports:
     RCurl,
     XML,
-    taxize,
     plyr,
     rappdirs,
     gWidgets,
