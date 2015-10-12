@@ -1,7 +1,7 @@
 #' biolflor_lookup
 #' 
 #' This dataframe is used to retrieve species URLs from the BiolFlor website
-#' (\url{http://www2.ufz.de/biolflor/index.jsp}). 
+#' (\samp{http://www2.ufz.de/biolflor/index.jsp}). 
 #' 
 #' @name biolflor_lookup
 #' @docType data
@@ -147,7 +147,7 @@ NULL
 #' Ecoflora; curious users can expand the number of downloadable traits
 #' simply extending the list with other 'pairs' (take care of using the right
 #' \code{Ecoflora codes} as described in
-#' \url{http://www.ecoflora.co.uk/search_plantchar.php}).
+#' \samp{http://www.ecoflora.co.uk/search_plantchar.php}).
 #' 
 #' @name traits_eco
 #' @docType data
@@ -173,7 +173,7 @@ NULL
 #' }
 #' @docType data
 #' @references Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database,
-#' J. Ecol., 82, 415-425.  \url{http://www.ecoflora.co.uk}
+#' J. Ecol., 82, 415-425.  \samp{http://www.ecoflora.co.uk}
 #' @keywords datasets
 #' @examples \dontrun{
 #' data(traits_eco)
@@ -189,12 +189,12 @@ NULL
 #' on the LEDA website; up to now only few functional traits were taken into
 #' account.  Hopefully the database will be extendend in the following releases
 #' of the package.  Please refer to
-#' \url{http://www.leda-traitbase.org/LEDAportal/plantTraits.jsp} for a
+#' \samp{http://www.leda-traitbase.org/LEDAportal/plantTraits.jsp} for a
 #' detailed explanation of the traits availabe (definitions, units of measure,
 #' etc...) in LEDA.
 #' 
 #' The original datasets are available as .TXT files in they raw form at
-#' \url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}; what is found
+#' \samp{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}; what is found
 #' here is a selection of a few traits.  A higher number of traits from LEDA
 #' may be included in the following releases of the package.
 #' 
@@ -217,7 +217,7 @@ NULL
 #' \item{uri}{: reference \code{url} for the species} }
 #' @references Please cite the following reference any time you use data retrieved from the
 #' LEDA traitbase (citation reported at
-#' \url{http://www.leda-traitbase.org/LEDAportal/citation.jsp}):
+#' \samp{http://www.leda-traitbase.org/LEDAportal/citation.jsp}):
 #' 
 #' Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P, Thompson, K.,
 #' Sonnenschein, M., Poschlod, P., Van Groenendael, J.M., Klimes, L.,
@@ -335,7 +335,7 @@ NULL
 ##' Will K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen.
 ##' 2012. A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants
 ##' species across the former Soviet Union. Ecology 93:689.
-##' \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+##' \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 ##'
 ##'
 #' @keywords dataframe
@@ -401,7 +401,7 @@ NULL
 ##' Will K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen.
 ##' 2012. A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants
 ##' species across the former Soviet Union. Ecology 93:689.
-##' \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+##' \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 ##'
 ##'
 #' @keywords dataframe

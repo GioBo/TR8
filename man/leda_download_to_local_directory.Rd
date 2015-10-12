@@ -40,6 +40,6 @@ J., Steendam, H.J., Tackenberg, O., Wilmann, B., Corneliss
 n, J.H.C., Eriksson, O., Garnier, E., Peco, B. (2008): The
 LEDA Traitbase: A database of life-history traits of
 Northwest European flora. Journal of Ecology 96:1266-1274.
-\url{
+\samp{
 http://www.leda-traitbase.org/LEDAportal/data_files.jsp}
 }

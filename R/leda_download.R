@@ -22,7 +22,7 @@
 ##' Corneliss
 ##' n, J.H.C., Eriksson, O., Garnier, E., Peco, B.
 ##' (2008): The LEDA Traitbase: A database of life-history
-##' traits of Northwest European flora. Journal of Ecology 96:1266-1274. \url{  http://www.leda-traitbase.org/LEDAportal/data_files.jsp}
+##' traits of Northwest European flora. Journal of Ecology 96:1266-1274. \samp{  http://www.leda-traitbase.org/LEDAportal/data_files.jsp}
 ##' @author   Gionata Bocci <boccigionata@@gmail.com>
 leda_download_to_local_directory<-function(directory){
     ## gmessage(title="","Downloading LEDA files is a time-consuming activity, \nthus you are suggested to download the dataset once\nand store them in a local directory.\n\nYou will now be asked to choose such a directory.")

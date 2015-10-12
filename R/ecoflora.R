@@ -148,7 +148,7 @@ setMethod(f='retrieve',
 #' 
 #' The function accepts a list of plant species names, tries to download the
 #' corresponding functional traits from the Ecoflora website
-#' (\url{http://www.ecoflora.co.uk/}) and return a data.frame with species
+#' (\samp{http://www.ecoflora.co.uk/}) and return a data.frame with species
 #' names as rows and functional traits as columns.
 #' 
 #' @param species_list a vector containing list of plant species names.

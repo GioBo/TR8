@@ -71,7 +71,7 @@ luirig<-function(species){
 
 ##' ##' get_italian_flowering get the beginning and the end of the flowering
 ##' phase for the italian flora. Values are based on Pignatti and retrieved
-##' from the \url{http://luirig.altervista.org/}
+##' from the \samp{http://luirig.altervista.org/}
 ##'
 ##' 
 ##' 
@@ -81,7 +81,7 @@ luirig<-function(species){
 ##' tr8_gui() created variables)
 ##' @return a dataframe with two columns, the beginning and the end month (expressed as a number from 1 to 12)
 ##' of the flowering phase
-##' @references \url{http://luirig.altervista.org/}
+##' @references \samp{http://luirig.altervista.org/}
 ##' @author Gionata Bocci <boccigionata@@gmail.com>
 get_italian_flowering<-function(species_list,TRAITS,rest){
     res<-new("results")

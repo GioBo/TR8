@@ -44,7 +44,7 @@
 
 \source{
 
-\url{http://www.leda-traitbase.org/LEDAportal/citation.jsp}
+\samp{http://www.leda-traitbase.org/LEDAportal/citation.jsp}
 }
 \references{
 Please cite the following reference any time you use data

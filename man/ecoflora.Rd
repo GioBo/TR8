@@ -25,7 +25,7 @@ will be left out.
 \description{
 The function accepts a list of plant species names, tries
 to download the corresponding functional traits from the
-Ecoflora website (\url{http://www.ecoflora.co.uk/}) and
+Ecoflora website (\samp{http://www.ecoflora.co.uk/}) and
 return a data.frame with species names as rows and
 functional traits as columns.
 }

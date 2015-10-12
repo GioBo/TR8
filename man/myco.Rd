@@ -26,7 +26,7 @@ Akhmetzhanova, A.A, Soudzilovskaia, N.A., Onipchenko, V.G.,
 Cornwell, W. K., Agafonov, V. A., Selivanov, I.A., and Cornelissen, 
 J. H. C. (2012): A rediscovered treasure: mycorrhizal intensity database for
 3000 vascular plants species across the former Soviet
-Union. Ecology 93:689. \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+Union. Ecology 93:689. \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 }
 \keyword{dataframe}
 

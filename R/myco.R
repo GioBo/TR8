@@ -15,7 +15,7 @@
 ##' Will K. Cornwell, Vladimir A. Agafonov, Ivan A. Selivanov, and Johannes H. C. Cornelissen.
 ##' 2012. A rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants
 ##' species across the former Soviet Union. Ecology 93:689.
-##' \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+##' \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 ##' }
 ##' @author Gionata Bocci <boccigionata@@gmail.com>
 ##'

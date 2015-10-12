@@ -107,7 +107,7 @@ Bundesamt für Naturschutz)
 
 Fitter, A . H. and Peat , H. J. (1994). The Ecological Flora
 Database, J. Ecol., 82, 415-425.
-\url{http://www.ecoflora.co.uk}
+\samp{http://www.ecoflora.co.uk}
 
 \bold{LEDA traitbase} Kleyer, M., Bekker, R.M., Knevel,
 I.C., Bakker, J.P, Thompson, K., Sonnenschein, M.,

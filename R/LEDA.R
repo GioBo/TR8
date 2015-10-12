@@ -46,7 +46,7 @@ seed_simplify<-function(tp){
 #' Extracts functional traits from the LEDA traitbase.
 #' 
 #' \code{leda} allows the user to extract data from \emph{LEDA_df} which is a
-#' \url{http://www.leda-traitbase.org/LEDAportal/}.
+#' \samp{http://www.leda-traitbase.org/LEDAportal/}.
 #' subset of the data available on the LEDA traitbase website
 #' 
 #' The function returns a data.frame with species as rows and LEDA functional

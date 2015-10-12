@@ -22,7 +22,7 @@ row.names
 \description{
 \code{leda} allows the user to extract data from
 \emph{LEDA_df} which is a
-\url{http://www.leda-traitbase.org/LEDAportal/}. subset of
+\samp{http://www.leda-traitbase.org/LEDAportal/}. subset of
 the data available on the LEDA traitbase website
 }
 \details{

@@ -14,7 +14,7 @@ tr8(species_list, download_list = NULL, gui_config = FALSE)
   traits which should be downlaoaded (to be used as an alternative
 to the GUI inerface)}
   \item{gui_config}{if set to TRUE a GUI for selecting
-  traits of interest is shown (default is TRUE)}
+  traits of interest is shown (default is FALSE)}
 }
 \value{
 An object of class \code{Tr8}; the slots \code{@results} contains various traits data for the species
@@ -30,19 +30,19 @@ At the moment the following databeses are available:
 
 \itemize{
 
-  \item{Biolflor \url{http://www2.ufz.de/biolflor/index.jsp}}
+  \item{Biolflor \samp{http://www2.ufz.de/biolflor/index.jsp}}
 
- \item{ Ecological Flora of the British Isles \url{http://www.ecoflora.co.uk/} }
+ \item{ Ecological Flora of the British Isles \samp{http://www.ecoflora.co.uk/} }
 
-  \item{ LEDA traitbase \url{http://www.leda-traitbase.org/LEDAportal/}}
+  \item{ LEDA traitbase \samp{http://www.leda-traitbase.org/LEDAportal/}}
 
   \item{ Ellenberg values for Italian Flora}
 
-  \item{ Mycorrhizal intensity database \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}}
+  \item{ Mycorrhizal intensity database \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}}
 
-  \item{ MycoFlor \url{http://www.esajournals.org/doi/abs/10.1890/12-1700.1}}
+  \item{ MycoFlor \samp{http://www.esajournals.org/doi/abs/10.1890/12-1700.1}}
 
-  \item{ Catminat \url{http://philippe.julve.pagesperso-orange.fr/catminat.htm}}
+  \item{ Catminat \samp{http://philippe.julve.pagesperso-orange.fr/catminat.htm}}
 
 }
 
@@ -81,7 +81,7 @@ Bundesamt für Naturschutz)
 
 Fitter, A . H. and Peat , H. J. (1994). The Ecological Flora
 Database, J. Ecol., 82, 415-425.
-\url{http://www.ecoflora.co.uk}
+\samp{http://www.ecoflora.co.uk}
 
 \bold{LEDA traitbase} Kleyer, M., Bekker, R.M., Knevel,
 I.C., Bakker, J.P, Thompson, K., Sonnenschein, M.,
@@ -102,7 +102,7 @@ Akhmetzhanova, A.A, Soudzilovskaia, N.A., Onipchenko, V.G.,
 Cornwell, W. K., Agafonov, V. A., Selivanov, I.A., and Cornelissen, 
 J. H. C. (2012): A rediscovered treasure: mycorrhizal intensity database for
 3000 vascular plants species across the former Soviet
-Union. Ecology 93:689. \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+Union. Ecology 93:689. \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 
 \bold{Pignatti et al., 2005}
 

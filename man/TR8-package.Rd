@@ -9,11 +9,11 @@ traits data for plant species from the following sources:
 
 \itemize{
 
-  \item{Biolflor \url{http://www2.ufz.de/biolflor/index.jsp}}
+  \item{Biolflor \samp{http://www2.ufz.de/biolflor/index.jsp}}
 
- \item{ Ecological Flora of the British Isles \url{http://www.ecoflora.co.uk/} }
+ \item{ Ecological Flora of the British Isles \samp{http://www.ecoflora.co.uk/} }
 
-  \item{ LEDA traitbase \url{http://www.leda-traitbase.org/LEDAportal/}}
+  \item{ LEDA traitbase \samp{http://www.leda-traitbase.org/LEDAportal/}}
 
   \item{ Ellenberg values for Italian Flora}
 
@@ -21,9 +21,9 @@ traits data for plant species from the following sources:
 
   \item{MycoFlor}
   
-  \item{\url{http://luirig.altervista.org/}}
+  \item{\samp{http://luirig.altervista.org/}}
 
-  \item{\url{http://perso.wanadoo.fr/philippe.julve/catminat.htm}}
+  \item{\samp{http://perso.wanadoo.fr/philippe.julve/catminat.htm}}
 
 }
   
@@ -63,7 +63,7 @@ Bundesamt für Naturschutz)
 
 Fitter, A . H. and Peat , H. J. (1994). The Ecological Flora
 Database, J. Ecol., 82, 415-425.
-\url{http://www.ecoflora.co.uk}
+\samp{http://www.ecoflora.co.uk}
 
 \bold{LEDA traitbase} Kleyer, M., Bekker, R.M., Knevel,
 I.C., Bakker, J.P, Thompson, K., Sonnenschein, M.,
@@ -84,7 +84,7 @@ Akhmetzhanova, A.A, Soudzilovskaia, N.A., Onipchenko, V.G.,
 Cornwell, W. K., Agafonov, V. A., Selivanov, I.A., and Cornelissen, 
 J. H. C. (2012): A rediscovered treasure: mycorrhizal intensity database for
 3000 vascular plants species across the former Soviet
-Union. Ecology 93:689. \url{http://esapubs.org/Archive/ecol/E093/059/default.htm}
+Union. Ecology 93:689. \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 
 \bold{Hempel et al, 2013}
 Hempel, S., Götzenberger, L., Kühn. I., Michalski, S.G.,

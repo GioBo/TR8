@@ -20,12 +20,12 @@ phase
 Gets the beginning and the end of
 the flowering phase for the italian flora. Values are based
 on Pignatti and retrieved from the
-\url{http://luirig.altervista.org/}
+\samp{http://luirig.altervista.org/}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>
 }
 \references{
-\url{http://luirig.altervista.org/}
+\samp{http://luirig.altervista.org/}
 }
 

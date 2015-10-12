@@ -30,7 +30,7 @@ LEDA Traitbase
 \references{
 Please cite the following reference any time you use data
 retrieved from the LEDA traitbase (citation reported at
-\url{http://www.leda-traitbase.org/LEDAportal/citation.jsp}):
+\samp{http://www.leda-traitbase.org/LEDAportal/citation.jsp}):
 
 Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P,
 Thompson, K., Sonnenschein, M., Poschlod, P., Van

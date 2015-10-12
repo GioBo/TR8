@@ -31,7 +31,7 @@ Ecoflora; curious users can expand the number of
 downloadable traits simply extending the list with other
 'pairs' (take care of using the right \code{Ecoflora codes}
 as described in
-\url{http://www.ecoflora.co.uk/search_plantchar.php}).
+\samp{http://www.ecoflora.co.uk/search_plantchar.php}).
 }
 \examples{
 ## observe the sructure of the dataset
@@ -40,7 +40,7 @@ str(traits_eco)
 \references{
 Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora
 Database, J. Ecol., 82, 415-425.
-\url{http://www.ecoflora.co.uk}
+\samp{http://www.ecoflora.co.uk}
 }
 \keyword{datasets}
 

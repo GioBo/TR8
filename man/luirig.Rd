@@ -20,7 +20,7 @@ plant species
 This function tries to retrieve the months of beginning and
 ending of the flowering period for species of the italian
 (data are collected form the website
-\url{http://luirig.altervista.org/}).  The function is used by
+\samp{http://luirig.altervista.org/}).  The function is used by
 the \code{get_italian_flowering} function.
 }
 \author{

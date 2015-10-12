@@ -22,14 +22,14 @@ parameters available on the LEDA website; up to now only
 few functional traits were taken into account.  Hopefully
 the database will be extendend in the following releases of
 the package.  Please refer to
-\url{http://www.leda-traitbase.org/LEDAportal/plantTraits.jsp}
+\samp{http://www.leda-traitbase.org/LEDAportal/plantTraits.jsp}
 for a detailed explanation of the traits availabe
 (definitions, units of measure, etc...) in LEDA.
 }
 \details{
 The original datasets are available as .TXT files in they
 raw form at
-\url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp};
+\samp{http://www.leda-traitbase.org/LEDAportal/data_files.jsp};
 what is found here is a selection of a few traits.  A
 higher number of traits from LEDA may be included in the
 following releases of the package.
@@ -42,7 +42,7 @@ data(LEDA_df)
 \references{
 Please cite the following reference any time you use data
 retrieved from the LEDA traitbase (citation reported at
-\url{http://www.leda-traitbase.org/LEDAportal/citation.jsp}):
+\samp{http://www.leda-traitbase.org/LEDAportal/citation.jsp}):
 
 Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P,
 Thompson, K., Sonnenschein, M., Poschlod, P., Van

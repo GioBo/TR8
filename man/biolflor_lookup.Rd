@@ -22,7 +22,7 @@ biolflor_lookup
 \description{
 This dataframe is used to retrieve species URLs from the
 BiolFlor website
-(\url{http://www2.ufz.de/biolflor/index.jsp}).
+(\samp{http://www2.ufz.de/biolflor/index.jsp}).
 }
 \examples{
 head(biolflor_lookup)
