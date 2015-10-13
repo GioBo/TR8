@@ -305,6 +305,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                     ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
                     ##     stop("You neither have a working internet connection nor locally stored LEDA files.\n  Please re-run tr8() function when your internet connection is working.")
                     ## }
+                    if(tryCatch(url.exists(url), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
+                        stop("\n\n LEDA website is probably down.\n Please re-run tr8() without selecting LEDA as a source of data \n (or re-try later).\n\n")
+                    }
+                    
                     local_storage(db="LEDA",directory)
                     load(local_leda)
             }else{rearranged<-NULL}
