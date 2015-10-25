@@ -36,6 +36,8 @@ tr8_config<-function(){
     temp_AMF<-temp_dframe[temp_dframe$db=="AMF",c("long_code","description")]
     ## get traits from catminat
     temp_Catminat<-temp_dframe[temp_dframe$db=="Catminat",c("long_code","description")]
+    ## get traits from BROT
+    temp_BROT<-temp_dframe[temp_dframe$db=="BROT",c("long_code","description")]
     
     ## create the main MODAL window
     window<-gbasicdialog(title="Traits selector for TR8")
@@ -52,6 +54,7 @@ tr8_config<-function(){
     res_Pignatti<-gcheckboxgroup(temp_Pignatti$description,container=nb,label="Pignatti")
     res_AMF<-gcheckboxgroup(temp_AMF$description,container=nb,label="AMF")
     res_Catminat<-gcheckboxgroup(temp_Catminat$description,container=nb,label="Catminat")
+    res_BROT<-gcheckboxgroup(temp_BROT$description,container=nb,label="BROT")
     visible(window,TRUE)
 
     
@@ -61,7 +64,7 @@ tr8_config<-function(){
     res_Pignatti<-svalue(res_Pignatti)
     res_AMF<-svalue(res_AMF)
     res_Catminat<-svalue(res_Catminat)
-
+    res_BROT <- svalue(res_BROT)
     
     res_BiolFlor<-fix_values(res_BiolFlor,temp_BiolFlor)
     res_LEDA<-fix_values(res_LEDA,temp_LEDA)
@@ -69,8 +72,9 @@ tr8_config<-function(){
     res_Pignatti<-fix_values(res_Pignatti,temp_Pignatti)
     res_AMF<-fix_values(res_AMF,temp_AMF)
     res_Catminat<-fix_values(res_Catminat,temp_Catminat)
+    res_BROT <- fix_values(res_BROT,temp_BROT)
     
-    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"AMF"=res_AMF,"Catminat"=res_Catminat)
+    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"AMF"=res_AMF,"Catminat"=res_Catminat,"BROT"=res_BROT)
     return(traits_list)
 
 }

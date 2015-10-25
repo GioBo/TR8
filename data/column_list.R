@@ -104,11 +104,38 @@ column_list<-list(
     "Soil_texture_fr"=c("Soil_texture_fr","Type of soil texture","Catminat"),
     "organic_matter_fr"=c("organic_matter_fr","Organic matter in the soil","Catminat"),
     "beg_flow_fr"=c("beg_flow_fr","Beginning of flowering (month)","Catminat"),
-    "end_flow_fr"=c("end_flow_fr","End of flowering (month)","Catminat")
+    "end_flow_fr"=c("end_flow_fr","End of flowering (month)","Catminat"),
     ##"order_of_maturation"=c("order_of_maturation","","Catminat"),
     ##"macule"=c("macule","","Catminat"),
     ##"type_ligneux"=c("type_ligneux","","Catminat"),
     ##"TYPE_BIOLOGIQUE"=c("TYPE_BIOLOGIQUE","","Catminat"),
 
+
+    #brot
+
+    "BudSource"=c("BudSource","BudSource","BROT"),
+    "DispMode"=c("DispMode","DispMode","BROT"),
+    "FruitType"=c("FruitType","FruitType","BROT"),
+    "HeatStimGerm"=c("HeatStimGerm","HeatStimGerm","BROT"),
+    "Height"=c("Height","Height","BROT"),
+    "LeafPhenology"=c("LeafPhenology","LeafPhenology","BROT"),
+    "LeafShape"=c("LeafShape","LeafShape","BROT"),
+    "LeafSize"=c("LeafSize","LeafSize","BROT"),
+    "MatResp"=c("MatResp","MatResp","BROT"),
+    "MatSap"=c("MatSap","MatSap","BROT"),
+    "OtherCues"=c("OtherCues","OtherCues","BROT"),
+    "Propagule"=c("Propagule","Propagule","BROT"),
+    "RespClip"=c("RespClip","RespClip","BROT"),
+    "RespDist"=c("RespDist","RespDist","BROT"),
+    "RespFire"=c("RespFire","RespFire","BROT"),
+    "RootDepth"=c("RootDepth","RootDepth","BROT"),
+    "SeedBank"=c("SeedBank","SeedBank","BROT"),
+    "SeedBankLong"=c("SeedBankLong","SeedBankLong","BROT"),
+    "SeedlEmerg"=c("SeedlEmerg","SeedlEmerg","BROT"),
+    "SeedlSurv"=c("SeedlSurv","SeedlSurv","BROT"),
+    "SeedMass"=c("SeedMass","SeedMass","BROT"),
+    "SRR"=c("SRR","SRR","BROT")
+
+    
     )
 
