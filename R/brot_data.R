@@ -1,8 +1,8 @@
 brot_data<-function(species_list,TRAITS){
 
     res<-new("results")
-#    env<-new.env(parent = parent.frame())
-#    BROT<-get("BROT",envir=env)
+    env<-new.env(parent = parent.frame())
+    BROT<-get("BROT",envir=env)
     species<-data.frame(species=species_list)
     
     temp_df<-merge(species,BROT,by.x="species",by.y="taxa",all.x=T)
@@ -12,7 +12,7 @@ brot_data<-function(species_list,TRAITS){
 
  #   remove(list=c("BROT"),envir = env)
     res@results<-temp_df
-    stringa<-"Paula S, Arianoutsou M, Kazanis D, Tavsanoglu Ç, Lloret F, Buhk C, Ojeda\n F, Luna B, Moreno JM, Rodrigo A, Espelta JM, Palacio S, Fernández-Santos\n B, Fernandes PM, and Pausas JG. 2009.\n Fire-related traits for plant species of the Mediterranean Basin. Ecology 90: 1420. \n AND \n Paula S. & Pausas J.G. 2013. BROT: a plant trait database for\n Mediterranean Basin species.\n Version 2013.06. URL: http://www.uv.es/jgpausas/brot.htm"
+    stringa<-"Paula S, Arianoutsou M, Kazanis D, Tavsanoglu \303\207, Lloret F, Buhk C, Ojeda\n F, Luna B, Moreno JM, Rodrigo A, Espelta JM, Palacio S, Fern\303\241ndez-Santos\n B, Fernandes PM, and Pausas JG. 2009.\n Fire-related traits for plant species of the Mediterranean Basin. Ecology 90: 1420. \n AND \n Paula S. & Pausas J.G. 2013. BROT: a plant trait database for\n Mediterranean Basin species.\n Version 2013.06. URL: http://www.uv.es/jgpausas/brot.htm"
     Encoding(stringa)<-"unicode"
     res@bibliography<-stringa
 
