@@ -49,7 +49,7 @@ possibility of easily retrieving traits data for plant species from the followin
 \item[Mycorrhizal intensity database] \cite{amf}
 \item[MycoFlor database]\cite{Hempel2013}
 \item[Catminat database]\cite{catminat} 
-    
+\item[BROT]\cite{BROT_1}\cite{BROT_2}  
 \end{description}
 
   Please note that not all the traits available on the listed
@@ -279,6 +279,16 @@ the following strategy was adopted:
 \end{description}
 
 \textbf{Nota bene}: in some cases some traits are stored as \textit{string} in the original databases, even though they should be treated as numbers (e.g. the number \textit{five} is stored as a string - i.e. "5", not as the numeric value \texttt{5}): in those case \texttt{tr8} function is not able to interpret that entry as a numeric, thus, applying the above mentioned criteria to merge multiple traits, strange outputs may result from \texttt{tr8}, e.g. if a species has two entries for the trait \texttt{height} - day 3 and 3.5 meters - the merged value will not be the numeric mean (3.25) but the union of the two strings ("3-3.5").
+
+
+\textbf{Note for BROT database}: BROT database contains several entries for the same trait for some species: this may be due to the fact that several sources of data were used and/or that data for different regions were reported. In the current version of \texttt{TR8} these multiple data are treated as follows:
+
+\begin{itemize}
+\item if there are both numeric (quantitative) and string (qualitative) entries, numeric ones are given the precedence and the mean of all numeric entries is used as the returned trait value
+\item if several qualitative entries are present (but no quantitative ones), only the most abundant level is reported (in case ties are present, eg. two levels are reported the same number of times, both values are reported, separated by a comma). 
+\end{itemize}
+
+
 
 \section{Citing the package}
    

@@ -80,6 +80,8 @@
 \item{ organic_matter_fr}{:c( "organic_matter_fr","Organic matter in the soil","Catminat")}
 \item{ beg_flow_fr}{:c( "beg_flow_fr","Beginning of flowering (month)","Catminat")}
 \item{ end_flow_fr}{:c( "end_flow_fr","End of flowering (month)","Catminat")}
+
+
  }}
 \description{
 A list containing a brief description of traits data
@@ -145,6 +147,22 @@ Julve, P., 1998 ff. - Baseflor. Index botanique,
 écologique et chorologique de la flore de France.
 Version : 26 November 2014 .
 URL: http://perso.wanadoo.fr/philippe.julve/catminat.htm
+
+
+
+\bold{BROT}
+
+Paula S, Arianoutsou M, Kazanis D, Tavsanoglu Ç, Lloret F, Buhk C, Ojeda
+F, Luna B, Moreno JM, Rodrigo A, Espelta JM, Palacio S, Fernández-Santos
+B, Fernandes PM, and Pausas JG. 2009.
+Fire-related traits for plant species of the Mediterranean Basin. Ecology 90: 1420. 
+
+AND
+
+Paula S. & Pausas J.G. 2013. BROT: a plant trait database for
+Mediterranean Basin species.
+Version 2013.06. URL: http://www.uv.es/jgpausas/brot.htm
+
 
 
 }

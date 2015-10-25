@@ -26,6 +26,7 @@ Imports:
     RCurl,
     XML,
     plyr,
+    reshape,
     rappdirs,
     gWidgets,
     gWidgetstcltk,
