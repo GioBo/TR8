@@ -65,7 +65,9 @@ Fitter, A . H. and Peat , H. J. (1994). The Ecological Flora
 Database, J. Ecol., 82, 415-425.
 \samp{http://www.ecoflora.co.uk}
 
-\bold{LEDA traitbase} Kleyer, M., Bekker, R.M., Knevel,
+\bold{LEDA traitbase}
+
+Kleyer, M., Bekker, R.M., Knevel,
 I.C., Bakker, J.P, Thompson, K., Sonnenschein, M.,
 Poschlod, P., Van Groenendael, J.M., Klimes, L., Klimesova,
 J., Klotz, S., Rusch, G.M., Hermy, M., Adriaens, D.,
@@ -87,6 +89,7 @@ J. H. C. (2012): A rediscovered treasure: mycorrhizal intensity database for
 Union. Ecology 93:689. \samp{http://esapubs.org/Archive/ecol/E093/059/default.htm}
 
 \bold{Hempel et al, 2013}
+
 Hempel, S., Götzenberger, L., Kühn. I., Michalski, S.G.,
 Rillig, M.C., Zobel, M., and Moora, M., 2013. Mycorrhizas in the Central European flora:
 relationships with plant life history traits and ecology. Ecology 94: 1389-1399.
