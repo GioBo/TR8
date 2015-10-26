@@ -62,8 +62,10 @@ At the moment the following databeses are available:
 
 }
 \examples{
+\dontrun{
 ## download some trait data for Abies alba 
 My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
+}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>

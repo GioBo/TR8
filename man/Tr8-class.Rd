@@ -59,6 +59,7 @@ Objects can be created by calls of the form \code{new("Tr8", ...)}.
  \code{\link{tr8}}
 }
 \examples{
+\dontrun{
 ## the bib() methods let the user have the exact
 ## bibliographic citations to be used for the
 ## retrieved data
@@ -74,6 +75,6 @@ My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
 ## the traits use lookup()
 
 lookup(My_traits)
-
+}
 }
 \keyword{classes}

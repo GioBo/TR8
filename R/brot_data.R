@@ -64,7 +64,7 @@ brot_download_to_local_directory<-function(directory){
     BROT<-read.delim("http://www.uv.es/jgpausas/brot/BROT_2013.06_data.txt",sep="\t",header=T)
     BROT$Data<-as.character(BROT$Data)
 
-    BROT<-aggregate(Data~taxa+Trait,BROT,FUN="brot_aggregate")
+    BROT<-aggregate(Data~taxa+Trait,BROT,FUN=brot_aggregate)
     BROT$taxa<-as.character(BROT$taxa)
     BROT$Trait<-as.character(BROT$Trait)
 

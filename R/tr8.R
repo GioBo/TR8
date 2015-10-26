@@ -388,15 +388,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         }
         ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
         catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df)
-
-        ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
-        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df)
-
         
-        
-        ## check if an already downloaded version of the Catminat database
+        ## check if an already downloaded version of the BROT database
         ## exists and, if so, use it otherwise download a copy, but only
-        ## if at least one Catminat trait is needed
+        ## if at least one BROT trait is needed
         local_BROT<-file.path(directory,"BROT.Rda")
         if(file.exists(local_BROT)){
             load(local_BROT)}else{

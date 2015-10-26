@@ -22,8 +22,9 @@ argument are those contained \code{short_code} column.
 ## available_traits()
 ## If the traits \\code{Maximum area}  and \\code{Leaf area} from
 ## Ecoflora are needed for the species Salix alba and Populus nigra, type
-
+\dontrun{
 tr8(species_list=c("Salix alba","Populus nigra"),download_list=c("life_form_P"))
+}
 }
 
 \author{

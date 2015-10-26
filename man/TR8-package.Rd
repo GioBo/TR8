@@ -42,10 +42,10 @@ The TR8 name, inspired by "car plates" jokes, was chosen since
 	     extremely short to type.
 }
 \examples{
-
+\dontrun{
 ## download some trait data for Abies alba 
 My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
-
+}
 }
 
 \references{
