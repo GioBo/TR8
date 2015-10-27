@@ -15,6 +15,14 @@
 ## names(dai)<-revalue(names(dai),c("submittedname"="Scientific.Name"))
 ## ref_PLANTS<-merge(dai,PLANTS)
 
-## ref_PLANTS<-ref_PLANTS[,c("acceptedname","score","matchedname","authority","Symbol","Synonym.Symbol")]
+## ref_PLANTS<-ref_PLANTS[,c("acceptedname","score","matchedname","Symbol")]
+
+##remove non ascii characters in acceptedname column
+## "small" x (code "<c3><97>" in iso-859-1, used un Citrus x aurantium
+## tp<-iconv(ref_PLANTS$acceptedname,"iso-8859-1","ASCII",sub="byte")
+## ## replace "small x"  with "x"
+## tp<-gsub("<c3><97>","x",tp)
+## ref_PLANTS$acceptedname<-tp
+
 
 ##save(file="~/Work/src/tr8_github/data/ref_PLANTS.rda",ref_PLANTS)
