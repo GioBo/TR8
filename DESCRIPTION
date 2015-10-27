@@ -11,7 +11,7 @@ Description: Plant ecologists often need to collect "traits" data
 	     automatically retrieving some of those functional traits data
 	     for plant species from publicly available databases (Biolflor, 
 	     The Ecological Flora of the British Isles, LEDA traitbase, Ellenberg 
-	     values for Italian Flora, Mycorrhizal intensity databases, Catminat, BROT).
+	     values for Italian Flora, Mycorrhizal intensity databases, Catminat, BROT, PLANTS).
 	     The TR8 name, inspired by "car plates" jokes, was chosen since
 	     it both reminds of the main object of the package and is
 	     extremely short to type.

@@ -45,7 +45,8 @@ At the moment the following databeses are available:
   \item{ Catminat \samp{http://philippe.julve.pagesperso-orange.fr/catminat.htm}}
 
   \item{ BROT \samp{http://www.uv.es/jgpausas/brot.htm} }
-  
+
+  \item{PLANTS \samp{http://www.bricol.net/}}
 }
 
 
@@ -140,6 +141,10 @@ AND
 Paula S. & Pausas J.G. 2013. BROT: a plant trait database for
 Mediterranean Basin species.
 Version 2013.06. URL: http://www.uv.es/jgpausas/brot.htm
+
+\bold{PLANTS}
+
+Green, W. (2009) USDA PLANTS Compilation, version 1, 09-02-02. 
 
 } 
 

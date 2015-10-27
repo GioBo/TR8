@@ -32,7 +32,8 @@ catminat_download_to_local_directory<-function(directory){
     catminat_df<-catminat_df[catminat_df$CHOROLOGIE!="?",]
     
     ## change columns' name in order to
-    ## avoid possible conflicts with non-ascii
+    ## avoid possible conflicts with non-
+    ## ascii
     ## french chars
     recode_catminat_values<-c("Lumi.{1}re"="ell_L_fr",
                               "Temp.{1}rature"="elle_T_fr",

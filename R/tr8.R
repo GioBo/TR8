@@ -280,7 +280,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
             ## run the gui
             traits_list<-tr8_config()
         }else{
-            for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF","Catminat","BROT")){
+            for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF","Catminat","BROT","PLANTS")){
                                         #db<-temp_dframe$db[temp_dframe$short_code==i]
                 data_db<-temp_dframe[temp_dframe$db==db,]
                 if(sum(data_db$short_code%in%download_list)>0){
@@ -403,13 +403,32 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         
         brot_traits <- brot_data(species_list,TRAITS=traits_list$BROT)
 
+
+        
+        ## check if an already downloaded version of the PLANTS database
+        ## exists and, if so, use it otherwise download a copy, but only
+        ## if at least one BROT trait is needed
+        local_PLANTS<-file.path(directory,"PLANTS.Rda")
+        if(file.exists(local_PLANTS)){
+            load(local_PLANTS)}else{
+            if(length(traits_list$PLANTS)>0){
+                local_storage(db="PLANTS",directory)
+                load(local_PLANTS)
+            }else{PLANTS_df<-NULL}
+        }
+        
+        PLANT_traits <- PLANTS(species_list,TRAITS=traits_list$PLANTS)
+
+
+
+        
         
         
         ## merge the results
         tr8_traits<-data.frame(species_list,row.names=species_list)
         bibliography=list()
         potential_issues<-c()
-        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits)){
+        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits,PLANT_traits)){
             ## merge the dataframes only if they contain data
             if(!is.null(i@results))
             {

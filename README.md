@@ -18,6 +18,7 @@ the following publicly available databases:
 * [MycoFlor](http://www.esajournals.org/doi/abs/10.1890/12-1700.1)
 * [Catminat](http://perso.wanadoo.fr/philippe.julve/catminat.htm)
 * [BROT](http://www.uv.es/jgpausas/brot.htm)
+* [PLANTS](http://www.bricol.net/)
 
  A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
 
