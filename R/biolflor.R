@@ -32,7 +32,7 @@ traits_pollen_Biolflor=c("Pollen vector")
 ## @slot list_traits a vector containing the list of traits which can be downloaded by the package
 ## @slot list_special_traits some of the traits require special Xpath rules to be extracted
 ## @exportClass biolflor_traits
-setClass("biolflor_traits",representation=list(url="character",extracted="list",list_traits="vector",list_special_traits="vector",results="data.frame"))
+setClass("biolflor_traits",representation=list(url="character",extracted="list",list_traits="vector",list_special_traits="vector",list_pollen_traits="vector",results="data.frame"))
 
 
 ## extract data fro biolflor_traits classes
@@ -64,11 +64,13 @@ setMethod(f="extract",
                   ##get web page
                   base_url<-"http://www2.ufz.de"
                   temp_pag<-htmlParse(getURL(paste(base_url,.Object@url,sep="")))
-                                  
+                  
                   ## parse html and extract data
+
                   for(trait in .Object@list_traits){
                       query=paste("//*[text()='",trait,"']/following-sibling::td/a",sep="")
                       value=xpathApply(temp_pag,query,xmlValue)
+
                       if(length(value) > 0) {
                           ##                      print(value)
                           .Object@extracted[[trait]]=paste(unlist(value),collapse = " - ")
@@ -86,6 +88,29 @@ setMethod(f="extract",
                       else{.Object@extracted[[trait]]=NA}
                       
                   }
+
+
+
+                  for(trait in .Object@list_pollen_traits){
+                      query1=paste("//*[text()='",trait,"']/following-sibling::td/a",sep="")
+                      value1=xpathApply(temp_pag,query1,xmlValue)
+
+
+                      query2="//*[text()='Pollen vector']/ancestor::*[1]/following-sibling::tr[1]/*[text()='Abundance']/following-sibling::td/text()"
+                      value2=xpathApply(temp_pag,query2,xmlValue)
+                      value2<-lapply(value2,function(x){gsub(" \\[.*\\]","",x)})
+                      value2<-lapply(value2,function(x){gsub("(.*)","[\\1]",x)})
+
+
+                      if(length(value2) > 0) {
+                          ##                      print(value)
+                          .Object@extracted[[trait]]=paste(paste(value1,value2),collapse=" - ")
+                      }
+                      else{.Object@extracted[[trait]]=NA}
+                      
+                  }
+
+
 
               }
               return(.Object)
@@ -145,7 +170,7 @@ biolflor<-function(list_species,TRAITS,rest=NULL){
                 }
             }else{species_url<-"not present"}
             Sys.sleep(rest)
-            prova<-new("biolflor_traits",url=species_url,list_traits=list_of_traits_Biolflor,list_special_traits=traits_special_Biolflor)
+            prova<-new("biolflor_traits",url=species_url,list_traits=list_of_traits_Biolflor,list_special_traits=traits_special_Biolflor,list_pollen_traits=traits_pollen_Biolflor)
             bio_res<-extract(prova)
             go<-bio_res@extracted
             ##            go<-data.frame(go,check_names=F)           

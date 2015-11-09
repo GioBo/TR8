@@ -9,7 +9,7 @@ list_of_traits_Biolflor=c(
    ,"Type of reproduction"                   
    ,"Type of seed production"                
    ,"Strategy type"                          
-   ,"Pollen vector"
+#   ,"Pollen vector"
    ,"Self-sterility and self-incompatibility"
    ,"Breeding system"
 
@@ -20,7 +20,7 @@ list_of_traits_Biolflor=c(
 
 traits_special_Biolflor=c(
     "Flower class after MUELLER"
-        ,"Type of apomixis"
+   ,"Type of apomixis"
     ## "Begin of flowering (months)",
     ## "End of flowering (months)",
     ## "Duration of flowering (months)",
@@ -34,4 +34,4 @@ traits_special_Biolflor=c(
 )
 
 
-## traits_pollen_Biolflor=c("Pollen vector")
+traits_pollen_Biolflor=c("Pollen vector")
