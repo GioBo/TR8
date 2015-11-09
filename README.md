@@ -51,4 +51,7 @@ library(TR8)
 ## already installed, simply deactivate dev_mode
 dev_mode(on=F)
 ```
-  
+
+
+
+[![Research software impact](http://depsy.org/api/package/cran/TR8/badge.svg)](http://depsy.org/package/r/TR8)
