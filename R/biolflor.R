@@ -98,7 +98,7 @@ setMethod(f="extract",
                       value1=xpathApply(temp_pag,query1,xmlValue)
 
 
-                      query2="//*[text()='Pollen vector']/ancestor::*[1]/following-sibling::tr[1]/*[text()='Abundance']/following-sibling::td/text()"
+                      query2=paste("//*[text()='",trait,"']/ancestor::*[1]/following-sibling::tr[1]/*[text()='Abundance']/following-sibling::td/text()",sep="")
                       value2=xpathApply(temp_pag,query2,xmlValue)
                       value2<-lapply(value2,function(x){gsub(" \\[.*\\]","",x)})
                       value2<-lapply(value2,function(x){gsub("(.*)","[\\1]",x)})
