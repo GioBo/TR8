@@ -48,8 +48,10 @@ setMethod(f="extract",
                   for(trait in .Object@list_traits){
                       .Object@extracted[[trait]]=NA
                   }
-
                   for(trait in .Object@list_special_traits){
+                      .Object@extracted[[trait]]=NA
+                  }
+                  for(trait in .Object@list_pollen_traits){
                       .Object@extracted[[trait]]=NA
                       }
               }
@@ -156,8 +158,10 @@ biolflor<-function(list_species,TRAITS,rest=NULL){
             list_of_traits_Biolflor<-list_of_traits_Biolflor[list_of_traits_Biolflor%in%TRAITS]
             ## check also the "special biolflor traits"
             traits_special_Biolflor<-traits_special_Biolflor[traits_special_Biolflor%in%TRAITS]
+            traits_pollen_Biolflor<-traits_pollen_Biolflor[traits_pollen_Biolflor%in%TRAITS]
             ## use the user's selected traits to instantiate the class
             ## and retrieve data
+            
         }
 
         tmp_list=list()
