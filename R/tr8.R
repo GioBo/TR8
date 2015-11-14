@@ -237,7 +237,7 @@ setMethod(f="bib",
 #'
 #' #' @examples \dontrun{
 #' #My_traits<-tr8(species_list=c("Abies alba"),download_traits=c("le_area","h_max","h_min"))
-#' }
+#' }s
 #' @export tr8
 tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
 
@@ -294,7 +294,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             check_names<-tnrs(species_list)
             check_names<-check_names[,c("submittedname","acceptedname","matchedname")]
             
-            reference_names<-lapply(lista,function(x){
+            reference_names<-lapply(species_list,function(x){
                 
                 sp_names<-subset(check_names,submittedname==x)
                 sp_names<-unique(unlist(sp_names))
