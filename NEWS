@@ -1,3 +1,12 @@
+## synonyms
+
+   Now tr8() accepts a new argument, 'synonyms': when it is set to
+   true the function will use 'tnrs' function from the package
+   'taxize' to search for synonyms of the provided species list and
+   search trait data for them as well. 
+
+
+
 ## Catminat database
 
 	Thanks to the `readxl` package, now the dataset (which is in

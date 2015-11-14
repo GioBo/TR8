@@ -3,7 +3,7 @@
 \title{\code{tr8}: retrieving functional traits data from various
 databases.}
 \usage{
-tr8(species_list, download_list = NULL, gui_config = FALSE)
+tr8(species_list, download_list = NULL, gui_config = FALSE,synonyms=FALSE)
 }
 \arguments{
   \item{species_list}{a vector containing names of the
@@ -14,7 +14,14 @@ tr8(species_list, download_list = NULL, gui_config = FALSE)
   traits which should be downlaoaded (to be used as an alternative
 to the GUI inerface)}
   \item{gui_config}{if set to TRUE a GUI for selecting
-  traits of interest is shown (default is FALSE)}
+    traits of interest is shown (default is FALSE)}
+  \item{synonyms}{if set to TRUE tr8 will use \code{taxize} to find
+  synonyms for the species names provided in \code{species_list} and
+  will return trait values for all those species; in that case the
+  dataframe contained in the \code{@results} slot will have synonyms as
+  row names and will contain an
+  additional column called \emph{original_names} which include the
+  original names provided with \code{species_list} (default is FALSE)}
 }
 \value{
 An object of class \code{Tr8}; the slots \code{@results} contains various traits data for the species

@@ -239,7 +239,7 @@ setMethod(f="bib",
 #' #My_traits<-tr8(species_list=c("Abies alba"),download_traits=c("le_area","h_max","h_min"))
 #' }
 #' @export tr8
-tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
+tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
 
     ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
     ##     stop("You need a working internet connection to use tr8()")
@@ -289,6 +289,24 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
                 traits_list[db]<-list(code)
             }
         }
+        if(synonyms==TRUE){
+
+            check_names<-tnrs(species_list)
+            check_names<-check_names[,c("submittedname","acceptedname","matchedname")]
+            
+            reference_names<-lapply(lista,function(x){
+                
+                sp_names<-subset(check_names,submittedname==x)
+                sp_names<-unique(unlist(sp_names))
+                return(sp_names)
+
+            }
+            )
+            names(reference_names)<-species_list
+            species_list<-as.vector(unlist(reference_names))
+            
+        }
+
         
         ## retrieve traits from ecolora function
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
@@ -450,7 +468,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         ## tr8_traits<-as.data.frame(tr8_traits[,names_columns],row.names = row_names)
         ## names(tr8_traits)<-names_columns
         tr8_traits<-tr8_traits[,!(names(tr8_traits)%in%c("Row.names","species_list")),drop=FALSE]
-        
+
         obj<-new("Tr8")
         ##    obj@double_names<-unique(c(eco_traits@double_names,leda_traits@double_names))
         ##    obj@not_valid<-intersect(intersect(eco_traits@not_valid,leda_traits@not_valid),pignatti_traits@not_valid)
@@ -458,6 +476,18 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE){
         ## biolflor_clean is not needed any more
         ## tr8_traits<-biolflor_clean(tr8_traits)
         tr8_traits<-column_conversion(tr8_traits)
+
+        
+        if(synonyms==TRUE){
+
+            reference_names<-ldply(lapply(reference_names,ldply))
+            names(reference_names)<-c("original_names","synonyms")
+            tr8_traits<-merge(reference_names,tr8_traits,by.x="synonyms",by.y=0)
+            row.names(tr8_traits)<-tr8_traits$synonyms
+            tr8_traits<-tr8_traits[,names(tr8_traits)!="synonyms"]
+        }
+
+
         obj@reference<-temp_dframe
         obj@results<-tr8_traits
         obj@bibliography<-bibliography
