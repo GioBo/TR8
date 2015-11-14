@@ -425,6 +425,28 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
   \end{enumerate}
   
 
+  \subsection{Dealing with synonyms}
+  
+  In some cases the same species may be present in different traitbases
+  under different synonyms. In order to make it easier for the user to deal with
+  this issue, \texttt{tr8} function has a parameter called
+  \texttt{synonyms}: when set to true it forces the \texttt{tr8} to call the
+  \texttt{tnrs} function from the \texttt{taxize} package and retrieve
+  possible synonims for the provided species names: in this case the
+  retrieved trait data will have all the found synonims a row names
+  and one additional column $-$ named \textit{original\_names} $-$ will be
+  added to the dataframe containing the results of the queries.
+
+
+@ 
+<<synonims, eval=FALSE>>=
+my_species<-c("Salix alba","Inula viscosa")
+my_traits<-c("h_max","le_area","li_form")
+my_Data<-tr8(species_list = my_species, download_list = my_traits, synonyms=TRUE)
+@ %def 
+
+
+  
   
 \section{Further steps}
 
