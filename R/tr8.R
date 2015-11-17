@@ -24,46 +24,46 @@ setGeneric(name="issues",def=function(.Object){standardGeneric("issues")})
 setMethod(f="issues",
           signature = "Tr8",
           definition = function(.Object){
-              check=FALSE
-              ## warning for double names
-              if(length(.Object@double_names)>0){
-                  cat("\n")
-                  cat("\t WARNING\n")
-                  cat("\n")
-                  for(sp in .Object@double_names){
-                      cat(paste("\tFor species",sp," multiple matched names were found\n"))
-                  }
-                  cat("\n")
-                  check=TRUE
-              }
-              ## warning for missing species
-              if(length(.Object@not_valid)>0){
-                  cat("\n")
-                  cat("\t WARNING\n")
-                  cat("\n")
-                  for(sp in .Object@not_valid){
-                      cat(paste("\tFor species",sp," no matched names were found\n"))
-                  }
-                  cat("\n")
-                  check=TRUE
-              }
-              ## advice about potential issues given by Ecoflora
-              if(!is.null(.Object@issues)){
-                  cat(.Object@issues)
-                  check=TRUE
-              }
-              if(check){
-                  cat("\tPlease check that these results are consistent with your orginal dataset!\n")
-                  ##              return(.Object)
-              }else{
+    check=FALSE
+    ## warning for double names
+    if(length(.Object@double_names)>0){
+        cat("\n")
+        cat("\t WARNING\n")
+        cat("\n")
+        for(sp in .Object@double_names){
+            cat(paste("\tFor species",sp," multiple matched names were found\n"))
+        }
+        cat("\n")
+        check=TRUE
+    }
+    ## warning for missing species
+    if(length(.Object@not_valid)>0){
+        cat("\n")
+        cat("\t WARNING\n")
+        cat("\n")
+        for(sp in .Object@not_valid){
+            cat(paste("\tFor species",sp," no matched names were found\n"))
+        }
+        cat("\n")
+        check=TRUE
+    }
+    ## advice about potential issues given by Ecoflora
+    if(!is.null(.Object@issues)){
+        cat(.Object@issues)
+        check=TRUE
+    }
+    if(check){
+        cat("\tPlease check that these results are consistent with your orginal dataset!\n")
+        ##              return(.Object)
+    }else{
 
-                  cat("No particular problems were faced in the data retrieval process.\n")
+        cat("No particular problems were faced in the data retrieval process.\n")
 
-              }
-              
-          }
-          
-          )
+    }
+    
+}
+
+)
 
 
 ## Method lookup
@@ -79,30 +79,30 @@ setGeneric(name="lookup",def=function(.Object){standardGeneric("lookup")})
 setMethod(f="lookup",
           signature="Tr8",
           definition = function(.Object){
-              REF<-.Object@reference
-              RES<-.Object@results
-              DF<-REF[REF$short_code%in%names(RES),]
+    REF<-.Object@reference
+    RES<-.Object@results
+    DF<-REF[REF$short_code%in%names(RES),]
 
-              cat("\n")
-              cat("\n")
-              cat("*****************************************************************")
-              cat("\n")
-              cat("To interpret the traits data, please refer to the following table\n")
-              cat("\n")
-              cat(sprintf("%-30s\t%-40s\t%-40s\n"," code","description","reference database\n"))
-              cat(sprintf("%-30s\t%-40s\t%-40s\n"," ----","-----------","------------------\n"))
-              for(i in 1:nrow(DF)){
-                  cat(sprintf("%-30s\t%-40s\t%-30s\n",DF[i,2],DF[i,3],DF[i,4]))
-              }
-              cat("\n")
-              cat(sprintf("%-30s\t%-40s\t%-40s\n"," ****","***********","******************\n"))
-              ##tp<-.Object@reference
-              ##tp<-tp[,c("short_code","description","db")]
-              tp<-DF[,c("short_code","description","db")]
-              names(tp)<-revalue(names(tp),c("short_code"="code","db"="reference database"))
-              return(invisible(tp))
-          }
-          )
+    cat("\n")
+    cat("\n")
+    cat("*****************************************************************")
+    cat("\n")
+    cat("To interpret the traits data, please refer to the following table\n")
+    cat("\n")
+    cat(sprintf("%-30s\t%-40s\t%-40s\n"," code","description","reference database\n"))
+    cat(sprintf("%-30s\t%-40s\t%-40s\n"," ----","-----------","------------------\n"))
+    for(i in 1:nrow(DF)){
+        cat(sprintf("%-30s\t%-40s\t%-30s\n",DF[i,2],DF[i,3],DF[i,4]))
+    }
+    cat("\n")
+    cat(sprintf("%-30s\t%-40s\t%-40s\n"," ****","***********","******************\n"))
+    ##tp<-.Object@reference
+    ##tp<-tp[,c("short_code","description","db")]
+    tp<-DF[,c("short_code","description","db")]
+    names(tp)<-revalue(names(tp),c("short_code"="code","db"="reference database"))
+    return(invisible(tp))
+}
+)
 
 
 
@@ -112,9 +112,9 @@ setMethod(f="lookup",
 setMethod(f="show",
           signature="Tr8",
           function(object){
-              print(object@results)
-          }
-          )
+    print(object@results)
+}
+)
 
 
 ## A method to extract results form a Tr8 object
@@ -125,9 +125,9 @@ setGeneric("extract_traits",def=function(object){standardGeneric("extract_traits
 setMethod(f="extract_traits",
           signature="Tr8",
           function(object){
-              return(object@results)
-          }
-          )
+    return(object@results)
+}
+)
 
 
 ## Method bib
@@ -140,27 +140,27 @@ setGeneric(name="bib",def=function(.Object){standardGeneric("bib")})
 setMethod(f="bib",
           signature="Tr8",
           definition = function(.Object){
-              env<-new.env(parent = parent.frame())
-              data(column_list,envir = env)
-              column_list<-get("column_list",envir=env)
+    env<-new.env(parent = parent.frame())
+    data(column_list,envir = env)
+    column_list<-get("column_list",envir=env)
 
-              cat("\n")
-              cat("Please use the following references for the data you retrieved with tr8()\n")
-              cat("\n")
-              for(db in names(.Object@bibliography)){
-                  cat("************************************************\n")
-                  cat("\n\nFor the following traits:\n\n")
-                  for(trait in .Object@bibliography[[db]]){
-                      cat("\t * ",paste(trait),"\n")
-                  }
-                  cat("\nplease use:\n\n")
-                  cat(db,fill=TRUE)
-                  cat("\n")
-              }
-              cat("************************************************\n")
-          }
+    cat("\n")
+    cat("Please use the following references for the data you retrieved with tr8()\n")
+    cat("\n")
+    for(db in names(.Object@bibliography)){
+        cat("************************************************\n")
+        cat("\n\nFor the following traits:\n\n")
+        for(trait in .Object@bibliography[[db]]){
+            cat("\t * ",paste(trait),"\n")
+        }
+        cat("\nplease use:\n\n")
+        cat(db,fill=TRUE)
+        cat("\n")
+    }
+    cat("************************************************\n")
+}
 
-          )
+)
 
 ## @rdname Tr8-Class
 ## @aliases bib, Tr8-Class
@@ -237,7 +237,7 @@ setMethod(f="bib",
 #'
 #' #' @examples \dontrun{
 #' #My_traits<-tr8(species_list=c("Abies alba"),download_traits=c("le_area","h_max","h_min"))
-#' }s
+#' }
 #' @export tr8
 tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
 
@@ -296,7 +296,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             
             reference_names<-lapply(species_list,function(x){
                 
-                sp_names<-subset(check_names,submittedname==x)
+                sp_names<-check_names[,check_names$submittedname==x]
                 sp_names<-unique(unlist(sp_names))
                 sp_names<-sp_names[grep("^\\w+ \\w+.*$",sp_names)]
                 return(sp_names)
