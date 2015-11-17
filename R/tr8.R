@@ -304,7 +304,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             }
             )
             names(reference_names)<-species_list
-            species_list<-as.vector(unlist(reference_names))
+            species_list<-unique(as.vector(unlist(reference_names)))
             
         }
 
@@ -480,12 +480,17 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
 
         
         if(synonyms==TRUE){
-
+            
             reference_names<-ldply(lapply(reference_names,ldply))
             names(reference_names)<-c("original_names","synonyms")
             tr8_traits<-merge(reference_names,tr8_traits,by.x="synonyms",by.y=0)
-            row.names(tr8_traits)<-tr8_traits$synonyms
-            tr8_traits<-tr8_traits[,names(tr8_traits)!="synonyms"]
+            ## in this case, where synonyms are required, then
+            ## row names is left with "numbers" since many strange coincidences may
+            ## happen (eg. two different species may have been found under the
+            ## same synonym, eg. using them as row.names would rais an error (and orginal
+            ## names cannot be used for the very same reason)
+            ##row.names(tr8_traits)<-tr8_traits$synonyms
+            ##tr8_traits<-tr8_traits[,names(tr8_traits)!="synonyms"]
         }
 
 

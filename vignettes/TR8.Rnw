@@ -433,9 +433,17 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
   \texttt{synonyms}: when set to true it forces the \texttt{tr8} to call the
   \texttt{tnrs} function from the \texttt{taxize} package and retrieve
   possible synonims for the provided species names: in this case the
-  retrieved trait data will have all the found synonims a row names
-  and one additional column $-$ named \textit{original\_names} $-$ will be
-  added to the dataframe containing the results of the queries.
+  retrieved trait data will have two additional columns, one called
+  \texttt{synonyms} (for the synonyms found) and another named
+  \textit{original\_names} which contains the original names passed by
+  the user with the \texttt{species\_list}
+  parameter\footnote{\textbf{PLEASE NOTE} that when \texttt{synonyms}
+    is set to TRUE, the resulting dataframe will have numbers as
+    row.names: this is mandatory since in a few cases different
+    species names may share a common synonym and 
+    \texttt{R} does not allow different
+    rows to share the same name.}.
+
 
 
 @ 
