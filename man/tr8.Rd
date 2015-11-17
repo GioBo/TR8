@@ -16,11 +16,12 @@ to the GUI inerface)}
   \item{gui_config}{if set to TRUE a GUI for selecting
     traits of interest is shown (default is FALSE)}
   \item{synonyms}{if set to TRUE tr8 will use \code{taxize} to find
-  synonyms for the species names provided in \code{species_list} and
+  synonyms for the species names provided with the \code{species_list} parameter and
   will return trait values for all those species; in that case the
-  dataframe contained in the \code{@results} slot will have synonyms as
-  row names and will contain an
-  additional column called \emph{original_names} which include the
+  dataframe contained in the \code{@results} slot will have two
+  additional columns called \emph{synonyms} (which contains the synonyms
+  found using \code{tnrs}) and another one
+  called \emph{original_names} which includes the
   original names provided with \code{species_list} (default is FALSE)}
 }
 \value{
