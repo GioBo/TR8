@@ -290,7 +290,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             }
         }
         if(synonyms==TRUE){
-
+            
             check_names<-tnrs(species_list)
             check_names<-check_names[,c("submittedname","acceptedname","matchedname")]
             
@@ -298,6 +298,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
                 
                 sp_names<-subset(check_names,submittedname==x)
                 sp_names<-unique(unlist(sp_names))
+                sp_names<-sp_names[grep("^\\w+ \\w+.*$",sp_names)]
                 return(sp_names)
 
             }
