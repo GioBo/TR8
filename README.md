@@ -57,3 +57,5 @@ dev_mode(on=F)
 [![Research software impact](http://depsy.org/api/package/cran/TR8/badge.svg)](http://depsy.org/package/r/TR8)
 
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/TR8)](https://github.com/metacran/cranlogs.app)
+
+[![cran version](http://www.r-pkg.org/badges/version/TR8)](http://cran.rstudio.com/web/packages/TR8)
