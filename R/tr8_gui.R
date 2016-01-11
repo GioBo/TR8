@@ -1,4 +1,3 @@
-
 ##' This function will make a simple GUI appear: this window containts
 ##' a tab  for each trait database: the user che choos which traits should be
 ##' downloaded from the \code{tr8} function.

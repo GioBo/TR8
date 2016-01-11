@@ -96,6 +96,7 @@ column_list<-list(
                  "fruit_type_fr"=c("fruit_type_fr","Type of fruit","Catminat"),
                  "dissemination_fr"=c("dissemination_fr","Type of dissemination","Catminat"),
                  "flower_colour_fr"=c("flower_colour_fr","Flower colour","Catminat"),
+                 "li_form_fr"=c("li_form_fr","Life form","Catminat"),
                  "ell_L_fr"=c("ell_L_fr","Ellenberg values for Light","Catminat"),
                  "elle_T_fr"=c("elle_T_fr","Ellenberg values for temperature","Catminat"),
                  "ell_C_fr"=c("ell_C_fr","Ellenberg values for continentality","Catminat"),
