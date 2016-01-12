@@ -13,9 +13,9 @@
     `xlsx` format) can be read without external dependencies
     (i.e. users do not have to worry about installing `perl`)
 
-## BROT and PLANTS traitbases
+## BROT, PLANTS and Ecological Flora of California traitbases
 
 
-     Two new databases are added as sources of data: BROT (mainly related to mediterranean
-     species) and PLANTS (from USA).
+     Three new databases are added as sources of data: BROT (mainly related to mediterranean
+     species), PLANTS and Ecological Flora of California (from USA).
 

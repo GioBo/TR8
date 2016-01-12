@@ -19,6 +19,8 @@ the following publicly available databases:
 * [Catminat](http://perso.wanadoo.fr/philippe.julve/catminat.htm)
 * [BROT](http://www.uv.es/jgpausas/brot.htm)
 * [PLANTS](http://www.bricol.net/)
+* [Ecological Flora of California](http://ucjeps.berkeley.edu/efc/)
+
 
  A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
 
@@ -53,6 +55,12 @@ dev_mode(on=F)
 ```
 
 
+
+
+Changes from past versions
+==========================
+
+  Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for changes/updates from past version of the package.
 
 [![Research software impact](http://depsy.org/api/package/cran/TR8/badge.svg)](http://depsy.org/package/r/TR8)
 
