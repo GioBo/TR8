@@ -114,8 +114,27 @@ column_list<-list(
                  ##"type_ligneux"=c("type_ligneux","","Catminat"),
                  ##"TYPE_BIOLOGIQUE"=c("TYPE_BIOLOGIQUE","","Catminat"),
 
+                 ##Flora of California
 
-                                        #brot
+                 
+                 "high_el"=c("high_el","High elevation","EFlora_Cal"),
+                 "low_el"=c("low_el","Low elevation","EFlora_Cal"),
+                 "seed_mas_cal"=c("seed_mas_cal","Seed mass","EFlora_Cal"),
+                 "seed_pro_cal"=c("seed_pro_cal","Annual seed production per plant (c)","EFlora_Cal"),
+                 "blade_area"=c("blade_area","Blade area (c)","EFlora_Cal"),
+                 "leaf_to_sap_area"=c("leaf_to_sap_area","Leaf area to sapwood area","EFlora_Cal"),
+                 "leaf_N_area"=c("leaf_N_area","Leaf Narea","EFlora_Cal"),
+                 "leaf_N_mass"=c("leaf_N_mass","Leaf Nmass","EFlora_Cal"),
+                 "max_height_cal"=c("max_height_cal","Maximum height (c)","EFlora_Cal"),
+                 "sla_cal"=c("sla_cal","Specific leaf area","EFlora_Cal"),
+                 "wood_dens"=c("wood_dens","Wood density","EFlora_Cal"),
+                 "blade_length"=c("blade_length","Blade length (c)","EFlora_Cal"),
+                 "blade_width"=c("blade_width","Blade width (c)","EFlora_Cal"),
+                 "leaf_thick"=c("leaf_thick","Leaf thickness","EFlora_Cal"),
+                 "leaf_type"=c("leaf_type","Leaf type","EFlora_Cal"),
+                 
+
+                 ##brot
 
                  "BudSource"=c("BudSource","BudSource","BROT"),
                  "DispMode"=c("DispMode","DispMode","BROT"),
@@ -229,6 +248,7 @@ column_list<-list(
                  "Protein.Potential"=c("Protein.Potential","Protein Potential","PLANTS"),
                  "Pulpwood.Product"=c("Pulpwood.Product","Pulpwood Product","PLANTS"),
                  "Veneer.Product"=c("Veneer.Product","Veneer Product","PLANTS")
+
 
                  
              )
