@@ -60,7 +60,7 @@ dev_mode(on=F)
 Changes from past versions
 ==========================
 
-  Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for changes/updates from past version of the package.
+  Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for changes/updates from past versions of the package.
 
 [![Research software impact](http://depsy.org/api/package/cran/TR8/badge.svg)](http://depsy.org/package/r/TR8)
 
