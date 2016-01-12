@@ -60,7 +60,11 @@ dev_mode(on=F)
 Changes from past versions
 ==========================
 
-  Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for changes/updates from past versions of the package.
+
+  **Important note**: the new version of _tr8()_ accepts the new argument 'synonyms': when set to true the function _tnrs_ from the package _taxize_ will be used to to search for synonyms of the provided species list and search trait data for them as well. 
+
+   Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for other changes/updates from past versions of the package.
+
 
 [![Research software impact](http://depsy.org/api/package/cran/TR8/badge.svg)](http://depsy.org/package/r/TR8)
 

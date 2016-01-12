@@ -43,7 +43,7 @@
    describe each single step in detail; users who are confident in the use of R could make most of the steps much shorter than what's presented here.}.
     This section relies on the dataset used by Sandau et
     al.(2014)\cite{Sandau} which is publicly available at
-    \texttt{dryad}\cite{dryad_Sandau} (under a CC0 1.0 licence ).
+    \texttt{dryad}\cite{dryad_Sandau} (under a CC0 1.0 licence).
     \textbf{NOTA BENE}: this dataset is here merely used as
     a tool to demonstrate some important points related to the functioning of
     \texttt{TR8}, thus what is proposed in this tutorial
