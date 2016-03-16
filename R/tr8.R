@@ -268,8 +268,8 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
     directory<-user_data_dir()
 
     
-    if(missing(species_list)||!is.character(species_list)){
-        message("\ntr8() accepts only a list of plant species names \nplease read help(tr8)\n")
+    if(missing(species_list)||!is.character(species_list)||any(grepl("^\\<\\w+\\>$",species_list))){
+        message("\ntr8() accepts only a list of complete plant species names\nplease read help(tr8)\n")
     }else{
         traits_list<-list()
         ## if the user wants to manually sets the parameters to download
