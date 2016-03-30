@@ -18,7 +18,7 @@ catminat_download_to_local_directory<-function(directory){
     ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab")
     ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab",fileEncoding="utf-8")
     temp_dest<-tempfile(fileext=".xlsx")
-    download.file(url,temp_dest)
+    download.file(url,temp_dest,mode="wb")
 
     catminat_df<-read_excel(temp_dest,sheet=1,col_names=T,col_types=rep("text",60))
     

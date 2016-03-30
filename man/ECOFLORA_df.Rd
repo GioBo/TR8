@@ -2,7 +2,7 @@
 \name{ECOFLORA_df}
 \alias{ECOFLORA_df}
 \title{\bold{ECOFLORA_df}: local lookup table for Ecoflora species' url(s)}
-\format{A data frame containing URL for the 1879 species contained in the
+\format{A data frame containing URL for the species contained in the
 Ecoflora web database.  \describe{
 \item{species}{a vector containing the species names as defined on Ecoflora website}
 \item{web_link}{a character vector containing the URL of each species trait web page}
@@ -22,8 +22,9 @@ from the \code{ecoflora()} function.
 }
 \examples{
 ## observe the data for the first few species
+\dontrun{
 head(ECOFLORA_df)
-
+}
 }
 \references{
 Please alwasy cite the database according to:
