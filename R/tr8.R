@@ -266,6 +266,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
     ## appauthor <- "GioBo"
     ## directory<-user_data_dir(appname, appauthor)
     directory<-user_data_dir()
+    
 
     
     if(missing(species_list)||!is.character(species_list)){
@@ -342,7 +343,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             }else{rearranged<-NULL}
         }
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
-
+        
         ## retrieve data from BiolFlor
         biolflor_traits<-biolflor(species_list,TRAITS=traits_list$BiolFlor,rest=rest)
         
