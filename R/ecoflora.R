@@ -25,7 +25,8 @@ setMethod('initialize',
               lookup=list()
               for(i in species_list){
                   ## is the species of interest either found in ecoflora matchedname, species name or acceptedname?
-                  results<-with(reference,reference[matchedname==i|species==i|acceptedname==i,])
+                  ##results<-with(reference,reference[matchedname==i|species==i|acceptedname==i,])
+                  results<-with(reference,reference[species==i,])
                   ## if there's just a single species, everything is fine, just extract the corresponding url
                   if(nrow(results)==1){
                       lookup[[i]]<-paste(base_url,results$web_link,sep="")
@@ -35,7 +36,7 @@ setMethod('initialize',
                           ## if multiple species are found, just take the url for that species which has acceptedname==ecoflora name
                           if(nrow(results)>1){
 
-                              results2<-with(reference,reference[matchedname==i&species==i&acceptedname==i,])
+                              results2<-with(reference,reference[species==i,])
 
                               ## in some cases Ecoflora has two species names (not accepted) which
                               ## correspond to a single accepted name eg. but are both different from that
@@ -50,10 +51,12 @@ setMethod('initialize',
                               if(nrow(results2)==0){
                                   stringa<-"\n\tBEWARE: Ecoflora contains the following species:\n\t - "
                                   stringa1<-paste(results$species,collapse="\n\t - ")
-                                  stringa2<-paste("\n\twhich correspond to the same accepted name: ",unique(results$acceptedname))
-                                  stringa3<-paste("\n\tIn this case only data corresponding to Ecoflora species",results$species[1],"will be used.\n",sep=" ")
-                                  stringa4<-paste("\n\tYou may want to re-run tr8 using the other Ecoflora species names to get traits for them\n")
-                                  tot_alert<-paste(stringa,stringa1,stringa2,stringa3,stringa4)
+                                  stringa2<-"for which multiple entries are present. Only one will be included; please check results on Ecolflora web site\n"
+                                  ## stringa2<-paste("\n\twhich correspond to the same accepted name: ",unique(results$acceptedname))
+                                  ## stringa3<-paste("\n\tIn this case only data corresponding to Ecoflora species",results$species[1],"will be used.\n",sep=" ")
+                                  ## stringa4<-paste("\n\tYou may want to re-run tr8 using the other Ecoflora species names to get traits for them\n")
+                                  ## tot_alert<-paste(stringa,stringa1,stringa2,stringa3,stringa4)
+                                  tot_alert<-paste(stringa,stringa1,stringa2)
                                   
                                   .Object@issues<-c(.Object@issues,tot_alert)
                                   results2<-results[1,]
@@ -111,6 +114,7 @@ setMethod(f='retrieve',
                           ## extract tabe data from the scraped web page
                           Sys.sleep(.Object@rest)
                           eco_data<-readHTMLTable(species_url)[[2]]
+                          ##eco_data<-readHTMLTable(species_url)
                           ## for some traits there are several entries (with the same Code), thus
                           ## the retrieved table must be "aggregated" in order to have 1 entr/trait
                           eco_data<-aggregate(eco_data$Value,by=list(eco_data$Number),paste,collapse=';')                  
@@ -167,10 +171,10 @@ setMethod(f='retrieve',
 #' }
 ecoflora<-function(species_list,TRAITS,rest)
     {
-        env<-new.env()
+        env<-new.env(parent = parent.frame()) ##        env<-new.env()
         res<-new("results")
-        data("ECOFLORA_df",envir=env)
-        data("traits_eco",envir=env)
+        ##data("ECOFLORA_df",envir=env)
+        ##data("traits_eco",envir=env)
         ECOFLORA_df<-get("ECOFLORA_df",envir=env)
         traits_eco<-get("traits_eco",envir=env)
         ## test if Ecoflora is providing data (if not the web page
@@ -221,7 +225,7 @@ ecoflora<-function(species_list,TRAITS,rest)
                 res@issues<-ret@issues
             }
         }
-        remove(list=c("ECOFLORA_df","traits_eco"),envir = env)
+        ##remove(list=c("ECOFLORA_df","traits_eco"), envir = env)
         res@bibliography<-"Fitter, A . H. and Peat , H. J., 1994. The Ecological Flora Database,\nJ. Ecol., 82, 415-425.  http://www.ecoflora.co.uk"
 
         return(res)

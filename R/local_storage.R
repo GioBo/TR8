@@ -16,7 +16,7 @@
 ##' default is NULL;
 ##' @return nothing
 ##' @author Gionata Bocci <boccigionata@@gmail.com>>
-local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor","Catminat","BROT","PLANTS"),directory){
+local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor","Catminat","BROT","PLANTS","Ecoflora"),directory){
 
     ##dir.create(directory,showWarnings=FALSE)
 
@@ -63,6 +63,9 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor","Catminat","BROT"
     }
     if("PLANTS"%in%db){
         PLANTS_download_to_local_directory(directory)
+    }
+    if("Ecoflora"%in%db){
+        ecoflora_download_to_local_directory(directory)
     }
 
     

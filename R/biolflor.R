@@ -166,12 +166,13 @@ biolflor<-function(list_species,TRAITS,rest=NULL){
 
         tmp_list=list()
         for(cur in list_species){
-            if(cur%in%biolflor_lookup$acceptedname|cur%in%biolflor_lookup$submittedname){
-                species_url<-with(biolflor_lookup,biolflor_lookup[acceptedname==cur|submittedname==cur,"V2"])
-                ## check if 2 species have the same accepted name
-                if(length(species_url)>1){
-                    species_url<-with(biolflor_lookup,biolflor_lookup[acceptedname==cur&submittedname==cur,"V2"])
-                }
+            if(cur%in%biolflor_lookup$submittedname){
+                species_url<-with(biolflor_lookup,biolflor_lookup[submittedname==cur,"V2"])
+                ## species_url<-with(biolflor_lookup,biolflor_lookup[acceptedname==cur|submittedname==cur,"V2"])
+                ## ## check if 2 species have the same accepted name
+                ## if(length(species_url)>1){
+                ##     species_url<-with(biolflor_lookup,biolflor_lookup[acceptedname==cur&submittedname==cur,"V2"])
+                ## }
             }else{species_url<-"not present"}
             Sys.sleep(rest)
             prova<-new("biolflor_traits",url=species_url,list_traits=list_of_traits_Biolflor,list_special_traits=traits_special_Biolflor,list_pollen_traits=traits_pollen_Biolflor)
