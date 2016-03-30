@@ -307,9 +307,17 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             species_list<-unique(as.vector(unlist(reference_names)))
             
         }
-
+        
         
         ## retrieve traits from ecolora function
+        local_ecoflora<-file.path(directory,"ECOFLORA_df.Rda")
+        if(file.exists(local_ecoflora)){
+            load(local_ecoflora)}else{
+            if(length(traits_list$Ecoflora)>0){
+                local_storage(db="Ecoflora",directory)
+                load(local_ecoflora)
+            }
+        }
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
 
         ## check if an already downloaded version of the LEDA database
