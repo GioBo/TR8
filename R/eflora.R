@@ -60,7 +60,7 @@ eflora<-function(species_list,TRAITS){
         TP<-data.frame(V1=species_list)
         berk<-merge(TP,berk,all.x=TRUE)
         row.names(berk)<-berk$V1
-        berk<-berk[,TRAITS]
+        berk<-berk[,TRAITS,drop=FALSE]
         berk<-droplevels.data.frame(berk)
         res@results<-berk
     }
