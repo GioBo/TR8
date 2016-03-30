@@ -433,7 +433,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
         brot_traits <- brot_data(species_list,TRAITS=traits_list$BROT)
         
         ## download traits from Electronic Flora of Californa
-        efloracal_traits<-eflora(species_list,TRAITS=traits_list$efloracal)
+        efloracal_traits<-eflora(species_list,TRAITS=traits_list$EFlora_Cal)
         
         ## check if an already downloaded version of the PLANTS database
         ## exists and, if so, use it otherwise download a copy, but only
