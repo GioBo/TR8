@@ -11,7 +11,8 @@ PLANTS <- function(species_list,TRAITS){
         PLANTS<-get("PLANTS",envir=env)
         species<-data.frame(species=species_list)
         
-        temp_df<-merge(species,PLANTS,by.x="species",by.y="acceptedname",all.x=T)
+        ##temp_df<-merge(species,PLANTS,by.x="species",by.y="acceptedname",all.x=T)
+        temp_df<-merge(species,PLANTS,by.x="species",by.y="matchedname",all.x=T)
         row.names(temp_df)<-temp_df$species
         temp_df<-temp_df[,!names(temp_df)%in%c("species"),drop=F]
         temp_df<-temp_df[,TRAITS,drop=F]

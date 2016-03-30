@@ -64,7 +64,8 @@ eflora<-function(species_list,TRAITS){
         berk<-droplevels.data.frame(berk)
         res@results<-berk
     }
-    stringa<-"EFCal Project. (n.d.). Retrieved January 12, 2016, from http://ucjeps.berkeley.edu/efc/index.html"
+
+    stringa<-paste("Jepson Flora Project, 2006. Ecological Flora of California, 23 July 2006, ",format(Sys.time(), "%b-%d-%Y"),sep="")
     Encoding(stringa)<-"unicode"
     res@bibliography<-stringa
 
