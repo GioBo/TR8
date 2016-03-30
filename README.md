@@ -22,7 +22,6 @@ the following publicly available databases:
 * [Ecological Flora of California](http://ucjeps.berkeley.edu/efc/)
 
 
- A basic guide for using the package is provided in [TR8.pdf](https://github.com/GioBo/TR8/blob/master/vignettes/TR8.pdf)
 
 
 Install the package
@@ -54,6 +53,23 @@ library(TR8)
 dev_mode(on=F)
 ```
 
+
+Usage
+=====
+
+  The package comes with two vignettes aimed at helping users: the first one is a basic guide on how to use the package main function (_tr8()_); to browse it, simply type in the R console:
+  
+  
+```R
+vignette("TR8")
+```
+  
+  The second one is a step-by-step description of what might be considered as a typical workflow for a plant ecologist who needs to collect traits' data and later analyze them; to view the vignette, write:
+  
+```R
+vignette("TR8_workflow")
+```
+  
 
 
 
