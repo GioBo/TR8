@@ -173,10 +173,8 @@ ecoflora<-function(species_list,TRAITS,rest)
     {
         env<-new.env(parent = parent.frame()) ##        env<-new.env()
         res<-new("results")
-        ##data("ECOFLORA_df",envir=env)
-        ##data("traits_eco",envir=env)
-        ECOFLORA_df<-get("ECOFLORA_df",envir=env)
-        traits_eco<-get("traits_eco",envir=env)
+        
+
         ## test if Ecoflora is providing data (if not the web page
         ##  http://www.ecoflora.co.uk/search_species.php will contain
         ## "No Species currently available"
@@ -193,6 +191,9 @@ ecoflora<-function(species_list,TRAITS,rest)
         if(is.null(TRAITS)){
             res@results<-NULL
         }else{
+
+            ECOFLORA_df<-get("ECOFLORA_df",envir=env)
+            traits_eco<-get("traits_eco",envir=env)            
             ## check that internet connection is working
             ## otherwise it will stop and provide an error 
             ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
