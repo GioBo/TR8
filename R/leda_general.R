@@ -1,7 +1,8 @@
 leda_download<-function(url,skip_row,column,out_name){
 #    base_url<-"http://www.leda-traitbase.org/LEDAportal/objects/Data_files/"
     ##base_url<-"http://www.uni-oldenburg.de/en/landeco/research/projects/LEDA/Data Files/"
-    base_url<-"http://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
+    base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
+    ##base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
     url<-paste(base_url,url,sep="")
     downloaded<-read.csv(url,row.names=NULL,skip=skip_row,sep=";",check.names="F")
     
@@ -34,7 +35,7 @@ leda_general<-function(url,skip_row,species,column,out_name){
     rearranged<-leda_download(url=url,skip_row=skip_row,column=column,out_name="variable")
 
     ########
-    ######## Mettere qui le opzioni di utilizzo del db scaricato
+######## Mettere qui le opzioni di utilizzo del db scaricato
     #######  Ricorda di chiamare la colonna "variable"
     
     temp_df<-as.data.frame(species,row.names = species)
