@@ -5,7 +5,12 @@
    'taxize' to search for synonyms of the provided species list and
    search trait data for them as well. 
 
+## Fixes
 
+  - LEDA is now using "https"
+  - Cleaner requests to Ecoflora
+   
+ 
 
 ## Catminat database
 
