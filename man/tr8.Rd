@@ -23,10 +23,18 @@ to the GUI inerface)}
   found using \code{tnrs}) and another one
   called \emph{original_names} which includes the
   original names provided with \code{species_list} (default is FALSE)}
+\item{catminat_alternatives}{if set to TRUE tr8 will search, within the
+  Catminat traitbase, for entries which contain, in their names, the
+  ones in the provided \code{species_list}; e.g. if "Myrtus communis" is
+  included in the \code{species_list}, tr8 will query the following
+  existing entries in Catminat: "Myrtus communis", "Myrtus communis v. communis" and "Myrtus communis v. leucocarpa".
+  (default is FALSE)}
+
+
 }
 \value{
 An object of class \code{Tr8}; the slots \code{@results} contains various traits data for the species
-of interest
+of interest.
 }
 \description{
 \code{tr8} makes internally use of other functions provided by the
@@ -70,6 +78,22 @@ At the moment the following databeses are available:
 
 
 }
+\details{
+
+  Not all traitbases use the most updated accepted names, thus
+  different traibases may use different names for the same biological entity; it is
+  not easy to find an automatic way to solve this issue, thus users are
+  urged to always check the results provided by the \code{tr8} function.
+   In order to help users, the new version of the function accepts two
+  parameters, \code{synonyms} and \code{catminat_alternative} so that
+  data will be retrieved also for species which are not directly
+  requested, but may be of interest for
+  the user (e.g. in Catminat currently there are not traits for
+  "Myrtus communis" but there are some for its subspecies). In this case
+  some careful manual work will be required later in order to select species and
+  traits of interest.
+}
+
 \examples{
 \dontrun{
 ## download some trait data for Abies alba 
