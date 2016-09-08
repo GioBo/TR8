@@ -239,7 +239,7 @@ setMethod(f="bib",
 #' #My_traits<-tr8(species_list=c("Abies alba"),download_traits=c("le_area","h_max","h_min"))
 #' }
 #' @export tr8
-tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
+tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,catminat_alternatives=FALSE){
 
     ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
     ##     stop("You need a working internet connection to use tr8()")
@@ -416,7 +416,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
             }else{catminat_df<-NULL}
         }
         ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
-        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df)
+        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df,similar=catminat_alternatives)
         
         ## check if an already downloaded version of the BROT database
         ## exists and, if so, use it otherwise download a copy, but only
@@ -476,7 +476,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
         ## names(tr8_traits)<-names_columns
         ## tr8_traits<-as.data.frame(tr8_traits[,names_columns],row.names = row_names)
         tr8_traits<-tr8_traits[,!(names(tr8_traits)%in%c("Row.names","species_list")),drop=FALSE]
-
+        
         obj<-new("Tr8")
         ##    obj@double_names<-unique(c(eco_traits@double_names,leda_traits@double_names))
         ##    obj@not_valid<-intersect(intersect(eco_traits@not_valid,leda_traits@not_valid),pignatti_traits@not_valid)
@@ -484,13 +484,13 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE){
         ## biolflor_clean is not needed any more
         ## tr8_traits<-biolflor_clean(tr8_traits)
         tr8_traits<-column_conversion(tr8_traits)
-
+        
         
         if(synonyms==TRUE){
             
             reference_names<-ldply(lapply(reference_names,ldply))
             names(reference_names)<-c("original_names","synonyms")
-            tr8_traits<-merge(reference_names,tr8_traits,by.x="synonyms",by.y=0)
+            tr8_traits<-merge(reference_names,tr8_traits,by.x="synonyms",by.y=0,all=T)
             ## in this case, where synonyms are required, then
             ## row names is left with "numbers" since many strange coincidences may
             ## happen (eg. two different species may have been found under the

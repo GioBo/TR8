@@ -1,9 +1,19 @@
-## synonyms
+## synonyms and alternative names
 
-   Now tr8() accepts a new argument, 'synonyms': when it is set to
-   true the function will use 'tnrs' function from the package
-   'taxize' to search for synonyms of the provided species list and
-   search trait data for them as well. 
+   Now tr8() accepts two new arguments:
+
+   - 'synonyms': when it is set to TRUE the function will use 'tnrs' function from
+     		 the package 'taxize' to search for synonyms of the provided species
+		 list and search trait data for them as well.
+
+   - 'catminat_alternatives': when TRUE tr8() searches - within the Catminat traitbase - also
+                              for species names which "contain" the names of the ones of interest
+			      (subspecies in Catminat are usually written in the form "Galium ver. halophilum"
+			      instead of "Galium verum subsp. halophilum"; cleaning this format in an automatic way
+			      is trickier than expected because for some entries we only have subspecies - thus
+			      automatically correcting the Genus is not always possible).
+
+
 
 ## Fixes
 

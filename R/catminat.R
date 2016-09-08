@@ -1,4 +1,4 @@
-catminat<-function(species_list,TRAITS,catminat_df){
+catminat<-function(species_list,TRAITS,catminat_df,similar=FALSE){
     res<-new("results")
     ## env<-new.env(parent = parent.frame())
     ## load(local_Catminat,envir = env)
@@ -8,8 +8,17 @@ catminat<-function(species_list,TRAITS,catminat_df){
         res@results<-NULL
     }else{
 
-        
-        DF<-catminat_df[catminat_df$species_name%in%species_list,c("species_name",TRAITS)]
+        if(similar){
+
+            DF<-lapply(species_list,function(x){
+                catminat_df[grep(x,catminat_df$species_name),c("species_name",TRAITS)]
+            }
+            )
+            DF<-ldply(DF)
+
+            }else{
+                DF<-catminat_df[catminat_df$species_name%in%species_list,c("species_name",TRAITS)]
+                }
         row.names(DF)<-DF$species_name
         DF<-DF[,TRAITS,drop=FALSE]
 

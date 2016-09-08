@@ -9,6 +9,20 @@
 
   Try to fix catminat
 
+
+#1 e #3 dovrebbero dare lo stesso risultato -> synonims=TRUE reduces the number of rows
+
+#+begin_src R :session *R* :results output :exports both
+  tratti<-c("li_span","ros","reprod_B","strategy","sex_reprod_fr","poll_vect_fr","fruit_type_fr","dissemination_fr")
+
+  specie<-c("Pinus pinea","Aster squamatus","Myrtus communis")
+
+  catm<-tr8(specie,tratti,catminat_alternative=T)
+  sino_only<-tr8(specie,tratti,synonyms=T)
+  catm_sin<-tr8(specie,tratti,catminat_alternatives=T,synonyms=T)
+#+end_src
+
+
 #+begin_src R :session *R* :results output :exports both
   load("~/.local/share/catminat.Rda")
 
