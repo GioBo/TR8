@@ -1,0 +1,23 @@
+
+* Ecoflora
+
+  - Amaranthus retroflexus :: li_form ="th"
+  - Ambrosia artemisiifolia ::	li_form ="Th"
+
+
+* Catminat
+
+  Try to fix catminat
+
+#+begin_src R :session *R* :results output :exports both
+  load("~/.local/share/catminat.Rda")
+
+  gatto<-head(catminat_df$species,50)
+
+  nomi<-gatto[grep("^([a-zA-Z]+) ([a-z]+\\.{1}) .*",gatto)]
+
+  nome<-nomi[3]
+  vai<-gsub("^([a-zA-Z]+) ([a-z]+)\\.{1} .*","\\1 \\2[a-zA-Z]+$",nome)
+
+  grep(vai,gatto)
+#+end_src
