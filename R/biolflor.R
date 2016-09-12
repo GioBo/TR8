@@ -142,10 +142,18 @@ setMethod(f="extract",
 #' @examples \dontrun{
 #' biolflor(c("Abies alba"))
 #' }
-biolflor<-function(list_species,TRAITS,rest=NULL){
+biolflor<-function(list_species,TRAITS,rest=NULL,directory){
     res<-new("results")
     env<-new.env(parent = parent.frame())
+    local_biolflor_lookup <- file.path(directory,"biolflor_lookup.rda")
     data(biolflor_lookup,envir=env)
+    
+    if(file.exists(local_biolflor_lookup)){
+        load(local_biolflor_lookup,envir = env)    
+    }else{
+        data(biolflor_lookup,envir=env)
+    }
+    
     biolflor_lookup<-get("biolflor_lookup",envir = env)    
     if(is.null(TRAITS)){
         res@results<-NULL

@@ -10,7 +10,7 @@
 ## brico$Scientific.Name<-as.character(brico$Scientific.Name)
 ## brico$Scientific.Name<-gsub(","," ",brico$Scientific.Name)
 
-## go<-tnrs(brico$Scientific.Name ,source = "iPlant_TNRS")
+## go<-tnrs(brico$Scientific.Name ,source = "iPlant_TNRS",verbose=FALSE)
 ## go$score<-as.numeric(go$score)
 ## dai<-go[,c("submittedname","acceptedname","score","matchedname","authority")]
 ## dai<-dai[dai$score>=.6,]

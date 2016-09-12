@@ -445,16 +445,41 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
     rows to share the same name.}.
 
 
-
 @ 
 <<synonims, eval=FALSE>>=
 my_species<-c("Salix alba","Inula viscosa")
 my_traits<-c("h_max","le_area","li_form")
-my_Data<-tr8(species_list = my_species, download_list = my_traits, synonyms=TRUE)
+my_Data<-tr8(species_list = my_species, download_list = my_traits, 
+             synonyms=TRUE)
 @ %def 
 
 
+
+
+
+  In the \texttt{Catminat} traitbase there are some entries which are
+  in the form "Genus v. subspecies" (e.g. "Myrtus communis
+  v. communis" and "Myrtus communis v. leucocarpa".); in order to
+  allow users to search among those subspecies, the parameter
+  \textsc{catminat\_alternatives} has been introduced in the
+  \textsc{tr8} function: when set to \textsc{TRUE} the function will
+  search  for entries which contain, in their names, the names
+  provided \textsc{species\_list}; e.g. if "Myrtus communis" is
+  included in the \textsc{species\_list}, tr8 will query the following
+  existing entries in Catminat: "Myrtus communis", "Myrtus communis
+  v. communis" and "Myrtus communis v. leucocarpa"). 
+
   
+@ 
+<<catminat, eval=FALSE>>=
+my_species<-c("Myrtus communis")
+## some traits from Catminat
+my_traits<-c("inflorescence_fr","sex_reprod_fr","poll_vect_fr")
+my_Data<-tr8(species_list = my_species, download_list = my_traits,
+             catminat_alternatives=TRUE)
+@ %def 
+
+
   
 \section{Further steps}
 
@@ -502,6 +527,30 @@ vignette("TR8_workflow")
   run AND traits data from the above mentioned databases are requested for the first time, these files are downloaded and an R version (\texttt{.Rda})
   copy is stored in a local directory and made available to future requests\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details).}.
 
+  
+\section{Update local lookup tables}
+
+  For some traitbases tr8 uses lookup-tables which contain URLs of the
+  species of interest (i.e. whenever the user search for traits data
+  for some species, tr8 searches for the corresponding URLs in such
+  tables and then retrieve the data from the corresponding webpages);
+  some of the traitbases queried by tr8 are 
+  uploaded from time to time thus the function may be unable to retrieve
+  traits data for the most recently uploaded species.
+  The \textsc{tr8\_setup} function allows the user to download the
+  most updated version of such tables; simply run 
+  
+  If the user wants to have available the most updated data, 
+
+@ 
+<<tr8_setup, eval=FALSE>>=
+tr8_setup()
+@ %def 
+  
+  \textbf{BEWARE}: this function takes a long time to run (nearly 20
+  minutes are required - on a fast connection - for retrieving lookup
+  tables for BiolFlor); it's very likely that the most recent version of \textsc{TR8} contains the already up-to-date version of the data, so in most cases will never need to use this function. 
+  
 
 \bibliography{tr8}
 

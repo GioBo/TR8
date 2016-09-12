@@ -3,7 +3,8 @@
 \title{\code{tr8}: retrieving functional traits data from various
 databases.}
 \usage{
-tr8(species_list, download_list = NULL, gui_config = FALSE,synonyms=FALSE)
+tr8(species_list, download_list = NULL, gui_config = FALSE,synonyms=FALSE,
+        catminat_alternatives=FALSE)
 }
 \arguments{
   \item{species_list}{a vector containing names of the
@@ -29,8 +30,6 @@ to the GUI inerface)}
   included in the \code{species_list}, tr8 will query the following
   existing entries in Catminat: "Myrtus communis", "Myrtus communis v. communis" and "Myrtus communis v. leucocarpa".
   (default is FALSE)}
-
-
 }
 \value{
 An object of class \code{Tr8}; the slots \code{@results} contains various traits data for the species

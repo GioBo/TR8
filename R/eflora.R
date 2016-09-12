@@ -19,7 +19,7 @@ codes_column<-c(
 
 
 eflora<-function(species_list,TRAITS){
-
+    
     res<-new("results")
     if(is.null(TRAITS)){
         res@results<-NULL
@@ -40,28 +40,34 @@ eflora<-function(species_list,TRAITS){
         lista<-list()
         ## read the data
         berk<-readHTMLTable(long_url)[[2]]
-        ## remove units of measure from the data values column
-        berk$V3<-gsub("\\t.*$","",berk$V3)
-        berk<-berk[,c("V1","V2","V3")]
-        ## recode the trait names in the short form used in the gui
-        berk$V2<-revalue(berk$V2,codes_column,warn_missing=FALSE)
+        if(is.null(berk)){
+            berk<-data.frame(matrix(NA,nrow=length(species_list),ncol=length(TRAITS)))
+            names(berk)<-TRAITS
+            row.names(berk)<-species_list
 
-        ## create a species*trait dataframe
-        ## dati<-cast(V1~V2,value="V3",data=berk,fun.aggregate=function(x){paste(x,sep="-")})
-        berk<-cast(V1~V2,value="V3",data=berk)
-        ## add empty columns for each traits which was requested but for which no data
-        ## were found in the traitbase
-        nomi<-TRAITS[!TRAITS%in%names(berk)]
-        for(i in nomi){
-            berk[[i]]<-"<NA>"
+        }else{ ## remove units of measure from the data values column
+            berk$V3<-gsub("\\t.*$","",berk$V3)
+            berk<-berk[,c("V1","V2","V3")]
+            ## recode the trait names in the short form used in the gui
+            berk$V2<-revalue(berk$V2,codes_column,warn_missing=FALSE)
+
+            ## create a species*trait dataframe
+            ## dati<-cast(V1~V2,value="V3",data=berk,fun.aggregate=function(x){paste(x,sep="-")})
+            berk<-cast(V1~V2,value="V3",data=berk)
+            ## add empty columns for each traits which was requested but for which no data
+            ## were found in the traitbase
+            nomi<-TRAITS[!TRAITS%in%names(berk)]
+            for(i in nomi){
+                berk[[i]]<-"<NA>"
+            }
+            
+            ## create a dataframe with the requested species' names
+            TP<-data.frame(V1=species_list)
+            berk<-merge(TP,berk,all.x=TRUE)
+            row.names(berk)<-berk$V1
+            berk<-berk[,TRAITS,drop=FALSE]
+            berk<-droplevels.data.frame(berk)
         }
-        
-        ## create a dataframe with the requested species' names
-        TP<-data.frame(V1=species_list)
-        berk<-merge(TP,berk,all.x=TRUE)
-        row.names(berk)<-berk$V1
-        berk<-berk[,TRAITS,drop=FALSE]
-        berk<-droplevels.data.frame(berk)
         res@results<-berk
     }
 

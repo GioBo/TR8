@@ -292,7 +292,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         }
         if(synonyms==TRUE){
             
-            check_names<-tnrs(species_list)
+            check_names<-tnrs(species_list,verbose=FALSE)
             check_names<-check_names[,c("submittedname","acceptedname","matchedname")]
             
             reference_names<-lapply(species_list,function(x){
@@ -320,7 +320,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
             }
         }
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
-
+        
         ## check if an already downloaded version of the LEDA database
         ## exists and, if so, use it otherwise download a copy, but only
         ## if at least one LEDA trait is needed
@@ -345,7 +345,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
         
         ## retrieve data from BiolFlor
-        biolflor_traits<-biolflor(species_list,TRAITS=traits_list$BiolFlor,rest=rest)
+        biolflor_traits<-biolflor(species_list,TRAITS=traits_list$BiolFlor,rest=rest,directory=directory)
         
         ## retrieve data from Pignatti
         pignatti_traits<-pignatti_f(species_list,TRAITS=traits_list$Pignatti)

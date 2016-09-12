@@ -19,6 +19,9 @@ catminat<-function(species_list,TRAITS,catminat_df,similar=FALSE){
             }else{
                 DF<-catminat_df[catminat_df$species_name%in%species_list,c("species_name",TRAITS)]
                 }
+        ## in a few cases (e.g. Alnus viridis) some entries are double-> this causes
+        ## problems -> be sure that all rows are unique
+        DF<-unique(DF)
         row.names(DF)<-DF$species_name
         DF<-DF[,TRAITS,drop=FALSE]
 

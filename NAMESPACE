@@ -1,4 +1,5 @@
 export(tr8)
+export(tr8_setup)
 exportMethods(bib)
 exportMethods(lookup)
 exportMethods(extract_traits)

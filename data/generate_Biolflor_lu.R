@@ -68,7 +68,7 @@ q## ############################################################
 ## ## From species names we now extract only Genus and Species
 ## ## (It's easier this way to work with TNRS)
 
-## biolflor_check<-tnrs(biolflor_lu$name,source="iPlant_TNRS")
+## biolflor_check<-tnrs(biolflor_lu$name,source="iPlant_TNRS",verbose=FALSE)
 ## save(biolflor_check,file = "data/biolflor_check.rda")
 
 

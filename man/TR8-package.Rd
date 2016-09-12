@@ -33,7 +33,7 @@ traits data for plant species from the following sources:
 }
 \details{
 \tabular{ll}{ Package: \tab TR8\cr Type: \tab Package\cr
-Version: \tab 0.9.15\cr Date: \tab 2016-3-30\cr License: \tab
+Version: \tab 0.9.15\cr Date: \tab 2016-9-8\cr License: \tab
 GPL>=2\cr Depends: \tab XML, RCurl, plyr, readxl\cr }
 
 The easiest way of using the package is through the

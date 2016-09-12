@@ -8,7 +8,7 @@
 ## PLANTS$Scientific.Name<-as.character(PLANTS$Scientific.Name)
 ## PLANTS$Scientific.Name<-gsub(","," ",PLANTS$Scientific.Name)
 
-## go<-tnrs(PLANTS$Scientific.Name ,source = "iPlant_TNRS")
+## go<-tnrs(PLANTS$Scientific.Name ,source = "iPlant_TNRS",verbose=FALSE)
 ## go$score<-as.numeric(go$score)
 ## dai<-go[,c("submittedname","acceptedname","score","matchedname","authority")]
 ## dai<-dai[dai$score>=.6,]
