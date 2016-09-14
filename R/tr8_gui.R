@@ -36,6 +36,8 @@ tr8_config<-function(){
     temp_AMF<-temp_dframe[temp_dframe$db=="AMF",c("long_code","description")]
     ## get traits from catminat
     temp_Catminat<-temp_dframe[temp_dframe$db=="Catminat",c("long_code","description")]
+    ## get traits from Imkerbond Zoersel
+    temp_Imkerbond<-temp_dframe[temp_dframe$db=="Imkerbond",c("long_code","description")]
     ## get traits from BROT
     temp_BROT<-temp_dframe[temp_dframe$db=="BROT",c("long_code","description")]
     ## get traits from Electronic flora of California
@@ -65,6 +67,7 @@ tr8_config<-function(){
     res_Pignatti<-gcheckboxgroup(temp_Pignatti$description,container=nb,label="Pignatti")
     res_AMF<-gcheckboxgroup(temp_AMF$description,container=nb,label="AMF")
     res_Catminat<-gcheckboxgroup(temp_Catminat$description,container=nb,label="Catminat")
+    res_Imkerbond<-gcheckboxgroup(temp_Imkerbond$description,container=nb,label="Imkerbond")
     res_BROT<-gcheckboxgroup(temp_BROT$description,container=nb,label="BROT")
     res_efloracal<-gcheckboxgroup(temp_efloracal$description,container=nb,label="Eflora Calif.")
     ##res_PLANTS<-gcheckboxgroup(temp_PLANTS$description,container=nb,label="PLANTS")
@@ -81,6 +84,7 @@ tr8_config<-function(){
     res_Ecoflora<-svalue(res_Ecoflora)
     res_Pignatti<-svalue(res_Pignatti)
     res_AMF<-svalue(res_AMF)
+    res_Imkerbond<-svalue(res_Imkerbond)
     res_Catminat<-svalue(res_Catminat)
     res_BROT <- svalue(res_BROT)
     res_PLANTS <- c(svalue(res_PLANTS_A),svalue(res_PLANTS_B))
@@ -91,6 +95,7 @@ tr8_config<-function(){
     res_Ecoflora<-fix_values(res_Ecoflora,temp_Ecoflora)
     res_Pignatti<-fix_values(res_Pignatti,temp_Pignatti)
     res_AMF<-fix_values(res_AMF,temp_AMF)
+    res_Imkerbond<-fix_values(res_Imkerbond,temp_Imkerbond)    
     res_Catminat<-fix_values(res_Catminat,temp_Catminat)
     res_BROT <- fix_values(res_BROT,temp_BROT)
     ## get the chosen traits from the 2 PLANTS panel and merge them in a single vector
@@ -98,7 +103,7 @@ tr8_config<-function(){
     res_PLANTS<- fix_values(res_PLANTS,temp_PLANTS)
     res_efloracal<-fix_values(res_efloracal,temp_efloracal)
     
-    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"AMF"=res_AMF,"Catminat"=res_Catminat,"BROT"=res_BROT,"PLANTS"=res_PLANTS,"efloracal"=res_efloracal)
+    traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"AMF"=res_AMF,"Catminat"=res_Catminat,"Imkerbond"=res_Imkerbond,"BROT"=res_BROT,"PLANTS"=res_PLANTS,"efloracal"=res_efloracal)
     return(traits_list)
 
 }

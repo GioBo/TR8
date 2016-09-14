@@ -281,7 +281,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
             ## run the gui
             traits_list<-tr8_config()
         }else{
-            for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF","Catminat","BROT","PLANTS","EFlora_Cal")){
+            for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF","Catminat","BROT","PLANTS","EFlora_Cal","Imkerbond")){
                                         #db<-temp_dframe$db[temp_dframe$short_code==i]
                 data_db<-temp_dframe[temp_dframe$db==db,]
                 if(sum(data_db$short_code%in%download_list)>0){
@@ -402,7 +402,10 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         amf_MycoFlor<-retrieve_MycoFlor(species_list,TRAITS=TRAIT_MYC,rest=rest,data_myco=MycoFlor)
 
 
+        ## Imkerbond
 
+
+        Imkerbond_traits <- imkerbond_get(species_list,TRAITS=traits_list$Imkerbond)
         
         ## check if an already downloaded version of the Catminat database
         ## exists and, if so, use it otherwise download a copy, but only
@@ -454,7 +457,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         tr8_traits<-data.frame(species_list,row.names=species_list)
         bibliography=list()
         potential_issues<-c()
-        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits,PLANT_traits,efloracal_traits)){
+        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits,PLANT_traits,efloracal_traits,Imkerbond_traits)){
             ## merge the dataframes only if they contain data
             if(!is.null(i@results))
             {
