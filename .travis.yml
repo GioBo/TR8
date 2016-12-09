@@ -1,6 +1,6 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 # example taken from https://github.com/PredictiveEcology/SpaDES/blob/master/.travis.yml
-
+edge: true
 sudo: required
 
 language: r
