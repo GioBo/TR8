@@ -50,7 +50,7 @@ matrix:
     osx_image: xcode8
     cran: https://cran.rstudio.com/
     latex: false
-    r_build_args: '--no-build-vignettes'
+    r_build_args: '--no-build-vignettes --resave-data'
     r_check_args: '--as-cran --ignore-vignettes --no-examples'
 
 
