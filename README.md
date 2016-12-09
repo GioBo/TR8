@@ -87,3 +87,5 @@ Changes from past versions
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/TR8)](https://github.com/metacran/cranlogs.app)
 
 [![cran version](http://www.r-pkg.org/badges/version/TR8)](http://cran.rstudio.com/web/packages/TR8)
+
+[![Build Status](https://travis-ci.org/GioBo/TR8.svg?branch=master)](https://travis-ci.org/GioBo/TR8)
