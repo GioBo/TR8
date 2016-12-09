@@ -17,7 +17,6 @@ matrix:
     - tlmgr install xcolor
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-    - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" >> ~/.Rprofile
 
   - os: linux
     dist: precise
@@ -55,7 +54,7 @@ matrix:
     r_check_args: '--as-cran --ignore-vignettes --no-examples'
 
 
-r_build_args: " "
+r_build_args: "--resave-data"
 
 r_check_args: "--as-cran"
 
