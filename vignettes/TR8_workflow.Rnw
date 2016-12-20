@@ -318,7 +318,7 @@ Having a look at the table, some points should be noted:
  In order to be able to carry on some statistical analysis, we adopt the following decisions:
  
  \begin{itemize}
- \item for for \textit{C. arvensis} we calculate the mean between 75 and 10 and use that as the \texttt{h\_max}
+ \item for \textit{C. arvensis} we calculate the mean between 75 and 10 and use that as the \texttt{h\_max}
 @ 
 <<cirsium,eval=FALSE>>=
 ## we extract the data from the object returned by tr8()
