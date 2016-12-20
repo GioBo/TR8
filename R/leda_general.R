@@ -110,3 +110,32 @@ leda_general<-function(url,skip_row,species,column,out_name){
 ##     row.names(merged)<-merged$Row.names
 ##     merged<-merged[,-1]
 ## },list(age_of_first_flowering,branching,bud_bank_seasonality_soil,buoyancy,canopy_height,dispersal,leaf_distribution,leaf_dmc,leaf_mass,leaf_size,dispersal_morphology,growth_form,life_span,releasing_height,sbank,seed_mass,shoot_growth_form,seed_number_per_shoot,woodiness,terminal_velocity))
+
+
+
+
+leda_fc <- function(species_list){
+    base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
+    url<-paste(base_url,"dispersal_type.txt",sep="")
+
+    downloaded<-read.csv(url,row.names=NULL,skip=6,sep=";",check.names="T")
+    names(downloaded) <- gsub("\\.+","_",    names(downloaded))
+    names(downloaded) <- gsub("_$","",    names(downloaded))
+        
+    float <- reshape::cast(data=downloaded,SBS_name~dispersal_type,value="BYC_avg_float_cap_sv",fun.aggregate=function(x){mean(x,na.rm=TRUE)})
+    row.names(float) <- float$SBS_name
+    float <- float[,!names(float)%in%c("SBS_name","V1")]
+
+    go <- lapply(float,function(x){
+        x[is.nan(x)]<-NA
+        x
+    })
+    go <- data.frame(go)
+    row.names(go) <- row.names(float)
+
+    data_tmp <- data.frame(species_list)
+    vai<- merge(data_tmp,go,by.x="species_list",by.y=0,all.x=TRUE)
+    row.names(vai) <- vai$species_list
+    vai <- vai[,names(vai)!="species_list"]
+    return(vai)
+    }
