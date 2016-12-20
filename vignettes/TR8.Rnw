@@ -243,7 +243,7 @@ issues(my_Data)
   the original websites (all the databases listed in the references
   provide the users with very precise and detailed descriptions).
 
-   Typically users will have a their vegetation data in the form of a
+   Typically users will have their vegetation data in the form of a
    \textit{sites}*\textit{species} dataframe (or matrix), thus they
    may want to extract traits data for the whole dataset (this time using the GUI to select traits), i.e. :
    
