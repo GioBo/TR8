@@ -1,3 +1,7 @@
+## leda_fc
+
+   New function which allows to download Mean Floating Capacity data from LEDA
+
 ## synonyms and alternative names
 
    Now tr8() accepts two new arguments:
