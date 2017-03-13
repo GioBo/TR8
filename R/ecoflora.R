@@ -21,7 +21,7 @@ setMethod('initialize',
               .Object@rest<-rest
               ## list which will contain ecoflora
               ## web link for each species
-              base_url<-"http://www.ecoflora.co.uk/search_ecochars.php?"
+              base_url<-"http://www.ecoflora.org.uk/search_ecochars.php?"
               lookup=list()
               for(i in species_list){
                   ## is the species of interest either found in ecoflora matchedname, species name or acceptedname?
@@ -99,7 +99,7 @@ setMethod(f='retrieve',
                   ## eco will contain as many slots as the species passed
                   ## and each slot-species will contain a list of the
                   ## downloaded ecological traits
-                  eco<-list()
+              eco<-list()
 
                   
                   for(species in .Object@df$species){
@@ -174,7 +174,7 @@ ecoflora<-function(species_list,TRAITS,rest)
         env<-new.env(parent = parent.frame()) ##        env<-new.env()
         res<-new("results")
         
-
+        
         ## test if Ecoflora is providing data (if not the web page
         ##  http://www.ecoflora.co.uk/search_species.php will contain
         ## "No Species currently available"
@@ -202,7 +202,7 @@ ecoflora<-function(species_list,TRAITS,rest)
 
             ## check that ecoflora is up and working
             
-            eco_check<-readLines("http://www.ecoflora.co.uk/search_species.php",warn=FALSE)
+            eco_check<-readLines("http://www.ecoflora.org.uk/search_species.php",warn=FALSE)
             res_check<-length(grep("No Species currently available",eco_check))
             
             

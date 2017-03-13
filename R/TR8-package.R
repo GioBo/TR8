@@ -147,7 +147,7 @@ NULL
 #' Ecoflora; curious users can expand the number of downloadable traits
 #' simply extending the list with other 'pairs' (take care of using the right
 #' \code{Ecoflora codes} as described in
-#' \samp{http://www.ecoflora.co.uk/search_plantchar.php}).
+#' \samp{http://www.ecoflora.org.uk/search_plantchar.php}).
 #' 
 #' @name traits_eco
 #' @docType data

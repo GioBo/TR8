@@ -1,6 +1,6 @@
 ecoflora_download_to_local_directory <- function(directory){
 
-    url <- "http://www.ecoflora.co.uk/search_species.php"
+    url <- "http://www.ecoflora.org.uk/search_species.php"
     temp_pag <- htmlParse(url)
 
     query <- paste('//*/a[contains(@href,"search_species2.php?plant_no=")]')

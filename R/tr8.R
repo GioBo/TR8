@@ -290,6 +290,16 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
                 traits_list[db]<-list(code)
             }
         }
+
+        if(length(species_list) > length(unique(species_list))){
+            duplicates <- names(which(table(species_list)>1))
+            message("\nDouble entries were found for the following species: \n")
+            for(i in duplicates){cat("\n \t *",i,"\n")}
+            message("\nBeware that tr8() will remove double entries from the search.\n")
+            
+            species_list <- unique(species_list)
+        }
+        
         if(synonyms==TRUE){
             
             check_names<-tnrs(species_list,verbose=FALSE)
