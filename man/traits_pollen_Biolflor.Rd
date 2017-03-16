@@ -8,9 +8,9 @@ a vector containing traits that can be downloaded from
 Biolflor
 }
 \examples{
-## have a look at the first rows of the dataset
-##head(traits_pollen_Biolflor)
-
+\dontrun{
+#data(traits_pollen_Biolflor)
+}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>
@@ -24,5 +24,5 @@ zu biologisch-ökologischen Merkmalen zur Flora von Deutschland.
 Schriftenreihe für Vegetationskunde *38*: 1-333.  (Bundesamt für. Bonn, 
 Bundesamt für Naturschutz)
 }
-\keyword{traits_pollen_Biolflor}
+\keyword{biolflor}
 

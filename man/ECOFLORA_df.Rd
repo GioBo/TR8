@@ -29,8 +29,8 @@ head(ECOFLORA_df)
 \references{
 Please alwasy cite the database according to:
 
-Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora
-Database, J. Ecol., 82, 415-425.
+Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database, J.
+Ecol., 82, 415-425.
 }
 \keyword{datasets}
 

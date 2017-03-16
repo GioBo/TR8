@@ -31,16 +31,16 @@ Ecoflora; curious users can expand the number of
 downloadable traits simply extending the list with other
 'pairs' (take care of using the right \code{Ecoflora codes}
 as described in
-\samp{http://www.ecoflora.co.uk/search_plantchar.php}).
+\samp{http://www.ecoflora.org.uk/search_plantchar.php}).
 }
 \examples{
-## observe the sructure of the dataset
-str(traits_eco)
+\dontrun{
+data(traits_eco)
+}
 }
 \references{
-Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora
-Database, J. Ecol., 82, 415-425.
-\samp{http://www.ecoflora.co.uk}
+Fitter, A . H. and Peat , H. J., 1994, The Ecological Flora Database,
+J. Ecol., 82, 415-425.  \samp{http://www.ecoflora.co.uk}
 }
 \keyword{datasets}
 

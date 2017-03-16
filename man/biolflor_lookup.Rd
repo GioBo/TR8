@@ -28,13 +28,9 @@ BiolFlor website
 head(biolflor_lookup)
 }
 \references{
-Please use the follow citation ay time you use data derived
-from Biolflor:
-
-Klotz, S., Kühn, I., Durka, W. (eds) (2002). BIOLFLOR - Eine Datenbank 
-zu biologisch-ökologischen Merkmalen zur Flora von Deutschland. 
-Schriftenreihe für Vegetationskunde *38*: 1-333.  (Bundesamt für. Bonn, 
-Bundesamt für Naturschutz)
+Please use the follow citation ay time you use data derived from Biolflor:
+BIOLFLOR - Eine Datenbank zu biologisch-ökologischen Merkmalen zur Flora von Deutschland.
+Schriftenreihe für Vegetationskunde 38: 1-333.  (Bundesamt für. Bonn, Bundesamt für Naturschutz)
 }
 \keyword{datasets}
 

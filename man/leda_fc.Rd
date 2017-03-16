@@ -12,9 +12,6 @@ leda_fc(species_list)
 \arguments{
   \item{species_list}{a vector of plant species names}
 }
-\details{
-
-}
 \value{
   Returns a dataframe where for each plant species (row) mean values of
   Floating Capacity are reported - if present in the LEDA database - for

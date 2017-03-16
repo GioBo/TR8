@@ -8,9 +8,9 @@ a vector containing traits that can be downloaded from
 Biolflor
 }
 \examples{
-## have a look at the first rows of the dataset
-##head(traits_special_Biolflor)
-
+\dontrun{
+#data(traits_special_Biolflor)
+}
 }
 \author{
 Gionata Bocci <boccigionata@gmail.com>

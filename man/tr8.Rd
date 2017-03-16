@@ -1,6 +1,6 @@
 \name{tr8}
 \alias{tr8}
-\title{\code{tr8}: retrieving functional traits data from various
+\title{\code{tr8}: a function for retrieving functional traits data from various
 databases.}
 \usage{
 tr8(species_list, download_list = NULL, gui_config = FALSE,synonyms=FALSE,
@@ -62,6 +62,8 @@ At the moment the following databeses are available:
   \item{ BROT \samp{http://www.uv.es/jgpausas/brot.htm} }
 
   \item{PLANTS \samp{http://www.bricol.net/}}
+
+  \item{Imkerbond Zoersel \samp{http://users.telenet.be/imkerbondzoersel/}}
 }
 
 
@@ -70,13 +72,14 @@ At the moment the following databeses are available:
   multi-panel GUI will ask users to choose among lists of available
   traits) or in a non-interactive way (providing the function with a
   vector containing the \code{short codes} of the trait which should be
-  downloaded (in order to have an idea of the available traits and the
+  downloaded - in order to have an idea of the available traits and the
   associated codes to be used for the \code{download_list}, see the
   \code{available_traits} function).
   
 
 
 }
+
 \details{
 
   Not all traitbases use the most updated accepted names, thus
@@ -177,9 +180,13 @@ Version 2013.06. URL: http://www.uv.es/jgpausas/brot.htm
 
 Green, W. (2009) USDA PLANTS Compilation, version 1, 09-02-02. 
 
-} 
+Pignatti S., Menegoni P., Pietrosanti S., 2005, Biondicazione attraverso le piante vascolari.
+Valori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora d'Italia.
+Braun-Blanquetia 39, Camerino, pp.  97.
+}
 
 \seealso{
 \code{bib()}
 }
+
 
