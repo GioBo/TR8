@@ -108,23 +108,29 @@ setMethod(f='retrieve',
                       for(trait in names(.Object@traits)){
                           eco[[species]][trait]<-NA
                       }
-                  }
-                  else{
+                  }else{
                       ## extract tabe data from the scraped web page
                       Sys.sleep(.Object@rest)
-                      eco_data<-readHTMLTable(species_url)[[2]]
-                      ##eco_data<-readHTMLTable(species_url)
-                      ## for some traits there are several entries (with the same Code), thus
-                      ## the retrieved table must be "aggregated" in order to have 1 entr/trait
-                      eco_data<-aggregate(eco_data$Value,by=list(eco_data$Number),paste,collapse=';')
-                      names(eco_data)<-c("Code","Value")
-                      ## fill in the list "eco"; NA values are used for those traits
-                      ## which do not have values in the Ecoflora database
-                      for(trait in names(.Object@traits)){
-                          if(.Object@traits[trait]%in%eco_data$Code){
-                              eco[[species]][trait]<-eco_data$Value[eco_data$Code==.Object@traits[trait]]
-                          }else{
-                              eco[[species]][trait]<-NA}
+                      eco_data<-readHTMLTable(species_url)
+                      if(is.null(eco_data[[1]])){
+                          for(trait in names(.Object@traits)){
+                              eco[[species]][trait]<-NA
+                          }
+                      }else{
+                          eco_data<-readHTMLTable(species_url)[[2]]
+                          ##eco_data<-readHTMLTable(species_url)
+                          ## for some traits there are several entries (with the same Code), thus
+                          ## the retrieved table must be "aggregated" in order to have 1 entr/trait
+                          eco_data<-aggregate(eco_data$Value,by=list(eco_data$Number),paste,collapse=';')
+                          names(eco_data)<-c("Code","Value")
+                          ## fill in the list "eco"; NA values are used for those traits
+                          ## which do not have values in the Ecoflora database
+                          for(trait in names(.Object@traits)){
+                              if(.Object@traits[trait]%in%eco_data$Code){
+                                  eco[[species]][trait]<-eco_data$Value[eco_data$Code==.Object@traits[trait]]
+                              }else{
+                                  eco[[species]][trait]<-NA}
+                          }
                       }
                   }
               }
