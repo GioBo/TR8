@@ -166,9 +166,5 @@ Version 2013.06. URL: http://www.uv.es/jgpausas/brot.htm
 
 
 }
-
-
-
-
 \keyword{dataframe}
 
