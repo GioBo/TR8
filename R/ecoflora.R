@@ -112,12 +112,14 @@ setMethod(f='retrieve',
                       ## extract tabe data from the scraped web page
                       Sys.sleep(.Object@rest)
                       eco_data<-readHTMLTable(species_url)
-                      if(is.null(eco_data[[1]])){
+##                      if(is.null(eco_data[[1]])){
+                      if(length(eco_data)==1){                          
+                          
                           for(trait in names(.Object@traits)){
                               eco[[species]][trait]<-NA
                           }
                       }else{
-                          eco_data<-readHTMLTable(species_url)[[2]]
+                          eco_data<-eco_data[[2]]
                           ##eco_data<-readHTMLTable(species_url)
                           ## for some traits there are several entries (with the same Code), thus
                           ## the retrieved table must be "aggregated" in order to have 1 entr/trait
@@ -216,8 +218,8 @@ ecoflora<-function(species_list,TRAITS,rest)
             
             obj<-new("Ecoflora",species_list=species_list,reference=ECOFLORA_df,traits=traits,rest=rest)
             ##        ret<-as.data.frame(ret@results)
-            ##remove(list=c("ECOFLORA_df","traits_eco"),pos =".GlobalEnv")
             ret<-retrieve(obj)
+            ##remove(list=c("ECOFLORA_df","traits_eco"),pos =".GlobalEnv")
             res@results<-ret@results
             res@issues<-ret@issues
         }
