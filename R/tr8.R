@@ -343,7 +343,8 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
                 ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
                 ##     stop("You neither have a working internet connection nor locally stored LEDA files.\n  Please re-run tr8() function when your internet connection is working.")
                 ## }
-                url_leda="http://www.uni-oldenburg.de/en/landeco/research/projects/LEDA/Data%20Files/"
+                url_leda="http://www.uni-oldenburg.de/en/landeco/research/projects/LEDA/Data-Files/"
+                ##url_leda="http://www.uni-oldenburg.de/en/landeco/research/projects/LEDA/Data%20Files/"
                 if(tryCatch(url.exists(url_leda), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
                     stop("\n\n LEDA website is probably down.\n Please re-run tr8() without selecting LEDA as a source of data \n (or re-try later).\n\n")
                 }
