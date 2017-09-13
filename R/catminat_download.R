@@ -22,7 +22,7 @@ catminat_download_to_local_directory<-function(directory){
 
     catminat_df<-read_excel(temp_dest,sheet=1,col_names=T,col_types=rep("text",60))
     
-    catminat_df<-catminat_df[grep("[0-9]+",catminat_df$rang_taxinomiqu,invert=T),]
+    catminat_df<-catminat_df[grep("[0-9]+",catminat_df$rang_taxinomique,invert=T),]
 
 
     ##### TODO correggere nomi delle specie\
