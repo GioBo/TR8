@@ -131,7 +131,7 @@ dev_mode(on=F)
 
   Using the \texttt{TR8} package is fairly simple: users just need to
   call the \texttt{tr8} function passing, as arguments, a vector of
-  plant species names (\textbf{withouth authors' names!}\footnote{This is needed since some traitbases do not include authors' names in the species' names.})
+  plant species names (\textbf{without authors' names!}\footnote{This is needed since some traitbases do not include authors' names in the species' names.})
   and a vector containing the codes corresponding
   to the traits which are to be downloaded:
   

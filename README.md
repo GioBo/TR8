@@ -71,6 +71,43 @@ vignette("TR8_workflow")
 ```
   
 
+Citation
+========
+
+  Please use the following citation whenever you mention the package in a scientific journal:
+
+  "Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits. Methods in Ecology and Evolution, 6(3), 347-350."
+
+  
+   Or, if you use BibTeX:
+
+```
+  @Article{,
+    author = {Bocci Gionata},
+    title = {TR8: an R package for easily retrieving plant species traits},
+    journal = {Methods in Ecology and Evolution},
+    year = {2015},
+    volume = {6},
+    number = {3},
+    pages = {347--350},
+    url = {http://dx.doi.org/10.1111/2041-210X.12327},
+  }
+```
+
+
+
+  Users of the **TR8** package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the `bib` method; just use:
+  
+
+```R
+bib(my_traits)
+```
+
+
+
+  
+
+  
 
 
 Changes from past versions
