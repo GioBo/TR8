@@ -96,11 +96,11 @@ Citation
 
 
 
-  Users of the **TR8** package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the `bib` method; just use:
+  Users of the **TR8** package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the `bib` method; to learn how to use it, just type:
   
 
 ```R
-bib(my_traits)
+?bib
 ```
 
 
