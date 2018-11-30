@@ -9,7 +9,7 @@ traits data for plant species from the following sources:
 
 \itemize{
 
-  \item{Biolflor \samp{http://www2.ufz.de/biolflor/index.jsp}}
+  \item{Biolflor \samp{http://www.ufz.de/biolflor/index.jsp}}
 
  \item{ Ecological Flora of the British Isles \samp{http://www.ecoflora.co.uk/} }
 

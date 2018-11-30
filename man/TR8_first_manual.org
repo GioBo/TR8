@@ -8,7 +8,7 @@ possibility of retrieveing traits data for plant species from various
 sources.
 A this stage the following databes are queried by the package:
 
- - BiolFlor ::  [[http://www2.ufz.de/biolflor/index.jsp]]
+ - BiolFlor ::  [[http://www.ufz.de/biolflor/index.jsp]]
  - Ecological Flora of the British Isles :: [[http://www.ecoflora.co.uk/]]
  - LEDA traitbase :: [[http://www.leda-traitbase.org/LEDAportal/]]
 

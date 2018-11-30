@@ -9,7 +9,7 @@ often scattered among various databases: TR8 contains a set of tools which take 
 automatically retrieving some of those functional traits data for plant species from 
 the following publicly available databases:
 
-* [Biolflor](http://www2.ufz.de/biolflor/index.jsp)
+* [Biolflor](http://www.ufz.de/biolflor/index.jsp)
 * [The Ecological Flora of the British Isles](http://www.ecoflora.co.uk/)
 * [LEDA traitbase](http://www.leda-traitbase.org/LEDAportal/)
 * Ellenberg values for Italian Flora

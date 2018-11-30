@@ -1,4 +1,3 @@
-
 ## list_of_traits_Biolflor=c(
 ##     "Life form"                        
 ##     ,"Life span"                              
@@ -58,13 +57,13 @@ setMethod(f="extract",
 
               else{
                   ##set language to english
-                  form="http://www2.ufz.de/biolflor/index.jsp"
-                  ##base_url<-"http://www2.ufz.de"
+                  form="http://www.ufz.de/biolflor/index.jsp"
+                  ##base_url<-"http://www.ufz.de"
                   param<-list("language"='en')
                   vai<-getForm(form,.params=list("language"="en"),style="POST")
                   
                   ##get web page
-                  base_url<-"http://www2.ufz.de"
+                  base_url<-"http://www.ufz.de"
                   temp_pag<-htmlParse(getURL(paste(base_url,.Object@url,sep="")))
                   
                   ## parse html and extract data

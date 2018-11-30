@@ -1,6 +1,6 @@
-q## ############################################################
-## ## Script needed to create the look_up table containing   ##
-## ## Species name and the corresponding URL on the BiolFlor ##
+## q## ############################################################
+## ## ## Script needed to create the look_up table containing   ##
+## ## ## Species name and the corresponding URL on the BiolFlor ##
 ## ## Website                                                ##
 ## ############################################################
 
@@ -34,10 +34,10 @@ q## ############################################################
 ## }
 
 
-## url_genus<-"http://www2.ufz.de/biolflor/overview/gattung.jsp"
+## url_genus<-"http://www.ufz.de/biolflor/overview/gattung.jsp"
 ## replaced="^\\."
-## replace_genus="http://www2.ufz.de/biolflor/overview"
-## replace_species="http://www2.ufz.de/biolflor/"
+## replace_genus="http://www.ufz.de/biolflor/overview"
+## replace_species="http://www.ufz.de/biolflor/"
 
 ## ## extract data.frame containing genera and their urls
 ## genera<-extract_biolflor(url_genus,replaced,replace_genus)
@@ -55,11 +55,11 @@ q## ############################################################
 
 
 
-##   REMEMBER TO REMOVE "annotations" COLUMN FROM ALL THE
-##   DATAFRAMES!!!!!!!!!
-##   OTHERWISE YOU'LL HAVE PROBLEMS WITH RCMD check
-##
-##
+##   ## REMEMBER TO REMOVE "annotations" COLUMN FROM ALL THE
+##   ## DATAFRAMES!!!!!!!!!
+##   ## OTHERWISE YOU'LL HAVE PROBLEMS WITH RCMD check
+
+
 
 
 

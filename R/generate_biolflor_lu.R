@@ -35,10 +35,10 @@ extract_biolflor<-function(url,replaced,replacement){
 
 
 store_biolflor <- function(directory){
-    url_genus<-"http://www2.ufz.de/biolflor/overview/gattung.jsp"
+    url_genus<-"http://www.ufz.de/biolflor/overview/gattung.jsp"
     replaced="^\\."
-    replace_genus="http://www2.ufz.de/biolflor/overview"
-    replace_species="http://www2.ufz.de/biolflor/"
+    replace_genus="http://www.ufz.de/biolflor/overview"
+    replace_species="http://www.ufz.de/biolflor/"
 
 
 
