@@ -5,14 +5,14 @@
 #' 
 #' @name biolflor_lookup
 #' @docType data
-#' @format A data frame with 3688 observations on the following 8 variables.
+#' @format A data frame with 3661 observations on the following 8 variables.
 #' \describe{
 #' \item{submittedname}{a character vector}
 #' \item{acceptedname}{a character vector}
 #' \item{sourceid}{a character vector}
 #' \item{score}{a character vector}
 #' \item{matchedname}{a character vector}
-#' \item{annotations}{a character vector}
+#' \item{authority}{a character vector}
 #' \item{V1}{a character vector}
 #' \item{V2}{a character vector} }
 #' @references Please use the follow citation ay time you use data derived from Biolflor:

@@ -41,7 +41,7 @@ The \texttt{TR8} package has been built in order to provide the user with the
 possibility of easily retrieving traits data for plant species from the following publicly available databases:
 
 \begin{description}
-\item[Biolflor] \url{http://www2.ufz.de/biolflor/index.jsp} \cite{biolflor}
+\item[Biolflor] \url{http://www.ufz.de/biolflor/index.jsp} \cite{biolflor}
 \item[Ecological Flora of the British Isles] \url{http://www.ecoflora.co.uk/} \cite{ecoflora}
 \item[LEDA traitbase] \url{http://www.leda-traitbase.org/LEDAportal/} \cite{leda}
 \item[Ellenberg values for Italian Flora] \cite{pignatti}

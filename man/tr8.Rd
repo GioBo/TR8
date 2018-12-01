@@ -45,7 +45,7 @@ At the moment the following databeses are available:
 
 \itemize{
 
-  \item{Biolflor \samp{http://www2.ufz.de/biolflor/index.jsp}}
+  \item{Biolflor \samp{http://www.ufz.de/biolflor/index.jsp}}
 
  \item{ Ecological Flora of the British Isles \samp{http://www.ecoflora.co.uk/} }
 

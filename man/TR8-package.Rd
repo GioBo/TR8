@@ -9,7 +9,7 @@ traits data for plant species from the following sources:
 
 \itemize{
 
-  \item{Biolflor \samp{http://www2.ufz.de/biolflor/index.jsp}}
+  \item{Biolflor \samp{http://www.ufz.de/biolflor/index.jsp}}
 
  \item{ Ecological Flora of the British Isles \samp{http://www.ecoflora.co.uk/} }
 
@@ -33,7 +33,7 @@ traits data for plant species from the following sources:
 }
 \details{
 \tabular{ll}{ Package: \tab TR8\cr Type: \tab Package\cr
-Version: \tab 0.9.18\cr Date: \tab 2017-09-13 \cr License: \tab
+Version: \tab 0.9.19\cr Date: \tab 2018-12-1 \cr License: \tab
 GPL>=2\cr Depends: \tab XML, RCurl, plyr, readxl\cr }
 
 The easiest way of using the package is through the
