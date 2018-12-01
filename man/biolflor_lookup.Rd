@@ -13,8 +13,8 @@ names as used in BiolFlor}
 \item{score}{a character vector expressing the \code{score} for matching
 \code{submitted} and \code{accepted} names}
 \item{matchedname}{name \code{matched} by the \code{tnrs} function}
-%% \item{annotations}{a character vector}
-%% \item{V1}{a character vector}
+\item{authority}{a character vector}
+\item{V1}{a character vector}
 \item{V2}{url of the BiolFlor web page for the species of interest} }}
 \usage{
 biolflor_lookup

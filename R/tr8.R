@@ -355,8 +355,6 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
             }else{rearranged<-NULL}
         }
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
-        ##:ess-bp-start::browser@nil:##
-browser(expr=is.null(.ESSBP.[["@3@"]]));##:ess-bp-end:##
         
         ## retrieve data from BiolFlor
         biolflor_traits<-biolflor(species_list,TRAITS=traits_list$BiolFlor,rest=rest,directory=directory)
