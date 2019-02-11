@@ -9,8 +9,8 @@
 \usepackage[normalem]{ulem} 
 \lstset{language=R}    
 \bibliographystyle{plain}
-%% \VignetteIndexEntry{Plants traits data}
-%%\VignetteDepends{TR8}
+% \VignetteIndexEntry{TR8: Extract traits data for plant species}
+%\VignetteDepends{TR8}
 
 
 
