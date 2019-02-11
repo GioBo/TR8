@@ -11,12 +11,12 @@
 \usepackage[normalem]{ulem} 
 \lstset{language=R}    
 \bibliographystyle{plain}
-%% \VignetteIndexEntry{Plants traits data}
-%%\VignetteDepends{TR8}
+%\VignetteIndexEntry{A real life workflow for the TR8 package}
+%\VignetteDepends{TR8}
 
 
 
-\title{A 'real life' workflow for the \texttt{TR8} package}
+\title{A real life workflow for the TR8 package}
 \author{Gionata Bocci\\Pisa (ITALY)\\ {boccigionata@gmail.com}}
 \begin{document}
 \maketitle
