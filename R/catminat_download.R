@@ -12,7 +12,7 @@ catminat_replace<-function(origin,change){
 
 
 catminat_download_to_local_directory<-function(directory){
-
+    
 
     url<-"http://philippe.julve.pagesperso-orange.fr/baseflor.xlsx"
     ##baseflor<-read.xls (url, sheet = 1, header=T,method="tab")
@@ -20,7 +20,7 @@ catminat_download_to_local_directory<-function(directory){
     temp_dest<-tempfile(fileext=".xlsx")
     download.file(url,temp_dest,mode="wb")
 
-    catminat_df<-read_excel(temp_dest,sheet=1,col_names=T,col_types=rep("text",60))
+    catminat_df<-read_excel(temp_dest,sheet=1,col_names=T,col_types=rep("text",63))
     
     catminat_df<-catminat_df[grep("[0-9]+",catminat_df$rang_taxinomique,invert=T),]
 

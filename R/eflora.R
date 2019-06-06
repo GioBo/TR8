@@ -50,7 +50,7 @@ eflora<-function(species_list,TRAITS){
             berk<-berk[,c("V1","V2","V3")]
             ## recode the trait names in the short form used in the gui
             berk$V2<-revalue(berk$V2,codes_column,warn_missing=FALSE)
-
+            
             ## create a species*trait dataframe
             ## dati<-cast(V1~V2,value="V3",data=berk,fun.aggregate=function(x){paste(x,sep="-")})
             berk<-cast(V1~V2,value="V3",data=berk)
