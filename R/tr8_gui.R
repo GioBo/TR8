@@ -57,7 +57,7 @@ tr8_config<-function(){
     }
     gui_chosen <- shiny::runApp(appDir, display.mode = "normal")
     ##     
-    print(gui_chosen)
+    # print(gui_chosen)
     results_gui <- list()
     if(!is.null(gui_chosen$BiolFlor)){
         res <- c(with(temp_dframe,long_code[db=="BiolFlor"&description%in%gui_chosen$BiolFlor]))
@@ -152,7 +152,6 @@ tr8_config<-function(){
     ## traits_list<-list("BiolFlor"=res_BiolFlor,"LEDA"=res_LEDA,"Ecoflora"=res_Ecoflora,"Pignatti"=res_Pignatti,"AMF"=res_AMF,"Catminat"=res_Catminat,"Imkerbond"=res_Imkerbond,"BROT"=res_BROT,"PLANTS"=res_PLANTS,"efloracal"=res_efloracal)
     ## return(traits_list)
 
-    print("yes")
     return(results_gui)
 }
 

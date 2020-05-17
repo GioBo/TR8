@@ -29,9 +29,7 @@ Imports:
     plyr,
     reshape,
     rappdirs,
-    shiny,
-    #gWidgets2,
-    #gWidgets2tcltk,
     readxl,
+    shiny,
     taxize
 RoxygenNote: 5.0.1
