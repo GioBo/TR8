@@ -1,16 +1,13 @@
-library(shiny)
+#library(shiny)
 
-# Define UI for app that draws a histogram ----
+
+# Define UI for app 
 ui <- fluidPage(
-
-
     
   # App title ----
   titlePanel("TR8: selection of traits of interest."),
-
-
   
-  # Sidebar layout with input and output definitions ----
+  # Sidebar layout
   sidebarLayout(
 
     # Sidebar panel for inputs ----
@@ -18,49 +15,52 @@ ui <- fluidPage(
 
         p("Select the traits you need to download from the lists on the right; each tab corresponds"),
         p("to one trait dabase."),
-        p("Once you are done, click the Close botton below and go back to the R session."),
+        p("Once you are done, click the",strong("Send request"), "botton below and go back to the R session."),
+        tags$br(),
 
-        actionButton("do", "Close"),
-                                        # Input: Slider for the number of bins ----
+        p("Please remember to always cite the appropriate sources of traits data (see ", code("?bib"), ")."),
+        tags$br(),
+        tags$br(),
+        tags$br(),
 
+        actionButton("do", "Send request")
     ),
 
-    # Main panel for displaying outputs ----
+    # Main panel for collecting requested traits ----
     mainPanel(
 
          tabsetPanel(type = "tabs",
                      tabPanel("BiolFlor",
                               checkboxGroupInput("biolflor", "Traits available from BiolFlor:",
-                                                 loppo("BiolFlor"))),
+                                                 TR8:::list_traits_shiny("BiolFlor"))),
                      tabPanel("Ecoflora",
                               checkboxGroupInput("ecoflora", "Traits available from BiolFlor:",
-                                                 loppo("Ecoflora"))),
+                                                 TR8:::list_traits_shiny("Ecoflora"))),
                      tabPanel("Pignatti",
                               checkboxGroupInput("pignatti", "Traits available from BiolFlor:",
-                                                 loppo("Pignatti"))),
+                                                 TR8:::list_traits_shiny("Pignatti"))),
                      tabPanel("LEDA",
                               checkboxGroupInput("leda", "Traits available from BiolFlor:",
-                                                 loppo("LEDA"))),
+                                                 TR8:::list_traits_shiny("LEDA"))),
                      tabPanel("AMF",
                               checkboxGroupInput("amf", "Traits available from BiolFlor:",
-                                                 loppo("AMF"))),
+                                                 TR8:::list_traits_shiny("AMF"))),
                      tabPanel("Catminat",
                               checkboxGroupInput("catminat", "Traits available from BiolFlor:",
-                                                 loppo("Catminat"))),
+                                                 TR8:::list_traits_shiny("Catminat"))),
                      tabPanel("Imkerbond",
                               checkboxGroupInput("imkerbond", "Traits available from BiolFlor:",
-                                                 loppo("Imkerbond"))),
+                                                 TR8:::list_traits_shiny("Imkerbond"))),
                      tabPanel("BROT",
                               checkboxGroupInput("brot", "Traits available from BiolFlor:",
-                                                 loppo("BROT"))),
+                                                 TR8:::list_traits_shiny("BROT"))),
                      tabPanel("EFLora California",
                               checkboxGroupInput("eflora", "Traits available from BiolFlor:",
-                                                 loppo("EFlora_Cal"))),
+                                                 TR8:::list_traits_shiny("EFlora_Cal"))),
                      tabPanel("Plants",
                               checkboxGroupInput("plants", "Traits available from BiolFlor:",
-                                                 loppo("PLANTS")))
+                                                 TR8:::list_traits_shiny("PLANTS")))
                   )
-      #plotOutput(outputId = "distPlot")
 
     )
   )

@@ -79,7 +79,7 @@ brot_download_to_local_directory<-function(directory){
     temp_BROT[]<-lapply(temp_BROT,as.character)
     temp_BROT[temp_BROT==""]<-NA
     BROT <- temp_BROT
-    save(file=file.path(directory,"BROT.Rda"),BROT)
+    save(file=file.path(directory,"BROT.Rda"), BROT)
     ##    return(temp_BROT)
 }
 

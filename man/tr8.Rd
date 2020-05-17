@@ -69,12 +69,19 @@ At the moment the following databeses are available:
 
   The function can either be used in an interactive way (i.e. if the
   \code{gui_config}  parameter is set to \code{TRUE}, a
-  multi-panel GUI will ask users to choose among lists of available
+  multi-panel html-GUI will ask users to choose among lists of available
   traits) or in a non-interactive way (providing the function with a
   vector containing the \code{short codes} of the trait which should be
   downloaded - in order to have an idea of the available traits and the
   associated codes to be used for the \code{download_list}, see the
   \code{available_traits} function).
+
+  When the HTML-GUI is being used, the user will have to select the
+  traits of interest from the available lists and then click the
+  "Send request" button and go back to the R console (NB: the browser
+  web page will become inactive; the user will have to take care of
+  closing it).
+  
   
 
 

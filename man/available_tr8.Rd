@@ -33,7 +33,7 @@ data(available_tr8)
 tr8(species_list=c("Salix alba","Populus nigra"),download_list=c("life_form_P"))
 }
 }
-\keyword{TR8,tr8}
+\keyword{tr8}
 \author{
 Gionata Bocci <boccigionata@gmail.com>
 }
