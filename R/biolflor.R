@@ -193,7 +193,8 @@ biolflor<-function(list_species,TRAITS,rest=NULL,directory){
 
 
         }
-        tp<-ldply(tmp_list)
+        tp <- lapply(tmp_list, unlist)
+        tp<-ldply(tp)
         row.names(tp)<-tp$.id
         names_species<-names(tp)[names(tp)!=".id"]
         ## drop=FALSE is necessary to avoid that single column dataframe (ie only one

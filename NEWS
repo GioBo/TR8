@@ -1,3 +1,15 @@
+TR8 v. 0.9.21
+=============
+
+Shiny is being used in place of gWidgets to provide the user with a graphical interface to select traits to download.
+
+
+
+
+TR8 v. 0.9.20
+=============
+
+
 ## leda_fc
 
    New function which allows to download Mean Floating Capacity data from LEDA
