@@ -113,12 +113,17 @@ Citation
 Changes from past versions
 ==========================
 
+
+### TR8 v. 0.9.21
+
 **Graphical interface**: as of version 0.9.21 **TR8** uses [Shiny](https://shiny.rstudio.com/) in place of gWidgets to provide the user with a graphical interface to select traits to download.
 
 When the HTML-GUI is being used, the user will have to select the traits of interest from the available lists and then click the "Send request" button and go back to the R console (NB: the browser web page will become inactive; the user will have to take care of closing it).
 
 
+**R compatibility**: now R version > 3.5.0 is required for TR8 to work; this is needed to make the package compliant with CRAN policies.
 
+### TR8 v. 0.9.20
 
   **Important note**: the new version of _tr8()_ accepts the new argument 'synonyms': when set to true the function _tnrs_ from the package _taxize_ will be used to to search for synonyms of the provided species list and search trait data for them as well. 
 

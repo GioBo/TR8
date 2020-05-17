@@ -15,7 +15,8 @@ ui <- fluidPage(
 
         p("Select the traits you need to download from the lists on the right; each tab corresponds"),
         p("to one trait dabase."),
-        p("Once you are done, click the",strong("Send request"), "botton below and go back to the R session."),
+        p("Once you are done, click the",strong("Send request"), "botton below: the web page will stop; you can"),
+        p("now close it, go back to the R session and use the downloaded data."),
         tags$br(),
 
         p("Please remember to always cite the appropriate sources of traits data (see ", code("?bib"), ")."),
