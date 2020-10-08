@@ -98,7 +98,7 @@ column_list<-list(
     "flower_colour_fr"=c("flower_colour_fr","Flower colour","Catminat"),
     "li_form_fr"=c("li_form_fr","Life form","Catminat"),
     "ell_L_fr"=c("ell_L_fr","Ellenberg values for Light","Catminat"),
-    "elle_T_fr"=c("elle_T_fr","Ellenberg values for temperature","Catminat"),
+    "ell_T_fr"=c("ell_T_fr","Ellenberg values for temperature","Catminat"),
     "ell_C_fr"=c("ell_C_fr","Ellenberg values for continentality","Catminat"),
     "ell_U_atm_fr"=c("ell_U_atm_fr","Ellenberg values for atmospheric moisture","Catminat"),
     "ell_U_fr"=c("ell_U_fr","Ellenberg values for moisture","Catminat"),
