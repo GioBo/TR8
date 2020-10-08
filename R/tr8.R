@@ -302,21 +302,23 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         
         if(synonyms==TRUE){
             
-            check_names<-tnrs(species_list,verbose=FALSE)
-            check_names<-check_names[,c("submittedname","acceptedname","matchedname")]
+            ## check_names<-tnrs(species_list,verbose=FALSE)
+            ## check_names<-check_names[,c("submittedname","acceptedname","matchedname")]
             
-            reference_names<-lapply(species_list,function(x){
+            ## reference_names<-lapply(species_list,function(x){
                 
-                sp_names<-check_names[check_names$submittedname==x,]
-                sp_names<-unique(unlist(sp_names))
-                sp_names<-sp_names[grep("^\\w+ \\w+.*$",sp_names)]
-                return(sp_names)
+            ##     sp_names<-check_names[check_names$submittedname==x,]
+            ##     sp_names<-unique(unlist(sp_names))
+            ##     sp_names<-sp_names[grep("^\\w+ \\w+.*$",sp_names)]
+            ##     return(sp_names)
 
-            }
-            )
-            names(reference_names)<-species_list
-            species_list<-unique(as.vector(unlist(reference_names)))
-            
+            ## }
+            ## )
+            ## names(reference_names)<-species_list
+            ## species_list<-unique(as.vector(unlist(reference_names)))
+
+            warning("The synonyms option deprecated in current version of TR8")
+
         }
         
         
@@ -503,9 +505,13 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         
         if(synonyms==TRUE){
             
-            reference_names<-ldply(lapply(reference_names,ldply))
-            names(reference_names)<-c("original_names","synonyms")
-            tr8_traits<-merge(reference_names,tr8_traits,by.x="synonyms",by.y=0,all=T)
+            ## reference_names<-ldply(lapply(reference_names,ldply))
+            ## names(reference_names)<-c("original_names","synonyms")
+            ## tr8_traits<-merge(reference_names,tr8_traits,by.x="synonyms",by.y=0,all=T)
+            cat("\nPlease note: the synonyms option is deprecated in current version of TR8\n\n")
+            ## warning("The synonyms option deprecated in current version of TR8")
+
+
             ## in this case, where synonyms are required, then
             ## row names is left with "numbers" since many strange coincidences may
             ## happen (eg. two different species may have been found under the
