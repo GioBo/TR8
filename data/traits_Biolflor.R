@@ -19,7 +19,8 @@ list_of_traits_Biolflor=c(
 ### * List of special traits to download from BiolFlor
 
 traits_special_Biolflor=c(
-    "Flower class after MUELLER"
+  "Flower class after MUELLER"
+  ,"Flower type after KUGLER"
    ,"Type of apomixis"
     ## "Begin of flowering (months)",
     ## "End of flowering (months)",
