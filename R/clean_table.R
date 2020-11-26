@@ -18,7 +18,7 @@ biolflor_clean<-function(input){
     DF<-input
 
 
-    for(param in c("Life.span","Life.form","Rosettes","Vegetative.propagation","Storage.organs","Type.of.reproduction","Strategy.type","Pollen.vector","Flower.class.after.MUELLER")){
+    for(param in c("Life.span","Life.form","Rosettes","Vegetative.propagation","Storage.organs","Type.of.reproduction","Strategy.type","Pollen.vector","Flower.class.after.MUELLER","Flower.type.after.KUGLER")){
         ## only clean these columns if they are really
         ## present in the retrieved data
         if(param %in% names(DF)){

@@ -11,11 +11,12 @@
 ##     )
 
 traits_special_Biolflor=c(
-    "Flower class after MUELLER",
-    "Begin of flowering (months)",
-    "End of flowering (months)",
-    "Duration of flowering (months)",
-    "Number of flowering phases"
+  "Flower class after MUELLER",
+  "Flower type after KUGLER",
+  "Begin of flowering (months)",
+  "End of flowering (months)",
+  "Duration of flowering (months)",
+  "Number of flowering phases"
 )
 
 traits_pollen_Biolflor=c("Pollen vector")
