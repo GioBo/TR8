@@ -16,23 +16,20 @@ leda_download<-function(URL,skip_row,column,out_name){
 
     names(rera)[names(rera)=="SBS name"] <- "Species"
     names(rera)[names(rera)==column] <- "variable"
-
-    rera <- rera%>%
-      group_by(Species)
     
     ## if the variable is numeric, we calculate the mean
     ## if it's a factor, we paste the various levels in
     ## one string
     if(is.numeric(rera$variable)){
-      rera <- rera%>%
-        dplyr::summarise(variable=mean(variable, na.rm=TRUE), .groups="drop")
+      rera <- aggregate(rera, by=list(rera$Species),
+                        FUN=function(variable){mean(variable, na.rm=TRUE)})
     }
     if(is.factor(rera$variable) || is.character(rera$variable)){
-      rera <- rera%>%
-        dplyr::summarise(variable=paste(unique(variable),collapse = " + "), .groups="drop")
+      rera <- aggregate(rera, by=list(rera$Species),
+                        FUN=function(variable){paste(unique(variable),collapse = " + ")})
     }
 
-    rera<-as.data.frame(rera)
+    rera<-as.data.frame(rera[,c("Species","variable")])
     
     
     ## if varaible should be considered as a factor it
@@ -48,7 +45,7 @@ leda_download<-function(URL,skip_row,column,out_name){
 
 leda_general<-function(url,skip_row,species,column,out_name){
     ## download the original traits
-  rearranged<-leda_download(url=url,skip_row=skip_row,column=column,out_name="variable")
+  rearranged<-leda_download(URL=url,skip_row=skip_row,column=column,out_name="variable")
     
 ########
 ######## Mettere qui le opzioni di utilizzo del db scaricato
