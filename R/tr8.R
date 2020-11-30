@@ -239,7 +239,7 @@ setMethod(f="bib",
 #' #My_traits<-tr8(species_list=c("Abies alba"),download_traits=c("le_area","h_max","h_min"))
 #' }
 #' @export tr8
-tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,catminat_alternatives=FALSE){
+tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,catminat_alternatives=FALSE, allow_persistent=NULL){
 
     ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
     ##     stop("You need a working internet connection to use tr8()")
@@ -265,7 +265,40 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
     ## appname <- "TR8"
     ## appauthor <- "GioBo"
     ## directory<-user_data_dir(appname, appauthor)
-    directory<-user_data_dir()
+  
+    if(is.null(allow_persistent)){
+ 
+      risp <- ""
+      cat("\nStoring downloaded data in persistent files will\n")
+      cat("allow faster future queries.\n\n")
+      risp <- readline("Do you allow tr8 to store data in a persistent file(s)?\n (answer y/n; Enter to abort): \n")
+      
+      if(!risp%in%c("n","y")){
+        cat("Please rerun tr8 and select one between y or n or,\n")
+        cat("\nto avoid this message, set the 'allow_persistent' parameter to\n")
+        cat("either FALSE (tr8 will use temporary files that will be deleted at\n")
+        cat("the end of the session) or TRUE, e.g.:\n")
+        cat("\n 'tr8(species_list=\"Salix alba\", download_list=c(\"h_max\"), allow_persistent=TRUE)'\n\n")
+        
+        return()
+      }
+
+                                        #
+      if(risp=="n" ){
+        ## use tempdir
+        directory <- tempdir()
+        allow_persistent <- FALSE
+      }
+      if(risp=="y"){
+        directory<-user_data_dir()
+        allow_persistent <- TRUE}
+    }
+    if(allow_persistent){
+      directory<-user_data_dir()}else if(!allow_persistent){
+                                  directory <- tempdir() }    
+
+
+  
     
 
     
