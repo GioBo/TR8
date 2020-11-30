@@ -187,7 +187,7 @@ ecoflora<-function(species_list,TRAITS,rest)
     ## if traits is NULL it means that the user did not selected
     ## a subset of traits (by means of the tr8_config function, thus
     ## all the traits should be downloaded
-
+    
     if(is.null(TRAITS)){
         res@results<-NULL
     }else{

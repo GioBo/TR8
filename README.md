@@ -118,11 +118,18 @@ Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for othe
 
 ### TR8 v. 0.9.22
 
+The tr8() function now has the additional parameter 'allow_persistent': when set to TRUE, tr8 will store retrieved databases
+from LEDA and Ecoflora into local files to speed up future queries; if FALSE, the downloaded data will be store in a temp directory that will
+be cleaned up at the end of the session; when NULL (default value), the user will be prompted for a choice between the two options.
+
+The package now is able to retrieve the trait "flower type after Kugler" from BiolFlor.
+
 Data retrieval from Catminat has been updated.
 
 The 'synonyms' argument for the _tr8()_ function is still avaiable for backward compatibility, but is not working
 in the current version of TR8; the mechanisms for checking for synonyms relied on the _tnrs_ function from [taxize](https://cran.r-project.org/web/packages/taxize/index.html) package, which in turn uses taxosaurus.org website: the latter has been having some issues lately and that impair the functioning of TR8.
 The 'synonyms' argument will be restored in future if the issue with taxosaurus.org is fixed.
+
 
 
 

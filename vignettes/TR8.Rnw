@@ -142,7 +142,8 @@ my_species<-c("Apium graveolens","Holcus mollis","Lathyrus sylvestris")
 ## a vector of traits
 to_be_downloaded<-c("reprod_B","strategy")
 ## now run tr8 and store the results in the my_traits object
-my_traits<-tr8(species_list = my_species,download_list = to_be_downloaded)
+my_traits<-tr8(species_list = my_species,download_list = to_be_downloaded,
+               allow_persistent=TRUE)
 @ %def 
 
   The codes which are accepted by \textsc{tr8} are listed in the \texttt{available\_tr8} database:
@@ -173,7 +174,8 @@ head(available_tr8)
 <<first_tr8,eval=FALSE>>=
 my_species<-c("Salix alba","Populus nigra")
 my_traits<-c("h_max","le_area","li_form")
-my_Data<-tr8(species_list = my_species, download_list = my_traits)
+my_Data<-tr8(species_list = my_species, download_list = my_traits,
+             allow_persistent=TRUE)
 @ %def 
 
   The \texttt{tr8} function will take care of downloading the data and
@@ -225,7 +227,8 @@ head(my_lookup)
 <<issues,eval=FALSE>>=
 my_species<-c("Salix alba","Populus nigra")
 my_traits<-c("h_max","le_area","li_form")
-my_Data<-tr8(species_list = my_species, download_list = my_traits)
+my_Data<-tr8(species_list = my_species, download_list = my_traits,
+             allow_persistent=TRUE)
 issues(my_Data)
 @ %def 
    
@@ -256,7 +259,7 @@ issues(my_Data)
 specie_names<-names(veg_data)
 ## use the tr8() function
 ## and tick those traits of interest in the pop-up window
-my_traits<-tr8(species_names,gui_config=TRUE)
+my_traits<-tr8(species_names,gui_config=TRUE, allow_persistent=TRUE)
 ## print the results
 print(my_traits)
 @ %def 
@@ -389,14 +392,14 @@ print(checked_names)
 \item Run \texttt{tr8}  (in this case using the GUI):
 
 <<tr8_ex1,eval=FALSE>>=
-my_traits<-tr8(species_names,gui_config = TRUE)
+my_traits<-tr8(species_names,gui_config = TRUE, allow_persistent=TRUE)
 print(my_traits)
 @ %def 
  
    Check whether \texttt{tr8()} had any problems in retrieving data:
 
 <<issue_workflow,eval=FALSE>>=
-my_traits<-tr8(species_names,gui_config = TRUE)
+my_traits<-tr8(species_names,gui_config = TRUE, allow_persistent=TRUE)
 issues(my_traits)
 @ %def 
 
@@ -426,58 +429,62 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
   
 
   \subsection{Dealing with synonyms}
-  
-  In some cases the same species may be present in different traitbases
-  under different synonyms. In order to make it easier for the user to deal with
-  this issue, \texttt{tr8} function has a parameter called
-  \texttt{synonyms}: when set to true it forces the \texttt{tr8} to call the
-  \texttt{tnrs} function from the \texttt{taxize} package and retrieve
-  possible synonims for the provided species names: in this case the
-  retrieved trait data will have two additional columns, one called
-  \texttt{synonyms} (for the synonyms found) and another named
-  \textit{original\_names} which contains the original names passed by
-  the user with the \texttt{species\_list}
-  parameter\footnote{\textbf{PLEASE NOTE} that when \texttt{synonyms}
-    is set to TRUE, the resulting dataframe will have numbers as
-    row.names: this is mandatory since in a few cases different
-    species names may share a common synonym and 
-    \texttt{R} does not allow different
-    rows to share the same name.}.
 
-
-@ 
-<<synonims, eval=FALSE>>=
-my_species<-c("Salix alba","Inula viscosa")
-my_traits<-c("h_max","le_area","li_form")
-my_Data<-tr8(species_list = my_species, download_list = my_traits, 
-             synonyms=TRUE)
-@ %def 
-
-
-
-
-
-  In the \texttt{Catminat} traitbase there are some entries which are
-  in the form "Genus v. subspecies" (e.g. "Myrtus communis
-  v. communis" and "Myrtus communis v. leucocarpa".); in order to
-  allow users to search among those subspecies, the parameter
-  \textsc{catminat\_alternatives} has been introduced in the
-  \textsc{tr8} function: when set to \textsc{TRUE} the function will
-  search  for entries which contain, in their names, the names
-  provided \textsc{species\_list}; e.g. if "Myrtus communis" is
-  included in the \textsc{species\_list}, tr8 will query the following
-  existing entries in Catminat: "Myrtus communis", "Myrtus communis
-  v. communis" and "Myrtus communis v. leucocarpa"). 
+  The new versions of tr8 does not allow to check for plant species synonims any more (given some issues
+  with remote databases needed for checking species names).
 
   
-@ 
-<<catminat, eval=FALSE>>=
-my_species<-c("Myrtus communis")
-## some traits from Catminat
-my_traits<-c("inflorescence_fr","sex_reprod_fr","poll_vect_fr")
-my_Data<-tr8(species_list = my_species, download_list = my_traits,
-             catminat_alternatives=TRUE)
-@ %def 
+%   In some cases the same species may be present in different traitbases
+%   under different synonyms. In order to make it easier for the user to deal with
+%   this issue, \texttt{tr8} function has a parameter called
+%   \texttt{synonyms}: when set to true it forces the \texttt{tr8} to call the
+%   \texttt{tnrs} function from the \texttt{taxize} package and retrieve
+%   possible synonims for the provided species names: in this case the
+%   retrieved trait data will have two additional columns, one called
+%   \texttt{synonyms} (for the synonyms found) and another named
+%   \textit{original\_names} which contains the original names passed by
+%   the user with the \texttt{species\_list}
+%   parameter\footnote{\textbf{PLEASE NOTE} that when \texttt{synonyms}
+%     is set to TRUE, the resulting dataframe will have numbers as
+%     row.names: this is mandatory since in a few cases different
+%     species names may share a common synonym and 
+%     \texttt{R} does not allow different
+%     rows to share the same name.}.
+
+
+% @ 
+% <<synonims, eval=FALSE>>=
+% my_species<-c("Salix alba","Inula viscosa")
+% my_traits<-c("h_max","le_area","li_form")
+% my_Data<-tr8(species_list = my_species, download_list = my_traits, 
+%              synonyms=TRUE)
+% @ %def 
+
+
+
+
+
+%   In the \texttt{Catminat} traitbase there are some entries which are
+%   in the form "Genus v. subspecies" (e.g. "Myrtus communis
+%   v. communis" and "Myrtus communis v. leucocarpa".); in order to
+%   allow users to search among those subspecies, the parameter
+%   \textsc{catminat\_alternatives} has been introduced in the
+%   \textsc{tr8} function: when set to \textsc{TRUE} the function will
+%   search  for entries which contain, in their names, the names
+%   provided \textsc{species\_list}; e.g. if "Myrtus communis" is
+%   included in the \textsc{species\_list}, tr8 will query the following
+%   existing entries in Catminat: "Myrtus communis", "Myrtus communis
+%   v. communis" and "Myrtus communis v. leucocarpa"). 
+
+  
+% @ 
+% <<catminat, eval=FALSE>>=
+% my_species<-c("Myrtus communis")
+% ## some traits from Catminat
+% my_traits<-c("inflorescence_fr","sex_reprod_fr","poll_vect_fr")
+% my_Data<-tr8(species_list = my_species, download_list = my_traits,
+%              catminat_alternatives=TRUE)
+% @ %def 
 
 
   
