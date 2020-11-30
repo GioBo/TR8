@@ -31,18 +31,19 @@ setMethod(f="get_traits",
               ## double (or triple) entries for some species [eg. Xanthium strumarium (according
               ## to TNRS name) corresponds to 3 different species in Pignatti dataframe)
               ## thus among the 3 retrieved species I select the one which, according to Pignatti,
-              ## is Xanthium strumarium]
-              DF<-ddply(DF,.(DF$Name.tnrs),function(x){
-                  if(nrow(x)>1){
-                      
-                      try(return(x[as.character(x$Specie.Pignatti)==as.character(x$Name.tnrs),]),silent=FALSE)
-##                      return(x[as.character(x$Specie.Pignatti)==as.character(x$Name.tnrs),])
-                  }else{return(x)}
-              })
+            ##             ## is Xanthium strumarium]
+            ##               DF<-plyr::ddply(DF,.(DF$Name.tnrs),function(x){
+            ##                   if(nrow(x)>1){
+            
+            ##                       try(return(x[as.character(x$Specie.Pignatti)==as.character(x$Name.tnrs),]),silent=FALSE)
+            ## ##                      return(x[as.character(x$Specie.Pignatti)==as.character(x$Name.tnrs),])
+            ##                   }else{return(x)}
+            ##               })
 
+            DF <- with(DF,DF[as.character(Specie.Pignatti)==as.character(Name.tnrs),])
               
 ##              results<-df[,c("Name.tnrs","forma_biologica","corotipo","L","T","C","U","R","N","S")]
-              row.names(DF)<-DF$Name.tnrs
+            row.names(DF)<-DF$Name.tnrs
               DF<-DF[,c("L","T","C","U","R","N","S","forma_biologica","corotipo")]
               names(DF)<-c("L","T","C","U","R","N","S","life_form_P","corotipo")
               selected<-.Object@traits[.Object@traits%in%names(DF)]

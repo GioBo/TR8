@@ -27,6 +27,7 @@ Depends:
 Imports:
     RCurl,
     XML,
+    dplyr,
     plyr,
     reshape,
     rappdirs,

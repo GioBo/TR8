@@ -317,7 +317,7 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
             ## names(reference_names)<-species_list
             ## species_list<-unique(as.vector(unlist(reference_names)))
 
-            warning("The synonyms option deprecated in current version of TR8")
+            warning("The synonyms option is deprecated in current version of TR8")
 
         }
         
@@ -325,12 +325,13 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         ## retrieve traits from ecolora function
         local_ecoflora<-file.path(directory,"ECOFLORA_df.Rda")
         if(file.exists(local_ecoflora)){
-            load(local_ecoflora)}else{
-            if(length(traits_list$Ecoflora)>0){
-                local_storage(db="Ecoflora",directory)
-                load(local_ecoflora)
-            }
-        }
+          load(local_ecoflora)}else{
+                                  if(length(traits_list$Ecoflora)>0){
+                                    
+                                    local_storage(db="Ecoflora",directory)
+                                    load(local_ecoflora)
+                                  }
+                                }
         eco_traits<-ecoflora(species_list,TRAITS=traits_list$Ecoflora,rest=rest)
         
         ## check if an already downloaded version of the LEDA database
@@ -338,9 +339,9 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         ## if at least one LEDA trait is needed
         local_leda<-file.path(directory,"leda_database.Rda")
         if(file.exists(local_leda)){
-            load(local_leda)}else{
+            rearranged<-get(load(local_leda))}else{
             if(length(traits_list$LEDA)>0){
-
+              
                 ## unfortunately nls() does not work on Windows, thus I think it's better to remove that
                 ## if(tryCatch(nsl("www.cran.r-project.org"), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
                 ##     stop("You neither have a working internet connection nor locally stored LEDA files.\n  Please re-run tr8() function when your internet connection is working.")
@@ -351,9 +352,9 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
                 if(tryCatch(url.exists(url_leda), error =function(e){return(FALSE)},warning=function(w){return(FALSE)})==FALSE){
                     stop("\n\n LEDA website is probably down.\n Please re-run tr8() without selecting LEDA as a source of data \n (or re-try later).\n\n")
                 }
-                
+              
                 local_storage(db="LEDA",directory)
-                load(local_leda)
+                rearranged<-get(load(local_leda))
             }else{rearranged<-NULL}
         }
         leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)

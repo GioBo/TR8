@@ -1,27 +1,42 @@
-leda_download<-function(url,skip_row,column,out_name){
+leda_download<-function(URL,skip_row,column,out_name){
     base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
     ##base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
-    url<-paste(base_url,url,sep="")
-    downloaded<-read.csv(url,row.names=NULL,skip=skip_row,sep=";",check.names="F")
+    base_timeout = options()$timeout
+    curlSetOpt(timeout = 400)
+    options(timeout=400)
+    URL<-paste(base_url,URL,sep="")
+    ## loprint(out_name)
+    downloaded<-read.csv(URL,row.names=NULL,skip=skip_row,sep=";",check.names="F")
+
+    options(timeout=base_timeout)
     
     ## extract only those column of interest
-    rearranged<-downloaded[,c("SBS name",column)]
-    names(rearranged)<-c("Species","variable")
+    rera <-downloaded[,c("SBS name",column)]
+    ## names(rearranged)<-c("Species","variable")
+
+    names(rera)[names(rera)=="SBS name"] <- "Species"
+    names(rera)[names(rera)==column] <- "variable"
     
     ## if the variable is numeric, we calculate the mean
     ## if it's a factor, we paste the various levels in
     ## one string
-    if(is.numeric(rearranged$variable)){
-        rearranged<-with(rearranged,tapply(variable,Species,FUN=function(x){mean(x,na.rm=TRUE)}))
-    } else if (is.factor(rearranged$variable)){
-        rearranged<-with(rearranged,tapply(variable,Species,FUN = function(x){paste(unique(x),collapse = " + ")}))
+    if(is.numeric(rera$variable)){
+      rera <- aggregate(rera, by=list(rera$Species),
+                        FUN=function(variable){mean(variable, na.rm=TRUE)})
     }
-    rearranged<-as.data.frame(rearranged)
+    if(is.factor(rera$variable) || is.character(rera$variable)){
+      rera <- aggregate(rera, by=list(rera$Species),
+                        FUN=function(variable){paste(unique(variable),collapse = " + ")})
+    }
+
+    rera<-as.data.frame(rera[,c("Species","variable")])
+    
+    
     ## if varaible should be considered as a factor it
     ## must be converted as such
-    if(!is.numeric(rearranged$rearranged)){rearranged$rearranged<-as.factor(rearranged$rearranged)}
-    names(rearranged)<-c(out_name)
-    return(rearranged)
+    ## if(!is.numeric(rera$variable)){rera$variable<-as.factor(rera$variable)}
+    names(rera)[names(rera)=="variable"] <- out_name
+    return(rera)
 }
 
 
@@ -30,7 +45,7 @@ leda_download<-function(url,skip_row,column,out_name){
 
 leda_general<-function(url,skip_row,species,column,out_name){
     ## download the original traits
-    rearranged<-leda_download(url=url,skip_row=skip_row,column=column,out_name="variable")
+  rearranged<-leda_download(URL=url,skip_row=skip_row,column=column,out_name="variable")
     
 ########
 ######## Mettere qui le opzioni di utilizzo del db scaricato
@@ -116,7 +131,7 @@ leda_fc <- function(species_list){
     base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
     ##base_url<-"https://www.uni-oldenburg.de/fileadmin/user_upload/biologie/ag/landeco/download/LEDA/Data_files/"
     url<-paste(base_url,"dispersal_type.txt",sep="")
-
+    
     downloaded<-read.csv(url,row.names=NULL,skip=6,sep=";",check.names="T")
     names(downloaded) <- gsub("\\.+","_",    names(downloaded))
     names(downloaded) <- gsub("_$","",    names(downloaded))
