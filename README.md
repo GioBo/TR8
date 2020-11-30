@@ -120,7 +120,8 @@ Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for othe
 
 The tr8() function now has the additional parameter 'allow_persistent': when set to TRUE, tr8 will store retrieved databases
 from LEDA and Ecoflora into local files to speed up future queries; if FALSE, the downloaded data will be store in a temp directory that will
-be cleaned up at the end of the session; when NULL (default value), the user will be prompted for a choice between the two options.
+be cleaned up at the end of the session; when NULL (default value), the user will be prompted for a choice between the two options 
+(this new parameter is needed to comply with CRAN policies).
 
 The package now is able to retrieve the trait "flower type after Kugler" from BiolFlor.
 
