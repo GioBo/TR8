@@ -4,7 +4,7 @@
 databases.}
 \usage{
 tr8(species_list, download_list = NULL, gui_config = FALSE,synonyms=FALSE,
-        catminat_alternatives=FALSE)
+        catminat_alternatives=FALSE, allow_persistent=NULL)
 }
 \arguments{
   \item{species_list}{a vector containing names of the
@@ -30,6 +30,11 @@ to the GUI inerface)}
   included in the \code{species_list}, tr8 will query the following
   existing entries in Catminat: "Myrtus communis", "Myrtus communis v. communis" and "Myrtus communis v. leucocarpa".
   (default is FALSE)}
+\item{allow_persistent}{if set to TRUE, tr8 will store retrieved databases
+  from LEDA and Ecoflora into local files to speed up future queries; if
+  FALSE, the downloaded data will be store in a temp directory that will
+  be cleaned up at the end of the session; when NULL (default value),
+  the user will be prompted for a choice between the two options.}
 }
 \value{
 An object of class \code{Tr8}; the slots \code{@results} contains various traits data for the species
@@ -106,7 +111,7 @@ At the moment the following databeses are available:
 \examples{
 \dontrun{
 ## download some trait data for Abies alba 
-My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"))
+My_traits<-tr8(species_list=c("Abies alba"),download_list=c("life_form_P"),allow_persistent=TRUE)
 }
 }
 \author{
