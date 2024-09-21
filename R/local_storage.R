@@ -36,7 +36,8 @@ local_storage<-function(db=c("LEDA","Akhmetzhanova","MycoFlor","Catminat","BROT"
     }
 
     if("MycoFlor"%in%db){
-        mycoflor_url <- "http://www.esapubs.org/archive/ecol/E094/123/MycoFlor.txt"
+        ## Old URL, not working anymore as of September 2024
+        ## mycoflor_url <- "http://www.esapubs.org/archive/ecol/E094/123/MycoFlor.txt"
         mycoflor_url <- "https://esapubs.org/archive/ecol/E094/123/MycoFlor.txt"
         MycoFlor<- tryCatch(read.delim(mycoflor_url,header=TRUE),
                             error=function(res){

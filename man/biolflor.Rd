@@ -18,6 +18,10 @@ dataframe with species name in row and traits data in
 column.
 }
 \description{
+
+  As of September 2024 Biolflor is no more available on-line.
+  The current function is left here as a reference for future
+  releases (in case the database is made available again.)
 This function allows the user to download some pre-defined
 traits from the BiolFlor website: the function returs a
 dataframe with species name in row and traits data in
@@ -35,10 +39,9 @@ Gionata Bocci <boccigionata@gmail.com>
 Please use the follow citation ay time you use data derived
 from Biolflor:
 
-Klotz, S., Kühn, I., Durka, W. (eds) (2002). BIOLFLOR - Eine Datenbank 
-zu biologisch-ökologischen Merkmalen zur Flora von Deutschland. 
-Schriftenreihe für Vegetationskunde *38*: 1-333.  (Bundesamt für. Bonn, 
+Klotz, S., Kühn, I., Durka, W. (eds) (2002). BIOLFLOR - Eine Datenbank
+zu biologisch-ökologischen Merkmalen zur Flora von Deutschland.
+Schriftenreihe für Vegetationskunde *38*: 1-333.  (Bundesamt für. Bonn,
 Bundesamt für Naturschutz)
 }
 \keyword{traits}
-

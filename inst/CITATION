@@ -1,23 +1,24 @@
 citHeader("Please use the first reference in the following list whenever using TR8:")
 ##citHeader("Please use the first reference in the following list whenever using TR8; the other entries represent the bibliographic citations for the databases queried by tr8(): please take care of choosing the correct ones (using the bib() function is a good way of knowing which entried you should use, see ?bib)")
 
-citEntry(entry = "Article", 
-         author = personList(as.person("Bocci Gionata")),
-         title = "TR8: an R package for easily retrieving plant species traits", 
+bibentry(bibtype = "Article",
+         ## author = personList(as.person("Bocci Gionata")),
+         author = c(person("Gionata", "Bocci", email = "boccigionata@gmail.com",role = c("aut", "cre"))),
+         title = "TR8: an R package for easily retrieving plant species traits",
          journal = "Methods in Ecology and Evolution",
-         year = 2015, 
+         year = 2015,
          volume = "6" ,
          number = "3",
-         pages = "347--350", 
+         pages = "347--350",
          url = "http://dx.doi.org/10.1111/2041-210X.12327",
          textVersion = paste("Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits.","Methods in Ecology and Evolution, 6(3):347-350, http://dx.doi.org/10.1111/2041-210X.12327"))
 
 
-## citEntry(entry = "Article", 
+## citEntry(entry = "Article",
 ##          author = personList(as.person("Klotz Stefan"),as.person("Kühn Ingolf"),as.person("Durka Walter")),
-##          title = "BIOLFLOR - Eine Datenbank zu biologisch-ökologischen Merkmalen zur Flora von Deutschland. 38: 1-333.  (Bundesamt für. Bonn, Bundesamt für Naturschutz)", 
-##          journal = "Schriftenreihe für Vegetationskunde", year = 2002, 
-##          volume = 38, pages = "1-333", 
+##          title = "BIOLFLOR - Eine Datenbank zu biologisch-ökologischen Merkmalen zur Flora von Deutschland. 38: 1-333.  (Bundesamt für. Bonn, Bundesamt für Naturschutz)",
+##          journal = "Schriftenreihe für Vegetationskunde", year = 2002,
+##          volume = 38, pages = "1-333",
 ##          url = "http://dx.doi.org/10.1111/j.1366-9516.2004.00106.x",
 ##          textVersion = paste("Klotz, S., Kühn, I., Durka, W. (eds) (2002).","BIOLFLOR - Eine Datenbank zu biologisch-ökologischen","Merkmalen zur Flora von Deutschland.","Schriftenreihe für Vegetationskunde 38: 1-333.","(Bundesamt für. Bonn, Bundesamt für Naturschutz)"))
 
@@ -26,7 +27,7 @@ citEntry(entry = "Article",
 ##     author = personList(as.person("Kleyer, M."),as.person("Bekker, R.M."),as.person("Knevel, I.C."), as.person("Bakker, J.P"), as.person("Thompson, K."), as.person("Sonnenschein, M."), as.person("Poschlod, P."), as.person("Van Groenendael, J.M."), as.person("Klimes, L."), as.person("Klimesova, J."), as.person("Klotz, S."), as.person("Rusch, G.M."), as.person("Hermy, M."), as.person("Adriaens, D."), as.person("Boedeltje, G."), as.person("Bossuyt, B."), as.person("Dannemann, A."), as.person("Endels, P."), as.person("Götzenberger, L."), as.person("Hodgson, J.G."), as.person("Jackel, A-K."), as.person("Kühn, I."), as.person("Kunzmann, D."), as.person("Ozinga, W.A."), as.person("Römermann, C."), as.person("Stadler, M."), as.person("Schlegelmilch, J."), as.person("Steendam, H.J."), as.person("Tackenberg, O."), as.person("Wilmann, B."), as.person("Cornelissen, J.H.C."), as.person("Eriksson, O."), as.person("Garnier, E."), as.person("Peco, B.")),
 ##     title="The LEDA Traitbase: A database of life-history traits of Northwest European flora.",
 ##     journal = " Journal of Ecology",
-##     year = 2008, 
+##     year = 2008,
 ##     volume = 96, pages = "1266-1274",
 ##     textVersion = paste("Kleyer, M., Bekker, R.M., Knevel, I.C., Bakker, J.P, Thompson, K., Sonnenschein, M., Poschlod, P., Van Groenendael, J.M., Klimes, L., Klimesova, J., Klotz, S., Rusch, G.M., Hermy, M., Adriaens, D., Boedeltje, G., Bossuyt, B., Dannemann, A., Endels, P., Götzenberger, L., Hodgson, J.G., Jackel, A-K., Kühn, I., Kunzmann, D., Ozinga, W.A., Römermann, C., Stadler, M., Schlegelmilch, J., Steendam, H.J., Tackenberg, O., Wilmann, B., Cornelissen, J.H.C., Eriksson, O., Garnier, E., Peco, B. (2008):", "The LEDA Traitbase: A database of life-history traits of Northwest European flora. Journal of Ecology 96: 1266-1274.")
 ##         )

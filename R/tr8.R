@@ -319,7 +319,9 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
                           "LEDA","Ecoflora","Pignatti","AMF",
                           ## "Catminat",
                           "BROT",
-                          "PLANTS","EFlora_Cal","Imkerbond")){
+                          "PLANTS","EFlora_Cal"
+                         ## ,"Imkerbond"
+                      )){
                                         #db<-temp_dframe$db[temp_dframe$short_code==i]
                 data_db<-temp_dframe[temp_dframe$db==db,]
                 if(sum(data_db$short_code%in%download_list)>0){
@@ -410,8 +412,6 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         ## if AMF is not already downloaded, local_storage is run (but only
         ## if this trait is requred
         TRAIT_AK="Akhmetzhanova"
-        ##:ess-bp-start::browser@nil:##
-browser(expr=is.null(.ESSBP.[["@13@"]]));##:ess-bp-end:##
         ##is the user interested in downloadin Akhmetzhanova?
         if("Myco_infection"%in%traits_list$AMF){
             ## then check if the dataset has already been downloaded
@@ -460,21 +460,21 @@ browser(expr=is.null(.ESSBP.[["@13@"]]));##:ess-bp-end:##
         ## Imkerbond
 
 
-        Imkerbond_traits <- imkerbond_get(species_list,TRAITS=traits_list$Imkerbond)
+        ## Imkerbond_traits <- imkerbond_get(species_list,TRAITS=traits_list$Imkerbond)
 
-        ## check if an already downloaded version of the Catminat database
-        ## exists and, if so, use it otherwise download a copy, but only
-        ## if at least one Catminat trait is needed
-        local_Catminat<-file.path(directory,"catminat.Rda")
-        if(file.exists(local_Catminat)){
-            load(local_Catminat)}else{
-                                    if(length(traits_list$Catminat)>0){
-                                        local_storage(db="Catminat",directory)
-                                        load(local_Catminat)
-                                    }else{catminat_df<-NULL}
-                                }
-        ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
-        catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df,similar=catminat_alternatives)
+        ## ## check if an already downloaded version of the Catminat database
+        ## ## exists and, if so, use it otherwise download a copy, but only
+        ## ## if at least one Catminat trait is needed
+        ## local_Catminat<-file.path(directory,"catminat.Rda")
+        ## if(file.exists(local_Catminat)){
+        ##     load(local_Catminat)}else{
+        ##                             if(length(traits_list$Catminat)>0){
+        ##                                 local_storage(db="Catminat",directory)
+        ##                                 load(local_Catminat)
+        ##                             }else{catminat_df<-NULL}
+        ##                         }
+        ## ##        leda_traits<-leda(species_list,TRAITS=traits_list$LEDA,rearranged=rearranged)
+        ## catminat_traits<-catminat(species_list,TRAITS=traits_list$Catminat,catminat_df,similar=catminat_alternatives)
 
         ## check if an already downloaded version of the BROT database
         ## exists and, if so, use it otherwise download a copy, but only
@@ -516,7 +516,12 @@ browser(expr=is.null(.ESSBP.[["@13@"]]));##:ess-bp-end:##
         ## from tr8 capabilities
         for(i in c(eco_traits,
                    ## biolflor_traits,
-                   leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits,PLANT_traits,efloracal_traits,Imkerbond_traits)){
+                   leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,
+                   ## catminat_traits,
+                   brot_traits,PLANT_traits,
+                   efloracal_traits #  ,
+                   ## Imkerbond_traits
+                   )){
             ## merge the dataframes only if they contain data
             if(!is.null(i@results))
             {
