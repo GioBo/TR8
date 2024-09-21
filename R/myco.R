@@ -5,8 +5,8 @@
 ##'
 ##' \code{Myco_infection} :  a numeric vector containing percentage of infection as provided
 ##' by Akhmetzhanova et al.
-##' @title retrieve_amf 
-##' @param species a vector containing names of plant species 
+##' @title retrieve_amf
+##' @param species a vector containing names of plant species
 ##' @param TRAITS a vector containing the traits to be downloaded (used as a check for
 ##' tr8_gui() created variables)
 ##' @return a data frame
@@ -43,8 +43,8 @@ retrieve_amf<-function(species,TRAITS,rest,data_myco){
     }
     res@results<-results
     ## remove(list=c("myco"),pos =".GlobalEnv")
-    
-        
+
+
     res@bibliography<-"Akhmetzhanova, A. A., Soudzilovskaia, N. A., Onipchenko, V. G.,\n Cornwell, W. K., Agafonov, V.A., Selivanov, I. A., and Cornelissen, J. H. C., 2012.\nA rediscovered treasure: mycorrhizal intensity database for 3000 vascular plants\nspecies across the former Soviet Union. Ecology 93:689.\n"
     return(res)
 }

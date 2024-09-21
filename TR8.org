@@ -15,7 +15,12 @@
 
 * BUGS [66%]
 
-*** BUG [#A] bug#18 
+** OPEN [#B] Check LEDA url
+
+   New URl <2024-09-21 Sat> is https://uol.de/en/landeco/research/leda/data-files and looks like
+   the format of the file has changed
+
+*** BUG [#A] bug#18
 
     If not connected to the network, the following error is raised,
     even though only Pignatti's data (which are locally stored) are requested
@@ -26,7 +31,7 @@ Error in file(con, "r") : cannot open the connection
 In addition: Warning message:
 In file(con, "r") : unable to resolve 'www.ecoflora.co.uk'
 
-#+END_SRC    
+#+END_SRC
 
 
 
@@ -36,14 +41,14 @@ In file(con, "r") : unable to resolve 'www.ecoflora.co.uk'
 
 *** BUG issue#1 :: change column_list.R and related files so that only one code is present for italian flowering
 *** FIXED bug#18: non ascii characters in data
-    
+
     Si trovano i seguenti non ascii files nei dataset
 
     - 153 in biolflor_lu$V1
     - 100 in biolflor_check$annotations
     - 100 in biolflor_lookup$annotations
     - 37 in ECOFLORA_df$annotations
-      
+
       Re arrange dataframes and .Rbuildignore to solve this issue:
 
       - remove column ~annotations~ e ~V1~ from biolflor_lookup (and
@@ -53,14 +58,14 @@ In file(con, "r") : unable to resolve 'www.ecoflora.co.uk'
       - remove column ~annotations~ from ECOFLORA_df (and updated manpage)
 
       - put biolfor_lu, biolflor_check (and their manpages) in .Rbuildignore
-    
-    
+
+
 *** FIXED [#A] bug#17
-    
+
     Se si usa specie<-("Salix alba") e si usa pignatti con solo "life
     form" si ottiene empty dataframe, se invece si mette anche un
     altro trait pignatti, si ottiene la life form corretta
-    
+
 *** FIXED [#A] bug#16 :: "no visible binding for global variables
 
    The following messages appears with R-devel check
@@ -87,7 +92,7 @@ lookup,Tr8: no visible binding for global variable ‘column_list’
 
 *** DONE bug#13 :: fix double names in leda_looked up data (branching AND dispersal_type)
 *** DONE bug#12 :: errore con retrieve_amf() se si usa tr8("Sinapis arvensis")
-    
+
 *** DONE bug#11 :: pignatti_f returns a single row dataframe
 *** DONE bug#10 :: Apera spica-venti doesn't work with ecoflora
 *** DONE bug#9 :: check get_italian_flowering for "Apera spica-venti"
@@ -101,17 +106,17 @@ lookup,Tr8: no visible binding for global variable ‘column_list’
                  correction:
 
     - 1. is /species/ in /acceptedname/? y:2,n:3
-      
+
     - 2. is /acceptedname/ unique? y:4,n:5
 
     - 3. is /species/ in /matchedname/? y:6,n:7
-	
+
     - 4. collect corresponding URL
-	
+
     - 5. extract the URL from that species for which /species name/ == /acceptedname/
-	
+
     - 6. collect corresponding URL
-	
+
     - 7. extract the URL from that species for which /species name/ == /matchedname/
 *** DONE bug#4 :: Xanthium strumarium (tnrs name) in Pignatti is
                  related to 3 species (X. italicum, X. strumarium,
@@ -162,16 +167,16 @@ lookup,Tr8: no visible binding for global variable ‘column_list’
    - email to jonathan storkey per chiedere se si può includere nel
      package anche la sua matrice species*traits del paper del 2006
 ** TODO issue#31 [0%] 						:documenting:
-   
+
    - [ ] elimina dalle vignette l'installazione da local package
    - [ ] correggi citazione di biolflor nel man file di traits_special_biolflor (mancano gli autori)
-   
+
 ** DONE issue#30						:documenting:
-   
+
    Correggere il manuale [[file:man/Tr8-class.Rd]] : aggiungere il metodo bib()
-   
+
 ** DONE issue#29
-   
+
    Uniforma tutte le citazioni nella forma Cognome, Nome
 
   - [ ] controlla [[file:man/tr8.Rd][tr8]]
@@ -180,13 +185,13 @@ lookup,Tr8: no visible binding for global variable ‘column_list’
 
    Check all manuals
 ** DONE issue#27
-   
+
    install "pdf" (for "R CHECK --as-cran")
-   
+
 ** DONE issue#26						:programming:
 
    remove all temporary variables
-   
+
 ** DONE issue#27						:documenting:
 
    detailed description of how data are combined (numeric, factors, characters, etc...)
@@ -211,8 +216,8 @@ lookup,Tr8: no visible binding for global variable ‘column_list’
    add an option to download LEDA files once and for all
 
 ** DONE issue#20						:programming:
-   download LEDA traits directly from the web 
-		    
+   download LEDA traits directly from the web
+
 *** leda_general() funziona
 *** fix the way leda_general accepts TRAITS from tr8()
 
@@ -240,7 +245,7 @@ convertire tutto a UTF-8 (es. kuhn)
  load data within function in a correct way in
  order to avoid the error message in R CMD build ;
  see these links:
-		    http://stackoverflow.com/questions/10492747/data-inside-a-function-package-creation 
+		    http://stackoverflow.com/questions/10492747/data-inside-a-function-package-creation
 ** +issue#10 ::  may add data from http://www.garden-en.com/e/en/54-common-bugle-ajuga-reptans/+
 ** DONE issue#9							:programming:
 for some italian species in luirig.altervista, the
@@ -252,16 +257,13 @@ not work
  add seedbank from leda or ecoflora
 ** DONE issue#6							:programming:
  add AMF according to http://esapubs.org/Archive/ecol/E093/059/default.htm
-** DONE issue#5 
+** DONE issue#5
  add flowering period from luirig
-** DONE issue#4 
+** DONE issue#4
  add a column for pignatti life form
-** DONE issue#3 
+** DONE issue#3
  maybe columns' names in the resulting df could be shortened
-** DONE issue#2 
+** DONE issue#2
  add a method "show" for class tr8 (print a pretty table or extract only the data.frame containing results : TO BE COMPLETED  probably an "export" option for Tr8::lookup is needed
-** DONE issue#1 
+** DONE issue#1
  use shorten names for traits levels: use data/tables.R as a reference table for correctiong names
-	
-	
-  

@@ -314,7 +314,12 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
             ## run the gui
             traits_list<-tr8_config()
         }else{
-            for(db in c("BiolFlor","LEDA","Ecoflora","Pignatti","AMF","Catminat","BROT","PLANTS","EFlora_Cal","Imkerbond")){
+            for(db in c(
+                          ## "BiolFlor",
+                          "LEDA","Ecoflora","Pignatti","AMF",
+                          ## "Catminat",
+                          "BROT",
+                          "PLANTS","EFlora_Cal","Imkerbond")){
                                         #db<-temp_dframe$db[temp_dframe$short_code==i]
                 data_db<-temp_dframe[temp_dframe$db==db,]
                 if(sum(data_db$short_code%in%download_list)>0){
@@ -405,6 +410,8 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         ## if AMF is not already downloaded, local_storage is run (but only
         ## if this trait is requred
         TRAIT_AK="Akhmetzhanova"
+        ##:ess-bp-start::browser@nil:##
+browser(expr=is.null(.ESSBP.[["@13@"]]));##:ess-bp-end:##
         ##is the user interested in downloadin Akhmetzhanova?
         if("Myco_infection"%in%traits_list$AMF){
             ## then check if the dataset has already been downloaded
@@ -505,7 +512,11 @@ tr8<-function(species_list,download_list=NULL,gui_config=FALSE,synonyms=FALSE,ca
         tr8_traits<-data.frame(species_list,row.names=species_list)
         bibliography=list()
         potential_issues<-c()
-        for(i in c(eco_traits,biolflor_traits,leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits,PLANT_traits,efloracal_traits,Imkerbond_traits)){
+        ## As of September 2024 Biolfor website is no more active => we remove it
+        ## from tr8 capabilities
+        for(i in c(eco_traits,
+                   ## biolflor_traits,
+                   leda_traits,pignatti_traits,it_flowering,amf_traits,amf_MycoFlor,catminat_traits,brot_traits,PLANT_traits,efloracal_traits,Imkerbond_traits)){
             ## merge the dataframes only if they contain data
             if(!is.null(i@results))
             {
