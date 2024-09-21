@@ -9,7 +9,7 @@ setMethod("initialize",
               if(length(TRAITS)>0){
                   .Object@traits<-TRAITS
               }else{
-                  .Object@traits<-c("L","T","C","U","R","N","S","life_form_P","corotipo") 
+                  .Object@traits<-c("L","T","C","U","R","N","S","life_form_P","corotipo")
           }
               return(.Object)
           }
@@ -21,12 +21,12 @@ setGeneric(name= "get_traits", def=function(.Object){standardGeneric("get_traits
 setMethod(f="get_traits",
           signature="ellenberg_pignatti",
           definition = function(.Object){
-              
+
               env<-new.env(parent = parent.frame())
               data(pignatti,envir=env)
               pignatti<-get("pignatti",envir=env)
               DF<-pignatti[pignatti$Name.tnrs%in%.Object@species_list,]
-              
+
               ## the following ddply is needed since pignatti dataframe has
               ## double (or triple) entries for some species [eg. Xanthium strumarium (according
               ## to TNRS name) corresponds to 3 different species in Pignatti dataframe)
@@ -34,21 +34,21 @@ setMethod(f="get_traits",
             ##             ## is Xanthium strumarium]
             ##               DF<-plyr::ddply(DF,.(DF$Name.tnrs),function(x){
             ##                   if(nrow(x)>1){
-            
+
             ##                       try(return(x[as.character(x$Specie.Pignatti)==as.character(x$Name.tnrs),]),silent=FALSE)
             ## ##                      return(x[as.character(x$Specie.Pignatti)==as.character(x$Name.tnrs),])
             ##                   }else{return(x)}
             ##               })
 
             DF <- with(DF,DF[as.character(Specie.Pignatti)==as.character(Name.tnrs),])
-              
+
 ##              results<-df[,c("Name.tnrs","forma_biologica","corotipo","L","T","C","U","R","N","S")]
             row.names(DF)<-DF$Name.tnrs
               DF<-DF[,c("L","T","C","U","R","N","S","forma_biologica","corotipo")]
               names(DF)<-c("L","T","C","U","R","N","S","life_form_P","corotipo")
               selected<-.Object@traits[.Object@traits%in%names(DF)]
               results<-DF[,selected]
-              
+
               results<-as.data.frame(results)
               names(results)<-selected#.Object@traits
               row.names(results)<-row.names(DF)
@@ -64,10 +64,10 @@ setMethod(f="get_traits",
 
 
 #' Extracts ellenberg values for the Italia Flora as provided by Pignatti et al. (2005)
-#' 
+#'
 #' This function is not ment to be used by the final user; it's used by the
 #' wrapper function \code{tr8()}
-#' 
+#'
 #' @param species a vector containing plant species names
 #' @param TRAITS a vector containing the traits to be downloaded (used as a check for
 #' tr8_gui() created variables)
@@ -88,7 +88,8 @@ pignatti_f<-function(species,TRAITS){
     if(is.null(TRAITS)){
         res@results<-NULL
     }else{
-        if(length(TRAITS)>0&&(!TRAITS%in%c("L","T","C","U","R","N","S","life_form_P","corotipo"))){
+        ## if(length(TRAITS)>0 && (!TRAITS%in%c("L","T","C","U","R","N","S","life_form_P","corotipo"))){
+        if(length(TRAITS)>0 && all(!TRAITS%in%c("L","T","C","U","R","N","S","life_form_P","corotipo"))){
             res@results<-NULL
                   }else{
 
@@ -99,5 +100,5 @@ pignatti_f<-function(species,TRAITS){
     }
     res@bibliography<-"Pignatti, S., Menegoni, P., Pietrosanti. S., 2005. Biondicazione attraverso le piante vascolari.\nValori di indicazione secondo Ellenberg (Zeigerwerte) per le specie della Flora di Italia. \nBraun-Blanquetia 39, Camerino, pp.  97.\n"
     return(res)
-        
+
 }
