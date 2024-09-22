@@ -2,7 +2,7 @@
 ##' a tab  for each trait database: the user che choose which traits should be
 ##' downloaded via the \code{tr8} function.
 ##'
-##' 
+##'
 ##' @title \code{tr8_config} an html page to configure TR8 package.
 ##' @return  the function will return a list containind the selected traits for each source of information
 ##' @seealso tr8()
@@ -11,13 +11,13 @@
 
 tr8_config<-function(){
 
-    ## get the list of traits 
+    ## get the list of traits
     ## data(column_list)
     ## convert it to a data frame
     env<-new.env()
     data("column_list",envir=env)
     column_list<-get("column_list",envir = env)
-    
+
     temp_dframe<-ldply(column_list)
     names(temp_dframe)<-c("long_code","short_code","description","db")
 
@@ -75,12 +75,12 @@ tr8_config<-function(){
 }
 
 fix_values<-function(TEMP_VAR,DF){
-    
+
     if(length(TEMP_VAR)==0){
         TEMP_VAR<-c()}else{
     TEMP_VAR<-with(DF,long_code[description%in%TEMP_VAR])
      }
-    
+
     return(TEMP_VAR)
 }
 
@@ -95,7 +95,7 @@ list_traits_shiny <- function(db_interest){
     env<-new.env()
     data("column_list",envir=env)
     column_list<-get("column_list",envir = env)
-    
+
     temp_dframe<-ldply(column_list)
     names(temp_dframe)<-c("long_code","short_code","description","db")
 
@@ -104,4 +104,3 @@ list_traits_shiny <- function(db_interest){
     return(temp_df$description)
 
 }
-

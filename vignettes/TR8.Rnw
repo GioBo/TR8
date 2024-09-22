@@ -149,7 +149,7 @@ dev_mode(on=F)
 ## a vector containing a list of plant species names
 my_species<-c("Apium graveolens","Holcus mollis","Lathyrus sylvestris")
 ## a vector of traits
-to_be_downloaded<-c("reprod_B","strategy")
+to_be_downloaded<-c("life_form_P","ell_L_it")
 ## now run tr8 and store the results in the my_traits object
 my_traits<-tr8(species_list = my_species,download_list = to_be_downloaded,
                allow_persistent=TRUE)
@@ -338,43 +338,43 @@ bib(my_traits)
 
 
 
-\section{Some notes on using \texttt{tr8}}
+% \section{Some notes on using \texttt{tr8}}
 
-\subsubsection*{A NOTE OF CAUTION}
-
-
-  Searching the web is a time (and
-  Internet band) consuming activity, thus the higher the number of
-  your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
-  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.
-
-  \subsubsection*{A (SECOND) NOTE OF CAUTION}
+% \subsubsection*{A NOTE OF CAUTION}
 
 
+%   Searching the web is a time (and
+%   Internet band) consuming activity, thus the higher the number of
+%   your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
+%   not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.
 
- Some users adopt the following workflow for analysing their vegetation data:
+%   \subsubsection*{A (SECOND) NOTE OF CAUTION}
 
-  \begin{enumerate}
-  \item insert vegetation data into a \textit{spreadsheet file} with species as
-  columns' and sites' as rows
-\item export the spreadsheet file as a \texttt{.csv} file
-\item import the \texttt{.csv} file into a \textbf{R} dataframe.
-  \end{enumerate}
 
-  When following these steps, a dot (".") will be inserted between
-Genus and Species of each plant species name (i.e. column names in the
-\texttt{R} dataframe will not be in the form \texttt{c("Abies alba", "Salix
-alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
-This may cause problems for further processing of plants'
-species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
-  option in \texttt{read.csv}. E.g. suppose that
-  \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
-  \textbf{R} console, one should use:
 
-<<import,eval=FALSE>>=
-My_data<-read.csv("my_veg_data.csv",
-                  header=T,row.names=1,check.names=F)
-@ %def
+%  Some users adopt the following workflow for analysing their vegetation data:
+
+%   \begin{enumerate}
+%   \item insert vegetation data into a \textit{spreadsheet file} with species as
+%   columns' and sites' as rows
+% \item export the spreadsheet file as a \texttt{.csv} file
+% \item import the \texttt{.csv} file into a \textbf{R} dataframe.
+%   \end{enumerate}
+
+%   When following these steps, a dot (".") will be inserted between
+% Genus and Species of each plant species name (i.e. column names in the
+% \texttt{R} dataframe will not be in the form \texttt{c("Abies alba", "Salix
+% alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
+% This may cause problems for further processing of plants'
+% species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
+%   option in \texttt{read.csv}. E.g. suppose that
+%   \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
+%   \textbf{R} console, one should use:
+
+% <<import,eval=FALSE>>=
+% My_data<-read.csv("my_veg_data.csv",
+%                   header=T,row.names=1,check.names=F)
+% @ %def
 
 
 
@@ -526,7 +526,7 @@ vignette("TR8_workflow")
   \item LEDA
   \item Akhmetzhanova
   \item MycoFlor
-  \item Catminat
+  % \item Catminat
   \end{itemize}
 
 

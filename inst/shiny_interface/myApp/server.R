@@ -5,18 +5,18 @@ server <- function(input, output, session) {
         ## and the list of selected traits will be sent back to the tr8 function
         ## to be elaborated
         stopApp(list(
-            "BiolFlor"=input$biolflor,
+            ## "BiolFlor"=input$biolflor,
             "Ecoflora"=input$ecoflora,
             "Pignatti"=input$pignatti,
             "LEDA"=input$leda,
             "AMF"=input$amf,
-            "Catminat"=input$catminat,
-            "Imkerbond"=input$imkerbond,
+            ## "Catminat"=input$catminat,
+            ## "Imkerbond"=input$imkerbond,
             "BROT"=input$brot,
             "efloracal"=input$eflora,
             "PLANTS"=input$plants
             ))
-         
+
     })
 
 }

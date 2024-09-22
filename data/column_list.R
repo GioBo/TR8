@@ -47,23 +47,23 @@ column_list<-list(
   ## "plant.growth.form"=c("g_form","Plant growth form","LEDA"),
   ## "dispersal.type"=c("disp_type","Plant dispersal type","LEDA"),
 
-  
 
-  
+
+
   ## BiolFlor
 
-  "Life form"=c("li_form_B","Life form","BiolFlor"),
-  "Life span"=c("li_span","Life span","BiolFlor"),
-  "Rosettes"=c("ros","Rosettes","BiolFlor"),
-  "Type of reproduction"=c("reprod_B","Type of reproduction","BiolFlor"),
-  "Strategy type"=c("strategy","Strategy type","BiolFlor"),
-  "Pollen vector"=c("poll_vect_B","Pollen vector","BiolFlor"),
-  "Flower class after MUELLER"=c("flw_muell","Flower class after Mueller","BiolFlor"),
-  "Flower type after KUGLER"=c("flw_kugler","Flower class after Kugler","BiolFlor"),
-  "Self-sterility and self-incompatibility"=c("self-st","Self-sterility and self-incompatibility","BiolFlor"),
-  "Breeding system"=c("Breeding_sys","Breeding system","BiolFlor"),
-  "Type of apomixis"=c("apomixis","Type of apomixis","BiolFlor"),
-  ## "Begin.of.flowering..months."=c("flw_beg","Begin of flowering months.","BiolFlor"),
+  ## "Life form"=c("li_form_B","Life form","BiolFlor"),
+  ## "Life span"=c("li_span","Life span","BiolFlor"),
+  ## "Rosettes"=c("ros","Rosettes","BiolFlor"),
+  ## "Type of reproduction"=c("reprod_B","Type of reproduction","BiolFlor"),
+  ## "Strategy type"=c("strategy","Strategy type","BiolFlor"),
+  ## "Pollen vector"=c("poll_vect_B","Pollen vector","BiolFlor"),
+  ## "Flower class after MUELLER"=c("flw_muell","Flower class after Mueller","BiolFlor"),
+  ## "Flower type after KUGLER"=c("flw_kugler","Flower class after Kugler","BiolFlor"),
+  ## "Self-sterility and self-incompatibility"=c("self-st","Self-sterility and self-incompatibility","BiolFlor"),
+  ## "Breeding system"=c("Breeding_sys","Breeding system","BiolFlor"),
+  ## "Type of apomixis"=c("apomixis","Type of apomixis","BiolFlor"),
+ ## "Begin.of.flowering..months."=c("flw_beg","Begin of flowering months.","BiolFlor"),
   ## "End.of.flowering..months."=c("flw_end","End of flowering months","BiolFlor"),
   ## "Duration.of.flowering..months."=c("flw_dur", "Duration of flowering months","BiolFlor"),
   ## "Number.of.flowering.phases"=c("flw_ph","Number of flowering phases","BiolFlor"),
@@ -87,30 +87,30 @@ column_list<-list(
   ## AMF
   "Myco_infection"=c("Myco_infection","Infection of AMF according to Akhmetzhanova et al.", "AMF"),
   "MycoFlor"=c("MycoFlor","Infection of AMF according to MycoFlor", "AMF"),
-  
-###    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti")
-  
-                                        #catminat
 
-  "inflorescence_fr"=c("inflorescence_fr","Type of inflorescence","Catminat"),
-  "sex_reprod_fr"=c("sex_reprod_fr","Type of sexual reproduction","Catminat"),
-  "poll_vect_fr"=c("poll_vect_fr","Pollen vector","Catminat"),
-  "fruit_type_fr"=c("fruit_type_fr","Type of fruit","Catminat"),
-  "dissemination_fr"=c("dissemination_fr","Type of dissemination","Catminat"),
-  "flower_colour_fr"=c("flower_colour_fr","Flower colour","Catminat"),
-  "li_form_fr"=c("li_form_fr","Life form","Catminat"),
-  "ell_L_fr"=c("ell_L_fr","Ellenberg values for Light","Catminat"),
-  "ell_T_fr"=c("ell_T_fr","Ellenberg values for temperature","Catminat"),
-  "ell_C_fr"=c("ell_C_fr","Ellenberg values for continentality","Catminat"),
-  "ell_U_atm_fr"=c("ell_U_atm_fr","Ellenberg values for atmospheric moisture","Catminat"),
-  "ell_U_fr"=c("ell_U_fr","Ellenberg values for moisture","Catminat"),
-  "ell_R_fr"=c("ell_R_fr","Ellenberg values for soil reaction","Catminat"),
-  "ell_N_fr"=c("ell_N_fr","Ellenberg values for nitrogen","Catminat"),
-  "ell_S_fr"=c("ell_S_fr","Ellenberg values for salt","Catminat"),
-  "Soil_texture_fr"=c("Soil_texture_fr","Type of soil texture","Catminat"),
-  "organic_matter_fr"=c("organic_matter_fr","Organic matter in the soil","Catminat"),
-  "beg_flow_fr"=c("beg_flow_fr","Beginning of flowering (month)","Catminat"),
-  "end_flow_fr"=c("end_flow_fr","End of flowering (month)","Catminat"),
+###    "support.AMF"=c("support.AMF","Potential infection of AMF","Giovannetti")
+
+  ## catminat
+
+  ## "inflorescence_fr"=c("inflorescence_fr","Type of inflorescence","Catminat"),
+  ## "sex_reprod_fr"=c("sex_reprod_fr","Type of sexual reproduction","Catminat"),
+  ## "poll_vect_fr"=c("poll_vect_fr","Pollen vector","Catminat"),
+  ## "fruit_type_fr"=c("fruit_type_fr","Type of fruit","Catminat"),
+  ## "dissemination_fr"=c("dissemination_fr","Type of dissemination","Catminat"),
+  ## "flower_colour_fr"=c("flower_colour_fr","Flower colour","Catminat"),
+  ## "li_form_fr"=c("li_form_fr","Life form","Catminat"),
+  ## "ell_L_fr"=c("ell_L_fr","Ellenberg values for Light","Catminat"),
+  ## "ell_T_fr"=c("ell_T_fr","Ellenberg values for temperature","Catminat"),
+  ## "ell_C_fr"=c("ell_C_fr","Ellenberg values for continentality","Catminat"),
+  ## "ell_U_atm_fr"=c("ell_U_atm_fr","Ellenberg values for atmospheric moisture","Catminat"),
+  ## "ell_U_fr"=c("ell_U_fr","Ellenberg values for moisture","Catminat"),
+  ## "ell_R_fr"=c("ell_R_fr","Ellenberg values for soil reaction","Catminat"),
+  ## "ell_N_fr"=c("ell_N_fr","Ellenberg values for nitrogen","Catminat"),
+  ## "ell_S_fr"=c("ell_S_fr","Ellenberg values for salt","Catminat"),
+  ## "Soil_texture_fr"=c("Soil_texture_fr","Type of soil texture","Catminat"),
+  ## "organic_matter_fr"=c("organic_matter_fr","Organic matter in the soil","Catminat"),
+  ## "beg_flow_fr"=c("beg_flow_fr","Beginning of flowering (month)","Catminat"),
+  ## "end_flow_fr"=c("end_flow_fr","End of flowering (month)","Catminat"),
   ##"order_of_maturation"=c("order_of_maturation","","Catminat"),
   ##"macule"=c("macule","","Catminat"),
   ##"type_ligneux"=c("type_ligneux","","Catminat"),
@@ -118,7 +118,7 @@ column_list<-list(
 
   ##Flora of California
 
-  
+
   "high_el"=c("high_el","High elevation","EFlora_Cal"),
   "low_el"=c("low_el","Low elevation","EFlora_Cal"),
   "seed_mas_cal"=c("seed_mas_cal","Seed mass","EFlora_Cal"),
@@ -134,7 +134,7 @@ column_list<-list(
   "blade_width"=c("blade_width","Blade width (c)","EFlora_Cal"),
   "leaf_thick"=c("leaf_thick","Leaf thickness","EFlora_Cal"),
   "leaf_type"=c("leaf_type","Leaf type","EFlora_Cal"),
-  
+
 
   ##brot
 
@@ -249,13 +249,10 @@ column_list<-list(
   "Post.Product"=c("Post.Product","Post Product","PLANTS"),
   "Protein.Potential"=c("Protein.Potential","Protein Potential","PLANTS"),
   "Pulpwood.Product"=c("Pulpwood.Product","Pulpwood Product","PLANTS"),
-  "Veneer.Product"=c("Veneer.Product","Veneer Product","PLANTS"),
-
+  "Veneer.Product"=c("Veneer.Product","Veneer Product","PLANTS") #,
   ## Imkerbond
-  "poll_q"=c("poll_q","Pollen quantity","Imkerbond"),
-  "nectar_q"=c("nectar_q","Nectar quantity","Imkerbond")    
+  ## "poll_q"=c("poll_q","Pollen quantity","Imkerbond"),
+  ## "nectar_q"=c("nectar_q","Nectar quantity","Imkerbond")
 
 
-  
 )
-

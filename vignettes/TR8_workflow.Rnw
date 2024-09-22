@@ -29,6 +29,22 @@
 \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 
 
+\textbf{NOTA BENE}: this document is left here as a mere
+reference but the workflow shown here is (at best) outdated: since
+the time the TR8 package was first published,
+most of the Trait Databases and Datasets used here have become
+unavailable via the web, thus this workflow is not working anymore.
+
+So, dear Reader, feel free to use whatever might work in this
+document (I still quite like the paragraphs on the multivariate
+analysis), but do not expect this to be an up-to-date tutorial.
+
+As per updating this document: the Author has left the
+Academic-hamster-wheel nearly a decade a ago and while he's still
+willing to maintain this package \textit{pro bono}, he is
+definitely fed up with having to update it since yet-another-traitbase
+is gone from public access.
+
 
 
 
@@ -540,14 +556,14 @@ env_data$Treat<-as.factor(env_data$Treat)
 
    Now we re-run the analysis:
 @
-<<i,eval=FALSE>>=
+<<i2,eval=FALSE>>=
 env.hill<-dudi.hillsmith(env_data,row.w=coa$lw,scannf = FALSE)
 @ %def
 
 \item And (finally) we can perform the \texttt{rlq} analysis using the previusly created objects:
 
 @
-<<l,eval=FALSE>>=
+<<l2,eval=FALSE>>=
 rlq_tr8<-rlq(env.hill,coa,traits.hill,scannf = F)
 @ %def
 
@@ -563,7 +579,7 @@ plot(rlq_tr8)
 \item We now perform a clustering and its results will be used for building functional groups. Following the example provided by Kleyer et al. \cite{Kleyer2012} we use the Ward minimum variance clustering:
 
 @
-<<m,eval=FALSE>>=
+<<n,eval=FALSE>>=
 clust<-hclust(dist(rlq_tr8$lQ),method="ward.D2")
 plot(clust,sub="Ward minimum variance clustering",xlab="TR8 tutorial")
 @ %def
