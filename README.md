@@ -4,24 +4,28 @@ TR8
 R package for downloading functional traits data for plant species
 
 
-Plant ecologists often need to collect "traits" data about plant species which are 
+Plant ecologists often need to collect "traits" data about plant species which are
 often scattered among various databases: TR8 contains a set of tools which take care of
-automatically retrieving some of those functional traits data for plant species from 
+automatically retrieving some of those functional traits data for plant species from
 the following publicly available databases:
 
-* [Biolflor](http://www.ufz.de/biolflor/index.jsp)
+
 * [The Ecological Flora of the British Isles](http://www.ecoflora.co.uk/)
 * [LEDA traitbase](http://www.leda-traitbase.org/LEDAportal/)
 * Ellenberg values for Italian Flora
 * [Mycorrhizal intensity database](http://esapubs.org/Archive/ecol/E093/059/default.htm)
 * [http://luirig.altervista.org/](http://luirig.altervista.org/)
 * [MycoFlor](http://www.esajournals.org/doi/abs/10.1890/12-1700.1)
-* [Catminat](http://perso.wanadoo.fr/philippe.julve/catminat.htm)
 * [BROT](http://www.uv.es/jgpausas/brot.htm)
 * [PLANTS](http://www.bricol.net/)
 * [Ecological Flora of California](http://ucjeps.berkeley.edu/efc/)
 
 
+As of September 2024, the following trait databases are not available any more, thus
+TR8 is not able to retrieve data from them:
+
+* [Biolflor](http://www.ufz.de/biolflor/index.jsp)
+* [Catminat](http://perso.wanadoo.fr/philippe.julve/catminat.htm)
 
 
 Install the package
@@ -34,7 +38,7 @@ install.packages(TR8,dependencies=TRUE)
 ```
 
   Or, if you want to try the devel version of the package hosted here, you will need [devtools](https://github.com/hadley/devtools):
-  
+
 ```R
 ## install the package
 install.packages("devtools")
@@ -58,18 +62,18 @@ Usage
 =====
 
   The package comes with two vignettes aimed at helping users: the first one is a basic guide on how to use the package main function (_tr8()_); to browse it, simply type in the R console:
-  
-  
+
+
 ```R
 vignette("TR8")
 ```
-  
+
   The second one is a step-by-step description of what might be considered as a typical workflow for a plant ecologist who needs to collect traits' data and later analyze them; to view the vignette, write:
-  
+
 ```R
 vignette("TR8_workflow")
 ```
-  
+
 
 Citation
 ========
@@ -78,7 +82,7 @@ Citation
 
   "Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits. Methods in Ecology and Evolution, 6(3), 347-350."
 
-  
+
    Or, if you use BibTeX:
 
 ```
@@ -97,7 +101,7 @@ Citation
 
 
   Users of the **TR8** package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the `bib` method; to learn how to use it, just type:
-  
+
 
 ```R
 ?bib
@@ -105,9 +109,9 @@ Citation
 
 
 
-  
 
-  
+
+
 
 
 Changes from past versions
@@ -115,12 +119,22 @@ Changes from past versions
 
 Please check [NEWS file](https://github.com/GioBo/TR8/blob/master/NEWS) for other changes/updates from past versions of the package.
 
+### TR8 v. 0.9.23
+
+
+As of September 2024, the following trait databases are not available any more, thus
+TR8 is not able to retrieve data from them:
+
+* [Biolflor](http://www.ufz.de/biolflor/index.jsp)
+* [Catminat](http://perso.wanadoo.fr/philippe.julve/catminat.htm)
+
+
 
 ### TR8 v. 0.9.22
 
 The tr8() function now has the additional parameter 'allow_persistent': when set to TRUE, tr8 will store retrieved databases
 from LEDA and Ecoflora into local files to speed up future queries; if FALSE, the downloaded data will be store in a temp directory that will
-be cleaned up at the end of the session; when NULL (default value), the user will be prompted for a choice between the two options 
+be cleaned up at the end of the session; when NULL (default value), the user will be prompted for a choice between the two options
 (this new parameter is needed to comply with CRAN policies).
 
 The package now is able to retrieve the trait "flower type after Kugler" from BiolFlor.
@@ -145,7 +159,7 @@ When the HTML-GUI is being used, the user will have to select the traits of inte
 
 ### TR8 v. 0.9.20
 
-  **Important note**: the new version of _tr8()_ accepts the new argument 'synonyms': when set to true the function _tnrs_ from the package _taxize_ will be used to to search for synonyms of the provided species list and search trait data for them as well. 
+  **Important note**: the new version of _tr8()_ accepts the new argument 'synonyms': when set to true the function _tnrs_ from the package _taxize_ will be used to to search for synonyms of the provided species list and search trait data for them as well.
 
 
 

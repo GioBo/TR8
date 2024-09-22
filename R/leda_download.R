@@ -37,7 +37,7 @@ leda_download_to_local_directory<-function(directory){
   ## ## build the first dataframe
   ## first<-leda_download(url=DF[1,2],skip_row=DF[1,3],column=DF[1,4],out_name=DF[1,5])
   ## rearranged<-first
-  ## ## download all the other txt files and merge each one to the
+
   ## ## previous one
   ## for(i in 2:nrow(DF)){
   ##   temp<-leda_download(url=DF[i,2],skip_row=DF[i,3],column=DF[i,4],out_name=DF[i,5])
@@ -65,8 +65,7 @@ leda_download_to_local_directory<-function(directory){
 
   ## save the complete dataset in a file called "leda_database.Rda"
   ## in the directory chosen by the user
-  remove(list=c("leda_lookup"), envir = env)    
+  remove(list=c("leda_lookup"), envir = env)
                                         #save(file=file.path(directory,"leda_database.Rda"),rearranged)
   save(file=file.path(directory,"leda_database.Rda"),RES)
 }
-

@@ -6,8 +6,8 @@
 \usepackage{longtable}
 \usepackage{afterpage}
 \usepackage{enumitem}
-\usepackage[normalem]{ulem} 
-\lstset{language=R}    
+\usepackage[normalem]{ulem}
+\lstset{language=R}
 \bibliographystyle{plain}
 % \VignetteIndexEntry{TR8: Extract traits data for plant species}
 %\VignetteDepends{TR8}
@@ -30,10 +30,10 @@
 \section{Rationale}
 \label{sec:rationale}
 
-@ 
+@
 <<options,echo=FALSE>>=
 options(width = 60)
-@ %def 
+@ %def
 
 
 
@@ -41,15 +41,13 @@ The \texttt{TR8} package has been built in order to provide the user with the
 possibility of easily retrieving traits data for plant species from the following publicly available databases:
 
 \begin{description}
-\item[Biolflor] \url{http://www.ufz.de/biolflor/index.jsp} \cite{biolflor}
 \item[Ecological Flora of the British Isles] \url{http://www.ecoflora.co.uk/} \cite{ecoflora}
 \item[LEDA traitbase] \url{http://www.leda-traitbase.org/LEDAportal/} \cite{leda}
 \item[Ellenberg values for Italian Flora] \cite{pignatti}
 \item[Flowering period for Italian Flora] \cite{pignatti} (data retrieved from \url{http://luirig.altervista.org/})
 \item[Mycorrhizal intensity database] \cite{amf}
 \item[MycoFlor database]\cite{Hempel2013}
-\item[Catminat database]\cite{catminat} 
-\item[BROT]\cite{BROT_1}\cite{BROT_2}  
+\item[BROT]\cite{BROT_1}\cite{BROT_2}
 \end{description}
 
   Please note that not all the traits available on the listed
@@ -57,15 +55,26 @@ possibility of easily retrieving traits data for plant species from the followin
   versions of the package (ie. some functionalities may be added and
   more traits will be made available).
 
+  As of September 2024 the following databases are no more available online (thus
+  TR8 is not available to retrieve traits data):
+
+\begin{description}
+\item[Biolflor] \url{http://www.ufz.de/biolflor/index.jsp} \cite{biolflor}
+\item[Catminat database]\cite{catminat}
+\end{description}
+
+
+
+
 \section{Installation}
 \label{sec:installation}
-  
+
   The \texttt{TR8} package is available on CRAN, thus it can be easily installed through:
-  
-@ 
+
+@
 <<install,eval=FALSE>>=
 install.packages("TR8",dependencies = TRUE)
-@ %def 
+@ %def
 
 The option \texttt{dependencies = TRUE} takes care of installing those packages which are
 needed by \texttt{TR8} to work properly.
@@ -73,10 +82,10 @@ needed by \texttt{TR8} to work properly.
 
   Once the package is installed, you can load it with:
 
-@ 
+@
 <<label=load,eval=FALSE>>=
 library(TR8)
-@ %def 
+@ %def
 
 Please note that:
 
@@ -86,7 +95,7 @@ Please note that:
   thus all the users of the \texttt{TR8} package are asked (and
   reminded \textbf{every time} they load the package) to always cite the original sources of the data (see
   paragraph \ref{sec:citing}).
-  
+
 \end{description}
 
 
@@ -99,14 +108,14 @@ Please note that:
 %%    \url{https://www.perl.org/get.html} and install either
 %%    \texttt{Strawberry Perl} (the one I suggest) or \texttt{ActiveState Perl}.
 
-  
+
 \subsection{Using the development version}
 
   The devel version of the package is hosted on github at \url{https://github.com/GioBo/TR8}: to use this
   version (instead of the stable one, released from CRAN), you'll need
   the \texttt{devtools} package (\url{https://github.com/hadley/devtools}):
-  
-@ 
+
+@
 <<devtools,eval=FALSE>>=
 ## install the package
 install.packages("devtools")
@@ -123,9 +132,9 @@ library(TR8)
 ## if you want to go back and use the CRAN version
 ## already installed, simply deactivate dev_mode
 dev_mode(on=F)
-@ %def 
-  
- 
+@ %def
+
+
 \section{Simple usage}
 \label{sec:usage}
 
@@ -134,29 +143,29 @@ dev_mode(on=F)
   plant species names (\textbf{without authors' names!}\footnote{This is needed since some traitbases do not include authors' names in the species' names.})
   and a vector containing the codes corresponding
   to the traits which are to be downloaded:
-  
-@ 
+
+@
 <<usage,eval=FALSE>>=
 ## a vector containing a list of plant species names
 my_species<-c("Apium graveolens","Holcus mollis","Lathyrus sylvestris")
 ## a vector of traits
-to_be_downloaded<-c("reprod_B","strategy")
+to_be_downloaded<-c("life_form_P","ell_L_it")
 ## now run tr8 and store the results in the my_traits object
 my_traits<-tr8(species_list = my_species,download_list = to_be_downloaded,
                allow_persistent=TRUE)
-@ %def 
+@ %def
 
   The codes which are accepted by \textsc{tr8} are listed in the \texttt{available\_tr8} database:
-@ 
+@
 <<load_TR8,echo=FALSE>>=
 library(TR8)
-@ %def 
+@ %def
 
-@ 
+@
 <<available_traits>>=
 ## see the firs lines of available_tr8 database
 head(available_tr8)
-@ %def 
+@ %def
 
  The database is composed of three columns:
  \begin{description}
@@ -169,51 +178,51 @@ head(available_tr8)
    height}, the \textit{leaf area} and the \textit{life form} (which
  are available through the \textit{Ecolfora} database) for
  \textit{Salix alba} and \textit{Populus nigra} and store the resulting data in the \texttt{my\_Data} object; the command should be:
- 
-@ 
+
+@
 <<first_tr8,eval=FALSE>>=
 my_species<-c("Salix alba","Populus nigra")
 my_traits<-c("h_max","le_area","li_form")
 my_Data<-tr8(species_list = my_species, download_list = my_traits,
              allow_persistent=TRUE)
-@ %def 
+@ %def
 
   The \texttt{tr8} function will take care of downloading the data and
   store them in the \texttt{my\_Data} object; you can see the results
   by printing them:
 
-@ 
+@
 <<usage2,eval=FALSE>>=
 ## see the downloaded data
 print(my_Data)
-@ %def 
+@ %def
 
   Or you can convert them to a data frame using the \texttt{extract\_traits} function:
-  
-@ 
+
+@
 <<extract_traits,eval=FALSE>>=
 traits_dataframe<-extract_traits(my_Data)
-@ %def 
+@ %def
 
   All the traits are now contained in a data frame with species as rows
   and columns as traits; where no trait data were available, you will
-  see a \texttt{NA}. 
+  see a \texttt{NA}.
 
-  
-  In order to make the dataframe more readable,  traits' names (i.e. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function: 
+
+  In order to make the dataframe more readable,  traits' names (i.e. columns' names) are converted to shorter codes: to see a brief explanation of the codes used to identify the traits, use the \texttt{lookup} function:
 
 
 <<lookup,eval=FALSE>>=
 lookup(my_Data)
-@ %def 
+@ %def
 
    The object returned by the \texttt{lookup} function can also be stored in order to be available for further elaborations:
-   
-@ 
+
+@
 <<lookup2,eval=FALSE>>=
 my_lookup<-lookup(my_Data)
 head(my_lookup)
-@ %def 
+@ %def
 
 \subsection{Checking retrieved data}
 
@@ -222,18 +231,18 @@ head(my_lookup)
    keep track of some of this problematic cases and the \texttt{issues()}
    function can be used to see whether any problem was faced during
    the process.
-   
-@ 
+
+@
 <<issues,eval=FALSE>>=
 my_species<-c("Salix alba","Populus nigra")
 my_traits<-c("h_max","le_area","li_form")
 my_Data<-tr8(species_list = my_species, download_list = my_traits,
              allow_persistent=TRUE)
 issues(my_Data)
-@ %def 
-   
-   
-   
+@ %def
+
+
+
 
 \subsection{Interactive use of \texttt{tr8}}
 
@@ -249,8 +258,8 @@ issues(my_Data)
    Typically users will have their vegetation data in the form of a
    \textit{sites}*\textit{species} dataframe (or matrix), thus they
    may want to extract traits data for the whole dataset (this time using the GUI to select traits), i.e. :
-   
-@ 
+
+@
 <<dataset,eval=FALSE>>=
 ## suppose veg_data is our dataframe with
 ## plant species as columns and sites as rows
@@ -262,7 +271,7 @@ specie_names<-names(veg_data)
 my_traits<-tr8(species_names,gui_config=TRUE, allow_persistent=TRUE)
 ## print the results
 print(my_traits)
-@ %def 
+@ %def
 
 
 \section{Interpreting retrieved data}
@@ -288,16 +297,16 @@ the following strategy was adopted:
 
 \begin{itemize}
 \item if there are both numeric (quantitative) and string (qualitative) entries, numeric ones are given the precedence and the mean of all numeric entries is used as the returned trait value
-\item if several qualitative entries are present (but no quantitative ones), only the most abundant level is reported (in case ties are present, eg. two levels are reported the same number of times, both values are reported, separated by a comma). 
+\item if several qualitative entries are present (but no quantitative ones), only the most abundant level is reported (in case ties are present, eg. two levels are reported the same number of times, both values are reported, separated by a comma).
 \end{itemize}
 
 
 
 \section{Citing the package}
-   
+
    Please use the following citation when using \texttt{TR8} package:\\
 \vspace{3mm}
-     
+
 Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits. Methods in Ecology and Evolution, 6(3):347-350.
 
      \vspace{3mm}
@@ -321,70 +330,70 @@ Bocci, G. (2015). TR8: an R package for easily retrieving plant species traits. 
 \label{sec:citing}
 
   Users of the \texttt{TR8} package should always cite the sources of information which provided the traits data: the correct citations to be used for the retrieved data can be obtained through the \texttt{bib} method; just use:
-  
+
 
 <<bib,eval=FALSE>>=
 bib(my_traits)
-@ %def 
+@ %def
 
 
 
-\section{Some notes on using \texttt{tr8}}
+% \section{Some notes on using \texttt{tr8}}
 
-\subsubsection*{A NOTE OF CAUTION}
-
-
-  Searching the web is a time (and
-  Internet band) consuming activity, thus the higher the number of
-  your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
-  not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.
-
-  \subsubsection*{A (SECOND) NOTE OF CAUTION}
+% \subsubsection*{A NOTE OF CAUTION}
 
 
-  
- Some users adopt the following workflow for analysing their vegetation data:
+%   Searching the web is a time (and
+%   Internet band) consuming activity, thus the higher the number of
+%   your plant species and the traits to be retrieved, the longer it will take to \texttt{tr8()} to complete its job. Moreover, in order
+%   not to overflow the remote databases with \texttt{http} requests, the \texttt{tr8} function will always pause between one search and the following one.
 
-  \begin{enumerate}
-  \item insert vegetation data into a \textit{spreadsheet file} with species as
-  columns' and sites' as rows
-\item export the spreadsheet file as a \texttt{.csv} file
-\item import the \texttt{.csv} file into a \textbf{R} dataframe.
-  \end{enumerate}
-  
-  When following these steps, a dot (".") will be inserted between
-Genus and Species of each plant species name (i.e. column names in the
-\texttt{R} dataframe will not be in the form \texttt{c("Abies alba", "Salix
-alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
-This may cause problems for further processing of plants'
-species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
-  option in \texttt{read.csv}. E.g. suppose that
-  \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
-  \textbf{R} console, one should use:
-
-<<import,eval=FALSE>>=
-My_data<-read.csv("my_veg_data.csv",
-                  header=T,row.names=1,check.names=F)
-@ %def 
+%   \subsubsection*{A (SECOND) NOTE OF CAUTION}
 
 
 
-  
+%  Some users adopt the following workflow for analysing their vegetation data:
+
+%   \begin{enumerate}
+%   \item insert vegetation data into a \textit{spreadsheet file} with species as
+%   columns' and sites' as rows
+% \item export the spreadsheet file as a \texttt{.csv} file
+% \item import the \texttt{.csv} file into a \textbf{R} dataframe.
+%   \end{enumerate}
+
+%   When following these steps, a dot (".") will be inserted between
+% Genus and Species of each plant species name (i.e. column names in the
+% \texttt{R} dataframe will not be in the form \texttt{c("Abies alba", "Salix
+% alba")} but in the form  \texttt{c("Abies.alba", "Salix.alba")}).
+% This may cause problems for further processing of plants'
+% species names, thus, in order to avoid this problem, please use the \texttt{check.names=F}
+%   option in \texttt{read.csv}. E.g. suppose that
+%   \texttt{my\_veg\_data.csv} is the \texttt{csv} file: in the
+%   \textbf{R} console, one should use:
+
+% <<import,eval=FALSE>>=
+% My_data<-read.csv("my_veg_data.csv",
+%                   header=T,row.names=1,check.names=F)
+% @ %def
+
+
+
+
  \section{Suggested workflow}
 
   We strongly suggest to always check plant species names with the
   \texttt{tnrs} function (from the \texttt{taxize} package) before
   using the \texttt{tr8} function; thus a typical workflow would be
   the following:
-  
+
   \begin{enumerate}
   \item Check plant species names (e.g. with something like the following -  please refere to the \texttt{taxize} package documentation\cite{taxize} for further details)
-    
+
 <<one,eval=FALSE>>=
 species_names<-names(veg_data)
 checked_names<-tnrs(species_names,source="iPlant_TNRS")
 print(checked_names)
-@ %def 
+@ %def
 
  Check which species (rows) in the table have a "score" value
  lower than 1 and check their names; if needed, correct them
@@ -394,14 +403,14 @@ print(checked_names)
 <<tr8_ex1,eval=FALSE>>=
 my_traits<-tr8(species_names,gui_config = TRUE, allow_persistent=TRUE)
 print(my_traits)
-@ %def 
- 
+@ %def
+
    Check whether \texttt{tr8()} had any problems in retrieving data:
 
 <<issue_workflow,eval=FALSE>>=
 my_traits<-tr8(species_names,gui_config = TRUE, allow_persistent=TRUE)
 issues(my_traits)
-@ %def 
+@ %def
 
 
 
@@ -412,28 +421,28 @@ issues(my_traits)
 
 <<extract, eval=FALSE>>=
 traits_df<-extract_traits(my_traits)
-@ %def 
+@ %def
 
 \item Observing a big data frame inside \texttt{R} could be difficult,
   thus users may want to save the \texttt{traits\_df} data frame as a
-  \texttt{.csv} file:  
-@ 
+  \texttt{.csv} file:
+@
 <<store_to_csv,eval=FALSE>>=
 save(traits_df,file="traits_df.csv")
-@ %def 
-  
+@ %def
+
 and then open that file with a spreadsheet software (e.g. LibreOffice).
 
-  
+
   \end{enumerate}
-  
+
 
   \subsection{Dealing with synonyms}
 
   The new versions of tr8 does not allow to check for plant species synonims any more (given some issues
   with remote databases needed for checking species names).
 
-  
+
 %   In some cases the same species may be present in different traitbases
 %   under different synonyms. In order to make it easier for the user to deal with
 %   this issue, \texttt{tr8} function has a parameter called
@@ -447,18 +456,18 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
 %   parameter\footnote{\textbf{PLEASE NOTE} that when \texttt{synonyms}
 %     is set to TRUE, the resulting dataframe will have numbers as
 %     row.names: this is mandatory since in a few cases different
-%     species names may share a common synonym and 
+%     species names may share a common synonym and
 %     \texttt{R} does not allow different
 %     rows to share the same name.}.
 
 
-% @ 
+% @
 % <<synonims, eval=FALSE>>=
 % my_species<-c("Salix alba","Inula viscosa")
 % my_traits<-c("h_max","le_area","li_form")
-% my_Data<-tr8(species_list = my_species, download_list = my_traits, 
+% my_Data<-tr8(species_list = my_species, download_list = my_traits,
 %              synonyms=TRUE)
-% @ %def 
+% @ %def
 
 
 
@@ -474,20 +483,20 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
 %   provided \textsc{species\_list}; e.g. if "Myrtus communis" is
 %   included in the \textsc{species\_list}, tr8 will query the following
 %   existing entries in Catminat: "Myrtus communis", "Myrtus communis
-%   v. communis" and "Myrtus communis v. leucocarpa"). 
+%   v. communis" and "Myrtus communis v. leucocarpa").
 
-  
-% @ 
+
+% @
 % <<catminat, eval=FALSE>>=
 % my_species<-c("Myrtus communis")
 % ## some traits from Catminat
 % my_traits<-c("inflorescence_fr","sex_reprod_fr","poll_vect_fr")
 % my_Data<-tr8(species_list = my_species, download_list = my_traits,
 %              catminat_alternatives=TRUE)
-% @ %def 
+% @ %def
 
 
-  
+
 \section{Further steps}
 
   The \texttt{TR8} package comes with another vignette, called
@@ -496,81 +505,69 @@ and then open that file with a spreadsheet software (e.g. LibreOffice).
   common problems that could be faced and the possible solutions to
   fix them.\\
   The vignette can be opened from within R, using:
-  
-@ 
+
+@
 <<vignette,eval=FALSE>>=
 vignette("TR8_workflow")
-@ %def 
-  
+@ %def
+
     Another vignette (called \texttt{Expanding\_TR8}) shows to programmers how  sources of data can be added to \texttt{TR8} (i.e. how functions for retrieving data should be written so that they can be easily integrated in \texttt{TR8}).
-    
-  
-  
-  
+
+
+
+
 
 \section{Local storage of remote data}
 \label{sec:leda}
 
   The following databases are stored as files (\texttt{.txt},\texttt{.csv} or \texttt{xlsx}) on the remote servers:
-  
+
   \begin{itemize}
   \item LEDA
   \item Akhmetzhanova
   \item MycoFlor
-  \item Catminat
+  % \item Catminat
   \end{itemize}
-  
-  
+
+
   %% LEDA Traitbase datafiles and Akhmetzhanova database are text files (either \texttt{.txt} or \texttt{.csv} files) which are
-  %% available for download at the LEDA (\url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}) and at the\textit{ Ecological Archives} websites . 
+  %% available for download at the LEDA (\url{http://www.leda-traitbase.org/LEDAportal/data_files.jsp}) and at the\textit{ Ecological Archives} websites .
   These
   files are (quite) big in size, thus downloading them every time the
   \texttt{tr8()} function is used is a time consuming
   activity\footnote{The text files are not distributed together with the
     \texttt{TR8} package - which would save time and memory when executing
     the \texttt{tr8()} function - in order to avoid possible licensing
-    conflicts between the \texttt{TR8}' GPL license and these datasets.}. 
+    conflicts between the \texttt{TR8}' GPL license and these datasets.}.
   In order to make data retrieval more efficient, when \texttt{tr8} is
   run AND traits data from the above mentioned databases are requested for the first time, these files are downloaded and an R version (\texttt{.Rda})
   copy is stored in a local directory and made available to future requests\footnote{By default these files will be installed in the directories which are commonly used for storing applications' data (which depends on the underlying operating systems; see \url{https://github.com/hadley/rappdirs} for details).}.
 
-  
+
 \section{Update local lookup tables}
 
   For some traitbases tr8 uses lookup-tables which contain URLs of the
   species of interest (i.e. whenever the user search for traits data
   for some species, tr8 searches for the corresponding URLs in such
   tables and then retrieve the data from the corresponding webpages);
-  some of the traitbases queried by tr8 are 
+  some of the traitbases queried by tr8 are
   uploaded from time to time thus the function may be unable to retrieve
   traits data for the most recently uploaded species.
   The \textsc{tr8\_setup} function allows the user to download the
-  most updated version of such tables; simply run 
-  
-  If the user wants to have available the most updated data, 
+  most updated version of such tables; simply run
 
-@ 
+  If the user wants to have available the most updated data,
+
+@
 <<tr8_setup, eval=FALSE>>=
 tr8_setup()
-@ %def 
-  
-  \textbf{BEWARE}: this function takes a long time to run (nearly 20
-  minutes are required - on a fast connection - for retrieving lookup
-  tables for BiolFlor); it's very likely that the most recent version of \textsc{TR8} contains the already up-to-date version of the data, so in most cases will never need to use this function. 
-  
+@ %def
+
+  \textbf{BEWARE}: this function takes a long time to run; it's very likely that the most recent version of \textsc{TR8} contains the already up-to-date version of the data, so in most cases will never need to use this function.
+
 
 \bibliography{tr8}
 
- 
+
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
