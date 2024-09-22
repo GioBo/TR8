@@ -42,8 +42,7 @@ analysis), but do not expect this to be an up-to-date tutorial.
 As per updating this document: the Author has left the
 Academic-hamster-wheel nearly a decade a ago and while he's still
 willing to maintain this package \textit{pro bono}, he is
-definitely fed up with having to update it since yet-another-traitbase
-is gone from public access.
+definitely fed up with having to constantly update it since yet-another-traitbase is gone from public access.
 
 
 
